@@ -1,3 +1,0 @@
-import { requireUser } from '../../_lib/auth.js';
-import { send, integration } from '../../_lib/adminHttp.js';
-export default async function handler(req,res){ const user=await requireUser(req,res); if(!user)return; send(res,200,{package:'social-insights-autoposter',integrations:[integration('Meta Graph API',['META_APP_ID','META_APP_SECRET','META_ACCESS_TOKEN'],'Official Instagram/Facebook publishing and analytics'),integration('TikTok Business API',['TIKTOK_CLIENT_KEY','TIKTOK_CLIENT_SECRET'],'Official TikTok account analytics and publishing'),integration('Trend Scraper Worker',['SOCIAL_TREND_WORKER_SECRET'],'Background trend parsing job authorization')]}); }

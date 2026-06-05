@@ -1,4 +1,0 @@
-import { requireUser } from '../../_lib/auth.js';
-import { method, body, send, nowIso } from '../../_lib/adminHttp.js';
-import { listRows, insertRow } from '../../_lib/adminDb.js';
-export default async function handler(req,res){ const user=await requireUser(req,res); if(!user)return; if(!method(req,res,['GET','POST']))return; if(req.method==='GET'){ const {rows,error}=await listRows('admin_social_trends',user.id,'created_at'); if(error)return send(res,500,{error:error.message}); return send(res,200,{trends:rows}); } const input=await body(req); const {row,error}=await insertRow('admin_social_trends',{owner_id:user.id,platform:input.platform||'instagram',topic:input.topic||'Uncategorized trend',style:input.style||'short-form',score:Number(input.score||0),metrics:input.metrics||{},recommendation:input.recommendation||null,created_at:nowIso()}); if(error)return send(res,500,{error:error.message}); send(res,201,{trend:row}); }

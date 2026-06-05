@@ -1,4 +1,0 @@
-import { requireUser } from '../../_lib/auth.js';
-import { method, body, send, nowIso } from '../../_lib/adminHttp.js';
-import { listRows, insertRow } from '../../_lib/adminDb.js';
-export default async function handler(req,res){ const user=await requireUser(req,res); if(!user)return; if(!method(req,res,['GET','POST']))return; if(req.method==='GET'){ const {rows,error}=await listRows('admin_ad_optimization_rules',user.id,'created_at'); if(error)return send(res,500,{error:error.message}); return send(res,200,{rules:rows}); } const input=await body(req); const {row,error}=await insertRow('admin_ad_optimization_rules',{owner_id:user.id,name:input.name||'Optimization rule',metric:input.metric||'roas',operator:input.operator||'<',threshold:Number(input.threshold||1),action:input.action||'decrease_budget',enabled:input.enabled!==false,created_at:nowIso(),updated_at:nowIso()}); if(error)return send(res,500,{error:error.message}); send(res,201,{rule:row}); }
