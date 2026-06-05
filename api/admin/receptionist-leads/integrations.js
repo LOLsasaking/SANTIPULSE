@@ -1,0 +1,3 @@
+import { requireUser } from '../../_lib/auth.js';
+import { send, integration } from '../../_lib/adminHttp.js';
+export default async function handler(req,res){ const user=await requireUser(req,res); if(!user)return; send(res,200,{package:'receptionist-leads',integrations:[integration('Vapi Voice Assistant',['VAPI_API_KEY','VAPI_ASSISTANT_ID'],'Inbound/outbound AI voice receptionist'),integration('Bland AI',['BLAND_API_KEY'],'Alternative AI voice assistant provider'),integration('WhatsApp Business API',['WHATSAPP_ACCESS_TOKEN','WHATSAPP_PHONE_NUMBER_ID'],'Messaging streams and conversation records'),integration('Calendar Provider',['CALENDAR_PROVIDER','CALENDAR_API_KEY'],'Availability checks and booking sync')]}); }

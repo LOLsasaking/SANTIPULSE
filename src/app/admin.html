@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex,nofollow" />
+<title>SantiPulse Admin · Automation Control Plane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/admin-dashboard.css" />
+</head>
+<body>
+  <header class="admin-topbar">
+    <a class="brand" href="/" aria-label="SantiPulse home">santipulse<span>.admin</span></a>
+    <div class="topbar-actions">
+      <span id="adminEmail" class="admin-email">Checking session…</span>
+      <button id="logoutBtn" class="btn ghost" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <main class="admin-shell">
+    <aside class="admin-sidebar" aria-label="Admin packages">
+      <p class="eyebrow">Control plane</p>
+      <h1>Automation backend</h1>
+      <p class="sidebar-copy">Three isolated modules. No legacy demos. No public automation UI.</p>
+      <nav class="package-nav">
+        <button class="nav-item active" type="button" data-module="receptionist-leads">
+          <span class="nav-kicker">Package 1</span>
+          <strong>Receptionist & Leads</strong>
+          <small>Voice, WhatsApp, CRM, calendar</small>
+        </button>
+        <button class="nav-item" type="button" data-module="social-insights-autoposter">
+          <span class="nav-kicker">Package 2</span>
+          <strong>Social Insights & Auto-Poster</strong>
+          <small>Trends, analytics, queue</small>
+        </button>
+        <button class="nav-item" type="button" data-module="auto-ad-manager">
+          <span class="nav-kicker">Package 3</span>
+          <strong>Auto-Ad Manager</strong>
+          <small>Campaigns, budgets, optimization</small>
+        </button>
+      </nav>
+    </aside>
+
+    <section class="admin-content">
+      <div id="loading" class="loading-card">Loading admin dashboard…</div>
+      <div id="app" class="hidden">
+        <section class="module-view active" data-view="receptionist-leads">
+          <div class="module-header">
+            <p class="eyebrow">Package 1</p>
+            <h2>The Receptionist & Leads Leadership Hub</h2>
+            <p>Manage AI voice intake, WhatsApp CRM streams, qualified lead records, calendar booking, and Human SOS escalation logs from a dedicated operational view.</p>
+          </div>
+          <div class="status-grid" data-status-grid="receptionist-leads"></div>
+          <div class="split-grid">
+            <article class="panel"><div class="panel-head"><h3>Lead management</h3><button class="btn" data-refresh="receptionist-leads/leads">Refresh</button></div><div id="leadsTable" class="table-wrap"></div></article>
+            <article class="panel"><div class="panel-head"><h3>CRM conversation logs</h3><button class="btn ghost" data-refresh="receptionist-leads/conversations">Refresh</button></div><div id="conversationsTable" class="table-wrap"></div></article>
+          </div>
+          <div class="split-grid">
+            <article class="panel"><div class="panel-head"><h3>Calendar scheduling sync</h3><button class="btn ghost" data-refresh="receptionist-leads/scheduling">Check slots</button></div><div id="schedulingPanel" class="empty-state"></div></article>
+            <article class="panel"><div class="panel-head"><h3>Human SOS</h3><button class="btn danger" data-action="human-sos">Trigger test alert</button></div><div id="sosPanel" class="empty-state">No active escalations.</div></article>
+          </div>
+        </section>
+
+        <section class="module-view" data-view="social-insights-autoposter">
+          <div class="module-header">
+            <p class="eyebrow">Package 2</p>
+            <h2>The Social Media Insights & Auto-Poster</h2>
+            <p>Separate trend analytics and official publishing queue for Instagram, Facebook, and TikTok workflows. Scraping and publishing are represented as backend jobs, not public UI widgets.</p>
+          </div>
+          <div class="status-grid" data-status-grid="social-insights-autoposter"></div>
+          <div class="split-grid">
+            <article class="panel"><div class="panel-head"><h3>Trend analytics</h3><button class="btn" data-refresh="social-insights-autoposter/trends">Refresh</button></div><div id="trendsTable" class="table-wrap"></div></article>
+            <article class="panel"><div class="panel-head"><h3>Auto-posting queue</h3><button class="btn ghost" data-refresh="social-insights-autoposter/queue">Refresh</button></div><div id="queueTable" class="table-wrap"></div></article>
+          </div>
+        </section>
+
+        <section class="module-view" data-view="auto-ad-manager">
+          <div class="module-header">
+            <p class="eyebrow">Package 3</p>
+            <h2>Auto-Ad Manager</h2>
+            <p>Dedicated campaign governance view for Meta Ads and TikTok Ads readiness, campaign state, optimization rules, and budget/action recommendations.</p>
+          </div>
+          <div class="status-grid" data-status-grid="auto-ad-manager"></div>
+          <div class="split-grid">
+            <article class="panel"><div class="panel-head"><h3>Campaigns</h3><button class="btn" data-refresh="auto-ad-manager/campaigns">Refresh</button></div><div id="campaignsTable" class="table-wrap"></div></article>
+            <article class="panel"><div class="panel-head"><h3>Optimization rules</h3><button class="btn ghost" data-refresh="auto-ad-manager/rules">Refresh</button></div><div id="rulesTable" class="table-wrap"></div></article>
+          </div>
+          <article class="panel"><div class="panel-head"><h3>Budget recommendations</h3><button class="btn ghost" data-refresh="auto-ad-manager/recommendations">Refresh</button></div><div id="recommendationsTable" class="table-wrap"></div></article>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  {{sb.config}}
+  <script src="/supabase.js"></script>
+  <script src="/auth.js"></script>
+  <script src="/admin-dashboard.js" defer></script>
+</body>
+</html>

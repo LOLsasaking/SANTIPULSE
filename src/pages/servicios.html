@@ -79,8 +79,8 @@
   .panel-bg{ position:absolute; inset:0; z-index:0; transition:filter .6s ease, transform .8s ease; transform:scale(1.0); }
   .stage:hover .panel .panel-bg{ filter:brightness(.4); }
   .stage .panel:hover .panel-bg{ filter:brightness(.7); transform:scale(1.05); }
-  .panel-web .panel-bg{ background:#0a0b0e url('/demo-media/panel-1.jpg') center/cover no-repeat; }
-  .panel-ai  .panel-bg{ background:#0e0a0c url('/demo-media/panel-3.jpg') center/cover no-repeat; }
+  .panel-web .panel-bg{ background:radial-gradient(circle at 24% 22%, rgba(255,255,255,.15), transparent 32%), linear-gradient(135deg,#0a0b0e,#17171d 52%,#050506); }
+  .panel-ai  .panel-bg{ background:radial-gradient(circle at 76% 25%, rgba(255,255,255,.13), transparent 30%), linear-gradient(135deg,#0e0a0c,#161622 55%,#050506); }
   .panel-ai  .panel-bg::after{ content:''; position:absolute; inset:0; background:radial-gradient(60% 50% at 75% 30%, rgba(226,59,78,.22), transparent 70%); }
   .panel-veil{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(5,5,5,.35) 0%, rgba(5,5,5,.2) 40%, rgba(5,5,5,.88) 100%); }
   .v-divider{ width:1px; background:linear-gradient(180deg, transparent, rgba(255,255,255,.14), transparent); flex:0 0 auto; }

@@ -2,7 +2,7 @@
    Local preview server — mimics the Vercel runtime.
    • Serves dist/ with clean URLs (/contratar/ -> /contratar/index.html)
    • Routes POST /api/lead to the real handler in api/lead.js
-   • No Supabase env -> DEMO mode (validates + simulates, no DB write)
+   • No Supabase env -> local preview mode (validates + simulates, no DB write)
    Run:  npm run preview   (build then serve)   |   npm run serve
    ============================================================ */
 import { createServer } from 'node:http';
@@ -50,7 +50,7 @@ const server = createServer(async (req, res) => {
   if (pathname === '/api/lead') {
     if (req.method !== 'POST') return send(res, 405, 'Method Not Allowed');
 
-    // DEMO mode: no Supabase configured -> simulate
+    // Local preview mode: no Supabase configured -> simulate
     if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       let raw = '';
       req.on('data', (c) => (raw += c));
@@ -62,8 +62,8 @@ const server = createServer(async (req, res) => {
           if (!b.name || b.name.trim().length < 2 || !emailOk) {
             return send(res, 400, JSON.stringify({ ok: false, error: 'invalid' }), { 'Content-Type': 'application/json' });
           }
-          console.log('  [DEMO] lead (not saved):', { name: b.name, email: b.email, need: b.need });
-          send(res, 200, JSON.stringify({ ok: true, demo: true }), { 'Content-Type': 'application/json' });
+          console.log('  [LOCAL PREVIEW] lead (not saved):', { name: b.name, email: b.email, need: b.need });
+          send(res, 200, JSON.stringify({ ok: true, preview: true }), { 'Content-Type': 'application/json' });
         } catch {
           send(res, 400, JSON.stringify({ ok: false, error: 'invalid' }), { 'Content-Type': 'application/json' });
         }
@@ -101,9 +101,9 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  const mode = process.env.SUPABASE_URL ? 'LIVE Supabase' : 'DEMO (no DB writes)';
+  const mode = process.env.SUPABASE_URL ? 'LIVE Supabase' : 'LOCAL PREVIEW (no DB writes)';
   console.log(`\n  ▲ Santipulse preview`);
   console.log(`  → http://localhost:${PORT}/            (ES home)`);
-  console.log(`  → /en/  /fr/  /de/  /it/   ·   /contratar/  /demos/  /nosotros/`);
+  console.log(`  → /en/  /fr/  /de/  /it/   ·   /contratar/  /precios/  /nosotros/  /admin/`);
   console.log(`  Form backend: ${mode}\n`);
 });

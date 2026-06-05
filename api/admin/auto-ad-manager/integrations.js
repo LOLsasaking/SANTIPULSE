@@ -1,0 +1,3 @@
+import { requireUser } from '../../_lib/auth.js';
+import { send, integration } from '../../_lib/adminHttp.js';
+export default async function handler(req,res){ const user=await requireUser(req,res); if(!user)return; send(res,200,{package:'auto-ad-manager',integrations:[integration('Meta Marketing API',['META_APP_ID','META_APP_SECRET','META_AD_ACCOUNT_ID','META_ACCESS_TOKEN'],'Meta Ads campaign read/write management'),integration('TikTok Ads API',['TIKTOK_ADVERTISER_ID','TIKTOK_ACCESS_TOKEN'],'TikTok Ads campaign read/write management'),integration('Optimization Worker',['AD_MANAGER_WORKER_SECRET'],'Authorized background budget and campaign adjustment worker')]}); }

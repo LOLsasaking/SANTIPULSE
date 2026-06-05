@@ -1,0 +1,4 @@
+import { requireUser } from '../../_lib/auth.js';
+import { method, body, send, nowIso } from '../../_lib/adminHttp.js';
+import { insertRow } from '../../_lib/adminDb.js';
+export default async function handler(req,res){ const user=await requireUser(req,res); if(!user)return; if(!method(req,res,['GET','POST']))return; if(req.method==='GET')return send(res,200,{message:'Calendar sync route is isolated under admin. Configure CALENDAR_PROVIDER and CALENDAR_API_KEY, then connect a provider adapter here.',available_slots:[]}); const input=await body(req); const {row,error}=await insertRow('admin_calendar_bookings',{owner_id:user.id,lead_id:input.lead_id||null,provider:process.env.CALENDAR_PROVIDER||'unconfigured',starts_at:input.starts_at||null,ends_at:input.ends_at||null,status:'requested',raw_payload:input,created_at:nowIso()}); if(error)return send(res,500,{error:error.message}); send(res,201,{booking:row}); }

@@ -1,0 +1,4 @@
+import { requireUser } from '../../_lib/auth.js';
+import { method, body, send, nowIso } from '../../_lib/adminHttp.js';
+import { listRows, insertRow } from '../../_lib/adminDb.js';
+export default async function handler(req,res){ const user=await requireUser(req,res); if(!user)return; if(!method(req,res,['GET','POST']))return; if(req.method==='GET'){ const {rows,error}=await listRows('admin_crm_conversation_logs',user.id,'created_at'); if(error)return send(res,500,{error:error.message}); return send(res,200,{conversations:rows}); } const input=await body(req); const {row,error}=await insertRow('admin_crm_conversation_logs',{owner_id:user.id,channel:input.channel||'whatsapp',contact:input.contact||null,summary:input.summary||null,transcript:input.transcript||null,human_sos:Boolean(input.human_sos),provider_event_id:input.provider_event_id||null,created_at:nowIso()}); if(error)return send(res,500,{error:error.message}); send(res,201,{conversation:row}); }
