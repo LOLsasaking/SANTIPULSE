@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       allow_promotion_codes: true,
       metadata: { user_id: user.id, plan },
       subscription_data: { metadata: { user_id: user.id, plan } },
-      success_url: `${origin}/dashboard/?payment=success`,
+      success_url: `${origin}/bienvenida/?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/dashboard/?payment=cancelled`,
     });
     return res.status(200).json({ url: session.url });

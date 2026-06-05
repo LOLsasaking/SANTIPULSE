@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="{{privacidad.metaDescription}}" />
+<title>{{privacidad.title}}</title>
+
+{{seo.canonical}}
+{{seo.hreflang}}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Santipulse" />
+<meta property="og:title" content="{{privacidad.title}}" />
+<meta property="og:description" content="{{privacidad.metaDescription}}" />
+<meta property="og:locale" content="{{meta.ogLocale}}" />
+<meta property="og:url" content="{{seo.ogUrl}}" />
+<meta name="twitter:card" content="summary" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script src="{{asset.prefix}}tw-config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body{ font-family:'Inter',sans-serif; background:#050505; color:#fff; }
+  .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.86; letter-spacing:-.02em; }
+  .meta,.volver,.wordmark{ font-family:'Space Mono',monospace; }
+  .meta{ font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.42); }
+  .volver{ font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.8); text-decoration:none; display:inline-flex; align-items:center; gap:10px; }
+  .wordmark{ font-size:13px; letter-spacing:.12em; color:rgba(255,255,255,.85); text-decoration:none; }
+  .topbar{ position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 30px; backdrop-filter:blur(14px); background:rgba(5,5,5,.55); }
+  .legal{ max-width:820px; }
+  .legal h2{ font-family:'Archivo',sans-serif; font-weight:800; text-transform:uppercase; font-size:22px; margin:38px 0 12px; }
+  .legal p,.legal li{ color:rgba(255,255,255,.72); line-height:1.75; }
+  .legal a{ color:#ff9aa6; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="volver" href="{{nav.home}}">{{common.volver}}</a>
+  <a class="wordmark" href="{{nav.home}}">santipulse.com</a>
+</div>
+
+<main class="pt-32 pb-24 px-6 md:px-10 legal mx-auto">
+  <p class="meta mb-5">{{privacidad.eyebrow}}</p>
+  <h1 class="headline text-5xl md:text-7xl mb-6">{{privacidad.titleA}}<br><span class="text-white/35">{{privacidad.titleB}}</span></h1>
+  <p>{{privacidad.intro}}</p>
+
+  <h2>{{privacidad.section1Title}}</h2>
+  <p>{{privacidad.section1Body}}</p>
+
+  <h2>{{privacidad.section2Title}}</h2>
+  <ul class="list-disc pl-6 space-y-2">
+    <li>{{privacidad.data1}}</li>
+    <li>{{privacidad.data2}}</li>
+    <li>{{privacidad.data3}}</li>
+  </ul>
+
+  <h2>{{privacidad.section3Title}}</h2>
+  <p>{{privacidad.section3Body}}</p>
+
+  <h2>{{privacidad.section4Title}}</h2>
+  <p>{{privacidad.section4Body}}</p>
+
+  <h2>{{privacidad.section5Title}}</h2>
+  <p>{{privacidad.section5Body}}</p>
+</main>
+
+<script src="{{asset.prefix}}lang.js" defer></script>
+</body>
+</html>

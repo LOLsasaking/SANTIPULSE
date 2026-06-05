@@ -1,0 +1,33 @@
+name: Pulse external automation jobs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  heavy-tasks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run external Pulse job placeholder
+        env:
+          PULSE_CRON_URL: ${{ secrets.PULSE_CRON_URL }}
+          PULSE_CRON_SECRET: ${{ secrets.PULSE_CRON_SECRET }}
+        run: |
+          set -euo pipefail
+          if [ -z "${PULSE_CRON_URL:-}" ]; then
+            echo "PULSE_CRON_URL is not configured; skipping external trigger."
+            exit 0
+          fi
+          curl --fail --silent --show-error \
+            -H "Authorization: Bearer ${PULSE_CRON_SECRET:-}" \
+            -H "Content-Type: application/json" \
+            --data '{"source":"github-actions","job":"pulse-heavy-tasks"}' \
+            "$PULSE_CRON_URL"

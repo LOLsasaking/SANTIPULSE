@@ -54,8 +54,8 @@
       "eyebrow": "Automatisation IA",
       "titleA": "Une IA qui",
       "titleB": "travaille pour vous",
-      "desc": "Surveillance des prix, génération de leads et plus. Récupérez des heures chaque semaine avec des automatisations autonomes.",
-      "meta": "Forfaits dès 1 automatisation",
+      "desc": "Recepcionista IA, Insights de Redes y Gestor de Ads. Recupera horas con un panel pensado para vender y operar clientes.",
+      "meta": "3 m?dulos Pulse",
       "cta": "Voir les forfaits et tarifs"
     }
   },
@@ -84,10 +84,10 @@
     "soonLabel": "Bientôt disponible",
     "soonDate": "Septembre 2026",
     "soonTag": "SEP 2026",
-    "soon1": "Réceptionniste IA",
-    "soon2": "Automatisation IA (agent)",
-    "soon3": "Automatisation des ventes et des prospects",
-    "soon4": "Automatisation générative et de contenu pour les réseaux sociaux",
+    "soon1": "Recepcionista IA",
+    "soon2": "Insights de Redes",
+    "soon3": "Gestor de Ads",
+    "soon4": "Pack completo Pulse",
     "fMessage": "Dites-m'en plus",
     "fMessagePh": "Ce que vous cherchez, des références que vous aimez, les délais, le budget approximatif...",
     "submit": "Envoyer la demande",
@@ -95,8 +95,11 @@
     "form": {
       "sending": "Envoi en cours...",
       "error": "Une erreur s'est produite. Réessayez ou écrivez-moi directement.",
-      "invalid": "Vérifiez votre nom et un e-mail valide."
-    }
+      "invalid": "Vérifiez votre nom et un e-mail valide.",
+      "consentRequired": "Acepta la pol?tica de privacidad para enviar la solicitud."
+    },
+    "gdprText": "Acepto la pol?tica de privacidad y doy permiso para que Santipulse me contacte sobre mi solicitud.",
+    "gdprLinkText": "Ver pol?tica de privacidad"
   },
   "demos": {
     "title": "Santipulse · Démos en direct",
@@ -117,110 +120,33 @@
       "sakana": "Bar à sushis et cuisine japonaise. L'art du sushi, poisson frais.",
       "tours": "Site de tours en 4 langues avec un hero vidéo cinématique et une galerie qui se révèle au défilement."
     },
-    "tools": {
-      "eyebrow": "Essayez vous-même · En temps réel",
-      "heading": "Automatisations en direct",
-      "intro": "Pas des vidéos : ces deux outils tournent vraiment sur mon serveur maintenant. Un essai gratuit pour chacun.",
-      "pm": {
-        "title": "Moniteur de prix",
-        "desc": "Collez l'URL d'un produit concurrent. Je lis son prix en direct et vous dis à quel prix vendre pour gagner.",
-        "url": "URL du produit concurrent",
-        "price": "Votre prix actuel (€)",
-        "floor": "Prix plancher (€)",
-        "run": "Lancer gratuitement",
-        "running": "Lecture du prix…"
+    "videos": {
+      "eyebrow": "Estrategia de v?deo ? The Pulse System",
+      "heading": "Tres demos para vender",
+      "intro": "Estos espacios sustituyen las herramientas antiguas. Est?n pensados para grabar v?deos claros del panel y explicar cada paquete sin depender de scrapers pesados.",
+      "receptionist": {
+        "kicker": "Recepcionista IA",
+        "title": "The 24/7 Front Desk",
+        "body": "Un v?deo mostrando una llamada fuera de horario, la IA respondiendo y el lead apareciendo en el panel.",
+        "point1": "Llamada o WhatsApp entra al sistema.",
+        "point2": "El panel crea el perfil del lead en tiempo real.",
+        "point3": "La cita queda lista para confirmar."
       },
-      "ls": {
-        "title": "Extracteur de leads",
-        "desc": "Collez l'URL d'un annuaire d'entreprises. J'extrais noms, emails et téléphones en quelques secondes.",
-        "url": "URL de l'annuaire / liste",
-        "max": "Leads max",
-        "run": "Extraire gratuitement",
-        "running": "Recherche de leads…"
+      "social": {
+        "kicker": "Insights de Redes",
+        "title": "Viral Content on Autopilot",
+        "body": "Un v?deo del panel detectando estilos virales, explicando por qu? funcionan y envi?ndolos a una cola de publicaci?n.",
+        "point1": "Escaneo de tendencias por nicho.",
+        "point2": "Puntuaci?n de probabilidad viral.",
+        "point3": "Post preparado para publicar."
       },
-      "res": {
-        "competitor": "Prix concurrent",
-        "suggestion": "Votre prix suggéré",
-        "action": "Action",
-        "leads": "leads trouvés",
-        "name": "Nom",
-        "email": "Email",
-        "phone": "Téléphone",
-        "web": "Site",
-        "empty": "Rien de lisible sur cette page. Essayez une autre URL."
-      },
-      "err": {
-        "generic": "Une erreur est survenue. Réessayez.",
-        "trial": "Vous avez utilisé votre essai gratuit. Contactez-moi pour des automatisations illimitées.",
-        "badurl": "Saisissez une URL valide (http/https)."
-      }
-    },
-    "autos": {
-      "eyebrow": "Ce que j’automatise · Avant et après",
-      "heading": "Vos 5 automatisations",
-      "intro": "Chacune fait une tâche répétitive à votre place, automatiquement. Voici ce que fait chacune et ce qu’elle vous fait gagner.",
-      "liveTag": "Démo gratuite",
-      "paidTag": "Pour les clients",
-      "beforeLabel": "Avant",
-      "afterLabel": "Après",
-      "timeKey": "Temps",
-      "moneyKey": "Revenus",
-      "items": {
-        "price": {
-          "name": "Surveillance des prix",
-          "what": "Surveille les prix de vos concurrents et vous dit quand baisser ou augmenter le vôtre pour gagner plus sans perdre de ventes.",
-          "before": "Vous vérifiez les prix à la main",
-          "after": "Prix optimal, surveillé 24/7",
-          "time": "5 h/sem.",
-          "money": "+600 €/mois",
-          "extraK": "Marge",
-          "extraV": "+12 %",
-          "status": "live"
-        },
-        "leads": {
-          "name": "Génération de leads",
-          "what": "Extrait noms, e-mails et téléphones d’annuaires et de sites pour commencer la journée avec une liste de prospects.",
-          "before": "Vous copiez les contacts un à un",
-          "after": "100+ leads prêts chaque matin",
-          "time": "8 h/sem.",
-          "money": "+900 €/mois",
-          "extraK": "Leads",
-          "extraV": "100+/jour",
-          "status": "live"
-        },
-        "outreach": {
-          "name": "Prospection à froid",
-          "what": "Envoie des e-mails personnalisés à vos leads automatiquement et relance, pour que votre boîte d’envoi ne s’arrête jamais.",
-          "before": "Vous écrivez chaque e-mail à la main",
-          "after": "Des centaines d’e-mails personnalisés/jour (typique)",
-          "time": "10 h/sem.",
-          "money": "Jusqu'à 1 200 €/mois",
-          "extraK": "Réponses",
-          "extraV": "Jusqu'à 3× plus",
-          "status": "paid"
-        },
-        "cart": {
-          "name": "Récupération de paniers",
-          "what": "Détecte les paniers abandonnés dans votre boutique et envoie une séquence d’e-mails pour récupérer la vente perdue.",
-          "before": "Vous perdez 70 % des paniers",
-          "after": "Récupérez 1 vente sur 4 (typique)",
-          "time": "6 h/sem.",
-          "money": "Jusqu'à 1 500 €/mois",
-          "extraK": "Récupération",
-          "extraV": "Jusqu'à 25 %",
-          "status": "paid"
-        },
-        "social": {
-          "name": "Planificateur de réseaux",
-          "what": "Planifie et publie sur Instagram et Facebook tout seul, pour que votre présence en ligne ne s’éteigne jamais.",
-          "before": "Vous publiez quand vous y pensez",
-          "after": "Contenu régulier, sans effort (typique)",
-          "time": "7 h/sem.",
-          "money": "Jusqu'à 500 €/mois",
-          "extraK": "Portée",
-          "extraV": "Jusqu'à 40 %",
-          "status": "paid"
-        }
+      "ads": {
+        "kicker": "Gestor de Ads",
+        "title": "The Digital Media Buyer",
+        "body": "Un v?deo de campa?as activas donde una regla sube presupuesto, pausa anuncios caros y avisa al due?o.",
+        "point1": "Reglas de ROAS y CPC visibles.",
+        "point2": "Presupuesto ajustado autom?ticamente.",
+        "point3": "Alerta humana antes de escalar."
       }
     }
   },
@@ -263,30 +189,30 @@
   },
   "precios": {
     "title": "Santipulse · Forfaits et tarifs",
-    "metaDescription": "Forfaits d'automatisation Santipulse — Starter, Pro et Agency. Surveillance des prix, génération de leads et prospection. Annulez à tout moment.",
-    "eyebrow": "Forfaits · Automatisation",
+    "metaDescription": "Planes de The Pulse System de Santipulse ? Recepcionista IA, Insights de Redes y Gestor de Ads. Cancela cuando quieras.",
+    "eyebrow": "Planes ? The Pulse System",
     "titleA": "Choisissez",
     "titleB": "votre forfait.",
-    "intro": "Commencez à automatiser dès aujourd'hui. Sans engagement, annulez quand vous voulez. Chaque forfait inclut les données en direct de vos démos.",
+    "intro": "Empieza con una arquitectura de agencia IA lista para vender: atenci?n, contenido y anuncios desde un panel en espa?ol.",
     "perMonth": "/mois",
     "popular": "Le plus populaire",
     "plans": {
       "starterName": "Starter",
-      "starterTagline": "Pour démarrer en solo.",
-      "starterF1": "1 automatisation au choix",
-      "starterF2": "Surveillance des prix · 5 URLs",
-      "starterF3": "Analyses de base",
+      "starterTagline": "Para activar el primer m?dulo.",
+      "starterF1": "Recepcionista IA",
+      "starterF2": "50 ejecuciones Pulse al mes",
+      "starterF3": "Leads y alertas humanas",
       "starterF4": "Support par email",
       "proName": "Pro",
       "proTagline": "Pour les entreprises en croissance.",
-      "proF1": "Les 3 automatisations",
-      "proF2": "Surveillance des prix · 25 URLs",
-      "proF3": "Analyses avancées + CSV",
+      "proF1": "Recepcionista IA",
+      "proF2": "Insights de Redes",
+      "proF3": "Gestor de Ads",
       "proF4": "Support prioritaire",
       "agencyName": "Agency",
       "agencyTagline": "Pour les agences à nombreux clients.",
-      "agencyF1": "Les 3 automatisations",
-      "agencyF2": "Exécutions illimitées",
+      "agencyF1": "Los 3 m?dulos Pulse",
+      "agencyF2": "Ejecuciones ilimitadas",
       "agencyF3": "Marque blanche + accès API",
       "agencyF4": "Équipe + intégrations sur mesure"
     },

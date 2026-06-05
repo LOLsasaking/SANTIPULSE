@@ -54,8 +54,8 @@
       "eyebrow": "Automazione IA",
       "titleA": "IA che",
       "titleB": "lavora per te",
-      "desc": "Monitoraggio prezzi, generazione di lead e altro. Recupera ore ogni settimana con automazioni che si eseguono da sole.",
-      "meta": "Piani da 1 automazione",
+      "desc": "Recepcionista IA, Insights de Redes y Gestor de Ads. Recupera horas con un panel pensado para vender y operar clientes.",
+      "meta": "3 m?dulos Pulse",
       "cta": "Vedi piani e prezzi"
     }
   },
@@ -84,10 +84,10 @@
     "soonLabel": "Prossimamente",
     "soonDate": "Settembre 2026",
     "soonTag": "SET 2026",
-    "soon1": "Receptionist IA",
-    "soon2": "Automazione IA (agente)",
-    "soon3": "Automazione di vendite e contatti",
-    "soon4": "Automazione generativa e di contenuti per i social",
+    "soon1": "Recepcionista IA",
+    "soon2": "Insights de Redes",
+    "soon3": "Gestor de Ads",
+    "soon4": "Pack completo Pulse",
     "fMessage": "Raccontami di più",
     "fMessagePh": "Cosa cerchi, riferimenti che ti piacciono, tempistiche, budget approssimativo...",
     "submit": "Invia richiesta",
@@ -95,8 +95,11 @@
     "form": {
       "sending": "Invio in corso...",
       "error": "Qualcosa è andato storto. Riprova o scrivimi direttamente.",
-      "invalid": "Controlla il tuo nome e un'email valida."
-    }
+      "invalid": "Controlla il tuo nome e un'email valida.",
+      "consentRequired": "Acepta la pol?tica de privacidad para enviar la solicitud."
+    },
+    "gdprText": "Acepto la pol?tica de privacidad y doy permiso para que Santipulse me contacte sobre mi solicitud.",
+    "gdprLinkText": "Ver pol?tica de privacidad"
   },
   "demos": {
     "title": "Santipulse · Demo dal vivo",
@@ -117,110 +120,33 @@
       "sakana": "Sushi bar e cucina giapponese. L'arte del sushi, pesce fresco.",
       "tours": "Sito di tour in 4 lingue con hero video cinematografico e una galleria che si svela allo scroll."
     },
-    "tools": {
-      "eyebrow": "Provalo tu stesso · In tempo reale",
-      "heading": "Automazioni dal vivo",
-      "intro": "Non sono video: questi due strumenti girano davvero sul mio server adesso. Una prova gratuita per ciascuno.",
-      "pm": {
-        "title": "Monitor prezzi",
-        "desc": "Incolla l'URL di un prodotto della concorrenza. Leggo il prezzo dal vivo e ti dico a quanto vendere per vincere.",
-        "url": "URL prodotto concorrente",
-        "price": "Il tuo prezzo attuale (€)",
-        "floor": "Prezzo minimo (€)",
-        "run": "Esegui gratis",
-        "running": "Leggo il prezzo…"
+    "videos": {
+      "eyebrow": "Estrategia de v?deo ? The Pulse System",
+      "heading": "Tres demos para vender",
+      "intro": "Estos espacios sustituyen las herramientas antiguas. Est?n pensados para grabar v?deos claros del panel y explicar cada paquete sin depender de scrapers pesados.",
+      "receptionist": {
+        "kicker": "Recepcionista IA",
+        "title": "The 24/7 Front Desk",
+        "body": "Un v?deo mostrando una llamada fuera de horario, la IA respondiendo y el lead apareciendo en el panel.",
+        "point1": "Llamada o WhatsApp entra al sistema.",
+        "point2": "El panel crea el perfil del lead en tiempo real.",
+        "point3": "La cita queda lista para confirmar."
       },
-      "ls": {
-        "title": "Estrattore di lead",
-        "desc": "Incolla l'URL di un elenco di aziende. Estraggo nomi, email e telefoni in pochi secondi.",
-        "url": "URL elenco / directory",
-        "max": "Lead max",
-        "run": "Estrai lead gratis",
-        "running": "Cerco lead…"
+      "social": {
+        "kicker": "Insights de Redes",
+        "title": "Viral Content on Autopilot",
+        "body": "Un v?deo del panel detectando estilos virales, explicando por qu? funcionan y envi?ndolos a una cola de publicaci?n.",
+        "point1": "Escaneo de tendencias por nicho.",
+        "point2": "Puntuaci?n de probabilidad viral.",
+        "point3": "Post preparado para publicar."
       },
-      "res": {
-        "competitor": "Prezzo concorrente",
-        "suggestion": "Il tuo prezzo suggerito",
-        "action": "Azione",
-        "leads": "lead trovati",
-        "name": "Nome",
-        "email": "Email",
-        "phone": "Telefono",
-        "web": "Sito",
-        "empty": "Niente di leggibile in questa pagina. Prova un altro URL."
-      },
-      "err": {
-        "generic": "Qualcosa è andato storto. Riprova.",
-        "trial": "Hai usato la tua prova gratuita. Contattami per automazioni illimitate.",
-        "badurl": "Inserisci un URL valido (http/https)."
-      }
-    },
-    "autos": {
-      "eyebrow": "Cosa automatizzo · Prima e dopo",
-      "heading": "Le tue 5 automazioni",
-      "intro": "Ognuna svolge un lavoro ripetitivo al posto tuo, in automatico. Ecco cosa fa ognuna e cosa ti fa risparmiare.",
-      "liveTag": "Demo gratis",
-      "paidTag": "Per i clienti",
-      "beforeLabel": "Prima",
-      "afterLabel": "Dopo",
-      "timeKey": "Tempo",
-      "moneyKey": "Ricavi",
-      "items": {
-        "price": {
-          "name": "Monitoraggio prezzi",
-          "what": "Tiene d’occhio i prezzi dei concorrenti e ti dice quando abbassare o alzare il tuo per guadagnare di più senza perdere vendite.",
-          "before": "Controlli i prezzi a mano, in ritardo",
-          "after": "Prezzo ottimale, monitorato 24/7",
-          "time": "5 h/sett.",
-          "money": "+€600/mese",
-          "extraK": "Margine",
-          "extraV": "+12%",
-          "status": "live"
-        },
-        "leads": {
-          "name": "Generazione di lead",
-          "what": "Estrae nomi, email e numeri di telefono da elenchi e siti, così inizi la giornata con una lista di potenziali clienti.",
-          "before": "Copi i contatti uno a uno",
-          "after": "100+ lead pronti ogni mattina",
-          "time": "8 h/sett.",
-          "money": "+€900/mese",
-          "extraK": "Lead",
-          "extraV": "100+/giorno",
-          "status": "live"
-        },
-        "outreach": {
-          "name": "Outreach a freddo",
-          "what": "Invia email personalizzate ai tuoi lead in automatico e fa follow-up, così la tua posta in uscita non si ferma mai.",
-          "before": "Scrivi ogni email a mano",
-          "after": "Centinaia di email personalizzate/giorno (tipico)",
-          "time": "10 h/sett.",
-          "money": "Fino a €1.200/mese",
-          "extraK": "Risposte",
-          "extraV": "Fino a 3× di più",
-          "status": "paid"
-        },
-        "cart": {
-          "name": "Recupero carrelli",
-          "what": "Rileva i carrelli abbandonati nel tuo negozio e invia una sequenza di email per recuperare la vendita persa.",
-          "before": "Perdi il 70% dei carrelli",
-          "after": "Recuperi 1 vendita su 4 (tipico)",
-          "time": "6 h/sett.",
-          "money": "Fino a €1.500/mese",
-          "extraK": "Recupero",
-          "extraV": "Fino a 25%",
-          "status": "paid"
-        },
-        "social": {
-          "name": "Pianificatore social",
-          "what": "Programma e pubblica su Instagram e Facebook da solo, così la tua presenza online non si spegne mai.",
-          "before": "Pubblichi quando te ne ricordi",
-          "after": "Contenuti costanti, senza pensieri (tipico)",
-          "time": "7 h/sett.",
-          "money": "Fino a €500/mese",
-          "extraK": "Copertura",
-          "extraV": "Fino a 40%",
-          "status": "paid"
-        }
+      "ads": {
+        "kicker": "Gestor de Ads",
+        "title": "The Digital Media Buyer",
+        "body": "Un v?deo de campa?as activas donde una regla sube presupuesto, pausa anuncios caros y avisa al due?o.",
+        "point1": "Reglas de ROAS y CPC visibles.",
+        "point2": "Presupuesto ajustado autom?ticamente.",
+        "point3": "Alerta humana antes de escalar."
       }
     }
   },
@@ -263,30 +189,30 @@
   },
   "precios": {
     "title": "Santipulse · Piani e prezzi",
-    "metaDescription": "Piani di automazione Santipulse — Starter, Pro e Agency. Monitoraggio prezzi, generazione di lead e outreach. Disdici quando vuoi.",
-    "eyebrow": "Piani · Automazione",
+    "metaDescription": "Planes de The Pulse System de Santipulse ? Recepcionista IA, Insights de Redes y Gestor de Ads. Cancela cuando quieras.",
+    "eyebrow": "Planes ? The Pulse System",
     "titleA": "Scegli",
     "titleB": "il tuo piano.",
-    "intro": "Inizia ad automatizzare oggi. Nessun vincolo, disdici quando vuoi. Ogni piano include i dati dal vivo delle tue demo.",
+    "intro": "Empieza con una arquitectura de agencia IA lista para vender: atenci?n, contenido y anuncios desde un panel en espa?ol.",
     "perMonth": "/mese",
     "popular": "Più popolare",
     "plans": {
       "starterName": "Starter",
-      "starterTagline": "Per iniziare da solo.",
-      "starterF1": "1 automazione a tua scelta",
-      "starterF2": "Monitor prezzi · 5 URL",
-      "starterF3": "Analisi di base",
+      "starterTagline": "Para activar el primer m?dulo.",
+      "starterF1": "Recepcionista IA",
+      "starterF2": "50 ejecuciones Pulse al mes",
+      "starterF3": "Leads y alertas humanas",
       "starterF4": "Supporto via email",
       "proName": "Pro",
       "proTagline": "Per attività in crescita.",
-      "proF1": "Tutte e 3 le automazioni",
-      "proF2": "Monitor prezzi · 25 URL",
-      "proF3": "Analisi avanzate + CSV",
+      "proF1": "Recepcionista IA",
+      "proF2": "Insights de Redes",
+      "proF3": "Gestor de Ads",
       "proF4": "Supporto prioritario",
       "agencyName": "Agency",
       "agencyTagline": "Per agenzie con molti clienti.",
-      "agencyF1": "Tutte e 3 le automazioni",
-      "agencyF2": "Esecuzioni illimitate",
+      "agencyF1": "Los 3 m?dulos Pulse",
+      "agencyF2": "Ejecuciones ilimitadas",
       "agencyF3": "White-label + accesso API",
       "agencyF4": "Team + integrazioni su misura"
     },

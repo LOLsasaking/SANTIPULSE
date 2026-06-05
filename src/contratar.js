@@ -29,6 +29,7 @@
     var message = (form.message.value || '').trim();
     var phone = (form.phone.value || '').trim();
     var business = (form.business.value || '').trim();
+    var gdprConsent = !!(form.gdprConsent && form.gdprConsent.checked);
 
     // Collect the "need" checkboxes
     var need = [];
@@ -37,6 +38,12 @@
     // Client-side validation (server re-validates)
     if (name.length < 2 || !EMAIL_RE.test(email)) {
       err.textContent = t.invalid || 'Revisa tu nombre y un email válido.';
+      err.classList.remove('hidden');
+      err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (!gdprConsent) {
+      err.textContent = t.consentRequired || 'Acepta la política de privacidad para enviar la solicitud.';
       err.classList.remove('hidden');
       err.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -52,6 +59,7 @@
       body: JSON.stringify({
         name: name, email: email, phone: phone, business: business,
         need: need, message: message,
+        gdprConsent: gdprConsent,
         company: form.company ? form.company.value : '',     // honeypot
         loadedAt: form.loadedAt ? form.loadedAt.value : '',
         lang: L
@@ -66,7 +74,9 @@
         } else {
           err.textContent = (res.d && res.d.error === 'invalid')
             ? (t.invalid || 'Revisa los datos.')
-            : (t.error || 'Algo salió mal. Inténtalo de nuevo.');
+            : (res.d && res.d.error === 'consent_required')
+              ? (t.consentRequired || 'Acepta la política de privacidad para enviar la solicitud.')
+              : (t.error || 'Algo salió mal. Inténtalo de nuevo.');
           err.classList.remove('hidden');
         }
       })

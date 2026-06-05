@@ -146,7 +146,7 @@
   <main id="app" class="wrap hidden">
     <header style="margin-bottom:28px">
       <p class="eyebrow" style="margin-bottom:12px">Tu panel</p>
-      <h1 class="headline" style="font-size:38px; margin:0 0 12px">Automatizaciones</h1>
+      <h1 class="headline" style="font-size:38px; margin:0 0 12px">The Pulse System</h1>
       <p class="muted" id="userEmail"></p>
     </header>
 
@@ -175,9 +175,9 @@
           <h3>Starter</h3>
           <div class="price">€49</div><div class="per">/ mes</div>
           <ul>
-            <li>Monitor de precios (5 URLs)</li>
-            <li>Captación de leads (50/mes)</li>
-            <li>Outreach en frío (50/mes)</li>
+            <li>Recepcionista IA</li>
+            <li>50 ejecuciones Pulse al mes</li>
+            <li>Leads y alertas preparados</li>
             <li>Soporte por email</li>
           </ul>
           <button class="btn ghost" data-checkout="starter">Elegir Starter</button>
@@ -187,10 +187,10 @@
           <h3>Pro</h3>
           <div class="price">€149</div><div class="per">/ mes</div>
           <ul>
-            <li>Monitor de precios (25 URLs)</li>
-            <li>Captación de leads (500/mes)</li>
-            <li>Outreach en frío (500/mes)</li>
-            <li>Programación de automatizaciones</li>
+            <li>Recepcionista IA</li>
+            <li>Insights de Redes</li>
+            <li>Gestor de Ads</li>
+            <li>500 ejecuciones Pulse al mes</li>
             <li>Soporte prioritario</li>
           </ul>
           <button class="btn" data-checkout="pro">Elegir Pro</button>
@@ -199,7 +199,7 @@
           <h3>Agency</h3>
           <div class="price">€399</div><div class="per">/ mes</div>
           <ul>
-            <li>Todo ilimitado</li>
+            <li>Módulos Pulse ilimitados</li>
             <li>Multi-cuenta / clientes</li>
             <li>Informes white-label</li>
             <li>Acceso API</li>
@@ -222,7 +222,7 @@
         <span class="node-ico">🗂️</span>
         <div class="grow">
           <h2 class="node-title">Perfil de negocio</h2>
-          <p class="node-sub">Las entradas de tus automatizaciones</p>
+          <p class="node-sub">Contexto para tus módulos Pulse</p>
         </div>
       </div>
       <form id="profileForm">
@@ -231,20 +231,12 @@
           <div><label><span class="fi">🌐</span> Sitio web</label><input name="website_url" type="url" placeholder="https://" /></div>
         </div>
         <div class="grid2" style="margin-bottom:14px">
-          <div><label><span class="fi">🏷️</span> Sector</label><input name="industry" placeholder="E-commerce / moda…" /></div>
-          <div><label><span class="fi">✉️</span> Nombre del remitente (outreach)</label><input name="sender_name" placeholder="Santi" /></div>
-        </div>
-        <div class="grid2" style="margin-bottom:14px">
-          <div><label><span class="fi">💶</span> Tu precio actual (€)</label><input name="my_current_price" type="number" step="0.01" placeholder="49.99" /></div>
-          <div><label><span class="fi">⬇️</span> Precio mínimo (€)</label><input name="floor_price" type="number" step="0.01" placeholder="35.00" /></div>
+          <div><label><span class="fi">🏷️</span> Sector</label><input name="industry" placeholder="Clínica / barbería / restaurante…" /></div>
+          <div><label><span class="fi">✉️</span> Persona de contacto</label><input name="sender_name" placeholder="Santi" /></div>
         </div>
         <div style="margin-bottom:14px">
-          <label><span class="fi">📊</span> URLs de competidores (monitor de precios · una por línea)</label>
-          <textarea name="competitor_urls" rows="3" placeholder="https://competidor.com/producto-1&#10;https://competidor.com/producto-2"></textarea>
-        </div>
-        <div class="grid2" style="margin-bottom:14px">
-          <div><label><span class="fi">🎯</span> URL objetivo de leads (directorio a rastrear)</label><input name="lead_target_urls" type="url" placeholder="https://directorio.com/listado" /></div>
-          <div><label><span class="fi">🔢</span> Máx. leads por ejecución</label><input name="max_leads_per_run" type="number" step="1" min="1" max="100" placeholder="10" /></div>
+          <label><span class="fi">🎯</span> Cliente ideal / zona</label>
+          <textarea name="target_market" rows="3" placeholder="Dueños de restaurantes en Tenerife, clientes que reservan por WhatsApp, leads de alto valor..."></textarea>
         </div>
         <button id="saveBtn" class="btn" type="submit" style="margin-top:6px">Guardar perfil</button>
         <div id="profileOk" class="msg ok hidden">Perfil guardado.</div>
@@ -259,22 +251,29 @@
         <span class="node-num">3</span>
         <span class="node-ico">▶️</span>
         <div class="grow">
-          <h2 class="node-title">Ejecutar automatización</h2>
-          <p class="node-sub">Usa los datos de tu perfil · requiere suscripción activa</p>
+          <h2 class="node-title">Ejecutar módulo Pulse</h2>
+          <p class="node-sub">Usa tu perfil · requiere suscripción activa</p>
         </div>
       </div>
       <div class="run-tools">
-        <button class="run-tool" data-run="price_monitor" data-state="idle">
-          <span class="ico">📊</span>
-          <span class="tname">Monitor de precios</span>
-          <span class="tdesc">Lee el precio de cada competidor de tu perfil y sugiere tu nuevo precio.</span>
+        <button class="run-tool" data-run="ai_receptionist" data-state="idle">
+          <span class="ico">☎</span>
+          <span class="tname">Recepcionista IA</span>
+          <span class="tdesc">Prepara llamadas, WhatsApp, reservas y alertas humanas para no perder leads.</span>
           <span class="go" data-go>Ejecutar →</span>
           <span class="bar"></span>
         </button>
-        <button class="run-tool" data-run="lead_scraper" data-state="idle">
-          <span class="ico">🎯</span>
-          <span class="tname">Captación de leads</span>
-          <span class="tdesc">Rastrea tu directorio objetivo y extrae nombres, emails y teléfonos.</span>
+        <button class="run-tool" data-run="social_insights" data-state="idle">
+          <span class="ico">◎</span>
+          <span class="tname">Insights de Redes</span>
+          <span class="tdesc">Convierte tendencias, estilos virales y cola de posts en un tablero grabable.</span>
+          <span class="go" data-go>Ejecutar →</span>
+          <span class="bar"></span>
+        </button>
+        <button class="run-tool" data-run="ad_manager" data-state="idle">
+          <span class="ico">$</span>
+          <span class="tname">Gestor de Ads</span>
+          <span class="tdesc">Prepara reglas de ROAS, CPC, presupuesto y alertas de beneficio.</span>
           <span class="go" data-go>Ejecutar →</span>
           <span class="bar"></span>
         </button>

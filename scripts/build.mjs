@@ -59,6 +59,8 @@ const PAGES = [
   { tpl: 'demos.html',     ns: 'demos',     path: 'demos' },
   { tpl: 'nosotros.html',  ns: 'nosotros',  path: 'nosotros' },
   { tpl: 'precios.html',   ns: 'precios',   path: 'precios' },
+  { tpl: 'bienvenida.html', ns: 'bienvenida', path: 'bienvenida' },
+  { tpl: 'privacidad.html', ns: 'privacidad', path: 'privacidad' },
 ];
 
 // Single-file JS + static assets copied verbatim into dist root
@@ -167,6 +169,16 @@ function copyDir(from, to) {
   }
 }
 
+function mergeFallback(base, override) {
+  if (Array.isArray(base) || Array.isArray(override)) return override ?? base;
+  if (!base || typeof base !== 'object') return override ?? base;
+  const out = { ...base };
+  for (const key of Object.keys(override || {})) {
+    out[key] = mergeFallback(base[key], override[key]);
+  }
+  return out;
+}
+
 // ---- Build ----
 console.log('• Cleaning dist/');
 if (existsSync(DIST)) rmSync(DIST, { recursive: true, force: true });
@@ -174,8 +186,10 @@ mkdirSync(DIST, { recursive: true });
 
 // Load all language strings up front
 const STRINGS = {};
+const ES_STRINGS = JSON.parse(readFileSync(join(SRC, 'i18n', `${DEFAULT_LANG}.json`), 'utf8'));
 for (const lang of LANGS) {
-  STRINGS[lang] = JSON.parse(readFileSync(join(SRC, 'i18n', `${lang}.json`), 'utf8'));
+  const langStrings = JSON.parse(readFileSync(join(SRC, 'i18n', `${lang}.json`), 'utf8'));
+  STRINGS[lang] = lang === DEFAULT_LANG ? langStrings : mergeFallback(ES_STRINGS, langStrings);
 }
 
 for (const lang of LANGS) {
@@ -204,7 +218,7 @@ for (const lang of LANGS) {
       data['i18n.formJson'] = JSON.stringify({ lang, form: s.contratar.form });
     }
     if (page.ns === 'demos') {
-      data['i18n.demosJson'] = JSON.stringify({ lang, live: s.demos.live, items: s.demos.items, tools: s.demos.tools, autos: s.demos.autos });
+      data['i18n.demosJson'] = JSON.stringify({ lang, live: s.demos.live, items: s.demos.items });
     }
     if (page.ns === 'precios') {
       // Checkout strings for precios.js + the Supabase auth config tag (real

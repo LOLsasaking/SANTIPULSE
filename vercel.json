@@ -5,12 +5,7 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "functions": {
-    "api/lead.js": { "maxDuration": 10 },
-    "api/demo/price-monitor.js": { "maxDuration": 30 },
-    "api/demo/lead-scraper.js": { "maxDuration": 30 },
-    "api/dashboard/run.js": { "maxDuration": 30 },
-    "api/stripe/webhook.js": { "maxDuration": 15 },
-    "api/cron/process.js": { "maxDuration": 60 }
+    "api/[...route].js": { "maxDuration": 60 }
   },
   "crons": [
     { "path": "/api/cron/process", "schedule": "*/5 * * * *" }

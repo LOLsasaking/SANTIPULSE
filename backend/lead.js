@@ -84,6 +84,12 @@ export default async function handler(req, res) {
   const business = clean(body.business, 120);
   const message = clean(body.message, 2000);
   const lang = clean(body.lang, 5) || 'es';
+  const gdprConsent = body.gdprConsent === true
+    || body.gdprConsent === 'true'
+    || body.gdpr_consent === true
+    || body.gdpr_consent === 'true'
+    || body.privacy === 'on'
+    || body.consent === 'on';
 
   // need[] -> comma-joined, each item capped & cleaned
   let need = '';
@@ -96,6 +102,9 @@ export default async function handler(req, res) {
   // Require a name + valid email (message/phone/business optional, matching the form)
   if (name.length < 2 || !EMAIL_RE.test(email)) {
     return res.status(400).json({ ok: false, error: 'invalid' });
+  }
+  if (!gdprConsent) {
+    return res.status(400).json({ ok: false, error: 'consent_required' });
   }
 
   const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -112,9 +121,20 @@ export default async function handler(req, res) {
     source: 'santipulse.com',
     ip_hash: hashIp(ip),
     user_agent: clean(req.headers['user-agent'], 300),
+    gdpr_consent: true,
+    gdpr_consent_at: new Date().toISOString(),
+    privacy_version: 'privacidad-2026-06-05',
   };
 
-  const { error } = await supabase.from('leads').insert([record]);
+  let { error } = await supabase.from('leads').insert([record]);
+  if (error && /gdpr|privacy_version|schema cache|column/i.test(error.message || '')) {
+    const fallback = { ...record };
+    delete fallback.gdpr_consent;
+    delete fallback.gdpr_consent_at;
+    delete fallback.privacy_version;
+    fallback.message = `[Consentimiento GDPR aceptado: privacidad-2026-06-05]\n\n${message}`;
+    ({ error } = await supabase.from('leads').insert([fallback]));
+  }
   if (error) {
     console.error('[lead] Supabase insert failed:', error.message);
     return res.status(500).json({ ok: false, error: 'server' });
@@ -125,7 +145,7 @@ export default async function handler(req, res) {
   // is exactly why fire-and-forget email previously failed with "fetch failed".
   // We still never let an email error fail the request (the lead is already saved).
   await Promise.allSettled([
-    notifyByEmail({ name, email, phone, business, need, message, lang })
+    notifyByEmail({ name, email, phone, business, need, message, lang, gdprConsent })
       .catch((e) => console.error('[lead] owner notify failed:', (e && e.message) || e)),
     sendAutoReply({ name, email, lang })
       .catch((e) => console.error('[lead] auto-reply failed:', (e && e.message) || e)),
@@ -134,7 +154,7 @@ export default async function handler(req, res) {
   return res.status(200).json({ ok: true });
 }
 
-async function notifyByEmail({ name, email, phone, business, need, message, lang }) {
+async function notifyByEmail({ name, email, phone, business, need, message, lang, gdprConsent }) {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.LEAD_NOTIFY_TO;
   const from = process.env.LEAD_NOTIFY_FROM || 'onboarding@resend.dev';
@@ -149,6 +169,7 @@ async function notifyByEmail({ name, email, phone, business, need, message, lang
     row('Negocio', business) +
     row('Necesita', need) +
     row('Idioma', lang) +
+    row('GDPR', gdprConsent ? 'Aceptado' : '') +
     (message ? `<p><b>Mensaje:</b></p><p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>` : '');
 
   const resp = await fetch('https://api.resend.com/emails', {

@@ -14,6 +14,18 @@
   function show(el) { el.classList.remove('hidden'); }
   function hide(el) { el.classList.add('hidden'); }
 
+  var MODULES = {
+    ai_receptionist: { label: 'Recepcionista IA', icon: 'TEL' },
+    social_insights: { label: 'Insights de Redes', icon: 'RED' },
+    ad_manager: { label: 'Gestor de Ads', icon: 'ADS' },
+  };
+  function moduleName(type) {
+    return (MODULES[type] && MODULES[type].label) || String(type || '').replace(/_/g, ' ');
+  }
+  function moduleIcon(type) {
+    return (MODULES[type] && MODULES[type].icon) || 'PLS';
+  }
+
   if (!window.SantiAuth || !window.SantiAuth.available()) {
     loading.textContent = 'Acceso no configurado.';
     return;
@@ -63,7 +75,7 @@
   function fillProfile(p) {
     if (!p) return;
     var form = document.getElementById('profileForm');
-    ['business_name', 'website_url', 'industry', 'sender_name', 'my_current_price', 'floor_price', 'max_leads_per_run'].forEach(function (k) {
+    ['business_name', 'website_url', 'industry', 'sender_name', 'target_market'].forEach(function (k) {
       if (form[k] != null && p[k] != null) form[k].value = p[k];
     });
     // URL fields are stored as JSONB arrays; show as text.
@@ -124,8 +136,8 @@
           var st = j.status || '';
           var scls = st === 'completed' ? 'raise' : st === 'failed' ? 'lower' : 'hold';
           var stxt = st === 'completed' ? 'Completado' : st === 'failed' ? 'Fallido' : st === 'running' ? 'En curso' : st;
-          var ico = j.automation_type === 'lead_scraper' ? '🎯' : '📊';
-          return '<tr><td>' + ico + ' ' + esc((j.automation_type || '').replace(/_/g, ' ')) +
+          var ico = moduleIcon(j.automation_type);
+          return '<tr><td><span class="mono" style="font-size:10px;color:#E23B4E">' + esc(ico) + '</span> ' + esc(moduleName(j.automation_type)) +
             '</td><td><span class="pill ' + scls + '">' + esc(stxt) + '</span></td><td>' +
             (j.is_demo ? 'sí' : 'no') + '</td><td class="mono" style="font-size:11px;color:rgba(255,255,255,.6)">' + esc(date) + '</td></tr>';
         }).join('');
@@ -167,15 +179,6 @@
     runMsg.innerHTML = html;
     show(runMsg);
   }
-  function money(n) {
-    if (n === null || n === undefined || isNaN(n)) return '—';
-    return '$' + Number(n).toFixed(2);
-  }
-  function actionPill(a) {
-    var cls = a === 'LOWER_PRICE' ? 'lower' : a === 'RAISE_PRICE' ? 'raise' : 'hold';
-    var txt = a === 'LOWER_PRICE' ? 'Bajar precio' : a === 'RAISE_PRICE' ? 'Subir precio' : 'Mantener';
-    return '<span class="pill ' + cls + '">' + txt + '</span>';
-  }
   function stat(k, v, color) {
     return '<div class="stat"><span class="k">' + esc(k) + '</span><span class="v"' +
       (color ? ' style="color:' + color + '"' : '') + '>' + v + '</span></div>';
@@ -183,45 +186,28 @@
   // Render the actual run output, not just a "done" line.
   function renderResult(type, result, usage) {
     var html = '';
-    var title = type === 'price_monitor' ? 'Monitor de precios' : 'Captación de leads';
+    var title = result.title || moduleName(type);
     var quota = usage && usage.limit && usage.limit !== 999999 ? usage.used + '/' + usage.limit : (usage ? String(usage.used) : '');
     html += '<div class="res-head"><span class="rt">' + esc(title) + '</span>' +
       (quota ? '<span class="muted mono" style="font-size:11px">' + esc(quota) + ' este mes</span>' : '') + '</div>';
 
-    if (type === 'price_monitor') {
-      var rows = (result.results || []);
-      html += '<div class="res-stats">' +
-        stat('Comprobadas', result.checked || 0) +
-        stat('Con precio', result.priced || 0, '#7fe0a3') +
-        stat('Sin precio', (result.checked || 0) - (result.priced || 0), '#ffcf7a') +
-        '</div>';
-      html += rows.map(function (r, i) {
-        var rep = r.repricing || {};
-        if (!r.success) {
-          return '<div class="res-row" style="animation-delay:' + (i * 0.05) + 's">' +
-            '<span class="url">' + esc(r.url || '—') + '</span>' +
-            '<span class="pill fail">Sin precio</span></div>';
-        }
-        return '<div class="res-row" style="animation-delay:' + (i * 0.05) + 's">' +
-          '<span class="url">' + esc(r.url || '—') + '</span>' +
-          '<span class="px" title="Precio competidor">' + money(r.competitorPrice) + '</span>' +
-          '<span class="px" style="color:#E23B4E" title="Tu sugerencia">→ ' + money(rep.suggestion) + '</span>' +
-          actionPill(rep.action) + '</div>';
-      }).join('') || '<p class="muted" style="font-size:13px">Sin resultados.</p>';
-    } else {
-      var leads = (result.leads || []);
-      html += '<div class="res-stats">' + stat('Leads encontrados', result.totalFound || leads.length, '#7fe0a3') + '</div>';
-      if (leads.length) {
-        html += '<table style="margin-top:4px"><thead><tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Web</th></tr></thead><tbody>' +
-          leads.map(function (l) {
-            var site = l.website ? '<a href="' + esc(l.website) + '" target="_blank" rel="noopener" style="color:#E23B4E">↗</a>' : '—';
-            return '<tr><td>' + esc(l.name || '—') + '</td><td>' + esc(l.email || '—') +
-              '</td><td>' + esc(l.phone || '—') + '</td><td>' + site + '</td></tr>';
-          }).join('') + '</tbody></table>';
-      } else {
-        html += '<p class="muted" style="font-size:13px">No se encontraron leads en esa página.</p>';
-      }
+    var metrics = result.metrics || [];
+    if (metrics.length) {
+      html += '<div class="res-stats">' + metrics.map(function (m) {
+        return stat(m.label || 'Dato', esc(m.value || '—'), '#7fe0a3');
+      }).join('') + '</div>';
     }
+    html += '<p class="muted" style="font-size:13px;line-height:1.6;margin:0 0 12px">' + esc(result.summary || 'Modulo Pulse preparado.') + '</p>';
+
+    var actions = result.nextActions || [];
+    if (actions.length) {
+      html += '<div class="res-row" style="align-items:flex-start;display:block">' +
+        '<span class="pill raise">Siguientes pasos</span>' +
+        '<ul style="margin:12px 0 0 18px;color:rgba(255,255,255,.72);font-size:13px;line-height:1.7">' +
+        actions.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') +
+        '</ul></div>';
+    }
+
     runResult.innerHTML = html;
     show(runResult);
   }
@@ -236,7 +222,7 @@
       card.setAttribute('data-state', 'running');
       if (go) go.innerHTML = '<span class="spinner"></span> Ejecutando…';
       hide(runResult);
-      setRunMsg('', '<span class="spinner"></span> Ejecutando la automatización… esto puede tardar unos segundos.');
+      setRunMsg('', '<span class="spinner"></span> Preparando el módulo Pulse… esto puede tardar unos segundos.');
 
       window.SantiAuth.apiFetch('/api/dashboard/run', { method: 'POST', body: JSON.stringify({ type: type }) })
         .then(function (r) { return r.json().then(function (d) { return { status: r.status, d: d }; }); })
@@ -251,9 +237,8 @@
           } else if (res.status === 402 && d.error === 'quota_exceeded') {
             setRunMsg('err', 'Has alcanzado tu límite mensual (' + esc(String(d.used)) + '/' + esc(String(d.limit)) +
               '). <a href="/precios/" style="color:#ff9aa6">Sube de plan →</a>');
-          } else if (res.status === 400 && d.error === 'no_inputs') {
-            var field = d.field === 'lead_target_urls' ? 'una URL objetivo de leads' : 'URLs de competidores';
-            setRunMsg('err', 'Añade ' + field + ' en tu perfil y guarda antes de ejecutar.');
+          } else if (res.status === 400 && d.error === 'invalid_type') {
+            setRunMsg('err', 'Ese módulo Pulse no está disponible.');
           } else {
             setRunMsg('err', 'No se pudo ejecutar. Inténtalo de nuevo.');
           }
