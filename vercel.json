@@ -7,6 +7,10 @@
   "functions": {
     "api/[...route].js": { "maxDuration": 60 }
   },
+  "rewrites": [
+    { "source": "/api", "destination": "/api/[...route]" },
+    { "source": "/api/:path*", "destination": "/api/[...route]" }
+  ],
   "crons": [
     { "path": "/api/cron/process", "schedule": "0 9 * * *" }
   ],
