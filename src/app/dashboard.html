@@ -283,6 +283,49 @@
       <span class="conn"></span>
     </section>
 
+    <!-- ④ Live Pulse modules -->
+    <section class="node" id="pulseNode">
+      <div class="node-head">
+        <span class="node-num">4</span>
+        <span class="node-ico">🟢</span>
+        <div class="grow">
+          <h2 class="node-title">Módulos en vivo</h2>
+          <p class="node-sub">Conexiones reales · datos en tiempo real</p>
+        </div>
+      </div>
+      <div id="pulseFlash" class="msg hidden" style="margin-bottom:14px"></div>
+      <div id="pulseModules">
+        <!-- Recepcionista IA -->
+        <div class="card" style="margin-bottom:16px">
+          <div class="node-head" style="margin-bottom:14px">
+            <span class="node-ico">☎</span>
+            <div class="grow"><h3 class="node-title" style="font-size:15px">Recepcionista IA</h3>
+            <p class="node-sub">Voz · WhatsApp · reservas · SOS humano</p></div>
+          </div>
+          <div id="recepBody"></div>
+        </div>
+        <!-- Insights de Redes -->
+        <div class="card" style="margin-bottom:16px">
+          <div class="node-head" style="margin-bottom:14px">
+            <span class="node-ico">◎</span>
+            <div class="grow"><h3 class="node-title" style="font-size:15px">Insights de Redes</h3>
+            <p class="node-sub">Tendencias · probabilidad viral · cola de posts</p></div>
+          </div>
+          <div id="insightsBody"></div>
+        </div>
+        <!-- Gestor de Ads -->
+        <div class="card" style="margin-bottom:0">
+          <div class="node-head" style="margin-bottom:14px">
+            <span class="node-ico">$</span>
+            <div class="grow"><h3 class="node-title" style="font-size:15px">Gestor de Ads</h3>
+            <p class="node-sub">Meta/TikTok · ROAS/CPC · reglas · alertas</p></div>
+          </div>
+          <div id="adsBody"></div>
+        </div>
+      </div>
+      <span class="conn"></span>
+    </section>
+
     <!-- ⑤ Integrations -->
     <section class="node" id="integNode">
       <div class="node-head">
@@ -469,6 +512,7 @@
   <script src="/supabase.js"></script>
   <script src="/auth.js"></script>
   <script src="/dashboard-automations.js" defer></script>
+  <script src="/pulse-modules.js" defer></script>
   <script src="/dashboard.js" defer></script>
 </body>
 </html>

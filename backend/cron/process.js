@@ -172,7 +172,52 @@ export default async function handler(req, res) {
     }
   }
 
+  // ── 4. Insights post queue (Insights de Redes) ────────────────────────────
+  // Publishes queued trend-driven posts through the same Meta Graph transport.
+  if (socialConfigured()) {
+    const { data: queued } = await sb.from('insights_post_queue')
+      .select('*').eq('status', 'scheduled').lte('scheduled_for', nowIso)
+      .order('scheduled_for', { ascending: true }).limit(BATCH);
+    for (const post of queued || []) {
+      try {
+        if (!post.account_id) { await failInsightsPost(sb, post.id, 'no_account'); summary.errors++; continue; }
+        const profile = await ownerProfile(post.user_id);
+        const q = await quotaFor(post.user_id, profile);
+        if (q.posts >= q.limits.postsPerMonth) { summary.skipped++; continue; }
+
+        await sb.from('insights_post_queue').update({ status: 'publishing' }).eq('id', post.id);
+        const { data: account } = await sb.from('social_accounts')
+          .select('*').eq('id', post.account_id).eq('status', 'active').maybeSingle();
+        if (!account) { await failInsightsPost(sb, post.id, 'account_not_connected'); summary.errors++; continue; }
+
+        const r = await publish(account, { caption: post.caption, mediaUrl: post.media_url });
+        if (!r.ok) { await failInsightsPost(sb, post.id, r.error); summary.errors++; continue; }
+
+        await sb.from('insights_post_queue')
+          .update({ status: 'published', external_post_id: r.id || null, last_error: null }).eq('id', post.id);
+        await sb.from('post_logs').insert({ post_id: null, user_id: post.user_id, status: 'published', detail: `insights:${r.id || ''}` });
+        q.posts++;
+        summary.posts++;
+      } catch (err) { console.error('[cron/insights]', err.message); summary.errors++; }
+    }
+  }
+
+  // ── 5. Ad rule engine (Gestor de Ads) ─────────────────────────────────────
+  // Evaluates active rules against each campaign's latest synced metrics and
+  // fires actions (pause / alert / scale). Imported lazily to keep the worker
+  // load light when the module is unused.
+  try {
+    const { evaluateAdRules } = await import('../_lib/ads.js');
+    const adSummary = await evaluateAdRules(sb, ownerProfile);
+    summary.ads = adSummary.fired;
+    summary.errors += adSummary.errors;
+  } catch (err) { console.error('[cron/ads]', err.message); }
+
   return res.status(200).json({ ok: true, processed: summary, at: nowIso });
+}
+
+async function failInsightsPost(sb, id, error) {
+  await sb.from('insights_post_queue').update({ status: 'failed', last_error: String(error || 'failed').slice(0, 500) }).eq('id', id);
 }
 
 // ── helpers ───────────────────────────────────────────────────────────────────

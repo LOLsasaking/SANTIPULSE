@@ -15,6 +15,17 @@ import socialAuthorize from '../backend/integrations/social/authorize.js';
 import socialCallback from '../backend/integrations/social/callback.js';
 import integrationStatus from '../backend/integrations/status.js';
 import lead from '../backend/lead.js';
+import receptionistDashboard from '../backend/receptionist/dashboard.js';
+import receptionistVapiWebhook from '../backend/receptionist/vapi-webhook.js';
+import receptionistWhatsappWebhook from '../backend/receptionist/whatsapp-webhook.js';
+import insightsDashboard from '../backend/insights/dashboard.js';
+import insightsIngest from '../backend/insights/ingest.js';
+import adsDashboard from '../backend/ads/dashboard.js';
+import adsAuthorize from '../backend/integrations/ads/authorize.js';
+import adsCallback from '../backend/integrations/ads/callback.js';
+import adsTiktokCallback from '../backend/integrations/ads/tiktok-callback.js';
+import calendarAuthorize from '../backend/integrations/calendar/authorize.js';
+import calendarCallback from '../backend/integrations/calendar/callback.js';
 import stripeCheckout from '../backend/stripe/checkout.js';
 import stripePortal from '../backend/stripe/portal.js';
 import stripeWebhook from '../backend/stripe/webhook.js';
@@ -24,6 +35,17 @@ export const config = { api: { bodyParser: false } };
 
 const ROUTES = new Map([
   ['lead', lead],
+  ['receptionist/dashboard', receptionistDashboard],
+  ['receptionist/vapi-webhook', receptionistVapiWebhook],
+  ['receptionist/whatsapp-webhook', receptionistWhatsappWebhook],
+  ['insights/dashboard', insightsDashboard],
+  ['insights/ingest', insightsIngest],
+  ['ads/dashboard', adsDashboard],
+  ['integrations/ads/authorize', adsAuthorize],
+  ['integrations/ads/callback', adsCallback],
+  ['integrations/ads/tiktok-callback', adsTiktokCallback],
+  ['integrations/calendar/authorize', calendarAuthorize],
+  ['integrations/calendar/callback', calendarCallback],
   ['dashboard/me', dashboardMe],
   ['dashboard/profile', dashboardProfile],
   ['dashboard/run', dashboardRun],
