@@ -25,9 +25,14 @@
 
   var SantiPulse = {
     init: function (active) {
-      var host = el('pulseModules');
-      if (!host) return;
-      if (!active) { host.innerHTML = '<div class="sub-lock muted">Los módulos en vivo requieren una suscripción activa. <a href="/precios/" style="color:#ff9aa6">Ver planes →</a></div>'; return; }
+      var bodies = ['recepBody', 'insightsBody', 'adsBody'];
+      var anyHost = bodies.some(function (id) { return !!el(id); });
+      if (!anyHost) return;
+      if (!active) {
+        var lock = '<div class="sub-lock">Los módulos en vivo requieren una suscripción activa. <a href="/precios/">Ver planes →</a></div>';
+        bodies.forEach(function (id) { var b = el(id); if (b) b.innerHTML = lock; });
+        return;
+      }
       this.renderReceptionist();
       this.renderInsights();
       this.renderAds();
