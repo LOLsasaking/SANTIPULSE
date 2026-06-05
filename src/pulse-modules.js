@@ -109,7 +109,10 @@
             field('Zona', 'region', c.region || '', 'Tenerife')
           ) +
           field('Hashtags (separados por coma)', 'hashtags_text', (c.hashtags || []).join(', '), '#barberia, #fade') +
-          '<button class="btn" type="submit" style="margin-top:6px">Guardar config</button>' +
+          '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">' +
+          '<button class="btn" type="submit">Guardar config</button>' +
+          (s.publishing && s.publishing.configured && !(s.publishing.connected) ? '<button class="btn ghost" type="button" data-connect-social>Conectar Instagram/Facebook</button>' : '') +
+          '</div>' +
           '<div class="msg ok hidden" id="insOk">Guardado.</div><div class="msg err hidden" id="insErr"></div>' +
           '</form>';
         html += '<p class="node-sub" style="margin:18px 0 8px">Estilos en tendencia (probabilidad viral)</p>';
@@ -130,6 +133,7 @@
             flash('insOk', 'insErr', r.status === 200);
           });
         });
+        bindSocialConnect();
       });
     },
 
@@ -180,13 +184,14 @@
 
     handleOAuthFlash: function () {
       var q = new URLSearchParams(window.location.search);
-      ['ads', 'calendar'].forEach(function (k) {
+      var LABELS = { ads: 'Ads', calendar: 'Calendario', social: 'Instagram/Facebook' };
+      ['ads', 'calendar', 'social'].forEach(function (k) {
         if (q.has(k)) {
           var msg = el('pulseFlash');
           if (msg) {
             var ok = q.get(k) === 'connected';
             msg.className = 'msg ' + (ok ? 'ok' : 'err');
-            msg.textContent = (k === 'ads' ? 'Ads' : 'Calendario') + (ok ? ' conectado.' : ' no se pudo conectar (' + esc(q.get('reason') || '') + ').');
+            msg.textContent = LABELS[k] + (ok ? ' conectado.' : ' no se pudo conectar (' + esc(q.get('reason') || '') + ').');
             msg.classList.remove('hidden');
           }
         }
@@ -290,6 +295,15 @@
     if (b) b.addEventListener('click', function () {
       b.disabled = true;
       api('/api/integrations/calendar/authorize').then(function (r) {
+        if (r.d && r.d.url) window.location.href = r.d.url; else b.disabled = false;
+      });
+    });
+  }
+  function bindSocialConnect() {
+    var b = document.querySelector('[data-connect-social]');
+    if (b) b.addEventListener('click', function () {
+      b.disabled = true;
+      api('/api/integrations/social/authorize').then(function (r) {
         if (r.d && r.d.url) window.location.href = r.d.url; else b.disabled = false;
       });
     });

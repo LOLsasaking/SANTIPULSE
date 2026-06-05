@@ -67,11 +67,8 @@
       show(document.getElementById('lockedNote'));
     }
 
-    // Boot the 3 client automations (Integrations + Cart/Outreach/Social),
-    // gated on the subscription state we just computed.
-    if (window.SantiAutomations) window.SantiAutomations.init(!!sub.active);
-    // Boot the 3 REAL Pulse modules' live panels (Recepcionista IA / Insights /
-    // Gestor de Ads), same subscription gate.
+    // Boot the 3 Pulse modules' live panels (Recepcionista IA / Insights de
+    // Redes / Gestor de Ads), gated on the subscription state we just computed.
     if (window.SantiPulseModules) window.SantiPulseModules.init(!!sub.active);
   }
 

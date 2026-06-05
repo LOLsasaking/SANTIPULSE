@@ -6,7 +6,7 @@
    profiles (service_role). The agent / dashboard reads free slots and
    creates events on demand — access tokens are minted per call.
 
-   Reuses the same Google OAuth client as gmail.js. Fully env-gated:
+   Standalone Google OAuth client (calendar scope). Fully env-gated:
    without GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET, isConfigured()
    is false and booking endpoints respond 503.
 

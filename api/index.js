@@ -1,19 +1,8 @@
-import cartRecovery from '../backend/automations/cart-recovery.js';
-import outreach from '../backend/automations/outreach.js';
-import socialAutomation from '../backend/automations/social.js';
 import cronProcess from '../backend/cron/process.js';
 import dashboardMe from '../backend/dashboard/me.js';
 import dashboardProfile from '../backend/dashboard/profile.js';
 import dashboardRun from '../backend/dashboard/run.js';
 import dashboardRuns from '../backend/dashboard/runs.js';
-import disconnect from '../backend/integrations/disconnect.js';
-import gmailAuthorize from '../backend/integrations/gmail/authorize.js';
-import gmailCallback from '../backend/integrations/gmail/callback.js';
-import shopifyAuthorize from '../backend/integrations/shopify/authorize.js';
-import shopifyCallback from '../backend/integrations/shopify/callback.js';
-import socialAuthorize from '../backend/integrations/social/authorize.js';
-import socialCallback from '../backend/integrations/social/callback.js';
-import integrationStatus from '../backend/integrations/status.js';
 import lead from '../backend/lead.js';
 import receptionistDashboard from '../backend/receptionist/dashboard.js';
 import receptionistVapiWebhook from '../backend/receptionist/vapi-webhook.js';
@@ -26,26 +15,36 @@ import adsCallback from '../backend/integrations/ads/callback.js';
 import adsTiktokCallback from '../backend/integrations/ads/tiktok-callback.js';
 import calendarAuthorize from '../backend/integrations/calendar/authorize.js';
 import calendarCallback from '../backend/integrations/calendar/callback.js';
+// Meta (Facebook/Instagram) OAuth — kept because Insights de Redes publishes
+// through the user's connected social account (social_accounts + Graph API).
+import socialAuthorize from '../backend/integrations/social/authorize.js';
+import socialCallback from '../backend/integrations/social/callback.js';
 import stripeCheckout from '../backend/stripe/checkout.js';
 import stripePortal from '../backend/stripe/portal.js';
 import stripeWebhook from '../backend/stripe/webhook.js';
-import track from '../backend/track/[token].js';
 
 export const config = { api: { bodyParser: false } };
 
 const ROUTES = new Map([
   ['lead', lead],
+  // Recepcionista IA
   ['receptionist/dashboard', receptionistDashboard],
   ['receptionist/vapi-webhook', receptionistVapiWebhook],
   ['receptionist/whatsapp-webhook', receptionistWhatsappWebhook],
+  // Insights de Redes
   ['insights/dashboard', insightsDashboard],
   ['insights/ingest', insightsIngest],
+  ['integrations/social/authorize', socialAuthorize],
+  ['integrations/social/callback', socialCallback],
+  // Gestor de Ads
   ['ads/dashboard', adsDashboard],
   ['integrations/ads/authorize', adsAuthorize],
   ['integrations/ads/callback', adsCallback],
   ['integrations/ads/tiktok-callback', adsTiktokCallback],
+  // Recepcionista IA — calendar booking
   ['integrations/calendar/authorize', calendarAuthorize],
   ['integrations/calendar/callback', calendarCallback],
+  // Account / billing / dashboard
   ['dashboard/me', dashboardMe],
   ['dashboard/profile', dashboardProfile],
   ['dashboard/run', dashboardRun],
@@ -53,17 +52,7 @@ const ROUTES = new Map([
   ['stripe/checkout', stripeCheckout],
   ['stripe/portal', stripePortal],
   ['stripe/webhook', stripeWebhook],
-  ['automations/cart-recovery', cartRecovery],
-  ['automations/outreach', outreach],
-  ['automations/social', socialAutomation],
-  ['integrations/disconnect', disconnect],
-  ['integrations/gmail/authorize', gmailAuthorize],
-  ['integrations/gmail/callback', gmailCallback],
-  ['integrations/shopify/authorize', shopifyAuthorize],
-  ['integrations/shopify/callback', shopifyCallback],
-  ['integrations/social/authorize', socialAuthorize],
-  ['integrations/social/callback', socialCallback],
-  ['integrations/status', integrationStatus],
+  // Background worker
   ['cron/process', cronProcess],
 ]);
 
@@ -73,11 +62,6 @@ export default async function handler(req, res) {
   const route = normalizeRoute(url.pathname);
 
   hydrateQuery(req, url);
-
-  if (route.startsWith('track/')) {
-    req.query.token = route.slice('track/'.length).split('/')[0] || '';
-    return track(req, res);
-  }
 
   const routeHandler = ROUTES.get(route);
   if (!routeHandler) {
