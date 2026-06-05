@@ -1,0 +1,20 @@
+# Obsidian notes & misc
+Website
+*.md
+*.py
+*.backup-*
+_serve.js
+_test_shot.py
+
+# Old demo source folders (their live versions are separate Vercel projects)
+electrician
+plumber
+
+# Build artifacts are generated on Vercel by `npm run build`
+dist
+node_modules
+
+# Old per-page source folders — the site is now built from src/ into dist/.
+# (Vercel serves dist/ via outputDirectory; these would be ignored anyway,
+#  but excluding them keeps the upload clean and avoids confusion.)
+aprender

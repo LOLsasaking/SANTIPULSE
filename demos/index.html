@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Demos en vivo de Santipulse — webs reales por sector, ya en marcha." />
+<title>Santipulse · Demos en vivo</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors:{ ink:'#050505', inkSoft:'#0B0B0D', ember:'#E23B4E' },
+    fontFamily:{ display:['"Archivo"','sans-serif'], body:['Inter','sans-serif'], mono:['"Space Mono"','monospace'] },
+  }}};
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Inter',sans-serif; background:#050505; color:#fff; }
+  .font-display{ font-family:'Archivo',sans-serif; }
+  .font-mono{ font-family:'Space Mono',monospace; }
+  .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.86; letter-spacing:-.02em; }
+  .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:14px; }
+  .eyebrow::before{ content:''; width:34px; height:1px; background:rgba(255,255,255,.5); }
+  .meta{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.42); }
+  .volver{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.8); text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition:color .3s ease; }
+  .volver:hover{ color:#fff; }
+  .volver svg{ transition:transform .3s ease; }
+  .volver:hover svg{ transform:translateX(-5px); }
+  .card{ background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08); transition:all .4s ease; }
+  .card:hover{ border-color:rgba(226,59,78,.5); transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,.5); }
+  .demo-thumb{ aspect-ratio:16/10; overflow:hidden; }
+  .demo-thumb video,.demo-thumb img{ width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+  .demo-card:hover .demo-thumb video,.demo-card:hover .demo-thumb img{ transform:scale(1.06); }
+  .topbar{ position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 30px; backdrop-filter:blur(14px); background:rgba(5,5,5,.55); }
+  .wordmark{ font-family:'Space Mono',monospace; font-size:13px; letter-spacing:.12em; color:rgba(255,255,255,.85); text-decoration:none; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="volver" href="/"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> Volver</a>
+  <a class="wordmark" href="/">santipulse.com</a>
+</div>
+
+<main class="pt-32 pb-24 px-6 md:px-10 max-w-6xl mx-auto">
+  <header class="mb-12">
+    <p class="eyebrow mb-5">Mis Trabajos · Demos en vivo</p>
+    <h1 class="headline text-5xl md:text-7xl mb-6">Pruébalo<br>en vivo</h1>
+    <p class="text-white/65 max-w-2xl text-lg">Webs reales que ya están en marcha. Haz clic en cualquiera para abrirla en una pestaña nueva — verás la portada tal cual la ve un cliente.</p>
+  </header>
+
+  <div id="gallery" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+  <div class="mt-10 p-5 rounded-2xl border border-ember/20 bg-ember/5 text-sm text-white/70 leading-relaxed max-w-3xl">
+    <b class="text-ember">🎯 Reservas y presupuestos integrados:</b> en restaurantes, barberías, uñas y tours el cliente reserva de verdad; en oficios pide presupuesto. El negocio lo ve al instante en su panel de administración.
+  </div>
+
+  <div class="mt-12">
+    <a href="/contratar/" class="inline-flex items-center gap-3 font-mono font-bold tracking-[0.2em] uppercase text-sm bg-white text-ink px-6 py-3.5 rounded-full hover:bg-white/90 transition">
+      Quiero algo así <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</main>
+
+<footer class="border-t border-white/10 py-10 px-6 md:px-10">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-4 justify-between items-center">
+    <a class="wordmark" href="/">santipulse.com</a>
+    <span class="meta">© 2026 Santipulse · 🇺🇸 EE.UU. · <span class="text-ember">Tenerife 🇪🇸</span></span>
+  </div>
+</footer>
+
+<script>
+const WEBSITES = [
+  { name:'On Fleek', emoji:'💈', desc:'Barbería premium y tienda de productos. Cortes, barba y cuidado capilar.', type:'video', media:'/demo-media/onfleek.mp4', url:'https://on-fleek-ten.vercel.app/' },
+  { name:'SUEHTAM', emoji:'🧥', desc:'Marca de moda exclusiva — streetwear de lujo por drops limitados.', type:'video', media:'/demo-media/suehtam.mp4', url:'https://suehtam.vercel.app/' },
+  { name:'Barbería El Estimado', emoji:'✂️', desc:'Web en producción con dominio propio. Cortes con carácter, barba a navaja y reservas online.', type:'video', media:'/demo-media/estimado-web.mp4', url:'https://www.barberiaelestimado.com/' },
+  { name:'El Estimado · Urban', emoji:'💈', desc:'Variante urban de la barbería: cortes, barba a navaja y reservas online.', type:'image', media:'/demo-media/elestimado.jpg', url:'https://barber-templates.vercel.app/urban' },
+  { name:'BURGUR', emoji:'🍔', desc:'El club definitivo de la hamburguesa. Smash burgers y vídeo al hacer scroll.', type:'video', media:'/demo-media/burgur.mp4', url:'https://restaurant-templates-rosy.vercel.app/burger.html' },
+  { name:'SAKANA', emoji:'🍣', desc:'Sushi bar y cocina japonesa. El arte del sushi, pescado fresco.', type:'video', media:'/demo-media/sakana.mp4', url:'https://restaurant-templates-rosy.vercel.app/sushi.html' },
+  { name:'Tenerife Tours', emoji:'🌋', desc:'Web de tours en 4 idiomas con hero de vídeo cinemático y galería que se desvela al hacer scroll.', type:'video', media:'/demo-media/tenerife-tours.mp4', url:'https://tenerife-tours.vercel.app/' },
+  { name:'VALS', emoji:'🚙', desc:'Importación de coches premium de EE.UU. a Tenerife. Catálogo de vehículos con vídeo y proceso de importación.', type:'video', media:'/demo-media/vals.mp4', url:'https://vals-xi.vercel.app/' },
+];
+function card(w){
+  const preview = w.type==='video'
+    ? `<video src="${w.media}" autoplay loop muted playsinline preload="metadata"></video>`
+    : `<img src="${w.media}" alt="Vista previa: ${w.name}" loading="lazy"/>`;
+  return `
+    <a href="${w.url}" target="_blank" rel="noopener" class="demo-card card rounded-2xl overflow-hidden block group">
+      <div class="demo-thumb relative">
+        ${preview}
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent"></div>
+        <span class="absolute top-3 right-3 inline-flex items-center gap-1.5 text-[10px] font-mono font-bold tracking-[0.15em] uppercase px-2.5 py-1 rounded-full bg-white text-ink">
+          Ver en vivo <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </span>
+      </div>
+      <div class="p-5">
+        <h3 class="font-display font-extrabold text-lg uppercase tracking-tight mb-1">${w.emoji} ${w.name}</h3>
+        <p class="text-white/55 text-xs leading-relaxed">${w.desc}</p>
+      </div>
+    </a>`;
+}
+document.getElementById('gallery').innerHTML = WEBSITES.map(card).join('');
+</script>
+</body>
+</html>

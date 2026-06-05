@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Panel · Santipulse</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:'Inter',sans-serif; background:#050505; color:#fff; }
+  .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.9; letter-spacing:-.02em; }
+  .mono{ font-family:'Space Mono',monospace; }
+  .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.5); }
+  .plans-link{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.6); text-decoration:none; white-space:nowrap; transition:color .2s; }
+  .plans-link:hover{ color:#fff; }
+  .topbar{ position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:18px 26px; border-bottom:1px solid rgba(255,255,255,.08); backdrop-filter:blur(12px); background:rgba(5,5,5,.6); }
+  .wordmark{ font-family:'Space Mono',monospace; font-size:13px; letter-spacing:.12em; color:rgba(255,255,255,.85); text-decoration:none; }
+  .wrap{ max-width:920px; margin:0 auto; padding:40px 24px 80px; }
+  .card{ background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:26px; margin-bottom:20px; }
+  label{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.5); display:flex; align-items:center; gap:6px; margin-bottom:6px; }
+  label .fi{ opacity:.7; font-size:12px; }
+  input, textarea{ width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:11px 13px; color:#fff; font-size:14px; font-family:inherit; transition:border-color .25s, box-shadow .25s, background .25s; }
+  textarea{ resize:vertical; min-height:64px; line-height:1.5; }
+  input:focus, textarea:focus{ outline:none; border-color:rgba(226,59,78,.6); box-shadow:0 0 0 3px rgba(226,59,78,.12); background:rgba(255,255,255,.06); }
+  input::placeholder, textarea::placeholder{ color:rgba(255,255,255,.3); }
+
+  /* ── n8n-style workflow nodes ── */
+  .flow{ position:relative; }
+  .node{ position:relative; background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.025)); border:1px solid rgba(255,255,255,.1); border-radius:18px; padding:26px 26px 26px 30px; margin-bottom:34px; box-shadow:0 8px 30px rgba(0,0,0,.35); transition:border-color .3s, box-shadow .3s; }
+  .node:last-child{ margin-bottom:0; }
+  .node::before{ content:''; position:absolute; left:0; top:22px; bottom:22px; width:3px; border-radius:3px; background:linear-gradient(180deg,#E23B4E,rgba(226,59,78,.25)); }
+  .node:hover{ border-color:rgba(226,59,78,.32); box-shadow:0 10px 38px rgba(226,59,78,.08), 0 8px 30px rgba(0,0,0,.4); }
+  /* connector line + dot flowing into the next node */
+  .node:not(:last-child)::after{ content:''; position:absolute; left:14px; bottom:-34px; width:2px; height:34px; background:linear-gradient(180deg,rgba(226,59,78,.5),rgba(226,59,78,.12)); }
+  .conn{ position:absolute; left:8px; bottom:-22px; width:14px; height:14px; border-radius:50%; background:#0a0a0a; border:2px solid rgba(226,59,78,.6); z-index:2; }
+  .conn::after{ content:''; position:absolute; inset:2px; border-radius:50%; background:#E23B4E; opacity:.85; animation:pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:.4; transform:scale(.8);} 50%{ opacity:1; transform:scale(1);} }
+  /* node header: number chip + icon + title */
+  .node-head{ display:flex; align-items:center; gap:13px; margin-bottom:20px; }
+  .node-num{ flex:none; width:30px; height:30px; border-radius:9px; display:grid; place-items:center; font-family:'Space Mono',monospace; font-weight:700; font-size:13px; color:#fff; background:rgba(226,59,78,.16); border:1px solid rgba(226,59,78,.4); }
+  .node-ico{ flex:none; font-size:18px; filter:saturate(1.1); }
+  .node-title{ font-family:'Archivo',sans-serif; font-weight:800; font-size:17px; text-transform:uppercase; letter-spacing:-.01em; margin:0; }
+  .node-sub{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.4); margin:2px 0 0; }
+  .node-head .grow{ flex:1; min-width:0; }
+  .btn{ font-family:'Space Mono',monospace; font-weight:700; font-size:12px; letter-spacing:.14em; text-transform:uppercase; background:#fff; color:#050505; padding:11px 20px; border-radius:9999px; border:0; cursor:pointer; transition:opacity .25s, transform .2s; }
+  .btn:hover:not(:disabled){ transform:translateY(-2px); }
+  .btn:disabled{ opacity:.5; cursor:wait; }
+  .btn.ghost{ background:transparent; color:rgba(255,255,255,.8); border:1px solid rgba(255,255,255,.18); }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .badge{ display:inline-block; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.1em; padding:5px 12px; border-radius:9999px; text-transform:uppercase; }
+  .badge.active{ background:rgba(64,200,120,.16); color:#7fe0a3; }
+  .badge.none{ background:rgba(255,255,255,.1); color:rgba(255,255,255,.7); }
+  table{ width:100%; border-collapse:collapse; font-size:13px; }
+  th{ text-align:left; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.45); padding:8px 10px; border-bottom:1px solid rgba(255,255,255,.1); }
+  td{ padding:9px 10px; border-bottom:1px solid rgba(255,255,255,.06); color:rgba(255,255,255,.82); }
+  .msg{ font-size:13px; margin-top:14px; padding:11px 14px; border-radius:10px; }
+  .msg.ok{ background:rgba(64,200,120,.12); border:1px solid rgba(64,200,120,.32); color:#9ff0bd; }
+  .msg.err{ background:rgba(226,59,78,.1); border:1px solid rgba(226,59,78,.3); color:#ff9aa6; }
+  .hidden{ display:none; }
+  .muted{ color:rgba(255,255,255,.55); font-size:14px; }
+  #loading{ text-align:center; padding:80px 20px; color:rgba(255,255,255,.5); font-family:'Space Mono',monospace; letter-spacing:.16em; text-transform:uppercase; font-size:12px; }
+  /* plan picker */
+  .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:20px; }
+  @media (max-width:680px){ .plans{ grid-template-columns:1fr; } }
+  .plan{ position:relative; background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:22px 20px; display:flex; flex-direction:column; transition:border-color .25s, transform .2s; }
+  .plan:hover{ border-color:rgba(226,59,78,.45); transform:translateY(-3px); }
+  .plan.featured{ border-color:rgba(226,59,78,.55); }
+  .plan .tag{ position:absolute; top:-9px; left:20px; font-family:'Space Mono',monospace; font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; background:#E23B4E; color:#fff; padding:3px 9px; border-radius:9999px; }
+  .plan h3{ font-family:'Archivo',sans-serif; font-weight:800; font-size:17px; text-transform:uppercase; letter-spacing:-.01em; margin:0 0 6px; }
+  .plan .price{ font-family:'Archivo',sans-serif; font-weight:900; font-size:30px; line-height:1; margin:4px 0 2px; }
+  .plan .per{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.45); }
+  .plan ul{ list-style:none; padding:0; margin:16px 0 20px; display:flex; flex-direction:column; gap:8px; }
+  .plan li{ font-size:12.5px; color:rgba(255,255,255,.7); display:flex; gap:8px; align-items:flex-start; }
+  .plan li::before{ content:'✓'; color:#E23B4E; font-weight:700; }
+  .plan button{ margin-top:auto; width:100%; }
+  /* ── Run automation — interactive ── */
+  .run-tools{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+  @media (max-width:620px){ .run-tools{ grid-template-columns:1fr; } }
+  .run-tool{ position:relative; text-align:left; background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:18px 18px 16px; cursor:pointer; color:#fff; font-family:inherit; transition:border-color .25s, transform .2s, background .25s; overflow:hidden; }
+  .run-tool:hover:not(:disabled){ border-color:rgba(226,59,78,.5); transform:translateY(-3px); background:rgba(255,255,255,.05); }
+  .run-tool:disabled{ cursor:wait; }
+  .run-tool .ico{ font-size:22px; display:block; margin-bottom:10px; }
+  .run-tool .tname{ font-family:'Archivo',sans-serif; font-weight:800; font-size:15px; text-transform:uppercase; letter-spacing:-.01em; }
+  .run-tool .tdesc{ font-size:12px; color:rgba(255,255,255,.5); margin-top:4px; line-height:1.45; }
+  .run-tool .go{ display:inline-flex; align-items:center; gap:8px; margin-top:14px; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#E23B4E; }
+  .run-tool[data-state="running"]{ border-color:rgba(226,59,78,.55); }
+  /* progress shimmer bar while running */
+  .run-tool .bar{ position:absolute; left:0; bottom:0; height:2px; width:100%; background:rgba(226,59,78,.15); overflow:hidden; opacity:0; transition:opacity .2s; }
+  .run-tool[data-state="running"] .bar{ opacity:1; }
+  .run-tool .bar::after{ content:''; position:absolute; inset:0; width:40%; background:#E23B4E; animation:slide 1.1s ease-in-out infinite; }
+  @keyframes slide{ 0%{ transform:translateX(-100%);} 100%{ transform:translateX(350%);} }
+  .spinner{ display:inline-block; width:13px; height:13px; border:2px solid rgba(255,255,255,.25); border-top-color:#E23B4E; border-radius:50%; animation:spin .7s linear infinite; vertical-align:-2px; }
+  @keyframes spin{ to{ transform:rotate(360deg);} }
+  /* result panel */
+  #runResult{ margin-top:18px; }
+  .res-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+  .res-head .rt{ font-family:'Archivo',sans-serif; font-weight:800; font-size:15px; text-transform:uppercase; }
+  .res-stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-bottom:14px; }
+  .stat{ background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:11px; padding:12px 14px; }
+  .stat .k{ display:block; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:5px; }
+  .stat .v{ font-family:'Archivo',sans-serif; font-weight:800; font-size:22px; line-height:1; }
+  .res-row{ display:flex; align-items:center; gap:10px; padding:11px 13px; border:1px solid rgba(255,255,255,.07); border-radius:10px; margin-bottom:8px; background:rgba(255,255,255,.02); animation:fadeUp .35s ease both; }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none;} }
+  .res-row .url{ flex:1; min-width:0; font-size:12.5px; color:rgba(255,255,255,.75); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .res-row .px{ font-family:'Space Mono',monospace; font-weight:700; font-size:14px; }
+  .pill{ font-family:'Space Mono',monospace; font-size:9px; font-weight:700; letter-spacing:.1em; padding:4px 9px; border-radius:9999px; text-transform:uppercase; white-space:nowrap; }
+  .pill.lower{ background:rgba(226,59,78,.16); color:#ff9aa6; }
+  .pill.raise{ background:rgba(64,200,120,.16); color:#7fe0a3; }
+  .pill.hold{ background:rgba(255,255,255,.1); color:rgba(255,255,255,.65); }
+  .pill.fail{ background:rgba(255,180,40,.14); color:#ffcf7a; }
+  .pill.warn{ background:rgba(255,180,40,.14); color:#ffcf7a; }
+  /* ── Integrations ── */
+  .integ{ display:flex; flex-direction:column; gap:12px; }
+  .integ-row{ display:flex; align-items:center; gap:14px; padding:14px 16px; border:1px solid rgba(255,255,255,.09); border-radius:13px; background:rgba(255,255,255,.02); }
+  .integ-row .ig-ico{ font-size:22px; flex:none; }
+  .integ-row .ig-body{ flex:1; min-width:0; }
+  .integ-row .ig-name{ font-family:'Archivo',sans-serif; font-weight:800; font-size:14px; text-transform:uppercase; letter-spacing:-.01em; }
+  .integ-row .ig-state{ font-family:'Space Mono',monospace; font-size:11px; color:rgba(255,255,255,.5); margin-top:2px; word-break:break-all; }
+  .integ-row .ig-actions{ flex:none; display:flex; gap:8px; align-items:center; }
+  .integ-row .btn{ padding:9px 16px; font-size:11px; }
+  .shop-inline{ display:flex; gap:8px; align-items:center; }
+  .shop-inline input{ width:210px; }
+  @media (max-width:560px){ .shop-inline input{ width:150px; } .integ-row{ flex-wrap:wrap; } }
+  /* sequence step editor */
+  .seq-step{ border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:14px; margin-bottom:12px; background:rgba(255,255,255,.02); }
+  .seq-step .sh{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .seq-step .sh .sn{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.55); }
+  .seq-step .rm{ background:none; border:0; color:rgba(255,255,255,.4); cursor:pointer; font-size:16px; line-height:1; }
+  .seq-step .rm:hover{ color:#ff9aa6; }
+  .link{ background:none; border:0; color:#E23B4E; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; padding:6px 0; }
+  .sub-lock{ text-align:center; padding:22px; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="wordmark" href="/">santipulse.com</a>
+    <button id="logoutBtn" class="btn ghost">Salir</button>
+  </div>
+
+  <div id="loading">Cargando panel…</div>
+
+  <main id="app" class="wrap hidden">
+    <header style="margin-bottom:28px">
+      <p class="eyebrow" style="margin-bottom:12px">Tu panel</p>
+      <h1 class="headline" style="font-size:38px; margin:0 0 12px">Automatizaciones</h1>
+      <p class="muted" id="userEmail"></p>
+    </header>
+
+   <div class="flow">
+    <!-- ① Subscription state -->
+    <section class="node">
+      <div class="node-head">
+        <span class="node-num">1</span>
+        <span class="node-ico">⚡</span>
+        <div class="grow">
+          <h2 class="node-title">Suscripción</h2>
+          <p class="node-sub">Tu plan activo</p>
+        </div>
+        <span id="planBadge" class="badge none">none</span>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:flex-end; gap:16px; flex-wrap:wrap; margin-top:-6px">
+        <div id="billingActions" style="display:flex; align-items:center; gap:16px">
+          <a href="/precios/" class="plans-link">Ver todos los planes →</a>
+          <button id="portalBtn" class="btn ghost hidden">Gestionar suscripción</button>
+        </div>
+      </div>
+
+      <!-- Plan picker — hidden once the user has an active subscription -->
+      <div id="plans" class="plans hidden">
+        <div class="plan" data-plan="starter">
+          <h3>Starter</h3>
+          <div class="price">€49</div><div class="per">/ mes</div>
+          <ul>
+            <li>Monitor de precios (5 URLs)</li>
+            <li>Captación de leads (50/mes)</li>
+            <li>Outreach en frío (50/mes)</li>
+            <li>Soporte por email</li>
+          </ul>
+          <button class="btn ghost" data-checkout="starter">Elegir Starter</button>
+        </div>
+        <div class="plan featured" data-plan="pro">
+          <span class="tag">Popular</span>
+          <h3>Pro</h3>
+          <div class="price">€149</div><div class="per">/ mes</div>
+          <ul>
+            <li>Monitor de precios (25 URLs)</li>
+            <li>Captación de leads (500/mes)</li>
+            <li>Outreach en frío (500/mes)</li>
+            <li>Programación de automatizaciones</li>
+            <li>Soporte prioritario</li>
+          </ul>
+          <button class="btn" data-checkout="pro">Elegir Pro</button>
+        </div>
+        <div class="plan" data-plan="agency">
+          <h3>Agency</h3>
+          <div class="price">€399</div><div class="per">/ mes</div>
+          <ul>
+            <li>Todo ilimitado</li>
+            <li>Multi-cuenta / clientes</li>
+            <li>Informes white-label</li>
+            <li>Acceso API</li>
+            <li>Soporte dedicado</li>
+          </ul>
+          <button class="btn ghost" data-checkout="agency">Elegir Agency</button>
+        </div>
+      </div>
+
+      <div id="lockedNote" class="msg err hidden" style="margin-top:18px">
+        Las demos gratis están en <a href="/demos/" style="color:#ff9aa6">/demos</a>.
+      </div>
+      <span class="conn"></span>
+    </section>
+
+    <!-- ② Business profile -->
+    <section class="node">
+      <div class="node-head">
+        <span class="node-num">2</span>
+        <span class="node-ico">🗂️</span>
+        <div class="grow">
+          <h2 class="node-title">Perfil de negocio</h2>
+          <p class="node-sub">Las entradas de tus automatizaciones</p>
+        </div>
+      </div>
+      <form id="profileForm">
+        <div class="grid2" style="margin-bottom:14px">
+          <div><label><span class="fi">🏢</span> Nombre del negocio</label><input name="business_name" placeholder="Mi tienda S.L." /></div>
+          <div><label><span class="fi">🌐</span> Sitio web</label><input name="website_url" type="url" placeholder="https://" /></div>
+        </div>
+        <div class="grid2" style="margin-bottom:14px">
+          <div><label><span class="fi">🏷️</span> Sector</label><input name="industry" placeholder="E-commerce / moda…" /></div>
+          <div><label><span class="fi">✉️</span> Nombre del remitente (outreach)</label><input name="sender_name" placeholder="Santi" /></div>
+        </div>
+        <div class="grid2" style="margin-bottom:14px">
+          <div><label><span class="fi">💶</span> Tu precio actual (€)</label><input name="my_current_price" type="number" step="0.01" placeholder="49.99" /></div>
+          <div><label><span class="fi">⬇️</span> Precio mínimo (€)</label><input name="floor_price" type="number" step="0.01" placeholder="35.00" /></div>
+        </div>
+        <div style="margin-bottom:14px">
+          <label><span class="fi">📊</span> URLs de competidores (monitor de precios · una por línea)</label>
+          <textarea name="competitor_urls" rows="3" placeholder="https://competidor.com/producto-1&#10;https://competidor.com/producto-2"></textarea>
+        </div>
+        <div class="grid2" style="margin-bottom:14px">
+          <div><label><span class="fi">🎯</span> URL objetivo de leads (directorio a rastrear)</label><input name="lead_target_urls" type="url" placeholder="https://directorio.com/listado" /></div>
+          <div><label><span class="fi">🔢</span> Máx. leads por ejecución</label><input name="max_leads_per_run" type="number" step="1" min="1" max="100" placeholder="10" /></div>
+        </div>
+        <button id="saveBtn" class="btn" type="submit" style="margin-top:6px">Guardar perfil</button>
+        <div id="profileOk" class="msg ok hidden">Perfil guardado.</div>
+        <div id="profileErr" class="msg err hidden"></div>
+      </form>
+      <span class="conn"></span>
+    </section>
+
+    <!-- ③ Run automation (paid) -->
+    <section class="node">
+      <div class="node-head">
+        <span class="node-num">3</span>
+        <span class="node-ico">▶️</span>
+        <div class="grow">
+          <h2 class="node-title">Ejecutar automatización</h2>
+          <p class="node-sub">Usa los datos de tu perfil · requiere suscripción activa</p>
+        </div>
+      </div>
+      <div class="run-tools">
+        <button class="run-tool" data-run="price_monitor" data-state="idle">
+          <span class="ico">📊</span>
+          <span class="tname">Monitor de precios</span>
+          <span class="tdesc">Lee el precio de cada competidor de tu perfil y sugiere tu nuevo precio.</span>
+          <span class="go" data-go>Ejecutar →</span>
+          <span class="bar"></span>
+        </button>
+        <button class="run-tool" data-run="lead_scraper" data-state="idle">
+          <span class="ico">🎯</span>
+          <span class="tname">Captación de leads</span>
+          <span class="tdesc">Rastrea tu directorio objetivo y extrae nombres, emails y teléfonos.</span>
+          <span class="go" data-go>Ejecutar →</span>
+          <span class="bar"></span>
+        </button>
+      </div>
+      <div id="runMsg" class="msg hidden" style="margin-top:16px"></div>
+      <div id="runResult" class="hidden"></div>
+      <span class="conn"></span>
+    </section>
+
+    <!-- ⑤ Integrations -->
+    <section class="node" id="integNode">
+      <div class="node-head">
+        <span class="node-num">5</span>
+        <span class="node-ico">🔌</span>
+        <div class="grow">
+          <h2 class="node-title">Integraciones</h2>
+          <p class="node-sub">Conecta tus cuentas para las automatizaciones</p>
+        </div>
+      </div>
+      <div id="integLoading" class="muted" style="font-size:13px">Cargando integraciones…</div>
+      <div id="integList" class="integ hidden">
+        <!-- Gmail -->
+        <div class="integ-row" data-integ="gmail">
+          <span class="ig-ico">✉️</span>
+          <div class="ig-body">
+            <div class="ig-name">Gmail</div>
+            <div class="ig-state" data-state>Envía outreach y recuperación de carritos desde tu correo.</div>
+          </div>
+          <div class="ig-actions">
+            <button class="btn" data-connect="gmail">Conectar</button>
+            <button class="btn ghost hidden" data-disconnect="gmail">Desconectar</button>
+          </div>
+        </div>
+        <!-- Shopify -->
+        <div class="integ-row" data-integ="shopify">
+          <span class="ig-ico">🛒</span>
+          <div class="ig-body">
+            <div class="ig-name">Shopify</div>
+            <div class="ig-state" data-state>Origen de los carritos abandonados.</div>
+          </div>
+          <div class="ig-actions">
+            <div class="shop-inline" data-shop-form>
+              <input type="text" data-shop-input placeholder="mi-tienda.myshopify.com" />
+              <button class="btn" data-connect="shopify">Conectar</button>
+            </div>
+            <button class="btn ghost hidden" data-disconnect="shopify">Desconectar</button>
+          </div>
+        </div>
+        <!-- Social -->
+        <div class="integ-row" data-integ="social">
+          <span class="ig-ico">📱</span>
+          <div class="ig-body">
+            <div class="ig-name">Facebook / Instagram</div>
+            <div class="ig-state" data-state>Publica tus posts programados.</div>
+          </div>
+          <div class="ig-actions">
+            <button class="btn" data-connect="social">Conectar</button>
+            <button class="btn ghost hidden" data-disconnect="social">Desconectar</button>
+          </div>
+        </div>
+      </div>
+      <div id="integMsg" class="msg hidden" style="margin-top:14px"></div>
+      <span class="conn"></span>
+    </section>
+
+    <!-- ⑥ Cart Recovery -->
+    <section class="node" id="cartNode">
+      <div class="node-head">
+        <span class="node-num">6</span>
+        <span class="node-ico">🛒</span>
+        <div class="grow">
+          <h2 class="node-title">Recuperación de carritos</h2>
+          <p class="node-sub">Secuencia de emails para carritos abandonados</p>
+        </div>
+      </div>
+      <div data-sub-gated>
+        <form id="cartForm">
+          <div class="grid2" style="margin-bottom:14px">
+            <div><label><span class="fi">✉️</span> Nombre del remitente</label><input name="from_name" placeholder="Mi tienda" /></div>
+            <div><label><span class="fi">🎟️</span> Código de descuento (opcional)</label><input name="discount_code" placeholder="VUELVE10" /></div>
+          </div>
+          <label><span class="fi">📧</span> Secuencia de emails</label>
+          <div data-steps></div>
+          <button type="button" class="link" data-add-step>+ Añadir paso</button>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px">
+            <button class="btn" type="submit">Guardar secuencia</button>
+            <button class="btn ghost" type="button" data-import="cart">Importar carritos de Shopify</button>
+          </div>
+          <div class="msg ok hidden" data-ok>Guardado.</div>
+          <div class="msg err hidden" data-err></div>
+        </form>
+        <div id="cartJobs" style="margin-top:18px"></div>
+      </div>
+      <div class="sub-lock muted hidden" data-sub-lock>
+        Requiere una suscripción activa. <a href="/precios/" style="color:#ff9aa6">Ver planes →</a>
+      </div>
+      <span class="conn"></span>
+    </section>
+
+    <!-- ⑦ Cold Outreach -->
+    <section class="node" id="outreachNode">
+      <div class="node-head">
+        <span class="node-num">7</span>
+        <span class="node-ico">📨</span>
+        <div class="grow">
+          <h2 class="node-title">Outreach en frío</h2>
+          <p class="node-sub">Emails personalizados + seguimiento automático</p>
+        </div>
+      </div>
+      <div data-sub-gated>
+        <form id="outreachForm">
+          <div class="grid2" style="margin-bottom:14px">
+            <div><label><span class="fi">✉️</span> Nombre del remitente</label><input name="from_name" placeholder="Santi" /></div>
+            <div><label><span class="fi">🔢</span> Límite diario</label><input name="daily_cap" type="number" min="1" max="500" placeholder="50" /></div>
+          </div>
+          <label><span class="fi">📧</span> Secuencia de emails (usa {{name}} / {{company}})</label>
+          <div data-steps></div>
+          <button type="button" class="link" data-add-step>+ Añadir paso</button>
+          <div style="margin:14px 0">
+            <label><span class="fi">👥</span> Destinatarios (email, nombre, empresa · uno por línea)</label>
+            <textarea data-recipients rows="3" placeholder="ana@empresa.com, Ana, Empresa S.L.&#10;luis@otra.com, Luis, Otra S.A."></textarea>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn" type="submit">Guardar campaña</button>
+            <button class="btn ghost" type="button" data-import="outreach">Añadir destinatarios</button>
+          </div>
+          <div class="msg ok hidden" data-ok>Guardado.</div>
+          <div class="msg err hidden" data-err></div>
+        </form>
+        <div id="outreachJobs" style="margin-top:18px"></div>
+      </div>
+      <div class="sub-lock muted hidden" data-sub-lock>
+        Requiere una suscripción activa. <a href="/precios/" style="color:#ff9aa6">Ver planes →</a>
+      </div>
+      <span class="conn"></span>
+    </section>
+
+    <!-- ⑧ Social Scheduler -->
+    <section class="node" id="socialNode">
+      <div class="node-head">
+        <span class="node-num">8</span>
+        <span class="node-ico">📅</span>
+        <div class="grow">
+          <h2 class="node-title">Programador de redes</h2>
+          <p class="node-sub">Programa posts en Facebook e Instagram</p>
+        </div>
+      </div>
+      <div data-sub-gated>
+        <form id="socialForm">
+          <div style="margin-bottom:14px">
+            <label><span class="fi">📲</span> Cuenta</label>
+            <select name="account_id" id="socialAccount" style="width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:11px 13px; color:#fff; font-size:14px; font-family:inherit"></select>
+          </div>
+          <div style="margin-bottom:14px">
+            <label><span class="fi">📝</span> Texto del post</label>
+            <textarea name="caption" rows="3" placeholder="Escribe tu publicación…"></textarea>
+          </div>
+          <div class="grid2" style="margin-bottom:14px">
+            <div><label><span class="fi">🖼️</span> URL de imagen (obligatoria para Instagram)</label><input name="media_url" type="url" placeholder="https://…/foto.jpg" /></div>
+            <div><label><span class="fi">🗓️</span> Fecha y hora</label><input name="scheduled_for" type="datetime-local" /></div>
+          </div>
+          <button class="btn" type="submit">Programar post</button>
+          <div class="msg ok hidden" data-ok>Programado.</div>
+          <div class="msg err hidden" data-err></div>
+        </form>
+        <div id="socialPosts" style="margin-top:18px"></div>
+      </div>
+      <div class="sub-lock muted hidden" data-sub-lock>
+        Requiere una suscripción activa. <a href="/precios/" style="color:#ff9aa6">Ver planes →</a>
+      </div>
+      <span class="conn"></span>
+    </section>
+
+    <!-- ⑨ Run history -->
+    <section class="node">
+      <div class="node-head">
+        <span class="node-num">9</span>
+        <span class="node-ico">📜</span>
+        <div class="grow">
+          <h2 class="node-title">Historial de ejecuciones</h2>
+          <p class="node-sub">Cada ejecución queda registrada aquí</p>
+        </div>
+      </div>
+      <div id="runsEmpty" class="muted hidden">Todavía no hay ejecuciones. Prueba las demos en /demos.</div>
+      <div id="runsWrap"><table><thead><tr>
+        <th>Tipo</th><th>Estado</th><th>Demo</th><th>Fecha</th>
+      </tr></thead><tbody id="runsBody"></tbody></table></div>
+    </section>
+   </div><!-- /.flow -->
+  </main>
+
+  {{sb.config}}
+  <script src="/supabase.js"></script>
+  <script src="/auth.js"></script>
+  <script src="/dashboard-automations.js" defer></script>
+  <script src="/dashboard.js" defer></script>
+</body>
+</html>

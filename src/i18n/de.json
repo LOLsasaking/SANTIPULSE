@@ -1,0 +1,301 @@
+{
+  "lang": "de",
+  "meta": {
+    "ogLocale": "de_DE"
+  },
+  "common": {
+    "acceder": "Öffnen",
+    "volver": "Zurück",
+    "footer": "© 2026 Santipulse · 🇺🇸 USA · Teneriffa 🇪🇸"
+  },
+  "home": {
+    "title": "Santipulse · Ich will eine Website oder mehr",
+    "metaDescription": "Santipulse - Echte Websites, Live-Demos und 1-zu-1-Schulung. Von den USA nach Teneriffa.",
+    "status": "Verfügbar",
+    "omas": "Santipulse · Und Mehr",
+    "panel1": {
+      "eyebrow": "Für Unternehmen",
+      "titleA": "Ich will",
+      "titleB": "eine Website",
+      "desc": "Individuelles Design und Entwicklung. Lieferung in 2–4 Wochen.",
+      "meta": "Echte Sites · Integrierte Buchungen"
+    },
+    "panel2": {
+      "eyebrow": "Meine Arbeiten",
+      "titleA": "Ich will",
+      "titleB": "Demos sehen",
+      "desc": "Sieh dir meine echten Websites live an, schon online.",
+      "meta": "5 Branchen · Live"
+    },
+    "panel3": {
+      "eyebrow": "Wer Wir Sind",
+      "titleA": "Über",
+      "titleB": "uns",
+      "desc": "KI, die dir Zeit spart und deine Online-Präsenz aufbaut.",
+      "meta": "In den USA gegründet · 2026"
+    }
+  },
+  "servicios": {
+    "title": "Santipulse · Was brauchst du?",
+    "metaDescription": "Wähle, was du brauchst: eine maßgeschneiderte Website oder KI-Automatisierungen, die dir jede Woche Stunden sparen.",
+    "eyebrow": "Für Unternehmen",
+    "titleA": "Was",
+    "titleB": "brauchst du?",
+    "intro": "Zwei Wege. Wähle den passenden — oder frag nach beiden.",
+    "web": {
+      "eyebrow": "Design & Entwicklung",
+      "titleA": "Eine",
+      "titleB": "Website",
+      "desc": "Maßgeschneidertes Design und Entwicklung mit integrierten Buchungen und Angeboten. Lieferung in 2–4 Wochen.",
+      "meta": "Echte Sites · 2–4 Wochen",
+      "cta": "Erzähl mir von deinem Projekt"
+    },
+    "ai": {
+      "eyebrow": "KI-Automatisierung",
+      "titleA": "KI, die",
+      "titleB": "für dich arbeitet",
+      "desc": "Preisüberwachung, Lead-Generierung und mehr. Gewinne jede Woche Stunden zurück mit Automatisierungen, die von selbst laufen.",
+      "meta": "Tarife ab 1 Automatisierung",
+      "cta": "Tarife & Preise ansehen"
+    }
+  },
+  "contratar": {
+    "title": "Santipulse · Erzähl mir von deinem Projekt",
+    "metaDescription": "Erzähl mir von deinem Projekt — individuelles Webdesign und Entwicklung mit Santipulse.",
+    "eyebrow": "Anfrage · Web-Projekt",
+    "titleA": "Erzähl mir",
+    "titleB": "von deinem Projekt.",
+    "intro": "Ich nehme nur wenige Projekte pro Monat an. Dieses Formular hilft mir zu verstehen, ob wir zusammenpassen. Wenn es passt, antworte ich dir persönlich innerhalb von 24 Stunden.",
+    "badges": "Vertraulich · Antwort in 24h · Unverbindlich",
+    "step1": "Schritt 01 · Deine Daten",
+    "fName": "Vollständiger Name *",
+    "fNamePh": "Dein Name",
+    "fEmail": "E-Mail *",
+    "fEmailPh": "du@email.com",
+    "fPhone": "Telefon / WhatsApp",
+    "fPhonePh": "+34 ...",
+    "fBusiness": "Unternehmen oder Branche",
+    "fBusinessPh": "Restaurant, Friseur, Handwerk...",
+    "step2": "Schritt 02 · Was du brauchst",
+    "availableNow": "Jetzt verfügbar",
+    "needChatbot": "Chatbot",
+    "needWebChatbot": "Website + Chatbot",
+    "needWeb": "Website",
+    "soonLabel": "Demnächst",
+    "soonDate": "September 2026",
+    "soonTag": "SEP 2026",
+    "soon1": "KI-Empfang",
+    "soon2": "KI-Automatisierung (Agent)",
+    "soon3": "Vertriebs- und Lead-Automatisierung",
+    "soon4": "Generative Automatisierung und Social-Media-Content",
+    "fMessage": "Erzähl mir mehr",
+    "fMessagePh": "Was du suchst, Referenzen, die dir gefallen, Zeitrahmen, ungefähres Budget...",
+    "submit": "Anfrage senden",
+    "success": "✓ Anfrage gesendet! Ich antworte innerhalb von 24 Stunden.",
+    "form": {
+      "sending": "Wird gesendet...",
+      "error": "Etwas ist schiefgelaufen. Bitte erneut versuchen oder schreib mir direkt.",
+      "invalid": "Bitte prüfe deinen Namen und eine gültige E-Mail."
+    }
+  },
+  "demos": {
+    "title": "Santipulse · Live-Demos",
+    "metaDescription": "Live-Demos von Santipulse — echte Websites nach Branche, bereits online.",
+    "eyebrow": "Meine Arbeiten · Live-Demos",
+    "titleA": "Teste es",
+    "titleB": "live",
+    "intro": "Echte Websites, die bereits online sind. Klick auf eine beliebige, um sie in einem neuen Tab zu öffnen — du siehst die Startseite genau so, wie ein Kunde sie sieht.",
+    "note": "<b class=\"text-ember\">🎯 Integrierte Buchungen & Angebote:</b> in Restaurants, Friseursalons, Nagelstudios und Touren bucht der Kunde wirklich; im Handwerk fordert er ein Angebot an. Das Unternehmen sieht es sofort in seinem Dashboard.",
+    "cta": "Ich will so etwas",
+    "live": "Live ansehen",
+    "items": {
+      "onfleek": "Premium-Friseursalon und Produktshop. Schnitte, Bart und Haarpflege.",
+      "suehtam": "Exklusive Modemarke — Luxus-Streetwear in limitierten Drops.",
+      "estimado": "Live-Site in Produktion mit eigener Domain. Schnitte mit Charakter, Rasiermesser-Bart und Online-Buchungen.",
+      "urban": "Urban-Variante des Salons: Schnitte, Rasiermesser-Bart und Online-Buchungen.",
+      "burgur": "Der ultimative Burger-Club. Smash Burgers und Video beim Scrollen.",
+      "sakana": "Sushi-Bar und japanische Küche. Die Kunst des Sushi, frischer Fisch.",
+      "tours": "Touren-Site in 4 Sprachen mit cinematischem Video-Hero und einer Galerie, die sich beim Scrollen enthüllt."
+    },
+    "tools": {
+      "eyebrow": "Selbst ausprobieren · In Echtzeit",
+      "heading": "Live-Automatisierungen",
+      "intro": "Keine Videos: Diese zwei Tools laufen gerade wirklich auf meinem Server. Eine Gratis-Testrunde pro Tool.",
+      "pm": {
+        "title": "Preis-Monitor",
+        "desc": "Füge die URL eines Konkurrenzprodukts ein. Ich lese den Live-Preis und sage dir, was du verlangen solltest, um zu gewinnen.",
+        "url": "URL des Konkurrenzprodukts",
+        "price": "Dein aktueller Preis (€)",
+        "floor": "Mindestpreis (€)",
+        "run": "Gratis starten",
+        "running": "Lese Preis…"
+      },
+      "ls": {
+        "title": "Lead-Scraper",
+        "desc": "Füge die URL eines Branchenverzeichnisses ein. Ich hole Namen, E-Mails und Telefonnummern in Sekunden.",
+        "url": "Verzeichnis- / Listen-URL",
+        "max": "Max. Leads",
+        "run": "Leads gratis sammeln",
+        "running": "Suche Leads…"
+      },
+      "res": {
+        "competitor": "Konkurrenzpreis",
+        "suggestion": "Dein Vorschlagspreis",
+        "action": "Aktion",
+        "leads": "Leads gefunden",
+        "name": "Name",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "web": "Seite",
+        "empty": "Nichts Lesbares auf dieser Seite. Versuch eine andere URL."
+      },
+      "err": {
+        "generic": "Etwas ist schiefgelaufen. Versuch es erneut.",
+        "trial": "Du hast deine Gratis-Testrunde verbraucht. Melde dich für unbegrenzte Automatisierungen.",
+        "badurl": "Gib eine gültige URL ein (http/https)."
+      }
+    },
+    "autos": {
+      "eyebrow": "Was ich automatisiere · Vorher und nachher",
+      "heading": "Deine 5 Automatisierungen",
+      "intro": "Jede erledigt eine sich wiederholende Aufgabe für dich — automatisch. Das macht jede und das spart sie dir.",
+      "liveTag": "Gratis-Demo",
+      "paidTag": "Für Kunden",
+      "beforeLabel": "Vorher",
+      "afterLabel": "Nachher",
+      "timeKey": "Zeit",
+      "moneyKey": "Umsatz",
+      "items": {
+        "price": {
+          "name": "Preisüberwachung",
+          "what": "Beobachtet die Preise deiner Konkurrenz und sagt dir, wann du deinen senken oder erhöhen solltest, um mehr zu verdienen, ohne Verkäufe zu verlieren.",
+          "before": "Du prüfst Preise von Hand, zu spät",
+          "after": "Optimaler Preis, rund um die Uhr überwacht",
+          "time": "5 Std./Woche",
+          "money": "+600 €/Monat",
+          "extraK": "Marge",
+          "extraV": "+12 %",
+          "status": "live"
+        },
+        "leads": {
+          "name": "Lead-Generierung",
+          "what": "Zieht Namen, E-Mails und Telefonnummern aus Verzeichnissen und Websites, damit du den Tag mit einer Liste potenzieller Kunden beginnst.",
+          "before": "Du kopierst Kontakte einzeln",
+          "after": "100+ Leads jeden Morgen bereit",
+          "time": "8 Std./Woche",
+          "money": "+900 €/Monat",
+          "extraK": "Leads",
+          "extraV": "100+/Tag",
+          "status": "live"
+        },
+        "outreach": {
+          "name": "Kaltakquise",
+          "what": "Sendet automatisch personalisierte E-Mails an deine Leads und folgt nach, damit dein Postausgang nie stillsteht.",
+          "before": "Du schreibst jede E-Mail von Hand",
+          "after": "Hunderte personalisierte E-Mails/Tag (typisch)",
+          "time": "10 Std./Woche",
+          "money": "Bis zu 1.200 €/Monat",
+          "extraK": "Antworten",
+          "extraV": "Bis zu 3× mehr",
+          "status": "paid"
+        },
+        "cart": {
+          "name": "Warenkorb-Rückgewinnung",
+          "what": "Erkennt abgebrochene Warenkörbe in deinem Shop und sendet eine E-Mail-Serie, um den verlorenen Verkauf zurückzugewinnen.",
+          "before": "Du verlierst 70 % der Warenkörbe",
+          "after": "Hol dir 1 von 4 Verkäufen zurück (typisch)",
+          "time": "6 Std./Woche",
+          "money": "Bis zu 1.500 €/Monat",
+          "extraK": "Rückgewinnung",
+          "extraV": "Bis zu 25 %",
+          "status": "paid"
+        },
+        "social": {
+          "name": "Social-Media-Planer",
+          "what": "Plant und postet von selbst auf Instagram und Facebook, damit deine Online-Präsenz nie verstummt.",
+          "before": "Du postest, wenn du daran denkst",
+          "after": "Konstanter Content, ohne Aufwand (typisch)",
+          "time": "7 Std./Woche",
+          "money": "Bis zu 500 €/Monat",
+          "extraK": "Reichweite",
+          "extraV": "Bis zu 40 %",
+          "status": "paid"
+        }
+      }
+    }
+  },
+  "nosotros": {
+    "title": "SantiPulse · Über uns",
+    "metaDescription": "Über SantiPulse — ein 2026 in den USA gegründetes KI-Unternehmen. Wir helfen Menschen, ihre Online-Präsenz aufzubauen und Zeit zu sparen.",
+    "eyebrow": "Wer Wir Sind",
+    "titleA": "Über",
+    "titleB": "uns",
+    "intro": "SantiPulse ist ein in den Vereinigten Staaten gegründetes Unternehmen für künstliche Intelligenz. Wir haben 2026 mit einer einfachen Idee eröffnet: Menschen dabei zu helfen, ihre Online-Präsenz aufzubauen und vor allem Zeit zu sparen.",
+    "badges": "In den USA gegründet · 2026 · KI",
+    "stat1Num": "2026",
+    "stat1Label": "Gründungsjahr",
+    "stat2Num": "USA",
+    "stat2Label": "Ursprung",
+    "stat3Num": "KI",
+    "stat3Label": "Technologie",
+    "missionEyebrow": "Unsere Mission",
+    "missionTitleA": "Deine Online-Präsenz,",
+    "missionTitleB": "ohne Zeit zu verlieren",
+    "missionP1": "Heute braucht jeder eine Online-Präsenz — aber wir reden nicht davon, in den sozialen Medien zu leben. Wir reden von einem echten Online-Profil: einer Website, einer digitalen Identität, die für dich arbeitet, auch wenn du nicht da bist.",
+    "missionP2": "Wir nutzen künstliche Intelligenz, um es einfach und schnell zu machen. Wie jedes gute KI-Unternehmen haben wir ein grundlegendes Ziel: dir Zeit zu sparen. Weniger repetitive Aufgaben, weniger Warten, mehr Ergebnisse.",
+    "believeEyebrow": "Woran wir glauben",
+    "believe1Title": "Eine echte Online-Präsenz",
+    "believe1Body": "Nicht nur soziale Medien: dein eigenes Online-Profil, das zeigt, wer du bist oder was dein Unternehmen macht.",
+    "believe2Title": "Zeit sparen",
+    "believe2Body": "Die KI übernimmt das Repetitive, damit du deine Zeit dem widmen kannst, was wirklich zählt.",
+    "believe3Title": "Persönliche Betreuung",
+    "believe3Body": "Seriöse Technologie aus den USA, mit menschlicher und direkter Begleitung.",
+    "doEyebrow": "Was wir tun",
+    "do1Title": "KI-Chatbots",
+    "do1Body": "24/7-Support, der für dich antwortet.",
+    "do2Title": "Websites & Online-Präsenz",
+    "do2Body": "Deine digitale Präsenz, fertig und maßgeschneidert.",
+    "do3Title": "Automatisierung",
+    "do3Body": "Weniger manuelle Aufgaben, mehr Freizeit.",
+    "ctaPrimary": "Ich will starten",
+    "ctaSecondary": "Live-Demos ansehen",
+    "footer": "© 2026 SantiPulse · In den USA gegründet"
+  },
+  "precios": {
+    "title": "Santipulse · Tarife & Preise",
+    "metaDescription": "Santipulse-Automatisierungstarife — Starter, Pro und Agency. Preisüberwachung, Lead-Generierung und Outreach. Jederzeit kündbar.",
+    "eyebrow": "Tarife · Automatisierung",
+    "titleA": "Wählen Sie",
+    "titleB": "Ihren Tarif.",
+    "intro": "Starten Sie heute mit der Automatisierung. Keine Bindung, jederzeit kündbar. Jeder Tarif enthält die Live-Daten aus Ihren Demos.",
+    "perMonth": "/Mon.",
+    "popular": "Am beliebtesten",
+    "plans": {
+      "starterName": "Starter",
+      "starterTagline": "Für den Solo-Einstieg.",
+      "starterF1": "1 Automatisierung nach Wahl",
+      "starterF2": "Preisüberwachung · 5 URLs",
+      "starterF3": "Basis-Analysen",
+      "starterF4": "E-Mail-Support",
+      "proName": "Pro",
+      "proTagline": "Für wachsende Unternehmen.",
+      "proF1": "Alle 3 Automatisierungen",
+      "proF2": "Preisüberwachung · 25 URLs",
+      "proF3": "Erweiterte Analysen + CSV",
+      "proF4": "Prioritäts-Support",
+      "agencyName": "Agency",
+      "agencyTagline": "Für Agenturen mit vielen Kunden.",
+      "agencyF1": "Alle 3 Automatisierungen",
+      "agencyF2": "Unbegrenzte Ausführungen",
+      "agencyF3": "White-Label + API-Zugang",
+      "agencyF4": "Team + individuelle Integrationen"
+    },
+    "cta": {
+      "button": "Wählen",
+      "note": "Sichere Zahlung mit Stripe. Ohne Konto bitten wir Sie, sich zuerst anzumelden.",
+      "redirecting": "Weiterleitung…",
+      "error": "Zahlung konnte nicht gestartet werden. Bitte erneut versuchen."
+    },
+    "footer": "© 2026 SantiPulse · Jederzeit kündbar"
+  }
+}

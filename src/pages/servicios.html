@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="{{servicios.metaDescription}}" />
+<title>{{servicios.title}}</title>
+
+{{seo.canonical}}
+{{seo.hreflang}}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Santipulse" />
+<meta property="og:title" content="{{servicios.title}}" />
+<meta property="og:description" content="{{servicios.metaDescription}}" />
+<meta property="og:locale" content="{{meta.ogLocale}}" />
+<meta property="og:url" content="{{seo.ogUrl}}" />
+<meta property="og:image" content="{{site.url}}/santilogo.png" />
+<meta name="twitter:card" content="summary" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script src="{{asset.prefix}}tw-config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    font-family:'Inter',sans-serif; background:#050505; color:#fff;
+    overflow:hidden; /* chooser = no scroll, like home */
+  }
+  .font-display{ font-family:'Archivo',sans-serif; }
+  .font-mono{ font-family:'Space Mono',monospace; }
+
+  /* ===== Fixed header overlay (matches home) ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 30px; pointer-events:none;
+  }
+  header a, header button{ pointer-events:auto; }
+  .wordmark{ font-family:'Space Mono',monospace; font-size:14px; letter-spacing:.12em; color:rgba(255,255,255,.92); text-decoration:none; }
+  .volver{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.75); text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:color .25s; }
+  .volver:hover{ color:#fff; }
+  .volver svg{ transition:transform .3s ease; }
+  .volver:hover svg{ transform:translateX(-4px); }
+
+  /* ===== Language switcher (matches home) ===== */
+  .lang-wrap{ position:relative; }
+  .lang-btn{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.8); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:9999px; padding:7px 12px; display:inline-flex; align-items:center; gap:7px; cursor:pointer; transition:border-color .25s; }
+  .lang-btn:hover{ border-color:rgba(255,255,255,.45); }
+  .lang-menu{ position:absolute; right:0; top:calc(100% + 8px); min-width:150px; background:rgba(11,11,13,.97); border:1px solid rgba(255,255,255,.12); border-radius:12px; overflow:hidden; backdrop-filter:blur(12px); }
+  .lang-menu a{ display:flex; align-items:center; gap:10px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,.85); text-decoration:none; transition:background .2s; }
+  .lang-menu a:hover, .lang-menu a[aria-current="true"]{ background:rgba(226,59,78,.16); color:#fff; }
+  .lang-menu.hidden{ display:none; }
+
+  /* ===== Title band over the diptych ===== */
+  .chooser-head{
+    position:fixed; top:0; left:0; right:0; z-index:30;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    padding:88px 24px 0; pointer-events:none;
+  }
+  .chooser-eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:14px; }
+  .chooser-title{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.9; letter-spacing:-.02em; font-size:clamp(2rem,5vw,3.6rem); }
+  .chooser-intro{ color:rgba(255,255,255,.6); font-size:.95rem; margin-top:14px; max-width:30rem; }
+
+  /* ===== Diptych ===== */
+  .stage{ display:flex; height:100vh; width:100vw; }
+  .panel{
+    position:relative; flex:1 1 0; overflow:hidden;
+    text-decoration:none; color:#fff; cursor:pointer;
+    transition: flex-grow .65s cubic-bezier(.22,.7,.18,1); flex-grow:1;
+  }
+  .stage:hover .panel{ flex-grow:.75; }
+  .stage .panel:hover{ flex-grow:1.8; }
+  .panel-bg{ position:absolute; inset:0; z-index:0; transition:filter .6s ease, transform .8s ease; transform:scale(1.0); }
+  .stage:hover .panel .panel-bg{ filter:brightness(.4); }
+  .stage .panel:hover .panel-bg{ filter:brightness(.7); transform:scale(1.05); }
+  .panel-web .panel-bg{ background:#0a0b0e url('/demo-media/panel-1.jpg') center/cover no-repeat; }
+  .panel-ai  .panel-bg{ background:#0e0a0c url('/demo-media/panel-3.jpg') center/cover no-repeat; }
+  .panel-ai  .panel-bg::after{ content:''; position:absolute; inset:0; background:radial-gradient(60% 50% at 75% 30%, rgba(226,59,78,.22), transparent 70%); }
+  .panel-veil{ position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(5,5,5,.35) 0%, rgba(5,5,5,.2) 40%, rgba(5,5,5,.88) 100%); }
+  .v-divider{ width:1px; background:linear-gradient(180deg, transparent, rgba(255,255,255,.14), transparent); flex:0 0 auto; }
+
+  .panel-content{
+    position:relative; z-index:2; height:100%; width:100%;
+    display:flex; flex-direction:column; justify-content:flex-end; padding:0 40px 60px;
+  }
+  .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:14px; margin-bottom:20px; }
+  .eyebrow::before{ content:''; width:34px; height:1px; background:rgba(255,255,255,.5); }
+  .headline{
+    font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
+    line-height:.86; letter-spacing:-.02em; font-size:clamp(2.2rem, 4.5vw, 4.4rem);
+    transition: transform .5s cubic-bezier(.22,.7,.18,1); transform-origin:left bottom; margin-bottom:18px;
+  }
+  .panel:hover .headline{ transform:scale(1.06) translateY(-4px); }
+  .panel-desc{ color:rgba(255,255,255,.72); font-size:1rem; max-width:24rem; margin-bottom:12px; opacity:.85; transition:opacity .5s ease; }
+  .panel:hover .panel-desc{ opacity:1; }
+  .panel-meta{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,255,255,.42); margin-bottom:26px; }
+  .acceder{ display:inline-flex; align-items:center; gap:12px; font-family:'Space Mono',monospace; font-weight:700; letter-spacing:.22em; text-transform:uppercase; font-size:13px; color:#fff; position:relative; padding-bottom:6px; width:max-content; }
+  .acceder::after{ content:''; position:absolute; left:0; bottom:0; height:2px; width:100%; background:#fff; transform-origin:left; transform:scaleX(0); transition:transform .4s ease; }
+  .panel:hover .acceder::after{ transform:scaleX(1); }
+  .acceder svg{ transition:transform .4s ease; }
+  .panel:hover .acceder svg{ transform:translateX(8px); }
+
+  @media (max-width:767px){
+    body{ overflow:auto; }
+    .chooser-head{ position:static; padding:96px 24px 8px; }
+    .stage{ flex-direction:column; height:auto; min-height:auto; }
+    .v-divider{ width:100%; height:1px; }
+    .panel{ min-height:54vh; flex:none; }
+    .stage:hover .panel, .stage .panel:hover{ flex-grow:1; }
+    .panel-content{ padding:0 26px 44px; padding-top:48px; }
+    .panel:hover .headline{ transform:none; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .panel,.panel-bg,.headline,.panel-desc,.acceder svg,.acceder::after{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="volver" href="{{nav.home}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> {{common.volver}}</a>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <a class="wordmark" href="{{nav.home}}">santipulse.com</a>
+    {{lang.switcher}}
+  </div>
+</header>
+
+<div class="chooser-head">
+  <p class="chooser-eyebrow">{{servicios.eyebrow}}</p>
+  <h1 class="chooser-title">{{servicios.titleA}}<br>{{servicios.titleB}}</h1>
+  <p class="chooser-intro">{{servicios.intro}}</p>
+</div>
+
+<main class="stage">
+
+  <!-- WEB -> /contratar -->
+  <a class="panel panel-web" href="{{nav.contratar}}">
+    <div class="panel-bg"></div><div class="panel-veil"></div>
+    <div class="panel-content">
+      <span class="eyebrow">{{servicios.web.eyebrow}}</span>
+      <h2 class="headline">{{servicios.web.titleA}}<br>{{servicios.web.titleB}}</h2>
+      <p class="panel-desc">{{servicios.web.desc}}</p>
+      <p class="panel-meta">{{servicios.web.meta}}</p>
+      <span class="acceder">{{servicios.web.cta}} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+    </div>
+  </a>
+
+  <div class="v-divider"></div>
+
+  <!-- AI -> /precios -->
+  <a class="panel panel-ai" href="{{nav.precios}}">
+    <div class="panel-bg"></div><div class="panel-veil"></div>
+    <div class="panel-content">
+      <span class="eyebrow">{{servicios.ai.eyebrow}}</span>
+      <h2 class="headline">{{servicios.ai.titleA}}<br>{{servicios.ai.titleB}}</h2>
+      <p class="panel-desc">{{servicios.ai.desc}}</p>
+      <p class="panel-meta">{{servicios.ai.meta}}</p>
+      <span class="acceder">{{servicios.ai.cta}} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+    </div>
+  </a>
+
+</main>
+
+<script src="{{asset.prefix}}lang.js" defer></script>
+</body>
+</html>

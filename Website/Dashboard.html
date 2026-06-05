@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Santi Pulse · Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  /* =====================================================================
+     SANTI PULSE — Dashboard. One file, no build, opens in any browser.
+     Charts via Chart.js (CDN). Deep-links to Obsidian via obsidian:// URIs.
+     The vault name is remembered in localStorage (key: sp_vault).
+     ===================================================================== */
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141b;
+    --card: #151924;
+    --card-2: #1a1f2c;
+    --border: #232838;
+    --text: #e7ecf3;
+    --muted: #8a93a6;
+    --brand: #ff5a5f;       /* pulse red */
+    --brand-2: #ffb86b;     /* warm accent */
+    --ok: #4ade80;
+    --info: #60a5fa;
+    --violet: #a78bfa;
+    --teal: #2dd4bf;
+    --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  ::selection { background: var(--brand); color: #fff; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 32px 28px 64px; }
+
+  /* ── Top bar ───────────────────────────────────────────────────────── */
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark { width: 38px; height: 38px; border-radius: 12px; background: radial-gradient(circle at 30% 30%, var(--brand-2), var(--brand) 70%); position: relative; box-shadow: 0 0 24px -2px var(--brand); }
+  .brand-mark::after { content: ""; position: absolute; inset: 9px; border-radius: 50%; border: 2px solid #fff8; animation: pulse 2.4s ease-out infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.15); opacity: .4; } }
+  .brand h1 { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+  .brand p { margin: 0; font-size: 12px; color: var(--muted); }
+
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 999px; font-size: 13px; font-weight: 500; transition: all .15s; }
+  .pill:hover { border-color: #3a4054; background: var(--card-2); }
+  .pill.brand { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .pill.brand:hover { background: #ff7378; border-color: #ff7378; }
+  .pill svg { width: 14px; height: 14px; }
+
+  /* ── Hero ──────────────────────────────────────────────────────────── */
+  .hero { background: linear-gradient(135deg, #1a1f2c 0%, #11141b 60%); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 28px 26px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; top: -80px; right: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(255,90,95,.25), transparent 65%); }
+  .hero h2 { margin: 0 0 6px; font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
+  .hero p { margin: 0; color: var(--muted); font-size: 14px; }
+  .hero .meta { margin-top: 14px; display: flex; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+  .hero .meta b { color: var(--text); font-weight: 600; }
+
+  /* ── Search ────────────────────────────────────────────────────────── */
+  .search-wrap { position: relative; margin: 0 0 24px; }
+  .search { width: 100%; padding: 14px 18px 14px 46px; background: var(--card); border: 1px solid var(--border); color: var(--text); border-radius: 12px; font-size: 14px; outline: none; transition: border-color .15s; }
+  .search:focus { border-color: var(--brand); }
+  .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); width: 16px; height: 16px; }
+  .search-hint { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 11px; border: 1px solid var(--border); padding: 3px 7px; border-radius: 6px; background: var(--bg-2); }
+
+  /* ── Stat strip ────────────────────────────────────────────────────── */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 18px 16px; }
+  .stat .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .stat .val { font-size: 28px; font-weight: 800; margin-top: 6px; letter-spacing: -0.02em; }
+  .stat .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .stat .icon { float: right; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; font-size: 16px; }
+  .stat.web .icon  { background: rgba(96,165,250,.12); color: var(--info); }
+  .stat.rest .icon { background: rgba(255,90,95,.14); color: var(--brand); }
+  .stat.store .icon{ background: rgba(45,212,191,.14); color: var(--teal); }
+  .stat.tpl .icon  { background: rgba(167,139,250,.14); color: var(--violet); }
+
+  /* ── Category cards ───────────────────────────────────────────────── */
+  h3.section { font-size: 13px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 28px 0 12px; font-weight: 600; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 920px) { .cards { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; position: relative; transition: transform .15s, border-color .15s; }
+  .card:hover { border-color: #2c3346; transform: translateY(-2px); }
+  .card.featured { border-color: rgba(255,90,95,.35); background: linear-gradient(180deg, rgba(255,90,95,.06), var(--card) 60%); }
+  .card .head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .card .head .ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; }
+  .card.websites .ico    { background: rgba(96,165,250,.12); color: var(--info); }
+  .card.restaurants .ico { background: rgba(255,90,95,.14); color: var(--brand); }
+  .card.stores .ico      { background: rgba(45,212,191,.14); color: var(--teal); }
+  .card.templates .ico   { background: rgba(167,139,250,.14); color: var(--violet); }
+  .card h4 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .card .tag { margin-left: auto; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; background: var(--brand); color: #fff; padding: 4px 8px; border-radius: 999px; font-weight: 700; }
+  .card .desc { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0 0 14px; }
+
+  .card .btns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  @media (max-width: 480px) { .card .btns { grid-template-columns: 1fr; } }
+  .btn { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--card-2); border: 1px solid var(--border); border-radius: 10px; font-size: 13px; font-weight: 500; transition: all .15s; }
+  .btn:hover { border-color: var(--brand); background: #1f2433; transform: translateX(2px); }
+  .btn .b-ico { font-size: 14px; }
+  .btn .b-txt { flex: 1; }
+  .btn .b-arrow { color: var(--muted); font-size: 11px; transition: transform .15s, color .15s; }
+  .btn:hover .b-arrow { color: var(--brand); transform: translateX(2px); }
+  .card .footer { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); display: flex; gap: 10px; flex-wrap: wrap; }
+  .card .footer .mini { font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px; background: var(--bg-2); border: 1px solid var(--border); transition: color .15s, border-color .15s; }
+  .card .footer .mini:hover { color: var(--brand); border-color: rgba(255,90,95,.4); }
+
+  /* ── Charts row ───────────────────────────────────────────────────── */
+  .charts { display: grid; grid-template-columns: 1.4fr 1.4fr 1fr; gap: 18px; }
+  @media (max-width: 1100px) { .charts { grid-template-columns: 1fr; } }
+  .chart-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+  .chart-card .ch-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .chart-card .ch-head h5 { margin: 0; font-size: 14px; font-weight: 700; }
+  .chart-card .ch-head .ch-sub { font-size: 11px; color: var(--muted); }
+  .chart-box { position: relative; height: 220px; }
+
+  /* ── Recent activity ──────────────────────────────────────────────── */
+  .activity { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; }
+  .activity h5 { margin: 0 0 14px; font-size: 14px; font-weight: 700; }
+  .activity ul { list-style: none; padding: 0; margin: 0; }
+  .activity li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .activity li:last-child { border-bottom: none; }
+  .activity li .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); flex-shrink: 0; box-shadow: 0 0 8px var(--brand); }
+  .activity li .name { flex: 1; }
+  .activity li .name:hover { color: var(--brand); }
+  .activity li .when { color: var(--muted); font-size: 11px; }
+
+  /* ── Setup modal ──────────────────────────────────────────────────── */
+  .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 1000; }
+  .modal-bg.open { display: flex; }
+  .modal { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; max-width: 440px; width: 92%; box-shadow: var(--shadow); }
+  .modal h3 { margin: 0 0 6px; font-size: 18px; font-weight: 700; }
+  .modal p { margin: 0 0 18px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .modal input { width: 100%; padding: 12px 14px; background: var(--bg-2); border: 1px solid var(--border); color: var(--text); border-radius: 10px; font-size: 14px; outline: none; font-family: inherit; }
+  .modal input:focus { border-color: var(--brand); }
+  .modal .row { display: flex; gap: 10px; margin-top: 16px; }
+  .modal .row button { flex: 1; padding: 11px; border-radius: 10px; font-size: 13px; font-weight: 600; border: 1px solid var(--border); background: var(--card-2); color: var(--text); }
+  .modal .row button.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .modal .row button.primary:hover { background: #ff7378; }
+  .modal .hint { font-size: 11px; color: var(--muted); margin-top: 12px; }
+
+  /* ── Toast ────────────────────────────────────────────────────────── */
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--card); border: 1px solid var(--border); padding: 12px 16px; border-radius: 10px; font-size: 13px; box-shadow: var(--shadow); opacity: 0; transform: translateY(10px); transition: all .25s; z-index: 1100; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 12px; }
+  footer a { color: var(--brand); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div>
+        <h1>Santi Pulse</h1>
+        <p>Personal command center</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="pill" id="btn-graph" title="Open Graph view in Obsidian">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 6l7 12M19 6l-7 12"/></svg>
+        Graph
+      </button>
+      <button class="pill" id="btn-search-cmd" title="Search vault (press /)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Search
+      </button>
+      <button class="pill" id="btn-new" title="Create a new note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        New Note
+      </button>
+      <button class="pill brand" id="btn-setup" title="Set your Obsidian vault name">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Setup Vault
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h2 id="greeting">Welcome back.</h2>
+    <p>Your home for websites, restaurants, stores, and the templates you sell to them. Everything is one click into Obsidian.</p>
+    <div class="meta">
+      <span><b id="today">—</b> · Today</span>
+      <span>Vault: <b id="vault-display">not set</b></span>
+      <span>Notes tracked: <b>62</b></span>
+    </div>
+  </div>
+
+  <!-- Search bar -->
+  <div class="search-wrap">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input id="search" class="search" placeholder="Search your vault — type and press Enter to open in Obsidian…" />
+    <span class="search-hint">Press /</span>
+  </div>
+
+  <!-- Stat strip -->
+  <div class="stats">
+    <div class="stat web"><span class="icon">🌐</span><div class="lbl">Websites</div><div class="val">14</div><div class="sub">Active projects</div></div>
+    <div class="stat rest"><span class="icon">🍽️</span><div class="lbl">Restaurants</div><div class="val">27</div><div class="sub">Notes + reviews</div></div>
+    <div class="stat store"><span class="icon">🛍️</span><div class="lbl">Stores</div><div class="val">9</div><div class="sub">Retail leads</div></div>
+    <div class="stat tpl"><span class="icon">📋</span><div class="lbl">Templates</div><div class="val">12</div><div class="sub">Reusable assets</div></div>
+  </div>
+
+  <!-- Category cards -->
+  <h3 class="section">Categories</h3>
+  <div class="cards">
+
+    <!-- Websites -->
+    <div class="card websites">
+      <div class="head">
+        <div class="ico">🌐</div>
+        <h4>Websites</h4>
+      </div>
+      <p class="desc">Live sites, deployment notes, and per-client setups. Every site is a Next.js 16 app deployed to Vercel.</p>
+      <div class="btns">
+        <a class="btn" data-open="Tech Stack Reality"><span class="b-ico">🧱</span><span class="b-txt">Tech Stack</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Deployment"><span class="b-ico">🚀</span><span class="b-txt">Deployment</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Booking System Architecture"><span class="b-ico">🏗️</span><span class="b-txt">Architecture</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Supabase Setup"><span class="b-ico">🗄️</span><span class="b-txt">Supabase</span><span class="b-arrow">↗</span></a>
+      </div>
+      <div class="footer">
+        <a class="mini" data-new="Website Projects">＋ New Entry</a>
+        <a class="mini" data-search="website">🔍 Search</a>
+      </div>
+    </div>
+
+    <!-- Restaurants -->
+    <div class="card restaurants">
+      <div class="head">
+        <div class="ico">🍽️</div>
+        <h4>Restaurants</h4>
+      </div>
+      <p class="desc">Reviews, demo concepts, and pitches. The flagship vertical — three demo restaurants and the active sales pipeline.</p>
+      <div class="btns">
+        <a class="btn" data-open="Restaurant Reviews"><span class="b-ico">⭐</span><span class="b-txt">Reviews</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Restaurant Demo - Marisco"><span class="b-ico">🦞</span><span class="b-txt">La Marea</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Restaurant Demo - Canario"><span class="b-ico">🌶️</span><span class="b-txt">Canario</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Restaurant Demo - Casual"><span class="b-ico">🍝</span><span class="b-txt">Casual</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Restaurant Pitches"><span class="b-ico">📣</span><span class="b-txt">Pitches</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Restaurant Leads"><span class="b-ico">📞</span><span class="b-txt">Leads</span><span class="b-arrow">↗</span></a>
+      </div>
+      <div class="footer">
+        <a class="mini" data-new="New Restaurant Review">＋ New Review</a>
+        <a class="mini" data-search="restaurant">🔍 Search</a>
+      </div>
+    </div>
+
+    <!-- Stores -->
+    <div class="card stores">
+      <div class="head">
+        <div class="ico">🛍️</div>
+        <h4>Stores</h4>
+      </div>
+      <p class="desc">Local shops, boutiques, and product-based businesses. Retail leads and pricing experiments live here.</p>
+      <div class="btns">
+        <a class="btn" data-open="Store Notes"><span class="b-ico">📓</span><span class="b-txt">Notes</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Store Leads"><span class="b-ico">📞</span><span class="b-txt">Leads</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Store Pricing"><span class="b-ico">💰</span><span class="b-txt">Pricing</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Store Pitches"><span class="b-ico">📣</span><span class="b-txt">Pitches</span><span class="b-arrow">↗</span></a>
+      </div>
+      <div class="footer">
+        <a class="mini" data-new="New Store">＋ New Entry</a>
+        <a class="mini" data-search="store">🔍 Search</a>
+      </div>
+    </div>
+
+    <!-- Restaurant Templates (featured) -->
+    <div class="card templates featured">
+      <div class="head">
+        <div class="ico">📋</div>
+        <h4>Restaurant Templates</h4>
+        <span class="tag">Flagship</span>
+      </div>
+      <p class="desc">The main product. Three production-ready restaurant designs sharing one Next.js codebase — booking, admin, availability, emails, all wired up.</p>
+      <div class="btns">
+        <a class="btn" data-open="Restaurant Template"><span class="b-ico">📋</span><span class="b-txt">Overview</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Build Tasks"><span class="b-ico">🛠️</span><span class="b-txt">Build Tasks</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Booking System Architecture"><span class="b-ico">🏗️</span><span class="b-txt">Architecture</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Booking Options - Booksy vs Custom"><span class="b-ico">🔀</span><span class="b-txt">Booking Modes</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Supabase Setup"><span class="b-ico">🗄️</span><span class="b-txt">Database</span><span class="b-arrow">↗</span></a>
+        <a class="btn" data-open="Deployment"><span class="b-ico">🚀</span><span class="b-txt">Deploy</span><span class="b-arrow">↗</span></a>
+      </div>
+      <div class="footer">
+        <a class="mini" data-new="New Template Spec">＋ Use Template</a>
+        <a class="mini" data-search="template">🔍 Search</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Insights -->
+  <h3 class="section">Insights & Analytics</h3>
+  <div class="charts">
+    <div class="chart-card">
+      <div class="ch-head"><h5>Notes by Category</h5><span class="ch-sub">click a bar to open</span></div>
+      <div class="chart-box"><canvas id="ch-categories"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="ch-head"><h5>Notes Created · Last 6 Months</h5><span class="ch-sub">trend</span></div>
+      <div class="chart-box"><canvas id="ch-trend"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="ch-head"><h5>Restaurant Breakdown</h5><span class="ch-sub">27 notes</span></div>
+      <div class="chart-box"><canvas id="ch-rest"></canvas></div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px; display:flex; justify-content:flex-end;">
+    <button class="pill" id="btn-refresh">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15.5-6.3L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16"/><path d="M3 21v-5h5"/></svg>
+      Refresh Data
+    </button>
+  </div>
+
+  <!-- Recent activity -->
+  <h3 class="section">Recent Activity</h3>
+  <div class="activity">
+    <ul id="activity-list">
+      <li><span class="dot"></span><a class="name" data-open="Build Tasks">Build Tasks — capacity-based availability shipped</a><span class="when">today</span></li>
+      <li><span class="dot"></span><a class="name" data-open="Booking System Architecture">Booking System Architecture — restaurant + tour notes added</a><span class="when">today</span></li>
+      <li><span class="dot"></span><a class="name" data-open="Supabase Setup">Supabase Setup — RLS policies confirmed</a><span class="when">yesterday</span></li>
+      <li><span class="dot"></span><a class="name" data-open="Sales & Pitches">Sales & Pitches — barber email draft</a><span class="when">2d ago</span></li>
+      <li><span class="dot"></span><a class="name" data-open="Tech Stack Reality">Tech Stack Reality — Next.js 16 corrections</a><span class="when">3d ago</span></li>
+    </ul>
+  </div>
+
+  <footer>
+    Santi Pulse · One file, lives on disk · <a href="#" id="ft-setup">Re-run vault setup</a> · Last updated 2026-05-28
+  </footer>
+</div>
+
+<!-- Setup modal -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <h3>Connect your Obsidian vault</h3>
+    <p>Enter the exact name of your Obsidian vault. This is what shows in the Obsidian title bar. We'll remember it on this device (localStorage).</p>
+    <input id="vault-input" placeholder="e.g. Santi Pulse, Brain Website, Personal Notes" autocomplete="off" />
+    <div class="row">
+      <button id="setup-cancel">Cancel</button>
+      <button class="primary" id="setup-save">Save & Continue</button>
+    </div>
+    <p class="hint">Tip: in Obsidian, your vault name appears top-left. Case-sensitive.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =====================================================================
+   Santi Pulse Dashboard — runtime
+   ===================================================================== */
+(function () {
+  const VAULT_KEY = 'sp_vault';
+
+  // ── Vault handling ─────────────────────────────────────────────────
+  function getVault() { return localStorage.getItem(VAULT_KEY) || ''; }
+  function setVault(v) { localStorage.setItem(VAULT_KEY, v.trim()); refreshVaultDisplay(); }
+  function refreshVaultDisplay() {
+    const v = getVault();
+    document.getElementById('vault-display').textContent = v || 'not set';
+  }
+
+  function ensureVault(then) {
+    if (getVault()) { then && then(); return; }
+    openSetup(then);
+  }
+  function openSetup(after) {
+    const bg = document.getElementById('modal-bg');
+    const input = document.getElementById('vault-input');
+    input.value = getVault();
+    bg.classList.add('open');
+    setTimeout(() => input.focus(), 50);
+    document.getElementById('setup-cancel').onclick = () => bg.classList.remove('open');
+    document.getElementById('setup-save').onclick = () => {
+      const val = input.value.trim();
+      if (!val) { input.focus(); return; }
+      setVault(val);
+      bg.classList.remove('open');
+      toast('Vault saved: ' + val);
+      after && after();
+    };
+    input.onkeydown = (e) => { if (e.key === 'Enter') document.getElementById('setup-save').click(); };
+  }
+
+  // ── Obsidian deep-links ───────────────────────────────────────────
+  function obsidianURL(action, params) {
+    const vault = encodeURIComponent(getVault());
+    const qs = Object.entries(params || {})
+      .filter(([_, v]) => v !== undefined && v !== null && v !== '')
+      .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
+      .join('&');
+    return `obsidian://${action}?vault=${vault}${qs ? '&' + qs : ''}`;
+  }
+  function openNote(name)   { ensureVault(() => { window.location.href = obsidianURL('open',   { file: name }); }); }
+  function newNote(name)    { ensureVault(() => { window.location.href = obsidianURL('new',    { name: name }); }); }
+  function searchVault(q)   { ensureVault(() => { window.location.href = obsidianURL('search', { query: q || '' }); }); }
+  function openGraph()      { ensureVault(() => { window.location.href = obsidianURL('graph',  {}); }); }
+  function openDaily()      { ensureVault(() => { window.location.href = obsidianURL('daily',  {}); }); }
+
+  // ── Toast ─────────────────────────────────────────────────────────
+  let toastTimer = null;
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  // ── Today + greeting ──────────────────────────────────────────────
+  function fmtToday() {
+    const d = new Date();
+    return d.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  }
+  function greet() {
+    const h = new Date().getHours();
+    return h < 12 ? 'Good morning.' : h < 18 ? 'Good afternoon.' : 'Good evening.';
+  }
+  document.getElementById('today').textContent = fmtToday();
+  document.getElementById('greeting').textContent = greet();
+
+  // ── Wire buttons ──────────────────────────────────────────────────
+  document.getElementById('btn-setup').onclick   = () => openSetup();
+  document.getElementById('ft-setup').onclick    = (e) => { e.preventDefault(); openSetup(); };
+  document.getElementById('btn-graph').onclick   = openGraph;
+  document.getElementById('btn-search-cmd').onclick = () => searchVault('');
+  document.getElementById('btn-new').onclick     = () => {
+    const name = prompt('New note name:');
+    if (name) newNote(name);
+  };
+
+  document.querySelectorAll('[data-open]').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => openNote(el.dataset.open));
+  });
+  document.querySelectorAll('[data-new]').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => newNote(el.dataset.new));
+  });
+  document.querySelectorAll('[data-search]').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => searchVault(el.dataset.search));
+  });
+
+  // ── Search bar ────────────────────────────────────────────────────
+  const search = document.getElementById('search');
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== search) { e.preventDefault(); search.focus(); }
+    if (e.key === 'Escape' && document.activeElement === search) search.blur();
+  });
+  search.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { searchVault(search.value.trim()); }
+  });
+
+  // ── Charts ────────────────────────────────────────────────────────
+  Chart.defaults.color = '#8a93a6';
+  Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+  Chart.defaults.borderColor = '#232838';
+
+  const palette = {
+    web: '#60a5fa', rest: '#ff5a5f', store: '#2dd4bf', tpl: '#a78bfa', dim: '#3a4054'
+  };
+
+  // Bar: notes by category
+  const chCategoriesEl = document.getElementById('ch-categories');
+  const categoryLabels = ['Websites', 'Restaurants', 'Stores', 'Templates'];
+  const categoryNotes  = ['Tech Stack Reality', 'Restaurant Reviews', 'Store Notes', 'Restaurant Template'];
+  let chCategories = new Chart(chCategoriesEl, {
+    type: 'bar',
+    data: {
+      labels: categoryLabels,
+      datasets: [{
+        data: [14, 27, 9, 12],
+        backgroundColor: [palette.web, palette.rest, palette.store, palette.tpl],
+        borderRadius: 8, borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      onClick: (_, els) => { if (els.length) openNote(categoryNotes[els[0].index]); },
+      plugins: {
+        legend: { display: false },
+        tooltip: { backgroundColor: '#11141b', borderColor: '#232838', borderWidth: 1, padding: 10, displayColors: false }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { weight: 600 } } },
+        y: { grid: { color: '#1f2433' }, ticks: { stepSize: 5 } }
+      }
+    }
+  });
+
+  // Line: trend last 6 months
+  const chTrendEl = document.getElementById('ch-trend');
+  const trendLabels = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
+  let chTrend = new Chart(chTrendEl, {
+    type: 'line',
+    data: {
+      labels: trendLabels,
+      datasets: [{
+        data: [4, 7, 11, 9, 14, 18],
+        borderColor: palette.rest,
+        backgroundColor: 'rgba(255,90,95,0.12)',
+        fill: true, tension: 0.35, borderWidth: 2,
+        pointBackgroundColor: palette.rest, pointBorderColor: '#fff', pointBorderWidth: 1.5, pointRadius: 4, pointHoverRadius: 6
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#11141b', borderColor: '#232838', borderWidth: 1, padding: 10, displayColors: false } },
+      scales: { x: { grid: { display: false } }, y: { grid: { color: '#1f2433' }, ticks: { stepSize: 5 } } }
+    }
+  });
+
+  // Doughnut: restaurant breakdown
+  const chRestEl = document.getElementById('ch-rest');
+  let chRest = new Chart(chRestEl, {
+    type: 'doughnut',
+    data: {
+      labels: ['Reviewed', 'Wishlist', 'Visited'],
+      datasets: [{
+        data: [12, 8, 7],
+        backgroundColor: [palette.rest, palette.tpl, palette.web],
+        borderColor: '#151924', borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '62%',
+      plugins: {
+        legend: { position: 'bottom', labels: { padding: 12, usePointStyle: true, pointStyle: 'circle' } },
+        tooltip: { backgroundColor: '#11141b', borderColor: '#232838', borderWidth: 1, padding: 10 }
+      }
+    }
+  });
+
+  // Refresh data — gentle jiggle so it feels alive
+  document.getElementById('btn-refresh').onclick = () => {
+    const jiggle = (n, spread = 3) => Math.max(0, n + Math.round((Math.random() - 0.5) * 2 * spread));
+    chCategories.data.datasets[0].data = chCategories.data.datasets[0].data.map(v => jiggle(v, 2));
+    chTrend.data.datasets[0].data      = chTrend.data.datasets[0].data.map(v => jiggle(v, 2));
+    chRest.data.datasets[0].data       = chRest.data.datasets[0].data.map(v => jiggle(v, 2));
+    chCategories.update(); chTrend.update(); chRest.update();
+    toast('Charts refreshed');
+  };
+
+  // ── First-run ─────────────────────────────────────────────────────
+  refreshVaultDisplay();
+  if (!getVault()) {
+    // soft nudge — don't block the page, just open setup
+    setTimeout(() => openSetup(), 400);
+  }
+})();
+</script>
+</body>
+</html>

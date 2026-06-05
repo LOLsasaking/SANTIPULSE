@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Sobre SantiPulse — empresa de IA fundada en EE.UU. en 2026. Ayudamos a las personas a construir su presencia online y ahorrar tiempo." />
+<title>SantiPulse · Sobre Nosotros</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors:{ ink:'#050505', inkSoft:'#0B0B0D', ember:'#E23B4E' },
+    fontFamily:{ display:['"Archivo"','sans-serif'], body:['Inter','sans-serif'], mono:['"Space Mono"','monospace'] },
+  }}};
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Inter',sans-serif; background:#050505; color:#fff; }
+  .font-display{ font-family:'Archivo',sans-serif; }
+  .font-mono{ font-family:'Space Mono',monospace; }
+  .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.86; letter-spacing:-.02em; }
+  .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:14px; }
+  .eyebrow::before{ content:''; width:34px; height:1px; background:rgba(255,255,255,.5); }
+  .meta{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.42); }
+  .volver{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.8); text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition:color .3s; }
+  .volver:hover{ color:#fff; } .volver svg{ transition:transform .3s; } .volver:hover svg{ transform:translateX(-5px); }
+  .wordmark{ font-family:'Space Mono',monospace; font-size:13px; letter-spacing:.12em; color:rgba(255,255,255,.85); text-decoration:none; }
+  .topbar{ position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 30px; backdrop-filter:blur(14px); background:rgba(5,5,5,.55); }
+  .card{ background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08); transition:all .4s; }
+  .card:hover{ border-color:rgba(226,59,78,.5); transform:translateY(-4px); }
+  .stat-num{ font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(1.6rem,4vw,2.5rem); line-height:1; letter-spacing:-.02em; }
+  .step-num{ font-family:'Archivo',sans-serif; font-weight:900; font-size:2.4rem; color:rgba(255,255,255,.12); line-height:1; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="volver" href="/"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> Volver</a>
+  <a class="wordmark" href="/">santipulse.com</a>
+</div>
+
+<main class="pt-36 pb-28 px-6 md:px-10 max-w-3xl mx-auto">
+
+  <!-- HERO -->
+  <header class="mb-24">
+    <p class="eyebrow mb-6">Quiénes Somos</p>
+    <h1 class="headline text-5xl md:text-8xl mb-8">Sobre<br>nosotros</h1>
+    <p class="text-white/75 max-w-2xl text-lg md:text-xl leading-relaxed font-light">
+      SantiPulse es una empresa de inteligencia artificial fundada en Estados Unidos. Abrimos nuestras puertas en 2026 con una idea simple: ayudar a las personas a construir su presencia online y, sobre todo, a ahorrar tiempo.
+    </p>
+    <p class="meta mt-8">Fundada en EE.UU. · 2026 · IA</p>
+  </header>
+
+  <!-- STATS — minimal hairline row -->
+  <section class="grid grid-cols-3 border-y border-white/10 mb-24">
+    <div class="py-8 pr-4">
+      <div class="stat-num mb-3">2026</div>
+      <p class="meta">Año de fundación</p>
+    </div>
+    <div class="py-8 px-4 border-l border-white/10">
+      <div class="stat-num mb-3">EE.UU.</div>
+      <p class="meta">Origen</p>
+    </div>
+    <div class="py-8 pl-4 border-l border-white/10">
+      <div class="stat-num mb-3">IA</div>
+      <p class="meta">Tecnología</p>
+    </div>
+  </section>
+
+  <!-- NUESTRA MISIÓN -->
+  <section class="mb-24">
+    <p class="eyebrow mb-8">Nuestra Misión</p>
+    <h2 class="headline text-3xl md:text-5xl mb-10">Tu perfil online,<br>sin perder tiempo</h2>
+    <div class="space-y-6 max-w-2xl">
+      <p class="text-white/70 leading-relaxed font-light text-lg">
+        Hoy todo el mundo necesita una presencia online — pero no hablamos de vivir en las redes sociales. Hablamos de tener un perfil online real: una web, una identidad digital que trabaje por ti incluso cuando no estás delante.
+      </p>
+      <p class="text-white/70 leading-relaxed font-light text-lg">
+        Usamos la inteligencia artificial para hacerlo simple y rápido. Como cualquier buena empresa de IA, nuestro objetivo de fondo es uno: ahorrarte tiempo. Menos tareas repetitivas, menos esperas, más resultados.
+      </p>
+    </div>
+  </section>
+
+  <!-- EN QUÉ CREEMOS — numbered list, no boxes -->
+  <section class="mb-24">
+    <p class="eyebrow mb-10">En qué creemos</p>
+    <div class="divide-y divide-white/10 border-t border-white/10">
+      <div class="grid md:grid-cols-[3rem_1fr] gap-x-8 gap-y-2 py-8">
+        <span class="meta pt-1">01</span>
+        <div>
+          <h3 class="text-xl font-medium mb-2">Presencia online real</h3>
+          <p class="text-white/55 leading-relaxed font-light max-w-xl">No solo redes sociales: un perfil online propio que represente quién eres o qué hace tu negocio.</p>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-[3rem_1fr] gap-x-8 gap-y-2 py-8">
+        <span class="meta pt-1">02</span>
+        <div>
+          <h3 class="text-xl font-medium mb-2">Ahorrar tiempo</h3>
+          <p class="text-white/55 leading-relaxed font-light max-w-xl">La IA se encarga de lo repetitivo para que tú dediques tu tiempo a lo que de verdad importa.</p>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-[3rem_1fr] gap-x-8 gap-y-2 py-8">
+        <span class="meta pt-1">03</span>
+        <div>
+          <h3 class="text-xl font-medium mb-2">Trato cercano</h3>
+          <p class="text-white/55 leading-relaxed font-light max-w-xl">Tecnología seria de EE.UU., con un acompañamiento humano y directo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUÉ HACEMOS — minimal list, no icons -->
+  <section class="mb-24">
+    <p class="eyebrow mb-10">Qué hacemos</p>
+    <div class="divide-y divide-white/10 border-t border-white/10">
+      <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 py-7">
+        <h4 class="text-lg font-medium">Chatbots con IA</h4>
+        <p class="text-white/50 font-light md:text-right md:max-w-sm">Atención 24/7 que responde por ti.</p>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 py-7">
+        <h4 class="text-lg font-medium">Webs y perfil online</h4>
+        <p class="text-white/50 font-light md:text-right md:max-w-sm">Tu presencia digital, lista y a medida.</p>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 py-7">
+        <h4 class="text-lg font-medium">Automatización</h4>
+        <p class="text-white/50 font-light md:text-right md:max-w-sm">Menos tareas manuales, más tiempo libre.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="flex flex-col sm:flex-row gap-4">
+    <a href="/contratar/" class="inline-flex items-center gap-3 font-mono font-bold tracking-[0.2em] uppercase text-sm bg-white text-ink px-6 py-3.5 rounded-full hover:bg-white/90 transition">
+      Quiero empezar <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <a href="/demos/" class="inline-flex items-center gap-3 font-mono font-bold tracking-[0.2em] uppercase text-sm border border-white/25 px-6 py-3.5 rounded-full hover:border-white transition">
+      Ver demos en vivo
+    </a>
+  </section>
+</main>
+
+<footer class="border-t border-white/10 py-10 px-6 md:px-10">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-4 justify-between items-center">
+    <a class="wordmark" href="/">santipulse.com</a>
+    <span class="meta">© 2026 SantiPulse · Fundada en EE.UU.</span>
+  </div>
+</footer>
+</body>
+</html>

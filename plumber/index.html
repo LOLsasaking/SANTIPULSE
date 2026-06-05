@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Fonterneros TNF — Detección de fugas, reformas de baños y fontanería de urgencia 24/7 en Tenerife y las Islas Canarias." />
+<title>Fonterneros TNF | Fontaneros en Tenerife</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1A2F'/%3E%3Cpath d='M50 18c12 16 20 26 20 38a20 20 0 1 1-40 0c0-12 8-22 20-38z' fill='%2306B6D4'/%3E%3C/svg%3E"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        navy:'#0A1A2F', navyDeep:'#06101F', navyMid:'#102A47',
+        cyan:'#06B6D4', cyanLt:'#22D3EE', cyanDk:'#0891B2',
+        ice:'#EAF6FB', slate:'#1E3A52'
+      },
+      fontFamily: { display:['"Sora"','system-ui','sans-serif'], body:['"Plus Jakarta Sans"','system-ui','sans-serif'] },
+    }},
+  };
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family:'Plus Jakarta Sans',sans-serif; background:#fff; color:#0A1A2F; overflow-x:hidden; }
+  .font-display { font-family:'Sora',sans-serif; }
+  .eyebrow { letter-spacing:.22em; }
+
+  /* Bold square buttons (vs electrician's pill) */
+  .btn-cyan { display:inline-flex; align-items:center; gap:.7rem; background:#06B6D4; color:#06101F; padding:1rem 1.75rem; border-radius:.85rem; font-weight:700; transition:all .25s ease; box-shadow:0 10px 26px rgba(6,182,212,.35); }
+  .btn-cyan:hover { background:#22D3EE; transform:translateY(-2px); box-shadow:0 14px 34px rgba(6,182,212,.5); }
+  .btn-outline { display:inline-flex; align-items:center; gap:.7rem; border:2px solid rgba(255,255,255,.3); color:#fff; padding:.9rem 1.7rem; border-radius:.85rem; font-weight:700; transition:all .25s ease; }
+  .btn-outline:hover { border-color:#22D3EE; background:rgba(34,211,238,.1); }
+  .btn-dark { display:inline-flex; align-items:center; gap:.7rem; background:#0A1A2F; color:#fff; padding:1rem 1.75rem; border-radius:.85rem; font-weight:700; transition:all .25s ease; }
+  .btn-dark:hover { background:#102A47; transform:translateY(-2px); }
+
+  .card-hover { transition:all .35s ease; }
+  .card-hover:hover { transform:translateY(-6px); box-shadow:0 26px 55px rgba(10,26,47,.14); }
+
+  .reveal { opacity:0; transform:translateY(26px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* Solid navbar (vs electrician's glass pill) */
+  #navbar { transition:all .3s ease; }
+  #navbar.scrolled { background:#0A1A2F; box-shadow:0 8px 30px rgba(6,16,31,.35); }
+
+  #loadingScreen { position:fixed; inset:0; z-index:9999; background:#0A1A2F; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity .7s ease, visibility .7s ease; }
+  #loadingScreen.hide { opacity:0; visibility:hidden; pointer-events:none; }
+  .loader-drop { width:90px; height:90px; border-radius:.9rem; background:#06B6D4; display:flex; align-items:center; justify-content:center; color:#06101F; font-size:2.4rem; animation:pulse 1.5s ease-in-out infinite; box-shadow:0 0 45px rgba(6,182,212,.6); }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:.92} 50%{transform:scale(1.08);opacity:1} }
+  .loader-text { margin-top:26px; font-family:'Sora',sans-serif; font-weight:700; letter-spacing:.34em; font-size:.72rem; color:rgba(255,255,255,.55); }
+
+  /* Wavy dividers */
+  .wave-top svg, .wave-bottom svg { display:block; width:100%; height:auto; }
+
+  /* FAQ */
+  .faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease, opacity .3s ease; opacity:0; }
+  .faq-item.open .faq-a { max-height:300px; opacity:1; }
+  .faq-item.open .faq-icon { transform:rotate(45deg); background:#06B6D4; color:#06101F; }
+  .faq-icon { transition:all .3s ease; }
+
+  /* Squared service/project cards w/ accent bar */
+  .accent-bar { position:relative; }
+  .accent-bar::before { content:''; position:absolute; left:0; top:1.75rem; bottom:1.75rem; width:4px; border-radius:4px; background:#06B6D4; }
+
+  .stat-ring { background:conic-gradient(#06B6D4 var(--p,75%), rgba(255,255,255,.12) 0); }
+
+  /* keep hero text legible on a bare photo (no overlay box) */
+  .hero-text-shadow { text-shadow:0 2px 18px rgba(6,16,31,.55), 0 1px 3px rgba(6,16,31,.5); }
+
+  .no-scroll { overflow:hidden; }
+</style>
+</head>
+<body class="font-body bg-white">
+
+<!-- LOADING -->
+<div id="loadingScreen" aria-hidden="true">
+  <div class="loader-drop"><i class="fa-solid fa-droplet"></i></div>
+  <div class="loader-text">FONTERNEROS&nbsp;TNF</div>
+</div>
+
+<!-- NAVBAR (solid, square) -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#inicio" class="flex items-center gap-x-3">
+      <div class="w-10 h-10 bg-cyan rounded-lg flex items-center justify-center"><i class="fa-solid fa-droplet text-navy text-lg"></i></div>
+      <div class="leading-none">
+        <span class="font-display font-extrabold text-xl text-white tracking-tight">FONTERNEROS</span>
+        <div class="text-[10px] eyebrow uppercase text-cyanLt mt-1">Fontanería Profesional · TNF</div>
+      </div>
+    </a>
+    <ul class="hidden lg:flex items-center gap-x-8 text-sm font-semibold">
+      <li><a href="#inicio" class="text-white/90 hover:text-cyanLt transition">Inicio</a></li>
+      <li><a href="#about" class="text-white/90 hover:text-cyanLt transition">Nosotros</a></li>
+      <li><a href="#services" class="text-white/90 hover:text-cyanLt transition">Servicios</a></li>
+      <li><a href="#projects" class="text-white/90 hover:text-cyanLt transition">Proyectos</a></li>
+      <li><a href="#faq" class="text-white/90 hover:text-cyanLt transition">FAQ</a></li>
+      <li><a href="#contact" class="text-white/90 hover:text-cyanLt transition">Contacto</a></li>
+    </ul>
+    <div class="flex items-center gap-x-3">
+      <a href="#contact" class="hidden sm:inline-flex btn-cyan py-2.5 px-5 text-sm">Reservar Visita <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <button id="burger" class="lg:hidden w-11 h-11 rounded-lg bg-cyan text-navy flex items-center justify-center" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="lg:hidden hidden bg-navyMid border-t border-white/10">
+    <ul class="flex flex-col p-6 gap-2 text-base font-semibold text-white/90">
+      <li><a href="#inicio" class="block py-2">Inicio</a></li>
+      <li><a href="#about" class="block py-2">Nosotros</a></li>
+      <li><a href="#services" class="block py-2">Servicios</a></li>
+      <li><a href="#projects" class="block py-2">Proyectos</a></li>
+      <li><a href="#faq" class="block py-2">FAQ</a></li>
+      <li><a href="#contact" class="block py-2">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO (full-screen background photo) ============ -->
+<section id="inicio" class="relative min-h-screen flex items-center text-white overflow-hidden bg-cover bg-center"
+         style="background-image:url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2400&auto=format&fit=crop')">
+  <!-- big faint outline word -->
+  <div class="absolute right-0 top-1/3 font-display font-extrabold text-[20vw] leading-none text-white/[0.05] pointer-events-none select-none">AGUA</div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-32 pb-20 hero-text-shadow">
+    <div class="max-w-2xl">
+      <div class="inline-flex items-center gap-x-2 bg-white/10 border border-white/20 px-4 py-1.5 rounded-lg text-xs eyebrow uppercase text-cyanLt mb-7 reveal">
+        <i class="fa-solid fa-droplet"></i> Desde 2017 · Islas Canarias
+      </div>
+      <h1 class="font-display font-extrabold text-5xl md:text-6xl lg:text-7xl leading-[1.03] mb-6 reveal">
+        Fontanería Fiable<br>para Hogares de <span class="text-cyan">Tenerife</span>
+      </h1>
+      <p class="text-lg md:text-xl text-white/90 max-w-md mb-9 reveal">
+        Reparación experta de fugas, reformas de baños y fontanería de urgencia 24/7 en todas las Islas Canarias.
+      </p>
+      <div class="flex flex-wrap items-center gap-5 reveal">
+        <a href="#contact" class="btn-cyan text-lg">Reservar Visita <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="tel:+34600111222" class="btn-outline text-lg"><i class="fa-solid fa-phone"></i> Urgencias 24/7</a>
+      </div>
+      <div class="flex items-center gap-4 mt-10 reveal">
+        <div class="flex -space-x-3">
+          <img class="w-10 h-10 rounded-full border-2 border-navy object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop" alt="">
+          <img class="w-10 h-10 rounded-full border-2 border-navy object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop" alt="">
+          <img class="w-10 h-10 rounded-full border-2 border-navy object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=120&auto=format&fit=crop" alt="">
+        </div>
+        <div><div class="text-sm font-bold">1.9K Reseñas</div><div class="text-cyan text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- wave divider into white -->
+  <div class="wave-bottom -mb-1 absolute bottom-0 inset-x-0 z-10">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path></svg>
+  </div>
+</section>
+
+<!-- ============ ABOUT / STATS (horizontal stat band) ============ -->
+<section id="about" class="max-w-7xl mx-auto px-6 py-20">
+  <div class="grid lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <div class="text-cyanDk font-bold eyebrow text-sm uppercase mb-3">Sobre Fonterneros TNF</div>
+      <h2 class="font-display font-extrabold text-4xl md:text-5xl leading-tight mb-6">Mantenemos los Hogares de Tenerife en Buen Flujo</h2>
+      <p class="text-slate/80 text-lg mb-8 leading-relaxed max-w-lg">
+        Ofrecemos fontanería profesional desde 2017: respuesta rápida, trabajo de calidad y un enfoque limpio y ordenado en el que puedes confiar. Desde un grifo que gotea hasta una reforma completa de baño, tratamos tu hogar como si fuera el nuestro.
+      </p>
+      <a href="#services" class="btn-dark">Ver Servicios <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    </div>
+    <div class="reveal">
+      <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?q=80&w=1000&auto=format&fit=crop" class="rounded-2xl w-full h-80 object-cover" alt="Trabajo de fontanería en una vivienda de Tenerife">
+    </div>
+  </div>
+
+  <!-- horizontal stat strip (different from electrician's stacked card) -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-14">
+    <div class="bg-ice rounded-2xl p-7 text-center reveal"><div class="font-display font-extrabold text-4xl text-navy">280<span class="text-cyan">+</span></div><div class="text-sm text-slate/70 mt-1 font-medium">Proyectos Realizados</div></div>
+    <div class="bg-ice rounded-2xl p-7 text-center reveal"><div class="font-display font-extrabold text-4xl text-navy">1<span class="text-cyan">h</span></div><div class="text-sm text-slate/70 mt-1 font-medium">Tiempo Medio de Respuesta</div></div>
+    <div class="bg-ice rounded-2xl p-7 text-center reveal"><div class="font-display font-extrabold text-4xl text-navy">7<span class="text-cyan">+</span></div><div class="text-sm text-slate/70 mt-1 font-medium">Municipios Atendidos</div></div>
+    <div class="bg-ice rounded-2xl p-7 text-center reveal"><div class="font-display font-extrabold text-4xl text-navy">24<span class="text-cyan">/7</span></div><div class="text-sm text-slate/70 mt-1 font-medium">Cobertura de Urgencias</div></div>
+  </div>
+</section>
+
+<!-- ============ SERVICES (left accent-bar list cards) ============ -->
+<section id="services" class="bg-ice py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <div class="text-cyanDk font-bold eyebrow text-sm uppercase">Lo Que Ofrecemos</div>
+      <h2 class="font-display font-extrabold text-4xl md:text-5xl mt-2">Servicios de Fontanería Profesional</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="bg-white rounded-2xl p-8 pl-10 accent-bar card-hover reveal">
+        <div class="w-14 h-14 bg-navy rounded-xl flex items-center justify-center mb-5"><i class="fa-solid fa-magnifying-glass text-cyanLt text-2xl"></i></div>
+        <h3 class="font-display font-bold text-xl mb-3">Detección y Reparación de Fugas</h3>
+        <p class="text-slate/70 leading-relaxed">Localización de fugas rápida y precisa con la última tecnología, con la mínima molestia para tu hogar.</p>
+      </article>
+      <article class="bg-white rounded-2xl p-8 pl-10 accent-bar card-hover reveal">
+        <div class="w-14 h-14 bg-navy rounded-xl flex items-center justify-center mb-5"><i class="fa-solid fa-bath text-cyanLt text-2xl"></i></div>
+        <h3 class="font-display font-bold text-xl mb-3">Reformas de Baños y Cocinas</h3>
+        <p class="text-slate/70 leading-relaxed">Fontanería integral para reformas completas, desde el diseño hasta el último acabado.</p>
+      </article>
+      <article class="bg-white rounded-2xl p-8 pl-10 accent-bar card-hover reveal">
+        <div class="w-14 h-14 bg-navy rounded-xl flex items-center justify-center mb-5"><i class="fa-solid fa-truck-fast text-cyanLt text-2xl"></i></div>
+        <h3 class="font-display font-bold text-xl mb-3">Fontanería de Urgencia</h3>
+        <p class="text-slate/70 leading-relaxed">Servicio de urgencias 24/7 en toda Tenerife: roturas de tuberías, atascos e inundaciones resueltos rápido.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE US (icon ROW, not numbered cards) ============ -->
+<section class="relative bg-navy text-white py-24 overflow-hidden">
+  <div class="wave-top -mt-1 absolute top-0 inset-x-0 rotate-180">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="#EAF6FB" d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path></svg>
+  </div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10 pt-10">
+    <div class="text-center mb-16 reveal">
+      <div class="text-cyanLt font-bold eyebrow text-sm uppercase">Por Qué Elegirnos</div>
+      <h2 class="font-display font-extrabold text-4xl md:text-5xl mt-3">Lo Que Nos Hace Diferentes</h2>
+    </div>
+    <div class="grid md:grid-cols-4 gap-10">
+      <div class="text-center reveal">
+        <div class="w-20 h-20 mx-auto rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-5"><i class="fa-solid fa-gauge-high text-cyan text-3xl"></i></div>
+        <h4 class="text-xl font-bold mb-2">Detección Rápida de Fugas</h4>
+        <p class="text-white/60 text-sm">Localizamos y reparamos fugas rápido y con la mínima molestia.</p>
+      </div>
+      <div class="text-center reveal">
+        <div class="w-20 h-20 mx-auto rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-5"><i class="fa-solid fa-medal text-cyan text-3xl"></i></div>
+        <h4 class="text-xl font-bold mb-2">Materiales y Trabajo de Calidad</h4>
+        <p class="text-white/60 text-sm">Solo materiales de alta calidad y piezas certificadas.</p>
+      </div>
+      <div class="text-center reveal">
+        <div class="w-20 h-20 mx-auto rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-5"><i class="fa-solid fa-broom text-cyan text-3xl"></i></div>
+        <h4 class="text-xl font-bold mb-2">Servicio Limpio y Ordenado</h4>
+        <p class="text-white/60 text-sm">Siempre dejamos tu hogar limpio y ordenado.</p>
+      </div>
+      <div class="text-center reveal">
+        <div class="w-20 h-20 mx-auto rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-5"><i class="fa-solid fa-clock-rotate-left text-cyan text-3xl"></i></div>
+        <h4 class="text-xl font-bold mb-2">Urgencias 24/7</h4>
+        <p class="text-white/60 text-sm">Respuesta rápida ante urgencias, de día o de noche.</p>
+      </div>
+    </div>
+  </div>
+  <div class="wave-bottom -mb-1 absolute bottom-0 inset-x-0">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M0,55 C240,20 480,20 720,45 C960,70 1200,70 1440,40 L1440,90 L0,90 Z"></path></svg>
+  </div>
+</section>
+
+<!-- ============ EXPERT TEAM (single clean row, no tilt) ============ -->
+<section id="team" class="max-w-7xl mx-auto px-6 py-24">
+  <div class="grid lg:grid-cols-3 gap-10 items-center">
+    <div class="reveal">
+      <div class="text-cyanDk font-bold eyebrow text-sm uppercase mb-3">Nuestro Equipo de Expertos</div>
+      <h2 class="font-display font-extrabold text-4xl md:text-5xl leading-tight mb-5">Conoce a las Personas Detrás de Cada Trabajo</h2>
+      <p class="text-slate/70 mb-7 leading-relaxed">Nos mueve mantener los hogares de Tenerife en buen flujo con una fontanería rápida, limpia y fiable, y un equipo que de verdad se preocupa.</p>
+      <a href="#contact" class="btn-dark">Trabaja con Nosotros <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    </div>
+    <div class="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-5">
+      <div class="group relative rounded-2xl overflow-hidden reveal">
+        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=600&auto=format&fit=crop" class="h-72 w-full object-cover" alt="Lead plumber">
+        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 to-transparent p-4">
+          <div class="font-bold text-white">Miguel Santos</div><div class="text-cyanLt text-xs">Fontanero Jefe</div>
+        </div>
+      </div>
+      <div class="group relative rounded-2xl overflow-hidden reveal">
+        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=600&auto=format&fit=crop" class="h-72 w-full object-cover" alt="Renovation specialist">
+        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 to-transparent p-4">
+          <div class="font-bold text-white">Pablo Díaz</div><div class="text-cyanLt text-xs">Especialista en Reformas</div>
+        </div>
+      </div>
+      <div class="group relative rounded-2xl overflow-hidden reveal">
+        <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?q=80&w=600&auto=format&fit=crop" class="h-72 w-full object-cover" alt="Emergency technician">
+        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 to-transparent p-4">
+          <div class="font-bold text-white">Adrián Gómez</div><div class="text-cyanLt text-xs">Técnico de Urgencias</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trusted-by inline strip -->
+  <div class="mt-16 border-t border-gray-100 pt-10 reveal">
+    <p class="text-center text-xs eyebrow uppercase text-slate/40 mb-6">Orgullosos de colaborar con negocios de confianza en Tenerife</p>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-50">
+      <div class="text-center font-display font-bold text-lg text-slate"><i class="fa-solid fa-droplet mr-1"></i>AquaCanarias</div>
+      <div class="text-center font-display font-bold text-lg text-slate">IslaFlow</div>
+      <div class="text-center font-display font-bold text-lg text-slate">TeideBaños</div>
+      <div class="text-center font-display font-bold text-lg text-slate">CanaryReform</div>
+      <div class="text-center font-display font-bold text-lg text-slate">AtlanticBuild</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS (clean grid, hover-overlay, no tilt) ============ -->
+<section id="projects" class="bg-ice py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between md:items-end gap-4 mb-12 reveal">
+      <div><div class="text-cyanDk font-bold eyebrow text-sm uppercase">Nuestro Trabajo</div><h2 class="font-display font-extrabold text-4xl md:text-5xl mt-2">Proyectos Recientes en Tenerife</h2></div>
+      <a href="#contact" class="btn-dark">Empezar tu Proyecto <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <article class="group relative rounded-2xl overflow-hidden reveal">
+        <img src="https://images.unsplash.com/photo-1604709177225-055f99402ea3?q=80&w=800&auto=format&fit=crop" class="h-80 w-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Reforma de baño">
+        <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent"></div>
+        <div class="absolute bottom-0 p-5"><h3 class="font-display font-bold text-white text-lg">Reforma Integral de Baño</h3><div class="text-cyanLt text-sm mt-1"><i class="fa-solid fa-location-dot mr-1"></i>Arona, Tenerife</div></div>
+      </article>
+      <article class="group relative rounded-2xl overflow-hidden reveal">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800&auto=format&fit=crop" class="h-80 w-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Fontanería de cocina">
+        <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent"></div>
+        <div class="absolute bottom-0 p-5"><h3 class="font-display font-bold text-white text-lg">Renovación de Fontanería de Cocina</h3><div class="text-cyanLt text-sm mt-1"><i class="fa-solid fa-location-dot mr-1"></i>La Orotava, Tenerife</div></div>
+      </article>
+      <article class="group relative rounded-2xl overflow-hidden reveal">
+        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop" class="h-80 w-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Reparación de fuga importante">
+        <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent"></div>
+        <div class="absolute bottom-0 p-5"><h3 class="font-display font-bold text-white text-lg">Reparación de Fuga Importante</h3><div class="text-cyanLt text-sm mt-1"><i class="fa-solid fa-location-dot mr-1"></i>Adeje, Tenerife</div></div>
+      </article>
+      <article class="group relative rounded-2xl overflow-hidden reveal">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" class="h-80 w-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Fontanería de obra nueva">
+        <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent"></div>
+        <div class="absolute bottom-0 p-5"><h3 class="font-display font-bold text-white text-lg">Fontanería de Obra Nueva</h3><div class="text-cyanLt text-sm mt-1"><i class="fa-solid fa-location-dot mr-1"></i>Granadilla, Tenerife</div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL (split: dark panel + quote) ============ -->
+<section class="bg-navy text-white py-24">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-[1fr_1.4fr] gap-12 items-center">
+    <div class="reveal">
+      <div class="text-7xl text-cyan leading-none mb-4"><i class="fa-solid fa-quote-right"></i></div>
+      <div class="flex items-center gap-3">
+        <img class="w-14 h-14 rounded-full object-cover border-2 border-cyan" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=160&auto=format&fit=crop" alt="">
+        <div><div class="font-bold">Marco Rossi</div><div class="text-white/50 text-sm">Propietario · Adeje, Tenerife</div><div class="text-cyan text-sm mt-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+      </div>
+    </div>
+    <p class="font-display font-semibold text-2xl md:text-3xl leading-snug reveal">
+      “Tuvimos una fuga importante en nuestra villa de Adeje y Fonterneros vino en menos de una hora. Encontraron el problema rápido, lo arreglaron de forma limpia y lo dejaron todo impecable. Los fontaneros más profesionales que hemos tenido en Tenerife.”
+    </p>
+  </div>
+</section>
+
+<!-- ============ FAQ (squared accordion, plus icon) ============ -->
+<section id="faq" class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-14 items-start">
+  <div class="reveal">
+    <div class="text-cyanDk font-bold eyebrow text-sm uppercase mb-3">Empresa de Fontanería</div>
+    <h2 class="font-display font-extrabold text-4xl md:text-5xl leading-tight mb-5">Preguntas Frecuentes de Fontanería en Tenerife</h2>
+    <p class="text-slate/70 mb-8 max-w-sm">Respuestas reales para propietarios y negocios de las Islas Canarias.</p>
+    <div class="bg-navy text-white rounded-2xl p-6 flex items-center gap-4 max-w-sm">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-xl object-cover" alt="Atención al cliente">
+      <div><div class="font-bold text-sm">Hola, soy Miguel de Fonterneros.</div><div class="text-white/50 text-xs mt-0.5">¿Tienes alguna duda? Llámanos o escríbenos cuando quieras.</div></div>
+    </div>
+  </div>
+  <div class="space-y-4">
+    <div class="faq-item bg-ice rounded-2xl px-6 reveal" data-open>
+      <button class="faq-q w-full flex items-center justify-between gap-4 py-5 text-left"><span class="font-bold">¿Con qué rapidez podéis reparar una tubería con fuga?</span><span class="faq-icon w-9 h-9 rounded-lg bg-navy text-white flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-plus text-sm"></i></span></button>
+      <div class="faq-a"><p class="pb-6 text-slate/70 leading-relaxed">En urgencias intentamos llegar en menos de una hora a cualquier punto de Tenerife. La mayoría de las fugas se localizan y reparan en una sola visita.</p></div>
+    </div>
+    <div class="faq-item bg-ice rounded-2xl px-6 reveal">
+      <button class="faq-q w-full flex items-center justify-between gap-4 py-5 text-left"><span class="font-bold">¿Ofrecéis paquetes completos de reforma de baño?</span><span class="faq-icon w-9 h-9 rounded-lg bg-navy text-white flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-plus text-sm"></i></span></button>
+      <div class="faq-a"><p class="pb-6 text-slate/70 leading-relaxed">Sí. Nos encargamos de reformas completas de baños y cocinas de principio a fin, desde el diseño de la fontanería hasta los acabados finales, con un presupuesto claro.</p></div>
+    </div>
+    <div class="faq-item bg-ice rounded-2xl px-6 reveal">
+      <button class="faq-q w-full flex items-center justify-between gap-4 py-5 text-left"><span class="font-bold">¿Qué zonas de Tenerife cubrís?</span><span class="faq-icon w-9 h-9 rounded-lg bg-navy text-white flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-plus text-sm"></i></span></button>
+      <div class="faq-a"><p class="pb-6 text-slate/70 leading-relaxed">Cubrimos toda la isla: Arona, La Orotava, Adeje, Granadilla, Santa Cruz, La Laguna y todo lo que hay entre medias.</p></div>
+    </div>
+    <div class="faq-item bg-ice rounded-2xl px-6 reveal">
+      <button class="faq-q w-full flex items-center justify-between gap-4 py-5 text-left"><span class="font-bold">¿Estáis disponibles para urgencias por la noche?</span><span class="faq-icon w-9 h-9 rounded-lg bg-navy text-white flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-plus text-sm"></i></span></button>
+      <div class="faq-a"><p class="pb-6 text-slate/70 leading-relaxed">Sí. Ofrecemos fontanería de urgencia 24/7 en toda Tenerife, incluidas noches y fines de semana. Las roturas e inundaciones no esperan, y nosotros tampoco.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT (dark split, square inputs) ============ -->
+<section id="contact" class="relative bg-navy text-white py-24 overflow-hidden">
+  <div class="wave-top absolute top-0 inset-x-0 rotate-180 -mt-1">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path></svg>
+  </div>
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center relative z-10 pt-10">
+    <div class="reveal">
+      <div class="text-cyanLt font-bold eyebrow text-sm uppercase mb-3">Contacto</div>
+      <h2 class="font-display font-extrabold text-4xl md:text-5xl leading-tight mb-5">¿Necesitas un Fontanero de Confianza?</h2>
+      <p class="text-white/70 mb-9 max-w-md">Rellena el formulario y nuestro equipo te responderá en menos de 1 hora.</p>
+      <div class="space-y-5">
+        <div class="flex items-center gap-4"><span class="w-12 h-12 rounded-xl bg-cyan text-navy flex items-center justify-center"><i class="fa-solid fa-phone"></i></span><div><div class="font-bold">Llámanos</div><div class="text-white/60 text-sm">+34 600 111 222</div></div></div>
+        <div class="flex items-center gap-4"><span class="w-12 h-12 rounded-xl bg-cyan text-navy flex items-center justify-center"><i class="fa-solid fa-envelope"></i></span><div><div class="font-bold">Escríbenos</div><div class="text-white/60 text-sm">info@fonterneros.es</div></div></div>
+        <div class="flex items-center gap-4"><span class="w-12 h-12 rounded-xl bg-cyan text-navy flex items-center justify-center"><i class="fa-solid fa-location-dot"></i></span><div><div class="font-bold">Ubicación</div><div class="text-white/60 text-sm">Arona, Tenerife</div></div></div>
+        <div class="flex items-center gap-4"><span class="w-12 h-12 rounded-xl bg-cyan text-navy flex items-center justify-center"><i class="fa-solid fa-clock"></i></span><div><div class="font-bold">Horario</div><div class="text-white/60 text-sm">Lun–Vie 08:00–19:00 · Urgencias 24/7</div></div></div>
+      </div>
+    </div>
+    <div class="bg-white text-navy rounded-2xl p-8 reveal">
+      <form id="bookForm" class="space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <input type="text" required placeholder="Nombre" class="w-full bg-ice border border-transparent rounded-xl px-5 py-4 focus:outline-none focus:border-cyan transition">
+          <input type="email" required placeholder="Correo electrónico" class="w-full bg-ice border border-transparent rounded-xl px-5 py-4 focus:outline-none focus:border-cyan transition">
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <input type="tel" required placeholder="Teléfono" class="w-full bg-ice border border-transparent rounded-xl px-5 py-4 focus:outline-none focus:border-cyan transition">
+          <select class="w-full bg-ice border border-transparent rounded-xl px-5 py-4 text-slate/60 focus:outline-none focus:border-cyan transition">
+            <option>Tu consulta sobre</option><option>Detección y Reparación de Fugas</option><option>Reforma de Baño / Cocina</option><option>Fontanería de Urgencia</option><option>Instalación de Obra Nueva</option>
+          </select>
+        </div>
+        <textarea rows="4" placeholder="Describe tu problema de fontanería..." class="w-full bg-ice border border-transparent rounded-xl px-5 py-4 focus:outline-none focus:border-cyan transition"></textarea>
+        <button type="submit" class="btn-cyan w-full justify-center text-lg">Reservar mi Visita <i class="fa-solid fa-arrow-right"></i></button>
+        <div id="formSuccess" class="hidden text-cyanDk font-semibold text-center">✓ ¡Gracias! Te responderemos en menos de 1 hora.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section id="blog" class="max-w-7xl mx-auto px-6 py-24">
+  <div class="flex flex-col md:flex-row justify-between md:items-end gap-4 mb-12 reveal">
+    <div><div class="text-cyanDk font-bold eyebrow text-sm uppercase">Blog y Noticias</div><h2 class="font-display font-extrabold text-4xl md:text-5xl mt-2">Últimas Noticias y Artículos</h2></div>
+    <a href="#" class="btn-dark">Ver Todas las Entradas <i class="fa-solid fa-arrow-right text-sm"></i></a>
+  </div>
+  <div class="grid md:grid-cols-3 gap-6">
+    <article class="bg-white border border-gray-100 rounded-2xl overflow-hidden card-hover reveal">
+      <div class="relative"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=700&auto=format&fit=crop" class="h-52 w-full object-cover" alt=""><span class="absolute top-3 left-3 bg-cyan text-navy text-xs font-bold px-3 py-1.5 rounded-lg">14 MAY</span></div>
+      <div class="p-6"><h3 class="font-display font-bold text-lg mb-2">Cómo Detectar Pronto una Fuga de Agua Oculta</h3><p class="text-sm text-slate/60 mb-4">¿Facturas de agua más altas y manchas de humedad? Así detectan los hogares de Tenerife las fugas antes de que se extiendan...</p><div class="flex items-center justify-between text-xs text-slate/40 border-t border-gray-100 pt-4"><span><i class="fa-solid fa-user text-cyan mr-1"></i>Por Fonterneros</span><span><i class="fa-regular fa-comment text-cyan mr-1"></i>03 Comentarios</span></div></div>
+    </article>
+    <article class="bg-white border border-gray-100 rounded-2xl overflow-hidden card-hover reveal">
+      <div class="relative"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=700&auto=format&fit=crop" class="h-52 w-full object-cover" alt=""><span class="absolute top-3 left-3 bg-cyan text-navy text-xs font-bold px-3 py-1.5 rounded-lg">30 ABR</span></div>
+      <div class="p-6"><h3 class="font-display font-bold text-lg mb-2">Cómo Planificar una Reforma de Baño en Tenerife</h3><p class="text-sm text-slate/60 mb-4">De la distribución a los acabados: lo que debes tener en cuenta antes de empezar tu reforma...</p><div class="flex items-center justify-between text-xs text-slate/40 border-t border-gray-100 pt-4"><span><i class="fa-solid fa-user text-cyan mr-1"></i>Por Fonterneros</span><span><i class="fa-regular fa-comment text-cyan mr-1"></i>05 Comentarios</span></div></div>
+    </article>
+    <article class="bg-white border border-gray-100 rounded-2xl overflow-hidden card-hover reveal">
+      <div class="relative"><img src="https://images.unsplash.com/photo-1542013936693-884638332954?q=80&w=700&auto=format&fit=crop" class="h-52 w-full object-cover" alt=""><span class="absolute top-3 left-3 bg-cyan text-navy text-xs font-bold px-3 py-1.5 rounded-lg">11 ABR</span></div>
+      <div class="p-6"><h3 class="font-display font-bold text-lg mb-2">Agua Dura en las Islas Canarias: Lo Que Debes Saber</h3><p class="text-sm text-slate/60 mb-4">La cal puede dañar tuberías y electrodomésticos: así proteges la fontanería de tu hogar...</p><div class="flex items-center justify-between text-xs text-slate/40 border-t border-gray-100 pt-4"><span><i class="fa-solid fa-user text-cyan mr-1"></i>Por Fonterneros</span><span><i class="fa-regular fa-comment text-cyan mr-1"></i>02 Comentarios</span></div></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="relative bg-navyDeep text-white/70 pt-24 pb-10 overflow-hidden">
+  <div class="wave-top absolute top-0 inset-x-0 rotate-180 -mt-1">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path></svg>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-6 pt-6">
+    <div class="bg-cyan text-navy rounded-2xl p-8 md:p-10 grid md:grid-cols-2 gap-6 items-center mb-16">
+      <div><h3 class="font-display font-extrabold text-2xl md:text-3xl mb-2">Suscríbete a nuestra Newsletter</h3><p class="text-navy/70 text-sm font-medium">Apúntate hoy y recibe los últimos consejos y ofertas de fontanería en Tenerife.</p></div>
+      <form id="newsForm" class="flex bg-white rounded-xl p-1.5">
+        <input type="email" required placeholder="Introduce tu correo electrónico..." class="flex-1 bg-transparent text-navy px-4 focus:outline-none">
+        <button type="submit" class="btn-dark py-3 px-5 text-sm">Suscribirse <i class="fa-solid fa-arrow-right text-xs"></i></button>
+      </form>
+    </div>
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-x-3 mb-4"><div class="w-10 h-10 bg-cyan rounded-lg flex items-center justify-center"><i class="fa-solid fa-droplet text-navy"></i></div><span class="font-display font-extrabold text-xl text-white">Fonterneros TNF</span></div>
+        <p class="text-sm text-white/50 mb-5">Fontanería rápida, limpia y fiable para hogares y negocios de Tenerife desde 2017.</p>
+        <div class="flex gap-3"><a href="#" class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-cyan hover:text-navy transition"><i class="fa-brands fa-facebook-f text-sm"></i></a><a href="#" class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-cyan hover:text-navy transition"><i class="fa-brands fa-instagram text-sm"></i></a><a href="#" class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-cyan hover:text-navy transition"><i class="fa-brands fa-whatsapp text-sm"></i></a></div>
+      </div>
+      <div><h4 class="text-white font-bold mb-4">Servicios</h4><ul class="space-y-2 text-sm"><li><a href="#services" class="hover:text-cyanLt transition">Reparación de Fugas</a></li><li><a href="#services" class="hover:text-cyanLt transition">Reformas</a></li><li><a href="#services" class="hover:text-cyanLt transition">Urgencias 24/7</a></li><li><a href="#services" class="hover:text-cyanLt transition">Obra Nueva</a></li></ul></div>
+      <div><h4 class="text-white font-bold mb-4">Empresa</h4><ul class="space-y-2 text-sm"><li><a href="#about" class="hover:text-cyanLt transition">Nosotros</a></li><li><a href="#team" class="hover:text-cyanLt transition">Nuestro Equipo</a></li><li><a href="#projects" class="hover:text-cyanLt transition">Proyectos</a></li><li><a href="#blog" class="hover:text-cyanLt transition">Blog</a></li></ul></div>
+      <div><h4 class="text-white font-bold mb-4">Contacto</h4><ul class="space-y-2 text-sm"><li><i class="fa-solid fa-phone text-cyan mr-2"></i>+34 600 111 222</li><li><i class="fa-solid fa-envelope text-cyan mr-2"></i>info@fonterneros.es</li><li><i class="fa-solid fa-location-dot text-cyan mr-2"></i>Arona, Tenerife</li></ul></div>
+    </div>
+    <div class="border-t border-white/10 pt-6 text-center text-sm">© 2026 Fonterneros TNF. Todos los derechos reservados. • Tenerife, Islas Canarias</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('load', () => setTimeout(() => document.getElementById('loadingScreen')?.classList.add('hide'), 700));
+  const ro = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }); }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+  const nav = document.getElementById('navbar');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll); onScroll();
+  const burger = document.getElementById('burger'); const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+  document.querySelectorAll('.faq-item').forEach(item => { item.querySelector('.faq-q').addEventListener('click', () => { const wasOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open')); if (!wasOpen) item.classList.add('open'); }); });
+  document.querySelector('.faq-item[data-open]')?.classList.add('open');
+  document.getElementById('bookForm').addEventListener('submit', e => { e.preventDefault(); document.getElementById('formSuccess').classList.remove('hidden'); e.target.reset(); });
+  document.getElementById('newsForm').addEventListener('submit', e => { e.preventDefault(); e.target.reset(); alert('¡Gracias por suscribirte!'); });
+</script>
+</body>
+</html>

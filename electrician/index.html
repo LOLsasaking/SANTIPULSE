@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="MegaSur SL — Instalaciones eléctricas profesionales, sistemas de hogar inteligente y reparaciones de urgencia 24/7 en Tenerife y las Islas Canarias." />
+<title>MegaSur SL | Electricista en Tenerife</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230B1120'/%3E%3Cpath d='M55 12 30 54h18l-6 34 28-46H50z' fill='%23F97316'/%3E%3C/svg%3E"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: { ink:'#0B1120', inkDeep:'#070C16', ember:'#F97316', emberLt:'#FB923C', cream:'#F6F5F2' },
+      fontFamily: { display:['"Space Grotesk"','system-ui','sans-serif'], body:['Inter','system-ui','sans-serif'] },
+    }},
+  };
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family:'Inter',sans-serif; background:#fff; color:#0B1120; overflow-x:hidden; }
+  .font-display { font-family:'Space Grotesk',sans-serif; }
+  .eyebrow { letter-spacing:.18em; }
+
+  /* Hero watermark */
+  .watermark {
+    position:absolute; left:50%; top:42%; transform:translate(-50%,-50%);
+    font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:26vw; line-height:1; color:rgba(255,255,255,.12);
+    white-space:nowrap; pointer-events:none; user-select:none;
+  }
+  .footer-watermark {
+    position:absolute; left:50%; bottom:-4vw; transform:translateX(-50%);
+    font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:22vw; line-height:1; color:rgba(255,255,255,.04);
+    white-space:nowrap; pointer-events:none; user-select:none;
+  }
+
+  /* Orange pill button with black circle arrow */
+  .btn-pill {
+    display:inline-flex; align-items:center; gap:.85rem;
+    background:linear-gradient(135deg,#FB923C,#F97316); color:#fff;
+    padding:.55rem .55rem .55rem 1.5rem; border-radius:999px; font-weight:600;
+    box-shadow:0 8px 24px rgba(249,115,22,.35); transition:all .3s ease;
+  }
+  .btn-pill:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(249,115,22,.5); }
+  .btn-pill .circ { width:2.25rem; height:2.25rem; border-radius:999px; background:#0B1120; color:#fff; display:flex; align-items:center; justify-content:center; }
+
+  .btn-ghost-arrow {
+    display:inline-flex; align-items:center; gap:.85rem; background:#0B1120; color:#fff;
+    padding:.55rem .55rem .55rem 1.5rem; border-radius:999px; font-weight:600; transition:all .3s ease;
+  }
+  .btn-ghost-arrow:hover { transform:translateY(-2px); }
+  .btn-ghost-arrow .circ { width:2.25rem; height:2.25rem; border-radius:999px; background:#F97316; color:#fff; display:flex; align-items:center; justify-content:center; }
+
+  .card-hover { transition:all .4s ease; }
+  .card-hover:hover { transform:translateY(-6px); box-shadow:0 24px 55px rgba(15,23,42,.12); }
+
+  .reveal { opacity:0; transform:translateY(26px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  .nav-pill { backdrop-filter:blur(14px); background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); }
+  #navbar.scrolled .nav-pill { background:rgba(255,255,255,.95); border-color:rgba(15,23,42,.06); box-shadow:0 10px 30px rgba(15,23,42,.1); }
+  #navbar.scrolled .nav-link, #navbar.scrolled .nav-logo-text { color:#0B1120 !important; }
+
+  /* Loading */
+  #loadingScreen { position:fixed; inset:0; z-index:9999; background:#0B1120; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity .7s ease, visibility .7s ease; }
+  #loadingScreen.hide { opacity:0; visibility:hidden; pointer-events:none; }
+  .loader-bolt { width:86px; height:86px; border-radius:24px; background:linear-gradient(135deg,#FB923C,#F97316); display:flex; align-items:center; justify-content:center; color:#fff; font-size:2.6rem; animation:pulse 1.5s ease-in-out infinite; box-shadow:0 0 40px rgba(249,115,22,.55); }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:.92} 50%{transform:scale(1.08);opacity:1} }
+  .loader-text { margin-top:26px; font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:.32em; font-size:.72rem; color:rgba(255,255,255,.55); }
+
+  /* Diagonal marquee */
+  .marquee-wrap { position:relative; overflow:hidden; }
+  .marquee-band { white-space:nowrap; display:flex; }
+  .marquee-band span { display:inline-flex; align-items:center; }
+  .marquee-orange { background:#F97316; transform:rotate(-3deg) scale(1.06); }
+  .marquee-track { display:inline-flex; animation:scrollX 28s linear infinite; }
+  .marquee-track.rev { animation-direction:reverse; }
+  @keyframes scrollX { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* FAQ */
+  .faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease, opacity .3s ease; opacity:0; }
+  .faq-item.open .faq-a { max-height:300px; opacity:1; }
+  .faq-item.open .faq-circ { background:#0B1120 !important; transform:rotate(90deg); }
+
+  /* Tilted polaroid cards */
+  .tilt-l { transform:rotate(-2deg); } .tilt-r { transform:rotate(2deg); }
+  .tilt-l:hover, .tilt-r:hover { transform:rotate(0) translateY(-6px); }
+  .polaroid { transition:transform .4s ease, box-shadow .4s ease; box-shadow:0 18px 45px rgba(15,23,42,.14); }
+
+  .hero-video { width:100%; border-radius:1.5rem; object-fit:cover; box-shadow:0 30px 70px rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.15); }
+  .no-scroll { overflow:hidden; }
+  .blueprint-bg { background-image:radial-gradient(circle, rgba(249,115,22,.08) 1px, transparent 1px); background-size:22px 22px; }
+</style>
+</head>
+<body class="font-body bg-white">
+
+<!-- LOADING -->
+<div id="loadingScreen" aria-hidden="true">
+  <div class="loader-bolt"><i class="fa-solid fa-bolt"></i></div>
+  <div class="loader-text">MEGASUR&nbsp;SL</div>
+</div>
+
+<!-- NAVBAR (floating pill) -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 pt-4 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="nav-pill rounded-full px-4 py-2.5 flex items-center justify-between transition-all duration-300">
+      <a href="#inicio" class="flex items-center gap-x-2.5 pl-2">
+        <div class="w-9 h-9 bg-gradient-to-br from-emberLt to-ember rounded-lg flex items-center justify-center">
+          <i class="fa-solid fa-bolt text-white"></i>
+        </div>
+        <span class="nav-logo-text font-display font-bold text-xl text-white">MegaSur</span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-x-7 text-sm font-medium">
+        <li><a href="#inicio" class="nav-link text-white/90 hover:text-ember transition">Inicio</a></li>
+        <li><a href="#about" class="nav-link text-white/90 hover:text-ember transition">Nosotros</a></li>
+        <li><a href="#services" class="nav-link text-white/90 hover:text-ember transition">Servicios</a></li>
+        <li><a href="#projects" class="nav-link text-white/90 hover:text-ember transition">Proyectos</a></li>
+        <li><a href="#faq" class="nav-link text-white/90 hover:text-ember transition">FAQ</a></li>
+        <li><a href="#contact" class="nav-link text-white/90 hover:text-ember transition">Contacto</a></li>
+      </ul>
+
+      <div class="flex items-center gap-x-3">
+        <a href="#contact" class="btn-pill text-sm py-2 pl-5">Pedir Presupuesto <span class="circ"><i class="fa-solid fa-arrow-right text-xs"></i></span></a>
+        <button id="burger" class="lg:hidden w-10 h-10 rounded-full bg-ink text-white flex items-center justify-center" aria-label="Menú"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="lg:hidden hidden mt-2 bg-white rounded-3xl shadow-xl border border-gray-100 p-6">
+      <ul class="flex flex-col gap-2 text-base font-medium text-gray-700">
+        <li><a href="#inicio" class="block py-2">Inicio</a></li>
+        <li><a href="#about" class="block py-2">Nosotros</a></li>
+        <li><a href="#services" class="block py-2">Servicios</a></li>
+        <li><a href="#projects" class="block py-2">Proyectos</a></li>
+        <li><a href="#faq" class="block py-2">FAQ</a></li>
+        <li><a href="#contact" class="block py-2">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="inicio" class="relative min-h-screen flex items-center overflow-hidden bg-cover bg-center"
+         style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2400&auto=format&fit=crop')">
+  <div class="absolute inset-0 bg-gradient-to-r from-ink/92 via-ink/75 to-ink/45"></div>
+  <div class="watermark">megasur</div>
+
+  <!-- vertical socials -->
+  <div class="hidden md:flex flex-col items-center gap-5 absolute left-6 top-1/2 -translate-y-1/2 z-20 text-white/70">
+    <a href="#" class="hover:text-ember transition" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#" class="hover:text-ember transition" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#" class="hover:text-ember transition" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="#" class="hover:text-ember transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    <div class="w-px h-16 bg-white/30 mt-2"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center w-full pt-28 pb-16">
+    <div class="text-white">
+      <h1 class="font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.04] mb-6 reveal">
+        Energía para Tenerife<br>con <span class="text-ember">Seguridad</span><br>y Tecnología
+      </h1>
+      <p class="text-lg text-white/80 max-w-md mb-8 reveal">
+        Instalaciones eléctricas profesionales, sistemas de hogar inteligente y reparaciones de urgencia 24/7 en todas las Islas Canarias.
+      </p>
+      <div class="flex flex-wrap items-center gap-5 reveal">
+        <a href="#contact" class="btn-pill text-lg">Presupuesto Gratis <span class="circ"><i class="fa-solid fa-arrow-right"></i></span></a>
+        <div class="flex items-center gap-3 text-white">
+          <div class="flex -space-x-3">
+            <img class="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop" alt="">
+            <img class="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop" alt="">
+            <img class="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=120&auto=format&fit=crop" alt="">
+          </div>
+          <div>
+            <div class="text-sm font-semibold">2.4K Reseñas</div>
+            <div class="text-ember text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- looping video where the quote CTA lives -->
+    <div class="relative reveal">
+      <div class="absolute -inset-3 bg-ember/25 rounded-[1.75rem] blur-2xl" aria-hidden="true"></div>
+      <video class="hero-video relative aspect-[4/5] lg:aspect-square" autoplay loop muted playsinline
+             poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200&auto=format&fit=crop"
+             aria-label="MegaSur electricians at work in Tenerife">
+        <source src="electrician-loop.mp4" type="video/mp4" />
+      </video>
+      <div class="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-2xl px-5 py-4 flex items-center gap-x-3 hidden sm:flex">
+        <div class="w-11 h-11 bg-ember/10 rounded-xl flex items-center justify-center text-ember"><i class="fa-solid fa-bolt text-xl"></i></div>
+        <div><div class="font-display font-bold text-ink leading-none">Presupuesto Gratis</div><div class="text-xs text-gray-500 mt-1">Respuesta en 2 horas</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / STATS ============ -->
+<section id="about" class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-14 items-center">
+  <div class="reveal">
+    <div class="bg-cream rounded-3xl p-8 inline-block mb-8 relative">
+      <span class="absolute top-6 right-6 w-2.5 h-2.5 rounded-full bg-ember"></span>
+      <div class="font-display font-bold text-6xl">320+</div>
+      <div class="h-px bg-gray-300 my-4 w-44"></div>
+      <div class="font-semibold">Proyectos y Clientes Atendidos</div>
+      <p class="text-sm text-gray-500 mt-2 max-w-xs">Más de 320 instalaciones realizadas en Tenerife con cuidado, precisión y un enfoque en la seguridad.</p>
+    </div>
+    <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=900&auto=format&fit=crop" class="rounded-3xl w-full h-64 object-cover" alt="Trabajo eléctrico en una vivienda de Tenerife">
+  </div>
+
+  <div class="reveal">
+    <div class="text-ember font-semibold eyebrow text-sm uppercase mb-3">—— Sobre Nosotros</div>
+    <h2 class="font-display font-bold text-4xl md:text-5xl leading-tight mb-6">
+      Energía para Hogares y Negocios de Tenerife
+    </h2>
+    <p class="text-gray-600 mb-6 leading-relaxed max-w-lg">
+      MegaSur SL ofrece trabajo eléctrico seguro, fiable y moderno desde 2018, apostando por la última tecnología de hogar inteligente y eficiencia energética. Nuestra misión no es solo cablear edificios, sino dar energía de forma responsable a los hogares y negocios de la isla.
+    </p>
+    <div class="flex flex-wrap items-center gap-5">
+      <a href="#services" class="btn-pill">Saber Más <span class="circ"><i class="fa-solid fa-arrow-right"></i></span></a>
+      <div class="bg-ink text-white rounded-2xl px-7 py-5">
+        <div class="text-xs eyebrow uppercase text-white/60">Cobertura en la Isla</div>
+        <div class="font-display font-bold text-4xl mt-1">7<span class="text-ember">+</span></div>
+        <div class="text-white/60 text-sm">Municipios atendidos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="bg-cream py-24">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[0.9fr_2fr] gap-12 items-start">
+    <div class="reveal">
+      <div class="text-ember font-semibold eyebrow text-sm uppercase mb-3">—— Lo Que Ofrecemos</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl leading-tight mb-8">Guiados por la Seguridad, Definidos por la Calidad</h2>
+      <a href="#contact" class="btn-pill">Ver Todos los Servicios <span class="circ"><i class="fa-solid fa-arrow-right"></i></span></a>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-6">
+      <article class="bg-white rounded-3xl p-6 card-hover reveal">
+        <div class="relative rounded-2xl overflow-hidden mb-5">
+          <img src="https://images.unsplash.com/photo-1565608438257-fac3c27beb36?q=80&w=600&auto=format&fit=crop" class="h-44 w-full object-cover" alt="Electricidad residencial">
+          <span class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+        </div>
+        <div class="flex items-center gap-3 mb-2"><i class="fa-solid fa-house text-ember text-xl"></i><h3 class="font-display font-semibold text-xl">Electricidad Residencial</h3></div>
+        <p class="text-sm text-gray-500 leading-relaxed">Cableado integral del hogar, diseño de iluminación y sistemas de hogar inteligente para la vida moderna en Tenerife.</p>
+      </article>
+      <article class="bg-white rounded-3xl p-6 card-hover reveal">
+        <div class="relative rounded-2xl overflow-hidden mb-5">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" class="h-44 w-full object-cover" alt="Electricidad comercial">
+          <span class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+        </div>
+        <div class="flex items-center gap-3 mb-2"><i class="fa-solid fa-building text-ember text-xl"></i><h3 class="font-display font-semibold text-xl">Electricidad Comercial</h3></div>
+        <p class="text-sm text-gray-500 leading-relaxed">Oficinas, comercios, restaurantes y hoteles en Tenerife cableados según normativa comercial.</p>
+      </article>
+      <article class="bg-white rounded-3xl p-6 card-hover reveal">
+        <div class="relative rounded-2xl overflow-hidden mb-5">
+          <img src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=600&auto=format&fit=crop" class="h-44 w-full object-cover" alt="Reparaciones de urgencia">
+          <span class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+        </div>
+        <div class="flex items-center gap-3 mb-2"><i class="fa-solid fa-screwdriver-wrench text-ember text-xl"></i><h3 class="font-display font-semibold text-xl">Reparaciones de Urgencia</h3></div>
+        <p class="text-sm text-gray-500 leading-relaxed">Reparación de averías eléctricas 24/7 e inspecciones de seguridad: respuesta rápida, de día o de noche.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE US ============ -->
+<section class="bg-ink text-white py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <div class="text-ember font-semibold eyebrow text-sm uppercase">—— Por Qué Elegirnos</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mt-3">Lo Que Nos Hace Diferentes</h2>
+    </div>
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="bg-white/5 border border-white/10 p-8 rounded-3xl reveal"><div class="text-ember font-display text-4xl font-bold mb-4">01</div><h4 class="text-xl font-semibold mb-3">Experiencia de Confianza</h4><p class="text-white/70">Electricistas certificados con años de experiencia práctica en Tenerife.</p></div>
+      <div class="bg-white/5 border border-white/10 p-8 rounded-3xl reveal"><div class="text-ember font-display text-4xl font-bold mb-4">02</div><h4 class="text-xl font-semibold mb-3">La Seguridad Primero</h4><p class="text-white/70">Todos los trabajos cumplen estrictas normas de seguridad y la normativa vigente.</p></div>
+      <div class="bg-white/5 border border-white/10 p-8 rounded-3xl reveal"><div class="text-ember font-display text-4xl font-bold mb-4">03</div><h4 class="text-xl font-semibold mb-3">Integración de Hogar Inteligente</h4><p class="text-white/70">Instalamos los últimos sistemas de domótica y automatización.</p></div>
+      <div class="bg-white/5 border border-white/10 p-8 rounded-3xl reveal"><div class="text-ember font-display text-4xl font-bold mb-4">04</div><h4 class="text-xl font-semibold mb-3">Rápidos y Fiables 24/7</h4><p class="text-white/70">Respuesta rápida ante urgencias eléctricas, a cualquier hora.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIAGONAL MARQUEE ============ -->
+<div class="marquee-wrap py-16 bg-white">
+  <div class="marquee-band absolute inset-x-0 top-1/2 -translate-y-1/2 opacity-10">
+    <div class="marquee-track font-display font-bold text-5xl md:text-7xl text-ink">
+      <span class="px-6">TRABAJO DE CALIDAD&nbsp;✳</span><span class="px-6">HOGAR INTELIGENTE&nbsp;✳</span><span class="px-6">URGENCIAS 24/7&nbsp;✳</span>
+      <span class="px-6">TRABAJO DE CALIDAD&nbsp;✳</span><span class="px-6">HOGAR INTELIGENTE&nbsp;✳</span><span class="px-6">URGENCIAS 24/7&nbsp;✳</span>
+    </div>
+  </div>
+  <div class="marquee-orange py-4 relative">
+    <div class="marquee-track text-white font-display font-semibold text-xl md:text-2xl">
+      <span class="px-6">CABLEADO RESIDENCIAL&nbsp;✳</span><span class="px-6">DOMÓTICA&nbsp;✳</span><span class="px-6">SOLAR + ELÉCTRICO&nbsp;✳</span><span class="px-6">INSPECCIONES DE SEGURIDAD&nbsp;✳</span><span class="px-6">INSTALACIONES COMERCIALES&nbsp;✳</span>
+      <span class="px-6">CABLEADO RESIDENCIAL&nbsp;✳</span><span class="px-6">DOMÓTICA&nbsp;✳</span><span class="px-6">SOLAR + ELÉCTRICO&nbsp;✳</span><span class="px-6">INSPECCIONES DE SEGURIDAD&nbsp;✳</span><span class="px-6">INSTALACIONES COMERCIALES&nbsp;✳</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EXPERT TEAM ============ -->
+<section id="team" class="max-w-7xl mx-auto px-6 py-12 grid lg:grid-cols-2 gap-14 items-center">
+  <div class="grid grid-cols-2 gap-5 reveal">
+    <div class="polaroid bg-white rounded-3xl p-3 tilt-l">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=600&auto=format&fit=crop" class="rounded-2xl h-72 w-full object-cover" alt="Lead electrician">
+      <div class="bg-ink text-white rounded-2xl px-4 py-3 -mt-8 relative mx-2 flex items-center justify-between">
+        <div><div class="font-semibold">Carlos Méndez</div><div class="text-xs text-white/60">Electricista Jefe</div></div>
+        <span class="w-8 h-8 rounded-full bg-ember flex items-center justify-center text-white text-xs"><i class="fa-solid fa-share-nodes"></i></span>
+      </div>
+    </div>
+    <div class="polaroid bg-white rounded-3xl p-3 tilt-r mt-8">
+      <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?q=80&w=600&auto=format&fit=crop" class="rounded-2xl h-72 w-full object-cover" alt="Smart home specialist">
+      <div class="bg-ink text-white rounded-2xl px-4 py-3 -mt-8 relative mx-2 flex items-center justify-between">
+        <div><div class="font-semibold">Javier Ruiz</div><div class="text-xs text-white/60">Especialista en Domótica</div></div>
+        <span class="w-8 h-8 rounded-full bg-ember flex items-center justify-center text-white text-xs"><i class="fa-solid fa-share-nodes"></i></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="text-ember font-semibold eyebrow text-sm uppercase mb-3">—— Nuestro Equipo</div>
+    <h2 class="font-display font-bold text-4xl md:text-5xl leading-tight mb-5">Conoce a Nuestro Equipo de Expertos</h2>
+    <p class="text-gray-600 mb-8 max-w-md leading-relaxed">Nos mueve dar energía a la vida de nuestros clientes en Tenerife con nuestro compromiso con la seguridad, la profesionalidad y un servicio fiable.</p>
+    <div class="flex gap-4">
+      <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?q=80&w=400&auto=format&fit=crop" class="w-24 h-28 rounded-2xl object-cover" alt="Technician">
+      <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=400&auto=format&fit=crop" class="w-24 h-28 rounded-2xl object-cover" alt="Technician">
+      <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=400&auto=format&fit=crop" class="w-24 h-28 rounded-2xl object-cover" alt="Technician">
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<section class="max-w-6xl mx-auto px-6 py-14">
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-60 reveal">
+    <div class="text-center font-display font-bold text-lg text-gray-500"><i class="fa-solid fa-bolt mr-1"></i>VoltCanarias</div>
+    <div class="text-center font-display font-bold text-lg text-gray-500">IslaTech</div>
+    <div class="text-center font-display font-bold text-lg text-gray-500">SolarSur</div>
+    <div class="text-center font-display font-bold text-lg text-gray-500">TeideHomes</div>
+    <div class="text-center font-display font-bold text-lg text-gray-500">AtlanticBuild</div>
+  </div>
+  <div class="text-center mt-8 reveal">
+    <span class="inline-block px-5 py-2 rounded-full border border-gray-200 text-xs eyebrow uppercase text-gray-500">Orgullosos de colaborar con negocios de confianza en Tenerife</span>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="max-w-7xl mx-auto px-6 py-20">
+  <div class="text-center mb-14 reveal">
+    <div class="text-ember font-semibold eyebrow text-sm uppercase">—— Nuestro Trabajo</div>
+    <h2 class="font-display font-bold text-4xl md:text-5xl mt-2">Proyectos Recientes en Tenerife</h2>
+  </div>
+  <div class="grid md:grid-cols-2 gap-8">
+    <article class="polaroid bg-white rounded-3xl p-3 tilt-l reveal">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900&auto=format&fit=crop" class="rounded-2xl h-72 w-full object-cover" alt="Renovación de villa moderna">
+      <div class="flex items-center justify-between px-3 py-4">
+        <div><h3 class="font-display font-bold text-xl">Renovación Eléctrica de Villa Moderna</h3><div class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot text-ember mr-1"></i>Adeje, Tenerife</div></div>
+        <span class="w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </div>
+    </article>
+    <article class="polaroid bg-white rounded-3xl p-3 tilt-r reveal">
+      <img src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=900&auto=format&fit=crop" class="rounded-2xl h-72 w-full object-cover" alt="Instalación de hogar inteligente">
+      <div class="flex items-center justify-between px-3 py-4">
+        <div><h3 class="font-display font-bold text-xl">Instalación de Hogar Inteligente</h3><div class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot text-ember mr-1"></i>La Laguna, Tenerife</div></div>
+        <span class="w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </div>
+    </article>
+    <article class="polaroid bg-white rounded-3xl p-3 tilt-r reveal">
+      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=900&auto=format&fit=crop" class="rounded-2xl h-72 w-full object-cover" alt="Instalación eléctrica comercial">
+      <div class="flex items-center justify-between px-3 py-4">
+        <div><h3 class="font-display font-bold text-xl">Instalación Eléctrica Comercial</h3><div class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot text-ember mr-1"></i>Santa Cruz, Tenerife</div></div>
+        <span class="w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </div>
+    </article>
+    <article class="polaroid bg-white rounded-3xl p-3 tilt-l reveal">
+      <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=900&auto=format&fit=crop" class="rounded-2xl h-72 w-full object-cover" alt="Sistema solar y eléctrico">
+      <div class="flex items-center justify-between px-3 py-4">
+        <div><h3 class="font-display font-bold text-xl">Sistema Solar + Eléctrico</h3><div class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot text-ember mr-1"></i>Puerto de la Cruz</div></div>
+        <span class="w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL ============ -->
+<section class="relative py-24 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?q=80&w=2000&auto=format&fit=crop')">
+  <div class="absolute inset-0 bg-ink/70"></div>
+  <div class="relative max-w-3xl mx-auto px-6">
+    <div class="bg-white rounded-3xl shadow-2xl p-9 reveal">
+      <div class="flex items-center justify-between mb-5">
+        <div class="flex -space-x-3">
+          <img class="w-11 h-11 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop" alt="">
+          <img class="w-11 h-11 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop" alt="">
+          <img class="w-11 h-11 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=120&auto=format&fit=crop" alt="">
+        </div>
+        <div class="text-right"><div class="font-semibold">2.4K Reseñas</div><div class="text-ember"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+      </div>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">“MegaSur recableó nuestra villa en Adeje e instaló un sistema completo de hogar inteligente. El equipo fue puntual, ordenado y se notaba que dominaban su oficio. Todo funciona a la perfección, y resolvieron cada duda por el camino.”</p>
+      <div><div class="font-bold">Laura Hernández</div><div class="text-sm text-gray-500">Propietaria · Adeje, Tenerife</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-14 items-start">
+  <div class="reveal">
+    <div class="text-ember font-semibold eyebrow text-sm uppercase mb-3">—— Empresa Eléctrica</div>
+    <h2 class="font-display font-bold text-4xl md:text-5xl leading-tight mb-5">Preguntas Frecuentes de Electricista en Tenerife</h2>
+    <p class="text-gray-500 mb-8 max-w-sm">Respuestas reales para propietarios y negocios de las Islas Canarias.</p>
+    <div class="bg-cream rounded-2xl p-5 flex items-center gap-4 max-w-sm">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-xl object-cover" alt="Atención al cliente">
+      <div><div class="font-semibold text-sm">Hola, soy Carlos de MegaSur.</div><div class="text-xs text-gray-500">¿Tienes alguna duda? Llámanos o escríbenos cuando quieras.</div></div>
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <div class="faq-item bg-cream rounded-full reveal" data-open>
+      <button class="faq-q w-full flex items-center justify-between gap-4 px-6 py-5 text-left"><span class="font-semibold">¿Cuánto cuesta una inspección eléctrica completa del hogar en Tenerife?</span><span class="faq-circ w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center flex-shrink-0 transition"><i class="fa-solid fa-arrow-right text-xs"></i></span></button>
+      <div class="faq-a px-6"><p class="pb-6 text-gray-600 leading-relaxed">Depende del tamaño de la vivienda y del alcance de la inspección. La mayoría de las inspecciones completas parten de una tarifa fija de desplazamiento, y siempre te damos un presupuesto claro y sin compromiso antes de empezar.</p></div>
+    </div>
+    <div class="faq-item bg-cream rounded-full reveal">
+      <button class="faq-q w-full flex items-center justify-between gap-4 px-6 py-5 text-left"><span class="font-semibold">¿Instaláis placas solares y sistemas de hogar inteligente?</span><span class="faq-circ w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center flex-shrink-0 transition"><i class="fa-solid fa-arrow-right text-xs"></i></span></button>
+      <div class="faq-a px-6"><p class="pb-6 text-gray-600 leading-relaxed">Sí. Diseñamos e instalamos sistemas solares y eléctricos completos, además de domótica integral: iluminación, climatización, seguridad y monitorización energética, a medida de tu vivienda.</p></div>
+    </div>
+    <div class="faq-item bg-cream rounded-full reveal">
+      <button class="faq-q w-full flex items-center justify-between gap-4 px-6 py-5 text-left"><span class="font-semibold">¿Estáis disponibles para urgencias por la noche?</span><span class="faq-circ w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center flex-shrink-0 transition"><i class="fa-solid fa-arrow-right text-xs"></i></span></button>
+      <div class="faq-a px-6"><p class="pb-6 text-gray-600 leading-relaxed">Por supuesto. Ofrecemos servicio de urgencias 24/7 en toda Tenerife, incluidas noches y fines de semana. Llámanos a cualquier hora y responderemos lo antes posible.</p></div>
+    </div>
+    <div class="faq-item bg-cream rounded-full reveal">
+      <button class="faq-q w-full flex items-center justify-between gap-4 px-6 py-5 text-left"><span class="font-semibold">¿Qué zonas de Tenerife cubrís?</span><span class="faq-circ w-9 h-9 rounded-full bg-ember text-white flex items-center justify-center flex-shrink-0 transition"><i class="fa-solid fa-arrow-right text-xs"></i></span></button>
+      <div class="faq-a px-6"><p class="pb-6 text-gray-600 leading-relaxed">Cubrimos toda la isla: Santa Cruz, La Laguna, Adeje, Arona, Puerto de la Cruz, Granadilla y todo lo que hay entre medias.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="bg-cream blueprint-bg py-24">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=900&auto=format&fit=crop" class="rounded-3xl w-full h-72 object-cover mb-8" alt="Electricista trabajando">
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="flex items-center gap-3"><span class="w-11 h-11 rounded-full bg-ember/15 text-ember flex items-center justify-center"><i class="fa-solid fa-phone"></i></span><div><div class="font-semibold">Llámanos</div><div class="text-sm text-gray-500">+34 600 000 000</div></div></div>
+        <div class="flex items-center gap-3"><span class="w-11 h-11 rounded-full bg-ember/15 text-ember flex items-center justify-center"><i class="fa-solid fa-envelope"></i></span><div><div class="font-semibold">Escríbenos</div><div class="text-sm text-gray-500">info@megasur.es</div></div></div>
+        <div class="flex items-center gap-3"><span class="w-11 h-11 rounded-full bg-ember/15 text-ember flex items-center justify-center"><i class="fa-solid fa-location-dot"></i></span><div><div class="font-semibold">Ubicación</div><div class="text-sm text-gray-500">Santa Cruz de Tenerife</div></div></div>
+        <div class="flex items-center gap-3"><span class="w-11 h-11 rounded-full bg-ember/15 text-ember flex items-center justify-center"><i class="fa-solid fa-clock"></i></span><div><div class="font-semibold">Horario</div><div class="text-sm text-gray-500">Lun–Vie 08:00–19:00 · Urgencias 24/7</div></div></div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="text-ember font-semibold eyebrow text-sm uppercase mb-3">—— Contacto</div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl leading-tight mb-4">¿Listo para dar Energía a tu Proyecto?</h2>
+      <p class="text-gray-600 mb-8">Rellena el formulario y nuestro equipo te responderá en menos de 2 horas.</p>
+      <form id="quoteForm" class="space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <input type="text" required placeholder="Nombre" class="w-full bg-white border border-gray-200 rounded-full px-6 py-4 focus:outline-none focus:border-ember transition">
+          <input type="email" required placeholder="Correo electrónico" class="w-full bg-white border border-gray-200 rounded-full px-6 py-4 focus:outline-none focus:border-ember transition">
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <input type="tel" required placeholder="Teléfono" class="w-full bg-white border border-gray-200 rounded-full px-6 py-4 focus:outline-none focus:border-ember transition">
+          <select class="w-full bg-white border border-gray-200 rounded-full px-6 py-4 text-gray-500 focus:outline-none focus:border-ember transition">
+            <option>Tu consulta sobre</option><option>Electricidad Residencial</option><option>Electricidad Comercial</option><option>Hogar Inteligente / Solar</option><option>Reparación de Urgencia</option>
+          </select>
+        </div>
+        <textarea rows="4" placeholder="Tu mensaje" class="w-full bg-white border border-gray-200 rounded-3xl px-6 py-4 focus:outline-none focus:border-ember transition"></textarea>
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <p class="text-xs text-gray-400">¡Estamos deseando saber de ti! Los campos obligatorios están marcados con *</p>
+          <button type="submit" class="btn-ghost-arrow">Enviar Ahora <span class="circ"><i class="fa-solid fa-arrow-right text-xs"></i></span></button>
+        </div>
+        <div id="formSuccess" class="hidden text-ember font-medium">✓ ¡Gracias! Te responderemos en menos de 2 horas.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section id="blog" class="max-w-7xl mx-auto px-6 py-24">
+  <div class="flex flex-col md:flex-row justify-between md:items-end gap-4 mb-12 reveal">
+    <div><div class="text-ember font-semibold eyebrow text-sm uppercase">—— Blog y Noticias</div><h2 class="font-display font-bold text-4xl md:text-5xl mt-2">Últimas Noticias y Artículos</h2></div>
+    <a href="#" class="btn-ghost-arrow">Ver Todas las Entradas <span class="circ"><i class="fa-solid fa-arrow-right text-xs"></i></span></a>
+  </div>
+  <div class="grid md:grid-cols-3 gap-6">
+    <article class="border border-gray-200 rounded-3xl overflow-hidden card-hover reveal">
+      <div class="relative"><img src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=700&auto=format&fit=crop" class="h-52 w-full object-cover" alt=""><span class="absolute bottom-3 right-3 bg-ink text-white text-xs px-3 py-1.5 rounded-full">12 MAY</span></div>
+      <div class="p-6"><h3 class="font-display font-bold text-lg mb-2">Mejoras de Hogar Inteligente para Villas Canarias</h3><p class="text-sm text-gray-500 mb-4">Cómo los propietarios en Tenerife reducen la factura de la luz con iluminación inteligente y domótica...</p><div class="flex items-center justify-between text-xs text-gray-400 border-t border-gray-100 pt-4"><span><i class="fa-solid fa-user text-ember mr-1"></i>Por MegaSur</span><span><i class="fa-regular fa-comment text-ember mr-1"></i>02 Comentarios</span></div></div>
+    </article>
+    <article class="border border-gray-200 rounded-3xl overflow-hidden card-hover reveal">
+      <div class="relative"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=700&auto=format&fit=crop" class="h-52 w-full object-cover" alt=""><span class="absolute bottom-3 right-3 bg-ink text-white text-xs px-3 py-1.5 rounded-full">28 ABR</span></div>
+      <div class="p-6"><h3 class="font-display font-bold text-lg mb-2">Por Qué la Energía Solar Tiene Sentido en Tenerife</h3><p class="text-sm text-gray-500 mb-4">Con más de 300 días de sol al año, combinar lo solar con tu instalación eléctrica se amortiza rápido...</p><div class="flex items-center justify-between text-xs text-gray-400 border-t border-gray-100 pt-4"><span><i class="fa-solid fa-user text-ember mr-1"></i>Por MegaSur</span><span><i class="fa-regular fa-comment text-ember mr-1"></i>04 Comentarios</span></div></div>
+    </article>
+    <article class="border border-gray-200 rounded-3xl overflow-hidden card-hover reveal">
+      <div class="relative"><img src="https://images.unsplash.com/photo-1565608438257-fac3c27beb36?q=80&w=700&auto=format&fit=crop" class="h-52 w-full object-cover" alt=""><span class="absolute bottom-3 right-3 bg-ink text-white text-xs px-3 py-1.5 rounded-full">09 ABR</span></div>
+      <div class="p-6"><h3 class="font-display font-bold text-lg mb-2">5 Señales de que tu Hogar Necesita una Inspección Eléctrica</h3><p class="text-sm text-gray-500 mb-4">Luces que parpadean, enchufes calientes, saltos del diferencial: cuándo llamar a un electricista...</p><div class="flex items-center justify-between text-xs text-gray-400 border-t border-gray-100 pt-4"><span><i class="fa-solid fa-user text-ember mr-1"></i>Por MegaSur</span><span><i class="fa-regular fa-comment text-ember mr-1"></i>01 Comentario</span></div></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ FOOTER (newsletter band + watermark) ============ -->
+<footer class="relative bg-inkDeep text-white/70 pt-20 pb-10 overflow-hidden">
+  <div class="footer-watermark">megasur</div>
+  <div class="relative max-w-7xl mx-auto px-6">
+    <!-- Newsletter -->
+    <div class="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-10 grid md:grid-cols-2 gap-6 items-center mb-16">
+      <div><h3 class="font-display font-bold text-2xl md:text-3xl text-white mb-2">Suscríbete a nuestra Newsletter</h3><p class="text-white/60 text-sm">Apúntate hoy y recibe los últimos consejos y ofertas eléctricas en Tenerife.</p></div>
+      <form id="newsForm" class="flex bg-white rounded-full p-1.5">
+        <input type="email" required placeholder="Introduce tu correo electrónico..." class="flex-1 bg-transparent text-ink px-5 focus:outline-none">
+        <button type="submit" class="btn-pill text-sm py-2.5 pl-5">Suscribirse <span class="circ"><i class="fa-solid fa-arrow-right text-xs"></i></span></button>
+      </form>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-x-2.5 mb-4"><div class="w-9 h-9 bg-gradient-to-br from-emberLt to-ember rounded-lg flex items-center justify-center"><i class="fa-solid fa-bolt text-white"></i></div><span class="font-display font-bold text-xl text-white">MegaSur SL</span></div>
+        <p class="text-sm text-white/60 mb-5">Soluciones eléctricas seguras, inteligentes y fiables para hogares y negocios de Tenerife desde 2018.</p>
+        <div class="flex gap-3"><a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-ember transition"><i class="fa-brands fa-facebook-f text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-ember transition"><i class="fa-brands fa-instagram text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-ember transition"><i class="fa-brands fa-whatsapp text-sm"></i></a></div>
+      </div>
+      <div><h4 class="text-white font-semibold mb-4">Servicios</h4><ul class="space-y-2 text-sm"><li><a href="#services" class="hover:text-ember transition">Residencial</a></li><li><a href="#services" class="hover:text-ember transition">Comercial</a></li><li><a href="#services" class="hover:text-ember transition">Hogar Inteligente</a></li><li><a href="#services" class="hover:text-ember transition">Urgencias 24/7</a></li></ul></div>
+      <div><h4 class="text-white font-semibold mb-4">Empresa</h4><ul class="space-y-2 text-sm"><li><a href="#about" class="hover:text-ember transition">Nosotros</a></li><li><a href="#team" class="hover:text-ember transition">Nuestro Equipo</a></li><li><a href="#projects" class="hover:text-ember transition">Proyectos</a></li><li><a href="#blog" class="hover:text-ember transition">Blog</a></li></ul></div>
+      <div><h4 class="text-white font-semibold mb-4">Contacto</h4><ul class="space-y-2 text-sm"><li><i class="fa-solid fa-phone text-ember mr-2"></i>+34 600 000 000</li><li><i class="fa-solid fa-envelope text-ember mr-2"></i>info@megasur.es</li><li><i class="fa-solid fa-location-dot text-ember mr-2"></i>Santa Cruz de Tenerife</li></ul></div>
+    </div>
+
+    <div class="border-t border-white/10 pt-6 text-center text-sm">© 2026 MegaSur SL. Todos los derechos reservados. • Tenerife, Islas Canarias</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('load', () => setTimeout(() => document.getElementById('loadingScreen')?.classList.add('hide'), 700));
+
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  const nav = document.getElementById('navbar');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll); onScroll();
+
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+  document.querySelector('.faq-item[data-open]')?.classList.add('open');
+
+  document.getElementById('quoteForm').addEventListener('submit', e => { e.preventDefault(); document.getElementById('formSuccess').classList.remove('hidden'); e.target.reset(); });
+  document.getElementById('newsForm').addEventListener('submit', e => { e.preventDefault(); e.target.reset(); alert('¡Gracias por suscribirte!'); });
+</script>
+</body>
+</html>

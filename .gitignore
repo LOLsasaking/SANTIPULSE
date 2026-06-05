@@ -1,0 +1,14 @@
+.vercel
+
+# secrets — never commit
+.env
+.env.local
+.env*.local
+
+# dependencies & build output
+node_modules/
+dist/
+
+# os / editor
+.DS_Store
+Thumbs.db

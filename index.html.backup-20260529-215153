@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Santipulse - Soluciones de IA fundadas en EE.UU., ahora expandiéndose a Tenerife. Chatbots inteligentes, automatización y sitios web premium para negocios locales." />
+<title>Santipulse | Soluciones de IA · De EE.UU. a Tenerife</title>
+
+<!-- Favicon SVG (logo pinwheel) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F172A'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: '#0F172A',
+          navyDeep: '#0A1020',
+          electric: '#60A5FA',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+          body: ['Inter', 'system-ui', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0F172A;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+
+  /* Fondo grid sutil */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(96,165,250,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(96,165,250,0.05) 1px, transparent 1px);
+    background-size: 70px 70px;
+  }
+
+  /* Logo hover */
+  .logo-hover {
+    transition: transform 0.7s ease, filter 0.7s ease;
+  }
+  .logo-hover:hover {
+    transform: rotate(45deg);
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.4));
+  }
+
+  /* Gradiente texto */
+  .text-gradient {
+    background: linear-gradient(135deg, #fff 0%, #93C5FD 60%, #60A5FA 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Botón premium */
+  .btn-primary {
+    background: linear-gradient(135deg, #60A5FA, #3B82F6);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(96,165,250,0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(96,165,250,0.45);
+  }
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  .btn-ghost:hover {
+    background: rgba(96,165,250,0.08);
+    border-color: rgba(96,165,250,0.5);
+  }
+
+  /* Tarjeta */
+  .card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.4s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(96,165,250,0.35);
+    box-shadow: 0 20px 50px rgba(96,165,250,0.12);
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Modal */
+  .modal-backdrop {
+    backdrop-filter: blur(8px);
+    background: rgba(10,16,32,0.85);
+  }
+  .modal-content {
+    background: linear-gradient(145deg, #0F172A, #1E293B);
+    border: 1px solid rgba(96,165,250,0.2);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.6);
+  }
+
+  /* Nav blur */
+  .nav-blur {
+    backdrop-filter: blur(20px);
+    background: rgba(15,23,42,0.78);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Loading screen */
+  #loadingScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #0F172A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #loadingScreen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .loader-logo {
+    width: 140px;
+    height: 140px;
+    animation: loaderPulse 1.6s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(96,165,250,0.5));
+  }
+  @keyframes loaderPulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+  .loader-bar {
+    margin-top: 32px;
+    width: 180px;
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .loader-bar::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, transparent, #60A5FA, transparent);
+    animation: loaderSlide 1.4s ease-in-out infinite;
+  }
+  @keyframes loaderSlide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(500%); }
+  }
+  .loader-text {
+    margin-top: 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Imagen logo (chrome 3D) en navbar/footer */
+  .logo-img {
+    transition: transform 0.5s ease, filter 0.5s ease;
+  }
+  .logo-img:hover {
+    transform: rotate(45deg);
+    filter: drop-shadow(0 0 12px rgba(96,165,250,0.6));
+  }
+
+  /* Vídeo logo animado en el hero (chroma-keyed) */
+  .hero-logo-video {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(96,165,250,0.35));
+    mix-blend-mode: screen; /* funde el negro del fondo del vídeo con el hero oscuro */
+  }
+  @media (min-width: 768px) {
+    .hero-logo-video {
+      width: 260px;
+      height: 260px;
+    }
+  }
+
+  /* Placeholder dashed */
+  .placeholder-box {
+    border: 1.5px dashed rgba(96,165,250,0.3);
+    background: rgba(96,165,250,0.03);
+  }
+
+  /* Bandera badge */
+  .flag-badge {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .no-scroll { overflow: hidden; }
+</style>
+</head>
+<body class="font-body">
+
+<!-- ============ LOADING SCREEN ============ -->
+<div id="loadingScreen" aria-hidden="true">
+  <img src="santilogo.png" alt="" class="loader-logo" />
+  <div class="loader-bar"></div>
+  <div class="loader-text">SANTIPULSE</div>
+</div>
+
+<!-- ============ LOGO SVG ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="santipulse-logo" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <polygon points="50,12 28,48 72,48"/>
+        <polygon points="88,50 52,28 52,72"/>
+        <polygon points="50,88 72,52 28,52"/>
+        <polygon points="12,50 48,72 48,28"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ NAVBAR ============ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-blur transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#inicio" class="flex items-center gap-3" aria-label="Santipulse inicio">
+      <img src="santilogo.png" alt="Santipulse" class="w-9 h-9 logo-img" />
+      <span class="font-display font-bold text-xl tracking-tight">SANTIPULSE</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <li><a href="#inicio" class="hover:text-electric transition">Inicio</a></li>
+      <li><a href="#servicios" class="hover:text-electric transition">Servicios</a></li>
+      <li><a href="#demos" class="hover:text-electric transition">Demos</a></li>
+      <li><a href="#proyectos" class="hover:text-electric transition">Proyectos</a></li>
+      <li><a href="#contacto" class="hover:text-electric transition">Contacto</a></li>
+    </ul>
+
+    <a href="#contacto" class="hidden md:inline-block btn-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold">
+      Hablemos
+    </a>
+
+    <button id="burger" class="md:hidden text-white p-2" aria-label="Abrir menú">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="md:hidden hidden bg-navy/95 border-t border-white/10">
+    <ul class="flex flex-col p-6 gap-4 text-base font-medium">
+      <li><a href="#inicio" class="block py-2">Inicio</a></li>
+      <li><a href="#servicios" class="block py-2">Servicios</a></li>
+      <li><a href="#demos" class="block py-2">Demos</a></li>
+      <li><a href="#proyectos" class="block py-2">Proyectos</a></li>
+      <li><a href="#contacto" class="block py-2">Contacto</a></li>
+      <li><a href="#contacto" class="btn-primary text-white px-5 py-3 rounded-full text-center font-semibold mt-2">Hablemos</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+  <div class="absolute inset-0 bg-grid opacity-60" aria-hidden="true"></div>
+
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-electric/15 rounded-full blur-3xl" aria-hidden="true"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+    <!-- Badge expansión -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full flag-badge text-xs md:text-sm text-white/70 mb-8 reveal">
+      <span>🇺🇸 Fundada en EE.UU.</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      <span>🇪🇸 Ahora en Tenerife</span>
+    </div>
+
+    <div class="flex justify-center mb-8 reveal">
+      <video
+        class="hero-logo-video"
+        autoplay
+        loop
+        muted
+        playsinline
+        aria-label="Logo animado de Santipulse"
+        poster="santilogo.png"
+      >
+        <source src="santipulse-logo.webm" type="video/webm" />
+      </video>
+    </div>
+
+    <p class="text-electric font-medium text-sm md:text-base tracking-widest uppercase mb-3 reveal">Santiago Goncalves</p>
+    <p class="text-white/70 text-sm md:text-base mb-6 reveal">Fundador y Desarrollador · SANTIPULSE</p>
+
+    <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 reveal">
+      <span class="text-gradient">Forjando el futuro</span><br/>
+      <span class="text-white">con IA</span>
+    </h1>
+
+    <p class="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-10 reveal">
+      Soluciones de inteligencia artificial nacidas en Estados Unidos, ahora ayudando a negocios locales en Tenerife a crecer con tecnología de primer nivel.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+      <a href="#servicios" class="btn-primary text-white px-8 py-4 rounded-full font-semibold text-base">
+        Explorar Servicios
+      </a>
+      <a href="#demos" class="btn-ghost text-white px-8 py-4 rounded-full font-semibold text-base">
+        Ver Demos
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ SOBRE SANTIPULSE ============ -->
+<section id="sobre" class="py-24 md:py-32 relative">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <p class="text-electric font-medium text-sm tracking-widest uppercase mb-3">Sobre Santipulse</p>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">
+        De Estados Unidos <span class="text-gradient">a Tenerife</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <div class="card rounded-2xl p-8 reveal">
+        <div class="text-4xl mb-4">🇺🇸</div>
+        <h3 class="font-display font-bold text-xl mb-3">Fundada en EE.UU.</h3>
+        <p class="text-white/70 leading-relaxed">
+          Santipulse nació en Estados Unidos como una agencia de soluciones de IA, ayudando a empresas a integrar chatbots, automatizaciones y experiencias web inteligentes en su día a día. Continuamos operando y sirviendo clientes allí.
+        </p>
+      </div>
+
+      <div class="card rounded-2xl p-8 reveal">
+        <div class="text-4xl mb-4">🇪🇸</div>
+        <h3 class="font-display font-bold text-xl mb-3">Expandiéndonos a Tenerife</h3>
+        <p class="text-white/70 leading-relaxed">
+          Ahora abrimos operaciones en las Islas Canarias para llevar esa misma calidad de soluciones de IA a los negocios locales de Tenerife — restaurantes, barberías, salones de uñas, tours y más.
+        </p>
+      </div>
+    </div>
+
+    <p class="text-center text-white/60 mt-12 max-w-2xl mx-auto reveal">
+      Soy <span class="text-white font-semibold">Santiago Goncalves</span>, fundador y desarrollador de Santipulse. Construyo tecnología seria con trato cercano: cada solución se piensa para resolver problemas reales y generar resultados medibles.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section id="servicios" class="py-24 md:py-32 relative">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <p class="text-electric font-medium text-sm tracking-widest uppercase mb-3">Servicios</p>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
+        Lo que <span class="text-gradient">ofrecemos</span>
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto">Tecnología de IA aplicada a problemas concretos de tu negocio.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      <!-- Chatbots -->
+      <article class="card rounded-2xl p-8 reveal">
+        <div class="w-14 h-14 rounded-xl bg-electric/10 flex items-center justify-center mb-6 text-electric">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-bold text-xl mb-3">Chatbots Inteligentes</h3>
+        <p class="text-white/60 text-sm mb-6 leading-relaxed">
+          Asistentes virtuales con IA que responden 24/7 a tus clientes. Preguntas frecuentes, información del negocio, recomendaciones y derivación a humano cuando hace falta.
+        </p>
+        <button onclick="openDemo('chatbot')" class="text-electric text-sm font-semibold hover:text-white transition flex items-center gap-2">
+          Ver demo del chatbot
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </article>
+
+      <!-- Sitios Web Inteligentes -->
+      <article class="card rounded-2xl p-8 reveal">
+        <div class="w-14 h-14 rounded-xl bg-electric/10 flex items-center justify-center mb-6 text-electric">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="2" y1="20" x2="22" y2="20"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-bold text-xl mb-3">Sitios Web Inteligentes</h3>
+        <p class="text-white/60 text-sm mb-6 leading-relaxed">
+          Webs modernas con <span class="text-electric font-medium">sistema de reservas integrado</span>. Tus clientes reservan online y tú ves cada cita al instante desde un panel. Plantillas premium por sector.
+        </p>
+        <button onclick="openDemo('websites')" class="text-electric text-sm font-semibold hover:text-white transition flex items-center gap-2">
+          Ver plantillas
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMOS ============ -->
+<section id="demos" class="py-24 md:py-32 relative bg-gradient-to-b from-transparent via-electric/5 to-transparent">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <p class="text-electric font-medium text-sm tracking-widest uppercase mb-3 reveal">Demos</p>
+    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 reveal">
+      Pruébalo <span class="text-gradient">en vivo</span>
+    </h2>
+    <p class="text-white/60 max-w-2xl mx-auto mb-12 reveal">
+      Haz clic en cualquier servicio para ver una demo real de lo que podemos hacer por tu negocio.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto reveal">
+      <button onclick="openDemo('chatbot')" class="card rounded-xl p-6 text-left">
+        <span class="text-3xl mb-3 block">💬</span>
+        <span class="block font-semibold">Chatbot Inteligente</span>
+        <span class="text-white/50 text-xs">Demo interactiva</span>
+      </button>
+      <button onclick="openDemo('websites')" class="card rounded-xl p-6 text-left">
+        <span class="text-3xl mb-3 block">🌐</span>
+        <span class="block font-semibold">Plantillas Web</span>
+        <span class="text-white/50 text-xs">4 sectores disponibles</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROYECTOS ============ -->
+<section id="proyectos" class="py-24 md:py-32 relative">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <p class="text-electric font-medium text-sm tracking-widest uppercase mb-3">Proyectos</p>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
+        Trabajos <span class="text-gradient">entregados</span>
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto">Proyectos reales construidos con Santipulse.</p>
+    </div>
+
+    <!-- Placeholder para 2 proyectos reales -->
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <article class="placeholder-box rounded-2xl p-12 text-center reveal">
+        <div class="w-14 h-14 rounded-xl bg-electric/10 mx-auto mb-4 flex items-center justify-center text-electric">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <p class="text-white/40 text-sm font-medium">Proyecto 1</p>
+        <p class="text-white/30 text-xs mt-2">Próximamente</p>
+      </article>
+
+      <article class="placeholder-box rounded-2xl p-12 text-center reveal">
+        <div class="w-14 h-14 rounded-xl bg-electric/10 mx-auto mb-4 flex items-center justify-center text-electric">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <p class="text-white/40 text-sm font-medium">Proyecto 2</p>
+        <p class="text-white/30 text-xs mt-2">Próximamente</p>
+      </article>
+    </div>
+
+    <p class="text-center text-white/40 text-xs mt-8 reveal">Estamos preparando el portafolio. Pronto verás aquí los casos completos.</p>
+  </div>
+</section>
+
+<!-- ============ POR QUÉ TENERIFE ============ -->
+<section class="py-24 md:py-32 relative">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <div class="text-5xl mb-6 reveal">🌋</div>
+    <p class="text-electric font-medium text-sm tracking-widest uppercase mb-3 reveal">Por qué Tenerife</p>
+    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 reveal">
+      Una isla con <span class="text-gradient">enorme potencial</span>
+    </h2>
+    <p class="text-white/70 text-lg leading-relaxed reveal">
+      Tenerife es un mercado vibrante: turismo internacional, gastronomía reconocida, servicios de proximidad y un ecosistema empresarial en crecimiento. Sin embargo, muchos negocios locales aún no han dado el salto a la IA. Por eso traemos aquí lo que ya funciona en Estados Unidos: tecnología seria, con trato cercano, adaptada a la realidad canaria.
+    </p>
+    <div class="flex flex-wrap justify-center gap-3 mt-10 reveal">
+      <span class="px-4 py-2 rounded-full border border-white/10 text-sm text-white/60">🏖️ Turismo</span>
+      <span class="px-4 py-2 rounded-full border border-white/10 text-sm text-white/60">🍽️ Restauración</span>
+      <span class="px-4 py-2 rounded-full border border-white/10 text-sm text-white/60">💈 Servicios locales</span>
+      <span class="px-4 py-2 rounded-full border border-white/10 text-sm text-white/60">🧭 Tours y experiencias</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section id="contacto" class="py-24 md:py-32 relative">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <p class="text-electric font-medium text-sm tracking-widest uppercase mb-3">Contacto</p>
+      <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
+        Hablemos de <span class="text-gradient">tu proyecto</span>
+      </h2>
+      <p class="text-white/60 max-w-xl mx-auto">Respondo en menos de 24 horas. Primera conversación sin compromiso.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Info -->
+      <div class="space-y-4 reveal">
+        <a href="tel:+34650257684" class="flex items-center gap-4 text-white/80 hover:text-electric transition card rounded-xl p-5">
+          <div class="w-12 h-12 rounded-lg bg-electric/10 flex items-center justify-center text-electric">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="text-xs text-white/40">Teléfono</div>
+            <div class="font-medium">+34 650 257 684</div>
+          </div>
+        </a>
+
+        <a href="mailto:santipulse@gmail.com" class="flex items-center gap-4 text-white/80 hover:text-electric transition card rounded-xl p-5">
+          <div class="w-12 h-12 rounded-lg bg-electric/10 flex items-center justify-center text-electric">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="text-xs text-white/40">Email</div>
+            <div class="font-medium">santipulse@gmail.com</div>
+          </div>
+        </a>
+
+        <div class="flex items-center gap-4 text-white/80 card rounded-xl p-5">
+          <div class="w-12 h-12 rounded-lg bg-electric/10 flex items-center justify-center text-electric">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="text-xs text-white/40">Ubicación</div>
+            <div class="font-medium">🇺🇸 Estados Unidos</div>
+            <div class="text-xs text-electric mt-0.5">Ahora también sirviendo en Tenerife 🇪🇸</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form id="contactForm" class="card rounded-2xl p-8 reveal space-y-4">
+        <div>
+          <label for="name" class="block text-sm text-white/70 mb-2">Nombre</label>
+          <input id="name" name="name" type="text" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-electric transition" placeholder="Tu nombre"/>
+        </div>
+        <div>
+          <label for="email" class="block text-sm text-white/70 mb-2">Email</label>
+          <input id="email" name="email" type="email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-electric transition" placeholder="tu@email.com"/>
+        </div>
+        <div>
+          <label for="message" class="block text-sm text-white/70 mb-2">Mensaje</label>
+          <textarea id="message" name="message" rows="4" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-electric transition" placeholder="Cuéntame qué necesitas..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary text-white w-full py-3.5 rounded-xl font-semibold">
+          Enviar mensaje
+        </button>
+        <div id="formSuccess" class="hidden text-center py-3 text-electric font-medium text-sm">
+          ✓ ¡Mensaje enviado! Te respondo en menos de 24 horas.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-white/10 py-10 mt-12">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-6 items-center">
+    <div class="flex items-center gap-3">
+      <img src="santilogo.png" alt="Santipulse" class="w-10 h-10 logo-img" />
+      <div>
+        <div class="font-display font-bold text-lg">SANTIPULSE</div>
+        <div class="text-white/40 text-xs">Forjando el futuro con IA</div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="https://wa.me/34650257684" aria-label="WhatsApp" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 text-sm text-white/70 hover:border-electric hover:text-electric transition">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4l-2.7-1.3a.6.6 0 00-.6.1l-1.2 1.2a8.6 8.6 0 01-4.4-4.4l1.2-1.2a.6.6 0 00.1-.6L8.6 5.5a.6.6 0 00-.7-.3l-2.5.6a.6.6 0 00-.4.6 12.2 12.2 0 0012 12 .6.6 0 00.6-.4l.6-2.5a.6.6 0 00-.3-.7zM12 2A10 10 0 002 12a9.9 9.9 0 001.4 5L2 22l5.1-1.4A10 10 0 1012 2z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <div class="text-center md:text-right text-white/40 text-xs">
+      © 2026 Santipulse · Todos los derechos reservados<br/>
+      🇺🇸 Estados Unidos · <span class="text-electric">Ahora también sirviendo en Tenerife 🇪🇸</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODALES ============ -->
+<div id="modalContainer"></div>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+// ===== Loading screen =====
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('loadingScreen');
+    if (loader) loader.classList.add('hide');
+  }, 900);
+});
+
+// ===== Reveal on scroll =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ===== Mobile menu =====
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+});
+
+// ===== Form =====
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('formSuccess').classList.remove('hidden');
+  e.target.reset();
+});
+
+// ===== MODALES =====
+const modalContainer = document.getElementById('modalContainer');
+
+function openModal(html) {
+  modalContainer.innerHTML = `
+    <div class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-backdrop" id="modalRoot" role="dialog" aria-modal="true">
+      <div class="modal-content rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative">
+        <button onclick="closeModal()" aria-label="Cerrar modal" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        ${html}
+      </div>
+    </div>
+  `;
+  document.body.classList.add('no-scroll');
+  document.getElementById('modalRoot').addEventListener('click', (e) => {
+    if (e.target.id === 'modalRoot') closeModal();
+  });
+}
+function closeModal() {
+  modalContainer.innerHTML = '';
+  document.body.classList.remove('no-scroll');
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+function openDemo(type) {
+  if (type === 'chatbot') openChatbotDemo();
+  else if (type === 'websites') openWebsitesDemo();
+}
+
+// ===== DEMO CHATBOT (placeholder hasta integración con Supabase) =====
+function openChatbotDemo() {
+  openModal(`
+    <div class="p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-electric to-blue-600 flex items-center justify-center text-2xl">💬</div>
+        <div>
+          <h3 class="font-display font-bold text-2xl">Chatbot Santipulse</h3>
+          <p class="text-white/50 text-sm">Demo interactiva</p>
+        </div>
+      </div>
+
+      <div id="chatMessages" class="bg-navy/50 rounded-2xl p-4 h-80 overflow-y-auto mb-4 space-y-3 border border-white/10"></div>
+
+      <form id="chatForm" class="flex gap-2">
+        <input id="chatInput" type="text" placeholder="Escribe tu mensaje..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-electric"/>
+        <button type="submit" class="btn-primary px-5 rounded-xl text-white font-semibold">Enviar</button>
+      </form>
+
+      <div class="mt-6 p-4 rounded-xl border border-electric/20 bg-electric/5 text-xs text-white/60">
+        🔧 <b class="text-electric">En desarrollo:</b> Este demo se conectará pronto a un chatbot real con IA, alimentado por Supabase. Mientras tanto, puedes probar la interfaz.
+      </div>
+    </div>
+  `);
+
+  const messages = document.getElementById('chatMessages');
+  const form = document.getElementById('chatForm');
+  const input = document.getElementById('chatInput');
+
+  function addMsg(text, isBot = false) {
+    const div = document.createElement('div');
+    div.className = `flex ${isBot ? 'justify-start' : 'justify-end'}`;
+    div.innerHTML = `
+      <div class="${isBot ? 'bg-electric/20 text-white' : 'bg-electric text-navy'} rounded-2xl px-4 py-3 max-w-[80%] text-sm leading-relaxed">
+        ${text}
+      </div>
+    `;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  setTimeout(() => {
+    addMsg('¡Hola! 👋 Soy el chatbot de Santipulse. Estoy en fase de prueba. Pronto podré responder con IA real conectada a Supabase. ¿Quieres saber más sobre nuestros servicios?', true);
+  }, 300);
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const txt = input.value.trim();
+    if (!txt) return;
+    addMsg(txt);
+    input.value = '';
+    setTimeout(() => {
+      addMsg('Gracias por tu mensaje. Esta es una demo previa — la versión final conectará con IA real para darte respuestas inteligentes. ¿Quieres que te avise cuando esté lista? Escríbenos a santipulse@gmail.com', true);
+    }, 700);
+  });
+}
+
+// ===== DEMO PLANTILLAS WEB =====
+function openWebsitesDemo() {
+  openModal(`
+    <div class="p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-electric to-blue-600 flex items-center justify-center text-2xl">🌐</div>
+        <div>
+          <h3 class="font-display font-bold text-2xl">Plantillas Web Premium</h3>
+          <p class="text-white/50 text-sm">Con sistema de reservas integrado</p>
+        </div>
+      </div>
+
+      <p class="text-white/70 text-sm mb-6 leading-relaxed">
+        Plantillas premium por sector con <span class="text-electric font-medium">reservas online en tiempo real</span>. Cuando un cliente reserva, tú lo ves al instante en el panel de administración.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <!-- Barberías -->
+        <a href="https://barber-templates.vercel.app" target="_blank" rel="noopener" class="card rounded-xl p-6 block group">
+          <div class="text-4xl mb-3">💈</div>
+          <h4 class="font-display font-bold text-lg mb-2">Barberías</h4>
+          <p class="text-white/50 text-xs mb-4">Galería de cortes, equipo, reservas online y panel para el barbero.</p>
+          <span class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-electric/10 text-electric border border-electric/20 group-hover:bg-electric group-hover:text-navy transition">
+            Ver demo en vivo
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </a>
+
+        <!-- Uñas -->
+        <a href="https://nail-templates.vercel.app" target="_blank" rel="noopener" class="card rounded-xl p-6 block group">
+          <div class="text-4xl mb-3">💅</div>
+          <h4 class="font-display font-bold text-lg mb-2">Salones de Uñas</h4>
+          <p class="text-white/50 text-xs mb-4">Portfolio visual, catálogo de servicios y reservas online integradas.</p>
+          <span class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-electric/10 text-electric border border-electric/20 group-hover:bg-electric group-hover:text-navy transition">
+            Ver demo en vivo
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </a>
+
+        <!-- Restaurantes -->
+        <a href="https://restaurant-templates-rosy.vercel.app" target="_blank" rel="noopener" class="card rounded-xl p-6 block group">
+          <div class="text-4xl mb-3">🍽️</div>
+          <h4 class="font-display font-bold text-lg mb-2">Restaurantes</h4>
+          <p class="text-white/50 text-xs mb-4">Hamburguesería y sushi bar con vídeo interactivo al hacer scroll y reservas online.</p>
+          <span class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-electric/10 text-electric border border-electric/20 group-hover:bg-electric group-hover:text-navy transition">
+            Ver demo en vivo
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </a>
+
+        <!-- Tours -->
+        <a href="https://tour-templates.vercel.app" target="_blank" rel="noopener" class="card rounded-xl p-6 block group">
+          <div class="text-4xl mb-3">🧭</div>
+          <h4 class="font-display font-bold text-lg mb-2">Tours y Experiencias</h4>
+          <p class="text-white/50 text-xs mb-4">Catálogo de experiencias y reserva de plazas online con aforo.</p>
+          <span class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-electric/10 text-electric border border-electric/20 group-hover:bg-electric group-hover:text-navy transition">
+            Ver demo en vivo
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </a>
+
+        <!-- Oficios -->
+        <a href="https://tenerife-oficios.vercel.app" target="_blank" rel="noopener" class="card rounded-xl p-6 block group md:col-span-2">
+          <div class="text-4xl mb-3">🔧</div>
+          <h4 class="font-display font-bold text-lg mb-2">Oficios — Fontanería, Electricidad y Construcción</h4>
+          <p class="text-white/50 text-xs mb-4">Webs para profesionales con formulario de presupuesto que llega directo al panel del negocio.</p>
+          <span class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-electric/10 text-electric border border-electric/20 group-hover:bg-electric group-hover:text-navy transition">
+            Ver demos en vivo
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <div class="mt-6 p-4 rounded-xl border border-electric/20 bg-electric/5 text-xs text-white/70 leading-relaxed">
+        <b class="text-electric">🎯 Reservas y presupuestos integrados:</b> En restaurantes, barberías, uñas y tours puedes hacer una reserva real. En los oficios, pides un presupuesto. En todos los casos, el negocio lo ve al instante en su panel de administración.
+      </div>
+    </div>
+  `);
+}
+</script>
+
+</body>
+</html>

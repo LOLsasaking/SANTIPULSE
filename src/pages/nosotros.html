@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="{{nosotros.metaDescription}}" />
+<title>{{nosotros.title}}</title>
+
+{{seo.canonical}}
+{{seo.hreflang}}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Santipulse" />
+<meta property="og:title" content="{{nosotros.title}}" />
+<meta property="og:description" content="{{nosotros.metaDescription}}" />
+<meta property="og:locale" content="{{meta.ogLocale}}" />
+<meta property="og:url" content="{{seo.ogUrl}}" />
+<meta name="twitter:card" content="summary" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script src="{{asset.prefix}}tw-config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Inter',sans-serif; background:#050505; color:#fff; }
+  .font-display{ font-family:'Archivo',sans-serif; }
+  .font-mono{ font-family:'Space Mono',monospace; }
+  .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.86; letter-spacing:-.02em; }
+  .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:14px; }
+  .eyebrow::before{ content:''; width:34px; height:1px; background:rgba(255,255,255,.5); }
+  .meta{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.42); }
+  .volver{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.8); text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition:color .3s; }
+  .volver:hover{ color:#fff; } .volver svg{ transition:transform .3s; } .volver:hover svg{ transform:translateX(-5px); }
+  .wordmark{ font-family:'Space Mono',monospace; font-size:13px; letter-spacing:.12em; color:rgba(255,255,255,.85); text-decoration:none; }
+  .topbar{ position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 30px; backdrop-filter:blur(14px); background:rgba(5,5,5,.55); }
+  .topbar-right{ display:flex; align-items:center; gap:16px; }
+  .stat-num{ font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(1.6rem,4vw,2.5rem); line-height:1; letter-spacing:-.02em; }
+  .lang-wrap{ position:relative; }
+  .lang-btn{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.8); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:9999px; padding:7px 12px; display:inline-flex; align-items:center; gap:7px; cursor:pointer; transition:border-color .25s; }
+  .lang-btn:hover{ border-color:rgba(255,255,255,.45); }
+  .lang-menu{ position:absolute; right:0; top:calc(100% + 8px); min-width:150px; background:rgba(11,11,13,.97); border:1px solid rgba(255,255,255,.12); border-radius:12px; overflow:hidden; backdrop-filter:blur(12px); z-index:60; }
+  .lang-menu a{ display:flex; align-items:center; gap:10px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,.85); text-decoration:none; transition:background .2s; }
+  .lang-menu a:hover, .lang-menu a[aria-current="true"]{ background:rgba(226,59,78,.16); color:#fff; }
+  .lang-menu.hidden{ display:none; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="volver" href="{{nav.home}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> {{common.volver}}</a>
+  <div class="topbar-right">
+    <a class="wordmark" href="{{nav.home}}">santipulse.com</a>
+    {{lang.switcher}}
+  </div>
+</div>
+
+<main class="pt-36 pb-28 px-6 md:px-10 max-w-3xl mx-auto">
+
+  <header class="mb-24">
+    <p class="eyebrow mb-6">{{nosotros.eyebrow}}</p>
+    <h1 class="headline text-5xl md:text-8xl mb-8">{{nosotros.titleA}}<br>{{nosotros.titleB}}</h1>
+    <p class="text-white/75 max-w-2xl text-lg md:text-xl leading-relaxed font-light">{{nosotros.intro}}</p>
+    <p class="meta mt-8">{{nosotros.badges}}</p>
+  </header>
+
+  <section class="grid grid-cols-3 border-y border-white/10 mb-24">
+    <div class="py-8 pr-4">
+      <div class="stat-num mb-3">{{nosotros.stat1Num}}</div>
+      <p class="meta">{{nosotros.stat1Label}}</p>
+    </div>
+    <div class="py-8 px-4 border-l border-white/10">
+      <div class="stat-num mb-3">{{nosotros.stat2Num}}</div>
+      <p class="meta">{{nosotros.stat2Label}}</p>
+    </div>
+    <div class="py-8 pl-4 border-l border-white/10">
+      <div class="stat-num mb-3">{{nosotros.stat3Num}}</div>
+      <p class="meta">{{nosotros.stat3Label}}</p>
+    </div>
+  </section>
+
+  <section class="mb-24">
+    <p class="eyebrow mb-8">{{nosotros.missionEyebrow}}</p>
+    <h2 class="headline text-3xl md:text-5xl mb-10">{{nosotros.missionTitleA}}<br>{{nosotros.missionTitleB}}</h2>
+    <div class="space-y-6 max-w-2xl">
+      <p class="text-white/70 leading-relaxed font-light text-lg">{{nosotros.missionP1}}</p>
+      <p class="text-white/70 leading-relaxed font-light text-lg">{{nosotros.missionP2}}</p>
+    </div>
+  </section>
+
+  <section class="mb-24">
+    <p class="eyebrow mb-10">{{nosotros.believeEyebrow}}</p>
+    <div class="divide-y divide-white/10 border-t border-white/10">
+      <div class="grid md:grid-cols-[3rem_1fr] gap-x-8 gap-y-2 py-8">
+        <span class="meta pt-1">01</span>
+        <div>
+          <h3 class="text-xl font-medium mb-2">{{nosotros.believe1Title}}</h3>
+          <p class="text-white/55 leading-relaxed font-light max-w-xl">{{nosotros.believe1Body}}</p>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-[3rem_1fr] gap-x-8 gap-y-2 py-8">
+        <span class="meta pt-1">02</span>
+        <div>
+          <h3 class="text-xl font-medium mb-2">{{nosotros.believe2Title}}</h3>
+          <p class="text-white/55 leading-relaxed font-light max-w-xl">{{nosotros.believe2Body}}</p>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-[3rem_1fr] gap-x-8 gap-y-2 py-8">
+        <span class="meta pt-1">03</span>
+        <div>
+          <h3 class="text-xl font-medium mb-2">{{nosotros.believe3Title}}</h3>
+          <p class="text-white/55 leading-relaxed font-light max-w-xl">{{nosotros.believe3Body}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-24">
+    <p class="eyebrow mb-10">{{nosotros.doEyebrow}}</p>
+    <div class="divide-y divide-white/10 border-t border-white/10">
+      <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 py-7">
+        <h4 class="text-lg font-medium">{{nosotros.do1Title}}</h4>
+        <p class="text-white/50 font-light md:text-right md:max-w-sm">{{nosotros.do1Body}}</p>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 py-7">
+        <h4 class="text-lg font-medium">{{nosotros.do2Title}}</h4>
+        <p class="text-white/50 font-light md:text-right md:max-w-sm">{{nosotros.do2Body}}</p>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 py-7">
+        <h4 class="text-lg font-medium">{{nosotros.do3Title}}</h4>
+        <p class="text-white/50 font-light md:text-right md:max-w-sm">{{nosotros.do3Body}}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="flex flex-col sm:flex-row gap-4">
+    <a href="{{nav.contratar}}" class="inline-flex items-center gap-3 font-mono font-bold tracking-[0.2em] uppercase text-sm bg-white text-ink px-6 py-3.5 rounded-full hover:bg-white/90 transition">
+      {{nosotros.ctaPrimary}} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <a href="{{nav.demos}}" class="inline-flex items-center gap-3 font-mono font-bold tracking-[0.2em] uppercase text-sm border border-white/25 px-6 py-3.5 rounded-full hover:border-white transition">
+      {{nosotros.ctaSecondary}}
+    </a>
+  </section>
+</main>
+
+<footer class="border-t border-white/10 py-10 px-6 md:px-10">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-4 justify-between items-center">
+    <a class="wordmark" href="{{nav.home}}">santipulse.com</a>
+    <span class="meta">{{nosotros.footer}}</span>
+  </div>
+</footer>
+
+<script src="{{asset.prefix}}lang.js" defer></script>
+</body>
+</html>
