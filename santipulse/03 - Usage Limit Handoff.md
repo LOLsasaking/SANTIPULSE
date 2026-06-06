@@ -19,6 +19,9 @@ If Codex hits a usage limit, resume from this project only:
   - Gestor de Ads
 - Added Stripe plan helper at `backend/pulse/stripe-plans.js`.
 - Redirected Stripe success to `/bienvenida/`.
+- Public `/precios/` buttons open Stripe Checkout even if the visitor is not
+  logged in. Logged-in dashboard checkout still attaches `user_id`; public
+  checkout lands on `/bienvenida/` and tells the buyer to use the same email.
 - Added `/bienvenida/` and `/privacidad/`.
 - Added GDPR checkbox and server-side consent enforcement.
 - Added homepage voice widget placeholder.

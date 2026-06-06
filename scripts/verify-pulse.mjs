@@ -92,6 +92,9 @@ const receptionistApi = readFileSync(join(ROOT, 'backend/receptionist/dashboard.
 const adCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/ad-checkout.js'), 'utf8');
 const pulseModulesApi = readFileSync(join(ROOT, 'backend/pulse/modules.js'), 'utf8');
 const dashboardRunApi = readFileSync(join(ROOT, 'backend/dashboard/run.js'), 'utf8');
+const stripeCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/checkout.js'), 'utf8');
+const pricingJs = readFileSync(join(ROOT, 'src/precios.js'), 'utf8');
+const spanishI18n = readFileSync(join(ROOT, 'src/i18n/es.json'), 'utf8');
 
 if (!dashboardHtml.includes('Automatizar ahora')) fail('dashboard must use easy automation copy');
 if (!pulseModulesJs.includes('/api/stripe/ad-checkout')) fail('ads panel must use one-off ad checkout');
@@ -116,6 +119,18 @@ if (!pulseModulesApi.includes('upsertAssistant') || !pulseModulesApi.includes('q
 }
 if (!dashboardRunApi.includes('await runPulseModule')) {
   fail('/api/dashboard/run must await real Pulse module actions');
+}
+if (!stripeCheckoutApi.includes('getUser') || stripeCheckoutApi.includes('requireUser')) {
+  fail('public pricing checkout must not require a logged-in dashboard session');
+}
+if (!stripeCheckoutApi.includes('public_checkout') || !stripeCheckoutApi.includes('/precios/?payment=cancelled')) {
+  fail('public pricing checkout must use public onboarding/cancel URLs');
+}
+if (!pricingJs.includes("fetch('/api/stripe/checkout'") || pricingJs.includes('loginHref(')) {
+  fail('/precios/ buttons must open Stripe publicly instead of forcing login first');
+}
+if (!spanishI18n.includes('mismo email')) {
+  fail('/bienvenida/ must explain same-email onboarding after public Stripe checkout');
 }
 
 const distPages = [

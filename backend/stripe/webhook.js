@@ -52,9 +52,9 @@ export default async function handler(req, res) {
       case 'checkout.session.completed': {
         const session = event.data.object;
         const userId = session.client_reference_id || session.metadata?.user_id;
-        if (!userId) { console.error('[webhook] no user_id on session'); break; }
 
         if (session.mode === 'payment' && session.metadata?.kind === 'ad_launch') {
+          if (!userId) { console.error('[webhook] no user_id on ad launch session'); break; }
           const inputParams = {
             platform: session.metadata.platform || 'meta',
             post_id: session.metadata.post_id || null,
@@ -95,6 +95,11 @@ export default async function handler(req, res) {
         }
 
         if (session.mode !== 'subscription') break;
+        if (!userId) {
+          // Public pricing checkout: Stripe collected payment/email. The buyer
+          // lands on /bienvenida/ to create or log into their dashboard.
+          break;
+        }
 
         const subscription = await stripe.subscriptions.retrieve(session.subscription);
         const priceId = subscription.items.data[0]?.price?.id;
