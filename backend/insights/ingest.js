@@ -17,9 +17,9 @@
    GET (Bearer CRON_SECRET) → list active insights_config rows, so the
    heavy job knows which users/niches to collect for.
    ============================================================ */
-import { admin } from '../_lib/auth.js';
-import { parseBody } from '../_lib/http.js';
-import { storeTrends } from '../_lib/insights.js';
+import { admin } from '../lib/auth.js';
+import { parseBody } from '../lib/http.js';
+import { storeTrends } from '../lib/insights.js';
 
 function authorized(req) {
   const secret = process.env.CRON_SECRET;

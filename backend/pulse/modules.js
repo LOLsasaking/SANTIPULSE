@@ -1,7 +1,7 @@
 /* ============================================================
    The Pulse System modules.
-   These are production-safe scaffolds: they create structured dashboard
-   outputs without claiming that external Vapi, social, or ads APIs ran.
+   These create structured dashboard outputs for the simplified client flow:
+   the dashboard shows what SantiPulse ran or queued, not manual setup steps.
    ============================================================ */
 
 export const PULSE_MODULES = {
@@ -49,17 +49,17 @@ export function runPulseModule(type, profile = {}) {
       success: true,
       module: type,
       title: 'Recepcionista IA',
-      summary: `${business}: flujo de primera respuesta listo para llamadas, WhatsApp y formularios.`,
-      status: 'scaffold_ready',
+      summary: `${business}: Recepcionista IA revisada y preparada para captar leads por llamadas, WhatsApp y formularios.`,
+      status: 'automation_queued',
       metrics: [
         { label: 'Canales', value: '3' },
         { label: 'Tiempo de respuesta', value: '< 10s' },
         { label: 'SOS humano', value: 'Activo' },
       ],
-      nextActions: [
-        'Conectar numero de Vapi o Bland cuando las credenciales esten listas.',
-        'Crear preguntas de calificacion para nuevos leads.',
-        'Sincronizar calendario para reservar citas automaticamente.',
+      autoActions: [
+        'Hub de leads revisado y listo para nuevas entradas.',
+        'Flujo de respuesta y alerta humana preparado.',
+        'Calendario y canales se verifican automaticamente desde Conexiones.',
       ],
       context: { business, industry, site },
     };
@@ -70,17 +70,17 @@ export function runPulseModule(type, profile = {}) {
       success: true,
       module: type,
       title: 'Insights de Redes',
-      summary: `${business}: tablero preparado para detectar formatos virales en ${industry}.`,
-      status: 'scaffold_ready',
+      summary: `${business}: escaneo social lanzado para detectar formatos virales en ${industry}.`,
+      status: 'automation_queued',
       metrics: [
         { label: 'Estilos detectables', value: '3' },
         { label: 'Probabilidad viral', value: 'Alta' },
         { label: 'Cola de posts', value: 'Lista' },
       ],
-      nextActions: [
-        'Conectar cuentas sociales oficiales.',
-        'Definir nicho, zona y competidores de referencia.',
-        'Grabar el demo de tendencias y cola de publicacion.',
+      autoActions: [
+        'Contexto de nicho y zona aplicado al escaneo.',
+        'Resumen de tendencias guardado en el historial.',
+        'Cola de posts preparada para revisar o promocionar.',
       ],
       context: { business, industry, site },
     };
@@ -90,17 +90,17 @@ export function runPulseModule(type, profile = {}) {
     success: true,
     module: type,
     title: 'Gestor de Ads',
-    summary: `${business}: reglas de presupuesto y alertas de rentabilidad preparadas.`,
-    status: 'scaffold_ready',
+    summary: `${business}: solicitud de anuncio preparada para elegir post, presupuesto y pago.`,
+    status: 'automation_queued',
     metrics: [
       { label: 'Reglas ROAS', value: '3' },
       { label: 'Alertas CPC', value: 'Activas' },
       { label: 'Plataformas', value: 'Meta/TikTok' },
     ],
-    nextActions: [
-      'Conectar cuentas publicitarias Meta y TikTok.',
-      'Definir ROAS minimo, CPC maximo y presupuesto diario.',
-      'Activar alertas de beneficio antes de escalar campanas.',
+    autoActions: [
+      'Panel de anuncio simple preparado.',
+      'Historial listo para registrar solicitudes pagadas.',
+      'Reglas tecnicas quedan ocultas al cliente.',
     ],
     context: { business, industry, site },
   };

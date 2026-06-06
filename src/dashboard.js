@@ -180,12 +180,12 @@
         return stat(m.label || 'Dato', esc(m.value || '—'), '#7fe0a3');
       }).join('') + '</div>';
     }
-    html += '<p class="muted" style="font-size:13px;line-height:1.6;margin:0 0 12px">' + esc(result.summary || 'Modulo Pulse preparado.') + '</p>';
+    html += '<p class="muted" style="font-size:13px;line-height:1.6;margin:0 0 12px">' + esc(result.summary || 'Módulo Pulse ejecutado.') + '</p>';
 
-    var actions = result.nextActions || [];
+    var actions = result.autoActions || result.nextActions || [];
     if (actions.length) {
       html += '<div class="res-row" style="align-items:flex-start;display:block">' +
-        '<span class="pill raise">Siguientes pasos</span>' +
+        '<span class="pill raise">Acciones automáticas</span>' +
         '<ul style="margin:12px 0 0 18px;color:rgba(255,255,255,.72);font-size:13px;line-height:1.7">' +
         actions.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') +
         '</ul></div>';

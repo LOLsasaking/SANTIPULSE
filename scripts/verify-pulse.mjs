@@ -27,9 +27,13 @@ function walk(dir, out = []) {
 
 assertFile('api/[...route].js');
 assertFile('README.md');
+assertFile('backend/handlers/router.js');
+assertFile('backend/lib/auth.js');
+assertFile('backend/lib/db.js');
 assertFile('backend/pulse/modules.js');
 assertFile('backend/pulse/stripe-plans.js');
 assertFile('backend/dashboard/run.js');
+assertFile('backend/stripe/ad-checkout.js');
 assertFile('backend-archive/api/demo/price-monitor.js');
 assertFile('backend-archive/api/demo/lead-scraper.js');
 assertFile('src/pages/bienvenida.html');
@@ -40,6 +44,17 @@ assertFile('santipulse/03 - Usage Limit Handoff.md');
 const apiFiles = walk('api').filter((file) => file.endsWith('.js'));
 if (apiFiles.length !== 1 || apiFiles[0] !== 'api/[...route].js') {
   fail(`api function count expected 1 catch-all, found: ${apiFiles.join(', ')}`);
+}
+
+const apiHandler = readFileSync(join(ROOT, 'api/[...route].js'), 'utf8');
+if (!apiHandler.includes("backend/handlers/router.js")) {
+  fail('api catch-all must delegate to backend/handlers/router.js');
+}
+if (apiHandler.includes('new Map([') || apiHandler.includes('hydrateBody(')) {
+  fail('api catch-all should stay a thin Vercel adapter, not own the route map/body parsing');
+}
+if (existsSync(join(ROOT, 'backend/_lib'))) {
+  fail('backend/_lib should be backend/lib in the production architecture');
 }
 
 const activeFiles = [

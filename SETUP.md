@@ -66,8 +66,8 @@ the API locally use `vercel dev`, or test handlers directly (as done during the 
 
 ## 7. Deploy notes (already handled in code)
 
-- **Playwright on Vercel**: auto-switches to `@sparticuz/chromium` + `playwright-core` when
-  `process.env.VERCEL` is set (see `api/_lib/browser.js`). No manual edit needed.
+- **Playwright on Vercel**: auto-switches to Vercel-safe dependencies when
+  `process.env.VERCEL` is set. No manual edit needed.
 - **CSP**: `vercel.json` already allows `*.supabase.co`, `js.stripe.com`, `api.stripe.com`.
 - **Webhook raw body**: `api/stripe/webhook.js` disables the body parser (required for
   signature verification).

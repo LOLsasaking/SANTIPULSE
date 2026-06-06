@@ -2,8 +2,8 @@
    Google redirects the BROWSER here after consent. Identity comes from the
    single-use, user-bound `state` nonce. We verify+consume it, exchange the code,
    persist the refresh token, then bounce back to the dashboard. */
-import { isConfigured, exchangeCode, saveConnection } from '../../_lib/calendar.js';
-import { consumeOAuthState } from '../../_lib/automations.js';
+import { isConfigured, exchangeCode, saveConnection } from '../../lib/calendar.js';
+import { consumeOAuthState } from '../../lib/automations.js';
 
 function bounce(res, ok, reason) {
   const q = ok ? 'calendar=connected' : `calendar=error&reason=${encodeURIComponent(reason || 'failed')}`;

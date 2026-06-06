@@ -6,7 +6,7 @@
    messages, bookings, and the human-SOS alert path.
 
    All writes use admin() (service_role); every query is scoped by
-   user_id in code. Mirrors backend/_lib/automations.js conventions.
+   user_id in code. Mirrors backend/lib/automations.js conventions.
    ============================================================ */
 import { admin } from './auth.js';
 import { sendText as waSendText } from './whatsapp.js';

@@ -7,13 +7,13 @@
    Trends are read sorted by viral_score (best first). Publishing of
    queued posts is done by the cron worker via the Meta Graph.
    ============================================================ */
-import { requireUser } from '../_lib/auth.js';
-import { getProfile, hasActiveSubscription } from '../_lib/profile.js';
-import { parseBody } from '../_lib/http.js';
-import * as social from '../_lib/socialMedia.js';
+import { requireUser } from '../lib/auth.js';
+import { getProfile, hasActiveSubscription } from '../lib/profile.js';
+import { parseBody } from '../lib/http.js';
+import * as social from '../lib/socialMedia.js';
 import {
   getConfig, saveConfig, listTrends, listQueue, queuePost, updateQueuePost,
-} from '../_lib/insights.js';
+} from '../lib/insights.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

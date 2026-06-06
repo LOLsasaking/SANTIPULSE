@@ -1,6 +1,6 @@
 /* GET /api/dashboard/runs — the user's automation run history. */
-import { requireUser } from '../_lib/auth.js';
-import { getUserJobs } from '../_lib/profile.js';
+import { requireUser } from '../lib/auth.js';
+import { getUserJobs } from '../lib/profile.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

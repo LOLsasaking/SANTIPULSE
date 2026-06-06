@@ -9,14 +9,14 @@
    Public endpoint (Meta calls it). GET is gated by WHATSAPP_VERIFY_TOKEN;
    POST resolves the owning user from the WABA phone_number_id.
    ============================================================ */
-import { getProfile } from '../_lib/profile.js';
+import { getProfile } from '../lib/profile.js';
 import {
   isConfigured, verifyChallenge, parseInbound, ownerByPhoneId, sendText,
-} from '../_lib/whatsapp.js';
+} from '../lib/whatsapp.js';
 import {
   upsertLead, insertMessage, raiseSos, shouldEscalate, getConfig,
-} from '../_lib/receptionist.js';
-import { parseBody } from '../_lib/http.js';
+} from '../lib/receptionist.js';
+import { parseBody } from '../lib/http.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

@@ -20,8 +20,10 @@ Legacy demos such as Price Monitor and Lead Scraper are archived under
 - `src/pages/`: public Spanish-first page templates.
 - `src/app/`: login and admin dashboard templates.
 - `src/*.js`: browser controllers copied into `dist/`.
-- `api/[...route].js`: the consolidated Vercel API function.
-- `backend/`: active server logic, integrations, modules, Stripe, auth, and cron.
+- `api/[...route].js`: the consolidated Vercel API adapter.
+- `backend/handlers/`: route map and request hydration for the catch-all API.
+- `backend/lib/`: shared server utilities for auth, data, products, providers, and HTTP.
+- `backend/`: active package handlers for integrations, modules, Stripe, auth, and cron.
 - `backend/pulse/stripe-plans.js`: Stripe plan map using environment-backed price IDs.
 - `supabase/`: setup SQL for leads, profiles, subscriptions, and Pulse module tables.
 - `scripts/build.mjs`: static build, i18n injection, SEO/social tags, app config, and assets.

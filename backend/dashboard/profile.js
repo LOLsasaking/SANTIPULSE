@@ -1,7 +1,7 @@
 /* GET/POST /api/dashboard/profile — read or update the business profile. */
-import { requireUser } from '../_lib/auth.js';
-import { getProfile, saveProfile } from '../_lib/profile.js';
-import { parseBody } from '../_lib/http.js';
+import { requireUser } from '../lib/auth.js';
+import { getProfile, saveProfile } from '../lib/profile.js';
+import { parseBody } from '../lib/http.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

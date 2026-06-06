@@ -9,15 +9,15 @@
    Status block tells the frontend which providers are configured so it
    can show Connect / Activate states (never exposes a token).
    ============================================================ */
-import { requireUser } from '../_lib/auth.js';
-import { getProfile, hasActiveSubscription } from '../_lib/profile.js';
-import { parseBody } from '../_lib/http.js';
-import * as vapi from '../_lib/vapi.js';
-import * as wa from '../_lib/whatsapp.js';
-import * as cal from '../_lib/calendar.js';
+import { requireUser } from '../lib/auth.js';
+import { getProfile, hasActiveSubscription } from '../lib/profile.js';
+import { parseBody } from '../lib/http.js';
+import * as vapi from '../lib/vapi.js';
+import * as wa from '../lib/whatsapp.js';
+import * as cal from '../lib/calendar.js';
 import {
   getConfig, saveConfig, listLeads, listCalls, listMessages, listBookings, listSos,
-} from '../_lib/receptionist.js';
+} from '../lib/receptionist.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -49,6 +49,14 @@ export default async function handler(req, res) {
   const action = body.action || 'save_config';
 
   if (action === 'save_config') {
+    const validation = validateReceptionistConfig(body);
+    if (!validation.ok) {
+      return res.status(400).json({
+        error: 'missing_required_config',
+        fields: validation.fields,
+        message: validation.message,
+      });
+    }
     const saved = await saveConfig(user.id, body);
     if (!saved) return res.status(500).json({ error: 'save_failed' });
     return res.status(200).json({ ok: true, config: saved });
@@ -57,6 +65,14 @@ export default async function handler(req, res) {
   if (action === 'provision_assistant') {
     if (!vapi.isConfigured()) return res.status(503).json({ error: 'integration_not_configured' });
     const config = await getConfig(user.id);
+    const validation = validateReceptionistConfig({ ...config, ...body });
+    if (!validation.ok) {
+      return res.status(400).json({
+        error: 'missing_required_config',
+        fields: validation.fields,
+        message: validation.message,
+      });
+    }
     try {
       const assistantId = await vapi.upsertAssistant({
         assistantId: config?.vapi_assistant_id || null,
@@ -91,4 +107,23 @@ export default async function handler(req, res) {
   }
 
   return res.status(400).json({ error: 'unknown_action' });
+}
+
+function validateReceptionistConfig(body = {}) {
+  const fields = [];
+  const phone = String(body.phone_number || '').trim();
+  const whatsappPhoneId = String(body.whatsapp_phone_id || '').trim();
+  const sosEmail = String(body.sos_email || '').trim();
+
+  if (!/^\+[1-9][0-9]{7,15}$/.test(phone)) fields.push('phone_number');
+  if (!whatsappPhoneId) fields.push('whatsapp_phone_id');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sosEmail)) fields.push('sos_email');
+
+  return {
+    ok: fields.length === 0,
+    fields,
+    message: fields.length
+      ? 'Completa el telefono, el numero de WhatsApp y el email SOS antes de guardar.'
+      : 'ok',
+  };
 }

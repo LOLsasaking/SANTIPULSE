@@ -1,6 +1,6 @@
 /* GET /api/dashboard/me — current user + profile + subscription state. */
-import { requireUser } from '../_lib/auth.js';
-import { getProfile, hasActiveSubscription } from '../_lib/profile.js';
+import { requireUser } from '../lib/auth.js';
+import { getProfile, hasActiveSubscription } from '../lib/profile.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

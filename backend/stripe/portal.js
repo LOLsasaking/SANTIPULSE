@@ -1,7 +1,7 @@
 /* POST /api/stripe/portal — open the Stripe Customer Portal. Auth required.
    Returns { url } to redirect the user to manage/cancel their subscription. */
-import { requireUser } from '../_lib/auth.js';
-import { getStripe, getProfileByUserId } from '../_lib/stripe.js';
+import { requireUser } from '../lib/auth.js';
+import { getStripe, getProfileByUserId } from '../lib/stripe.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

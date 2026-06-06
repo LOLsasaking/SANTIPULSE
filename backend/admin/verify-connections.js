@@ -9,7 +9,7 @@
 
    Auth: requires a logged-in admin (Supabase bearer token).
    ============================================================ */
-import { requireUser } from '../_lib/auth.js';
+import { requireUser } from '../lib/auth.js';
 
 const TIMEOUT_MS = 8000;
 

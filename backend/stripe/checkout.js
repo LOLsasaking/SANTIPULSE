@@ -1,9 +1,9 @@
 /* POST /api/stripe/checkout — create a Stripe Checkout session for a plan.
    Auth required. Body: { plan: "starter"|"pro"|"agency" }. Returns { url }. */
-import { requireUser } from '../_lib/auth.js';
-import { getStripe, getProfileByUserId } from '../_lib/stripe.js';
-import { normalizePlanKey, priceIdFor, PLANS } from '../_lib/products.js';
-import { parseBody } from '../_lib/http.js';
+import { requireUser } from '../lib/auth.js';
+import { getStripe, getProfileByUserId } from '../lib/stripe.js';
+import { normalizePlanKey, priceIdFor, PLANS } from '../lib/products.js';
+import { parseBody } from '../lib/http.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

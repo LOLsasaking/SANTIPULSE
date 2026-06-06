@@ -2,9 +2,9 @@
    TikTok redirects the browser here after portal auth. We exchange the auth_code
    for an access token + advertiser ids, discover the accounts, store them, then
    bounce to the dashboard. */
-import { consumeOAuthState } from '../../_lib/automations.js';
-import { tiktokConfigured, tiktokExchangeCode, tiktokDiscoverAccounts } from '../../_lib/adsProviders.js';
-import { saveAccounts } from '../../_lib/ads.js';
+import { consumeOAuthState } from '../../lib/automations.js';
+import { tiktokConfigured, tiktokExchangeCode, tiktokDiscoverAccounts } from '../../lib/adsProviders.js';
+import { saveAccounts } from '../../lib/ads.js';
 
 function bounce(res, ok, reason) {
   const q = ok ? 'ads=connected' : `ads=error&reason=${encodeURIComponent(reason || 'failed')}`;

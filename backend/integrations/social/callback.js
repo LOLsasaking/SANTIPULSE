@@ -2,8 +2,8 @@
    Facebook redirects the browser here after login. Identity comes from the
    user-bound `state` nonce. We exchange for a long-lived token, discover the
    user's Pages + linked IG accounts, persist them, then bounce to the dashboard. */
-import { isConfigured, exchangeCode, discoverAccounts, saveAccounts } from '../../_lib/socialMedia.js';
-import { consumeOAuthState } from '../../_lib/automations.js';
+import { isConfigured, exchangeCode, discoverAccounts, saveAccounts } from '../../lib/socialMedia.js';
+import { consumeOAuthState } from '../../lib/automations.js';
 
 function bounce(res, ok, reason, count) {
   const q = ok

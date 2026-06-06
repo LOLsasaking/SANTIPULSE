@@ -1,8 +1,8 @@
 /* GET /api/integrations/social/authorize
    Auth required. Creates a CSRF state, then 302-redirects to Facebook Login. */
-import { requireUser } from '../../_lib/auth.js';
-import { isConfigured, buildAuthUrl } from '../../_lib/socialMedia.js';
-import { createOAuthState } from '../../_lib/automations.js';
+import { requireUser } from '../../lib/auth.js';
+import { isConfigured, buildAuthUrl } from '../../lib/socialMedia.js';
+import { createOAuthState } from '../../lib/automations.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

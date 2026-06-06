@@ -11,11 +11,11 @@
 
    Public endpoint (Vapi calls it), so auth is the shared secret only.
    ============================================================ */
-import { admin } from '../_lib/auth.js';
-import { getProfile } from '../_lib/profile.js';
-import { isConfigured, verifyWebhook, parseEndOfCall } from '../_lib/vapi.js';
-import { upsertLead, upsertCall, raiseSos, shouldEscalate } from '../_lib/receptionist.js';
-import { parseBody } from '../_lib/http.js';
+import { admin } from '../lib/auth.js';
+import { getProfile } from '../lib/profile.js';
+import { isConfigured, verifyWebhook, parseEndOfCall } from '../lib/vapi.js';
+import { upsertLead, upsertCall, raiseSos, shouldEscalate } from '../lib/receptionist.js';
+import { parseBody } from '../lib/http.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

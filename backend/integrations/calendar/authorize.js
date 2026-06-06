@@ -2,9 +2,9 @@
    Auth required. Creates a CSRF state and returns { url } — the Google consent
    URL (calendar scope) the browser navigates to. JSON not 302 so apiFetch can
    read it. Responds 503 if Google OAuth isn't configured. */
-import { requireUser } from '../../_lib/auth.js';
-import { isConfigured, buildAuthUrl } from '../../_lib/calendar.js';
-import { createOAuthState } from '../../_lib/automations.js';
+import { requireUser } from '../../lib/auth.js';
+import { isConfigured, buildAuthUrl } from '../../lib/calendar.js';
+import { createOAuthState } from '../../lib/automations.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

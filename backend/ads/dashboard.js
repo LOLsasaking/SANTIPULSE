@@ -8,14 +8,15 @@
    Rule evaluation itself runs in the cron worker (evaluateAdRules);
    'sync' refreshes campaign metrics on demand.
    ============================================================ */
-import { requireUser } from '../_lib/auth.js';
-import { getProfile, hasActiveSubscription } from '../_lib/profile.js';
-import { parseBody } from '../_lib/http.js';
-import { metaConfigured, tiktokConfigured } from '../_lib/adsProviders.js';
+import { requireUser } from '../lib/auth.js';
+import { getProfile, hasActiveSubscription } from '../lib/profile.js';
+import { parseBody } from '../lib/http.js';
+import { metaConfigured, tiktokConfigured } from '../lib/adsProviders.js';
 import {
   listAccounts, listCampaigns, listRules, listAlerts,
   syncAccount, createRule, updateRule, deleteRule, disconnectAccount,
-} from '../_lib/ads.js';
+} from '../lib/ads.js';
+import { listQueue } from '../lib/insights.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -23,11 +24,11 @@ export default async function handler(req, res) {
   if (!user) return;
 
   if (req.method === 'GET') {
-    const [accounts, campaigns, rules, alerts] = await Promise.all([
-      listAccounts(user.id), listCampaigns(user.id), listRules(user.id), listAlerts(user.id),
+    const [accounts, campaigns, rules, alerts, posts] = await Promise.all([
+      listAccounts(user.id), listCampaigns(user.id), listRules(user.id), listAlerts(user.id), listQueue(user.id, 50),
     ]);
     return res.status(200).json({
-      accounts, campaigns, rules, alerts,
+      accounts, campaigns, rules, alerts, posts,
       status: {
         meta: { configured: metaConfigured() },
         tiktok: { configured: tiktokConfigured() },

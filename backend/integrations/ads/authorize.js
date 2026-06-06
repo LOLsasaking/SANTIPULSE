@@ -2,11 +2,11 @@
    Auth required. Returns { url } — the provider's consent URL for connecting an
    AD account (ads scopes). JSON not 302 so apiFetch can read it. 503 if the
    chosen provider isn't configured. */
-import { requireUser } from '../../_lib/auth.js';
-import { createOAuthState } from '../../_lib/automations.js';
+import { requireUser } from '../../lib/auth.js';
+import { createOAuthState } from '../../lib/automations.js';
 import {
   metaConfigured, tiktokConfigured, buildMetaAuthUrl, buildTikTokAuthUrl,
-} from '../../_lib/adsProviders.js';
+} from '../../lib/adsProviders.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');

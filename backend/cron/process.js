@@ -15,10 +15,10 @@
    call and only marked 'published' on success, so a crash mid-batch leaves
    it retryable. Batches are small to stay under the function timeout.
    ============================================================ */
-import { admin } from '../_lib/auth.js';
-import { getProfile } from '../_lib/profile.js';
-import { publish, isConfigured as socialConfigured } from '../_lib/socialMedia.js';
-import { limitsFor } from '../_lib/products.js';
+import { admin } from '../lib/auth.js';
+import { getProfile } from '../lib/profile.js';
+import { publish, isConfigured as socialConfigured } from '../lib/socialMedia.js';
+import { limitsFor } from '../lib/products.js';
 
 const BATCH = 15;
 
@@ -89,7 +89,7 @@ export default async function handler(req, res) {
 
   // ── 2. Ad rule engine (Gestor de Ads) ─────────────────────────────────────
   try {
-    const { evaluateAdRules } = await import('../_lib/ads.js');
+    const { evaluateAdRules } = await import('../lib/ads.js');
     const adSummary = await evaluateAdRules(sb, ownerProfile);
     summary.ads = adSummary.fired;
     summary.errors += adSummary.errors;

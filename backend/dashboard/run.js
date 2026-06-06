@@ -2,11 +2,11 @@
    POST /api/dashboard/run - run a Pulse module scaffold.
    Auth required. Body: { type: 'ai_receptionist'|'social_insights'|'ad_manager' }.
    ============================================================ */
-import { requireUser } from '../_lib/auth.js';
-import { createJob, countUserRunsThisMonth, dbEnabled, finishJob } from '../_lib/db.js';
-import { parseBody } from '../_lib/http.js';
-import { getProfile, hasActiveSubscription } from '../_lib/profile.js';
-import { limitsFor } from '../_lib/products.js';
+import { requireUser } from '../lib/auth.js';
+import { createJob, countUserRunsThisMonth, dbEnabled, finishJob } from '../lib/db.js';
+import { parseBody } from '../lib/http.js';
+import { getProfile, hasActiveSubscription } from '../lib/profile.js';
+import { limitsFor } from '../lib/products.js';
 import { PULSE_TYPES, runPulseModule } from '../pulse/modules.js';
 
 export default async function handler(req, res) {

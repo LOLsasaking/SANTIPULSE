@@ -129,6 +129,27 @@
   .msg{ font-size:13px; margin-top:14px; padding:11px 14px; border-radius:10px; }
   .msg.ok{ background:var(--green-soft); color:var(--green); }
   .msg.err{ background:var(--red-soft); color:var(--red); }
+  .field-invalid{ border-color:var(--red) !important; box-shadow:0 0 0 3px var(--red-tint) !important; }
+
+  /* easy Pulse panels */
+  .simple-panel{ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr); gap:18px; align-items:stretch; border:1px solid var(--line); border-radius:16px; padding:20px; margin-bottom:16px; background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02)); }
+  .simple-panel h2{ margin:0 0 8px; font-size:22px; letter-spacing:-.02em; }
+  .simple-panel p{ margin:0; color:#b9bcc4; line-height:1.55; }
+  .simple-panel .eyebrow{ margin:0 0 8px; font-size:10px; letter-spacing:.14em; text-transform:uppercase; font-weight:800; color:var(--red); }
+  .simple-panel.accent-green{ border-color:rgba(95,224,160,.24); }
+  .simple-panel.accent-blue{ border-color:rgba(118,183,255,.24); }
+  .simple-panel.accent-yellow{ border-color:rgba(255,207,122,.28); }
+  .simple-status{ min-width:0; }
+  .easy-form{ border:1px solid var(--line); border-radius:16px; padding:18px; background:rgba(255,255,255,.025); }
+  .module-actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px; }
+  .module-actions .btn{ min-height:40px; }
+  .ad-launch textarea{ margin-bottom:12px; }
+  .status-dot{ width:9px; height:9px; border-radius:999px; display:inline-block; background:#555b66; box-shadow:0 0 0 4px rgba(255,255,255,.04); }
+  .status-dot.on{ background:var(--green); box-shadow:0 0 0 4px var(--green-soft); }
+  .quiet-details{ margin-top:14px; color:var(--muted); font-size:13px; }
+  .quiet-details summary{ cursor:pointer; color:#c4c7cf; font-weight:700; margin-bottom:10px; }
+  .mini-done p{ margin:8px 0 0; color:#c4c7cf; line-height:1.55; }
+  @media (max-width:780px){ .simple-panel{ grid-template-columns:1fr; } }
 
   /* status chips inside module panels */
   .status-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
@@ -258,22 +279,22 @@
 
           <!-- Run a module -->
           <div class="card">
-            <h2 class="card-title">Ejecutar módulo Pulse</h2>
-            <p class="card-sub">Genera un resumen con tu perfil de negocio · requiere suscripción activa</p>
+            <h2 class="card-title">Automatizar ahora</h2>
+            <p class="card-sub">Pulsa un módulo y SantiPulse ejecuta la acción por ti.</p>
             <div class="run-tools">
               <button class="run-tool" data-run="ai_receptionist" data-state="idle">
                 <span class="ico">☎</span><span class="tname">Recepcionista IA</span>
-                <span class="tdesc">Llamadas, WhatsApp, reservas y alertas humanas.</span>
+                <span class="tdesc">Activa llamadas, WhatsApp, reservas y alertas humanas.</span>
                 <span class="go" data-go>Ejecutar →</span><span class="bar"></span>
               </button>
               <button class="run-tool" data-run="social_insights" data-state="idle">
                 <span class="ico">◎</span><span class="tname">Insights de Redes</span>
-                <span class="tdesc">Tendencias, estilos virales y cola de posts.</span>
+                <span class="tdesc">Escanea tendencias y prepara ideas de posts.</span>
                 <span class="go" data-go>Ejecutar →</span><span class="bar"></span>
               </button>
               <button class="run-tool" data-run="ad_manager" data-state="idle">
                 <span class="ico">$</span><span class="tname">Gestor de Ads</span>
-                <span class="tdesc">Reglas de ROAS/CPC, presupuesto y alertas.</span>
+                <span class="tdesc">Prepara un anuncio sin tocar reglas técnicas.</span>
                 <span class="go" data-go>Ejecutar →</span><span class="bar"></span>
               </button>
             </div>

@@ -2,9 +2,9 @@
    Facebook redirects the browser here after consent on the ads scope. Identity
    from the single-use, user-bound `state`. We exchange the code, discover the
    user's ad accounts, store them, then bounce to the dashboard. */
-import { consumeOAuthState } from '../../_lib/automations.js';
-import { metaConfigured, metaExchangeCode, metaDiscoverAccounts } from '../../_lib/adsProviders.js';
-import { saveAccounts } from '../../_lib/ads.js';
+import { consumeOAuthState } from '../../lib/automations.js';
+import { metaConfigured, metaExchangeCode, metaDiscoverAccounts } from '../../lib/adsProviders.js';
+import { saveAccounts } from '../../lib/ads.js';
 
 function bounce(res, ok, reason) {
   const q = ok ? 'ads=connected' : `ads=error&reason=${encodeURIComponent(reason || 'failed')}`;
