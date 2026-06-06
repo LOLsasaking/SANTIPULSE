@@ -37,15 +37,21 @@ export default async function handler(req, res) {
       ? { user_id: user.id, plan, source: body.source || 'dashboard' }
       : { plan, source: 'public_pricing', public_checkout: 'true' };
 
+    const mode = PLANS[plan].mode || 'subscription';
+    const cancelPath = body.source === 'web'
+      ? '/contratar/?payment=cancelled'
+      : isPublicPricing ? '/precios/?payment=cancelled' : '/dashboard/?payment=cancelled';
+
     const sessionPayload = {
-      mode: 'subscription',
+      mode,
       line_items: [{ price: priceId, quantity: 1 }],
       allow_promotion_codes: true,
       metadata,
-      subscription_data: { metadata },
       success_url: `${origin}/bienvenida/?session_id={CHECKOUT_SESSION_ID}${isPublicPricing ? '&public_checkout=1' : ''}`,
-      cancel_url: `${origin}${isPublicPricing ? '/precios/?payment=cancelled' : '/dashboard/?payment=cancelled'}`,
+      cancel_url: `${origin}${cancelPath}`,
     };
+    // subscription_data is only valid for recurring checkouts; one-time payments reject it.
+    if (mode === 'subscription') sessionPayload.subscription_data = { metadata };
     if (profile?.stripe_customer_id) sessionPayload.customer = profile.stripe_customer_id;
     else if (user?.email) sessionPayload.customer_email = user.email;
     if (user?.id) sessionPayload.client_reference_id = user.id;

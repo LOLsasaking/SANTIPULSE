@@ -22,6 +22,23 @@ export const PLANS = {
     priceMonthly: 399,
     priceEnv: 'STRIPE_PRICE_AGENCY',
   },
+  // Web-design plans (separate product from the Pulse AI subscriptions above).
+  // Same web + perks; only the payment model differs. Not in LIMITS, so they grant
+  // no dashboard module access — web buyers are not Pulse subscribers.
+  web_monthly: {
+    name: 'Web Mensual',
+    label: 'Página web (mensual)',
+    priceMonthly: 49,
+    mode: 'subscription',
+    priceEnv: 'STRIPE_PRICE_WEB_MONTHLY',
+  },
+  web_onetime: {
+    name: 'Web Pago Único',
+    label: 'Página web (pago único)',
+    priceOnce: 400,
+    mode: 'payment',
+    priceEnv: 'STRIPE_PRICE_WEB_ONETIME',
+  },
 };
 
 export const PLAN_ALIASES = {

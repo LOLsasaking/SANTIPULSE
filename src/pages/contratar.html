@@ -21,120 +21,454 @@
 <script src="{{asset.prefix}}tw-config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  body{ font-family:'Inter',sans-serif; background:#050505; color:#fff; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Inter',sans-serif; background:#050505; color:#fff; padding-bottom:64px; }
+  [id]{ scroll-margin-top:96px; }
   .font-display{ font-family:'Archivo',sans-serif; }
   .font-mono{ font-family:'Space Mono',monospace; }
-  .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.86; letter-spacing:-.02em; }
-  .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:14px; }
-  .eyebrow::before{ content:''; width:34px; height:1px; background:rgba(255,255,255,.5); }
+  .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.9; letter-spacing:-.02em; }
+  .serif-h{ font-family:'Archivo',sans-serif; font-weight:900; letter-spacing:-.02em; line-height:1.04; }
+  .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.55); }
   .meta{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.42); }
-  .volver{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.8); text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition:color .3s; }
-  .volver:hover{ color:#fff; } .volver svg{ transition:transform .3s; } .volver:hover svg{ transform:translateX(-5px); }
-  .wordmark{ font-family:'Space Mono',monospace; font-size:13px; letter-spacing:.12em; color:rgba(255,255,255,.85); text-decoration:none; }
-  .topbar{ position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 30px; backdrop-filter:blur(14px); background:rgba(5,5,5,.55); }
-  .topbar-right{ display:flex; align-items:center; gap:16px; }
-  .field{ width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:14px 16px; color:#fff; transition:border-color .3s; }
-  .field:focus{ outline:none; border-color:#E23B4E; }
-  label{ display:block; font-size:13px; color:rgba(255,255,255,.7); margin-bottom:8px; }
-  .pill{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase; padding:9px 14px; border-radius:9999px; border:1px solid rgba(255,255,255,.18); cursor:pointer; transition:all .25s; user-select:none; }
+  .wordmark{ font-family:'Space Mono',monospace; font-size:14px; letter-spacing:.06em; color:#fff; text-decoration:none; display:inline-flex; align-items:center; gap:9px; font-weight:700; }
+  .wordmark .gem{ width:24px; height:24px; border-radius:7px; background:linear-gradient(135deg,#7c5cff,#5b8cff); display:grid; place-items:center; }
+  .wordmark .gem svg{ width:13px; height:13px; }
+
+  /* announcement bar */
+  .annc{ background:linear-gradient(90deg,#6d4bff,#3f7bff); color:#fff; font-size:13.5px; display:flex; align-items:center; justify-content:center; gap:14px; padding:9px 18px; text-align:center; }
+  .annc .pill{ background:#fff; color:#3a2bd6; font-weight:700; font-size:12px; border-radius:9999px; padding:5px 13px; text-decoration:none; white-space:nowrap; }
+
+  /* nav */
+  .nav{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:16px 26px; background:rgba(8,8,11,.82); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.07); }
+  .nav-links{ display:flex; align-items:center; gap:26px; }
+  .nav-links a{ color:rgba(255,255,255,.72); text-decoration:none; font-size:14px; font-weight:500; transition:color .2s; }
+  .nav-links a:hover{ color:#fff; }
+  .wa-btn{ display:inline-flex; align-items:center; gap:8px; background:#1fb866; color:#fff; font-weight:700; font-size:14px; text-decoration:none; padding:10px 17px; border-radius:9999px; transition:background .2s; }
+  .wa-btn:hover{ background:#19a259; }
+  .wa-btn svg{ width:17px; height:17px; }
+
+  /* hero */
+  .hero{ max-width:1240px; margin:0 auto; padding:60px 26px 70px; display:grid; grid-template-columns:1.05fr .95fr; gap:54px; align-items:start; }
+  .badge{ display:inline-flex; align-items:center; gap:9px; font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.08em; color:#b9a8ff; background:rgba(124,92,255,.12); border:1px solid rgba(124,92,255,.3); border-radius:9999px; padding:7px 14px; margin-bottom:24px; }
+  .badge::before{ content:''; width:7px; height:7px; border-radius:50%; background:#1fb866; }
+  .hero h1{ font-size:clamp(2.6rem,4.4vw,4rem); }
+  .hero h1 .accent{ font-family:'Archivo',sans-serif; font-style:italic; font-weight:800; background:linear-gradient(90deg,#8c6bff,#5b8cff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero-sub{ color:rgba(255,255,255,.66); font-size:1.12rem; line-height:1.6; max-width:30rem; margin:22px 0 18px; }
+  .trust{ color:rgba(255,255,255,.5); font-size:13px; line-height:1.7; max-width:30rem; }
+  .stat-row{ display:flex; gap:10px; margin-top:30px; border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:18px; background:rgba(255,255,255,.02); max-width:30rem; }
+  .stat-cell{ flex:1; }
+  .stat-cell .v{ font-family:'Archivo',sans-serif; font-weight:900; font-size:1.7rem; color:#8c7bff; }
+  .stat-cell .k{ font-size:11px; color:rgba(255,255,255,.5); margin-top:2px; }
+  .stat-div{ width:1px; background:rgba(255,255,255,.1); }
+
+  /* form card */
+  .form-card{ background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.1); border-radius:24px; padding:30px 28px; box-shadow:0 30px 80px rgba(0,0,0,.45); }
+  .form-card h2{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.5rem; letter-spacing:-.01em; }
+  .form-card .sub{ color:rgba(255,255,255,.55); font-size:13.5px; margin:6px 0 22px; }
+  .field{ width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:13px 15px; color:#fff; transition:border-color .25s; font-size:14px; }
+  .field:focus{ outline:none; border-color:#7c5cff; }
+  .field::placeholder{ color:rgba(255,255,255,.32); }
+  label{ display:block; font-size:12.5px; color:rgba(255,255,255,.65); margin-bottom:7px; }
+  .group-label{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:11px; }
+  .pill{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:8px 13px; border-radius:9999px; border:1px solid rgba(255,255,255,.18); cursor:pointer; transition:all .2s; user-select:none; }
   .pill:hover{ border-color:rgba(255,255,255,.5); }
   .pill input{ display:none; }
-  .pill:has(input:checked){ background:#fff; color:#050505; border-color:#fff; }
-  .pill.soon{ cursor:not-allowed; color:rgba(255,255,255,.45); border-color:rgba(255,255,255,.1); border-style:dashed; }
-  .pill.soon:hover{ border-color:rgba(255,255,255,.18); }
-  .pill.soon .tag{ font-size:9px; letter-spacing:.1em; color:#E23B4E; margin-left:8px; }
-  .group-label{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:12px; }
-  .group-label .accent{ color:#E23B4E; }
-  /* Language switcher (shared) */
+  .pill:has(input:checked){ background:#7c5cff; color:#fff; border-color:#7c5cff; }
+  .submit-btn{ width:100%; background:linear-gradient(90deg,#6d4bff,#5b6dff); color:#fff; font-weight:800; font-size:15px; padding:15px; border-radius:14px; border:0; cursor:pointer; transition:opacity .2s,transform .15s; }
+  .submit-btn:hover:not(:disabled){ transform:translateY(-1px); }
+  .submit-btn:disabled{ opacity:.6; cursor:not-allowed; }
+  .consent{ display:flex; align-items:flex-start; gap:11px; font-size:12px; color:rgba(255,255,255,.6); line-height:1.5; }
+  .consent input{ width:16px; height:16px; margin-top:2px; accent-color:#7c5cff; flex:none; }
+  .consent a{ color:#b9a8ff; text-decoration:none; }
+  .consent a:hover{ text-decoration:underline; }
+  .hp-field{ position:absolute !important; left:-9999px !important; top:-9999px !important; width:1px; height:1px; overflow:hidden; opacity:0; }
+  .or-sep{ display:flex; align-items:center; gap:14px; color:rgba(255,255,255,.4); font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; margin:18px 0; }
+  .or-sep::before,.or-sep::after{ content:''; flex:1; height:1px; background:rgba(255,255,255,.12); }
+  .wa-block{ width:100%; display:flex; align-items:center; justify-content:center; gap:9px; background:#1fb866; color:#fff; font-weight:700; padding:14px; border-radius:14px; text-decoration:none; transition:background .2s; }
+  .wa-block:hover{ background:#19a259; }
+
+  /* section shells */
+  .sec{ max-width:1180px; margin:0 auto; padding:84px 26px; }
+  .sec-tag{ display:inline-block; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:#b9a8ff; border:1px solid rgba(124,92,255,.3); background:rgba(124,92,255,.08); border-radius:9999px; padding:7px 15px; }
+  .light{ background:#f4f5fb; color:#11141f; }
+  .light .sec-tag{ color:#6d4bff; border-color:rgba(109,75,255,.3); background:rgba(109,75,255,.07); }
+
+  /* datos (dark band) */
+  .datos{ background:radial-gradient(120% 90% at 50% 0%, #15172b, #060713 70%); }
+  .stat-card{ background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:34px 26px; text-align:center; }
+  .stat-card .big{ font-family:'Archivo',sans-serif; font-weight:900; font-size:3.4rem; line-height:1; }
+  .stat-card .desc{ color:rgba(255,255,255,.6); font-size:13.5px; line-height:1.55; margin-top:14px; }
+  .chart-card{ background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:26px; }
+  .chart-card h3{ font-weight:700; font-size:1.05rem; }
+  .chart-card p{ color:rgba(255,255,255,.55); font-size:13px; line-height:1.5; margin-top:6px; }
+
+  /* pain cards */
+  .pain-card{ background:#fff; border:1px solid rgba(17,20,31,.08); border-radius:18px; padding:24px; box-shadow:0 10px 30px rgba(17,20,31,.05); }
+  .pain-card .ic{ color:#E23B4E; margin-bottom:16px; }
+  .pain-card h3{ font-weight:700; font-size:15.5px; margin-bottom:8px; }
+  .pain-card p{ color:#5b616e; font-size:13.5px; line-height:1.55; }
+
+  /* feature cards */
+  .feat-card{ background:#fff; border:1px solid rgba(17,20,31,.08); border-radius:18px; padding:24px; }
+  .feat-card .ic{ color:#6d4bff; margin-bottom:16px; }
+  .feat-card h3{ font-weight:700; font-size:15.5px; margin-bottom:8px; }
+  .feat-card p{ color:#5b616e; font-size:13.5px; line-height:1.55; }
+
+  /* process */
+  .step-num{ width:46px; height:46px; border-radius:50%; background:linear-gradient(135deg,#6d4bff,#5b8cff); color:#fff; font-family:'Space Mono',monospace; font-weight:700; display:grid; place-items:center; font-size:14px; }
+  .step h3{ font-weight:700; font-size:15.5px; margin:18px 0 8px; }
+  .step p{ color:#5b616e; font-size:13.5px; line-height:1.55; }
+
+  /* pricing */
+  .plan{ background:#fff; border:1px solid rgba(17,20,31,.1); border-radius:24px; padding:34px 30px; display:flex; flex-direction:column; position:relative; }
+  .plan.feat{ border:2px solid #6d4bff; box-shadow:0 24px 60px rgba(109,75,255,.16); }
+  .plan-badge{ position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:#6d4bff; color:#fff; font-size:12px; font-weight:700; border-radius:9999px; padding:6px 16px; white-space:nowrap; }
+  .plan .pname{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#6d4bff; }
+  .plan .price{ font-family:'Archivo',sans-serif; font-weight:900; font-size:3.3rem; line-height:1; letter-spacing:-.03em; }
+  .plan .old{ color:#9aa0ad; text-decoration:line-through; font-size:1.5rem; font-weight:700; margin-right:10px; }
+  .plan .per{ color:#5b616e; font-size:14px; margin-left:4px; }
+  .plan ul{ list-style:none; margin:24px 0; flex:1; }
+  .plan li{ display:flex; gap:10px; align-items:flex-start; padding:7px 0; color:#2a2f3a; font-size:14px; }
+  .plan li svg{ flex:none; margin-top:3px; color:#1fb866; }
+  .pay-btn{ display:block; text-align:center; width:100%; padding:14px; border-radius:13px; font-weight:800; font-size:14px; cursor:pointer; border:1px solid #d4d7e0; background:#fff; color:#11141f; text-decoration:none; transition:all .2s; }
+  .pay-btn:hover{ border-color:#11141f; }
+  .pay-btn.primary{ background:linear-gradient(90deg,#6d4bff,#5b6dff); color:#fff; border:0; }
+  .pay-btn.primary:hover{ opacity:.92; }
+  .pay-btn.ghost{ background:transparent; margin-top:10px; font-weight:600; color:#5b616e; }
+  .pay-btn:disabled{ opacity:.6; cursor:wait; }
+
+  /* faq */
+  .faq-item{ border:1px solid rgba(17,20,31,.1); border-radius:14px; background:#fff; margin-bottom:12px; overflow:hidden; }
+  .faq-item summary{ list-style:none; cursor:pointer; padding:19px 22px; font-weight:600; font-size:15px; display:flex; align-items:center; justify-content:space-between; gap:14px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary .chev{ transition:transform .25s; flex:none; color:#6d4bff; }
+  .faq-item[open] summary .chev{ transform:rotate(180deg); }
+  .faq-item .ans{ padding:0 22px 20px; color:#5b616e; font-size:14px; line-height:1.6; }
+
+  /* dark cta band */
+  .cta-band{ background:radial-gradient(120% 120% at 80% 0%, #1a1530, #07040f 70%); }
+
+  /* sticky bottom */
+  .sticky-bar{ position:fixed; left:0; right:0; bottom:0; z-index:60; background:linear-gradient(90deg,#6d4bff,#4f6dff); }
+  .sticky-bar a{ display:block; text-align:center; color:#fff; font-weight:800; font-size:15px; padding:16px; text-decoration:none; }
+
+  /* messages */
+  .msg{ text-align:center; padding:14px; border-radius:13px; font-weight:600; font-size:14px; }
+  .msg.ok{ border:1px solid rgba(31,184,102,.4); background:rgba(31,184,102,.1); color:#7fe0a3; }
+  .msg.err{ border:1px solid rgba(226,59,78,.4); background:rgba(226,59,78,.08); color:#ff9aa6; }
+  .hidden{ display:none; }
+
+  /* language switcher (shared) */
   .lang-wrap{ position:relative; }
   .lang-btn{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.8); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:9999px; padding:7px 12px; display:inline-flex; align-items:center; gap:7px; cursor:pointer; transition:border-color .25s; }
   .lang-btn:hover{ border-color:rgba(255,255,255,.45); }
   .lang-menu{ position:absolute; right:0; top:calc(100% + 8px); min-width:150px; background:rgba(11,11,13,.97); border:1px solid rgba(255,255,255,.12); border-radius:12px; overflow:hidden; backdrop-filter:blur(12px); z-index:60; }
   .lang-menu a{ display:flex; align-items:center; gap:10px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,.85); text-decoration:none; transition:background .2s; }
-  .lang-menu a:hover, .lang-menu a[aria-current="true"]{ background:rgba(226,59,78,.16); color:#fff; }
+  .lang-menu a:hover, .lang-menu a[aria-current="true"]{ background:rgba(124,92,255,.18); color:#fff; }
   .lang-menu.hidden{ display:none; }
-  /* Honeypot */
-  .hp-field{ position:absolute !important; left:-9999px !important; top:-9999px !important; width:1px; height:1px; overflow:hidden; opacity:0; }
-  .consent{ display:flex; align-items:flex-start; gap:11px; padding:14px 16px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(255,255,255,.035); color:rgba(255,255,255,.7); font-size:12.5px; line-height:1.55; }
-  .consent input{ width:16px; height:16px; margin-top:2px; accent-color:#E23B4E; flex:none; }
-  .consent a{ color:#ff9aa6; text-decoration:none; }
-  .consent a:hover{ text-decoration:underline; }
-  button:disabled{ opacity:.6; cursor:not-allowed; }
+
+  @media (max-width:900px){
+    .hero{ grid-template-columns:1fr; gap:34px; padding-top:38px; }
+    .nav-links{ display:none; }
+    .sec{ padding:56px 22px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <a class="volver" href="{{nav.home}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> {{common.volver}}</a>
-  <div class="topbar-right">
-    <a class="wordmark" href="{{nav.home}}">santipulse.com</a>
-    {{lang.switcher}}
-  </div>
+<!-- announcement bar -->
+<div class="annc">
+  <span>{{contratar.landing.bar.text}} <b>{{contratar.landing.bar.strong}}</b> {{contratar.landing.bar.tail}}</span>
+  <a class="pill" href="#form">{{contratar.landing.bar.cta}}</a>
 </div>
 
-<main class="pt-32 pb-24 px-6 md:px-10 max-w-3xl mx-auto">
-  <header class="mb-10">
-    <p class="eyebrow mb-5">{{contratar.eyebrow}}</p>
-    <h1 class="headline text-5xl md:text-7xl mb-2">{{contratar.titleA}}</h1>
-    <h1 class="headline text-5xl md:text-7xl text-white/35 mb-6">{{contratar.titleB}}</h1>
-    <p class="text-white/65 max-w-xl text-lg">{{contratar.intro}}</p>
-    <p class="meta mt-6">{{contratar.badges}}</p>
-  </header>
-
-  <form id="form" class="space-y-6" novalidate>
-    <div>
-      <p class="meta mb-3">{{contratar.step1}}</p>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div><label for="name">{{contratar.fName}}</label><input id="name" name="name" required maxlength="100" autocomplete="name" class="field" placeholder="{{contratar.fNamePh}}"/></div>
-        <div><label for="email">{{contratar.fEmail}}</label><input id="email" name="email" type="email" required maxlength="160" autocomplete="email" class="field" placeholder="{{contratar.fEmailPh}}"/></div>
-        <div><label for="phone">{{contratar.fPhone}}</label><input id="phone" name="phone" maxlength="40" autocomplete="tel" class="field" placeholder="{{contratar.fPhonePh}}"/></div>
-        <div><label for="business">{{contratar.fBusiness}}</label><input id="business" name="business" maxlength="120" class="field" placeholder="{{contratar.fBusinessPh}}"/></div>
-      </div>
-    </div>
-
-    <div>
-      <p class="meta mb-5">{{contratar.step2}}</p>
-
-      <p class="group-label">{{contratar.availableNow}}</p>
-      <div class="flex flex-wrap gap-2 mb-7">
-        <label class="pill"><input type="checkbox" name="need" value="{{contratar.needChatbot}}"> {{contratar.needChatbot}}</label>
-        <label class="pill"><input type="checkbox" name="need" value="{{contratar.needWebChatbot}}"> {{contratar.needWebChatbot}}</label>
-        <label class="pill"><input type="checkbox" name="need" value="{{contratar.needWeb}}"> {{contratar.needWeb}}</label>
-        <label class="pill"><input type="checkbox" name="need" value="{{contratar.soon1}}"> {{contratar.soon1}}</label>
-        <label class="pill"><input type="checkbox" name="need" value="{{contratar.soon2}}"> {{contratar.soon2}}</label>
-        <label class="pill"><input type="checkbox" name="need" value="{{contratar.soon3}}"> {{contratar.soon3}}</label>
-        <label class="pill"><input type="checkbox" name="need" value="{{contratar.soon4}}"> {{contratar.soon4}}</label>
-      </div>
-
-      <label for="message">{{contratar.fMessage}}</label>
-      <textarea id="message" name="message" rows="5" maxlength="2000" class="field" placeholder="{{contratar.fMessagePh}}"></textarea>
-    </div>
-
-    <!-- Honeypot: hidden from humans, bots tend to fill it -->
-    <div class="hp-field" aria-hidden="true">
-      <label>Company (leave empty)<input type="text" name="company" tabindex="-1" autocomplete="off"/></label>
-    </div>
-    <input type="hidden" name="loadedAt" id="loadedAt" value="" />
-
-    <label class="consent" for="gdprConsent">
-      <input id="gdprConsent" name="gdprConsent" type="checkbox" required />
-      <span>{{contratar.gdprText}} <a href="{{asset.prefix}}privacidad/" target="_blank" rel="noopener">{{contratar.gdprLinkText}}</a>.</span>
-    </label>
-
-    <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl bg-white text-ink font-mono font-bold tracking-[0.22em] uppercase text-sm hover:bg-white/90 transition">{{contratar.submit}}</button>
-
-    <div id="ok" class="hidden text-center py-4 rounded-xl border border-ember/30 bg-ember/5 text-ember font-medium" role="status">{{contratar.success}}</div>
-    <div id="err" class="hidden text-center py-4 rounded-xl border border-red-500/30 bg-red-500/5 text-red-300 font-medium" role="alert"></div>
-  </form>
-
-  <div class="mt-10 grid sm:grid-cols-3 gap-3">
-    <a href="tel:+34650257684" class="meta hover:text-ember transition">📞 +34 650 257 684</a>
-    <a href="mailto:santipulse@gmail.com" class="meta hover:text-ember transition">✉ santipulse@gmail.com</a>
-    <a href="https://wa.me/34650257684" rel="noopener" target="_blank" class="meta hover:text-ember transition">💬 WhatsApp</a>
+<!-- nav -->
+<header class="nav">
+  <a class="wordmark" href="{{nav.home}}">
+    <span class="gem"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2l5 6-5 14L7 8z"/></svg></span>
+    Santipulse
+  </a>
+  <nav class="nav-links">
+    <a href="#por-que">{{contratar.landing.nav.porque}}</a>
+    <a href="#incluye">{{contratar.landing.nav.incluye}}</a>
+    <a href="#proceso">{{contratar.landing.nav.proceso}}</a>
+    <a href="#precio">{{contratar.landing.nav.precio}}</a>
+    <a href="#faq">{{contratar.landing.nav.faq}}</a>
+  </nav>
+  <div style="display:flex; align-items:center; gap:14px;">
+    <a class="wa-btn" href="https://wa.me/34650257684" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.53 0-3.03-.41-4.34-1.19l-.31-.18-3.12.82.83-3.04-.2-.31a8.16 8.16 0 01-1.25-4.34c0-4.54 3.7-8.23 8.24-8.23 4.54 0 8.23 3.69 8.23 8.23s-3.69 8.23-8.23 8.23z"/></svg>
+      {{contratar.landing.nav.whatsapp}}
+    </a>
+    {{lang.switcher}}
   </div>
-</main>
+</header>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <div>
+    <span class="badge">{{contratar.landing.hero.badge}}</span>
+    <h1 class="serif-h">{{contratar.landing.hero.titleA}} {{contratar.landing.hero.titleB}}<br><span class="accent">{{contratar.landing.hero.titleC}}</span></h1>
+    <p class="hero-sub">{{contratar.landing.hero.sub}}</p>
+    <p class="trust">{{contratar.landing.hero.badges}}</p>
+    <div class="stat-row">
+      <div class="stat-cell"><div class="v">{{contratar.landing.hero.stat1v}}</div><div class="k">{{contratar.landing.hero.stat1k}}</div></div>
+      <div class="stat-div"></div>
+      <div class="stat-cell"><div class="v">{{contratar.landing.hero.stat2v}}</div><div class="k">{{contratar.landing.hero.stat2k}}</div></div>
+      <div class="stat-div"></div>
+      <div class="stat-cell"><div class="v">{{contratar.landing.hero.stat3v}}</div><div class="k">{{contratar.landing.hero.stat3k}}</div></div>
+    </div>
+  </div>
+
+  <!-- LEAD FORM (kept intact -> POST /api/lead via contratar.js) -->
+  <div id="form-card" class="form-card">
+    <h2>{{contratar.landing.hero.formTitle}}</h2>
+    <p class="sub">{{contratar.landing.hero.formSub}}</p>
+
+    <form id="form" class="space-y-4" novalidate>
+      <div><label for="name">{{contratar.fName}}</label><input id="name" name="name" required maxlength="100" autocomplete="name" class="field" placeholder="{{contratar.fNamePh}}"/></div>
+      <div><label for="phone">{{contratar.fPhone}}</label><input id="phone" name="phone" maxlength="40" autocomplete="tel" class="field" placeholder="{{contratar.fPhonePh}}"/></div>
+      <div><label for="business">{{contratar.fBusiness}}</label><input id="business" name="business" maxlength="120" class="field" placeholder="{{contratar.fBusinessPh}}"/></div>
+      <div><label for="email">{{contratar.fEmail}}</label><input id="email" name="email" type="email" required maxlength="160" autocomplete="email" class="field" placeholder="{{contratar.fEmailPh}}"/></div>
+
+      <div>
+        <p class="group-label">{{contratar.step2}}</p>
+        <div class="flex flex-wrap gap-2">
+          <label class="pill"><input type="checkbox" name="need" value="{{contratar.needWeb}}" checked> {{contratar.needWeb}}</label>
+          <label class="pill"><input type="checkbox" name="need" value="{{contratar.needWebChatbot}}"> {{contratar.needWebChatbot}}</label>
+          <label class="pill"><input type="checkbox" name="need" value="{{contratar.needChatbot}}"> {{contratar.needChatbot}}</label>
+        </div>
+      </div>
+
+      <div>
+        <label for="message">{{contratar.fMessage}}</label>
+        <textarea id="message" name="message" rows="3" maxlength="2000" class="field" placeholder="{{contratar.fMessagePh}}"></textarea>
+      </div>
+
+      <!-- Honeypot -->
+      <div class="hp-field" aria-hidden="true">
+        <label>Company (leave empty)<input type="text" name="company" tabindex="-1" autocomplete="off"/></label>
+      </div>
+      <input type="hidden" name="loadedAt" id="loadedAt" value="" />
+
+      <label class="consent" for="gdprConsent">
+        <input id="gdprConsent" name="gdprConsent" type="checkbox" required />
+        <span>{{contratar.gdprText}} <a href="{{asset.prefix}}privacidad/" target="_blank" rel="noopener">{{contratar.gdprLinkText}}</a>.</span>
+      </label>
+
+      <button type="submit" id="submitBtn" class="submit-btn">{{contratar.submit}}</button>
+
+      <div id="ok" class="msg ok hidden" role="status">{{contratar.success}}</div>
+      <div id="err" class="msg err hidden" role="alert"></div>
+    </form>
+
+    <div class="or-sep">{{contratar.landing.hero.whatsappLabel}}</div>
+    <a class="wa-block" href="https://wa.me/34650257684" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>
+      {{contratar.landing.hero.whatsappBtn}}
+    </a>
+    <p class="meta" style="text-align:center; margin-top:16px;">{{contratar.landing.hero.badges}}</p>
+  </div>
+</section>
+
+<!-- DATOS REALES -->
+<section id="por-que" class="datos">
+  <div class="sec" style="text-align:center;">
+    <span class="sec-tag">{{contratar.landing.datos.eyebrow}}</span>
+    <h2 class="serif-h" style="font-size:clamp(2rem,3.6vw,3rem); margin:24px auto 16px; max-width:48rem;">{{contratar.landing.datos.titleA}}<br>{{contratar.landing.datos.titleB}}</h2>
+    <p style="color:rgba(255,255,255,.6); max-width:42rem; margin:0 auto 48px; line-height:1.6;">{{contratar.landing.datos.sub}}</p>
+
+    <div class="grid md:grid-cols-3 gap-4" style="text-align:center;">
+      <div class="stat-card"><div class="big" style="color:#8c7bff;">{{contratar.landing.datos.s1v}}</div><div class="desc">{{contratar.landing.datos.s1d}}</div></div>
+      <div class="stat-card"><div class="big" style="color:#2fd38a;">{{contratar.landing.datos.s2v}}</div><div class="desc">{{contratar.landing.datos.s2d}}</div></div>
+      <div class="stat-card"><div class="big" style="color:#5b9cff;">{{contratar.landing.datos.s3v}}</div><div class="desc">{{contratar.landing.datos.s3d}}</div></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4" style="margin-top:18px; text-align:left;">
+      <div class="chart-card">
+        <h3>{{contratar.landing.datos.chart1Title}}</h3>
+        <p>{{contratar.landing.datos.chart1Sub}}</p>
+        <div style="display:flex; align-items:flex-end; gap:40px; height:170px; margin-top:26px; padding:0 20px;">
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:10px;">
+            <div style="width:100%; max-width:120px; height:56px; border-radius:10px 10px 0 0; background:rgba(255,255,255,.14);"></div>
+            <span style="color:rgba(255,255,255,.55); font-size:13px;">{{contratar.landing.datos.chart1A}}</span>
+          </div>
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:10px;">
+            <div style="width:100%; max-width:120px; height:150px; border-radius:10px 10px 0 0; background:linear-gradient(180deg,#7c5cff,#2fd38a);"></div>
+            <span style="color:#fff; font-size:13px; font-weight:600;">{{contratar.landing.datos.chart1B}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>{{contratar.landing.datos.chart2Title}}</h3>
+        <p>{{contratar.landing.datos.chart2Sub}}</p>
+        <svg viewBox="0 0 320 150" style="width:100%; height:170px; margin-top:18px;" preserveAspectRatio="none">
+          <line x1="0" y1="120" x2="320" y2="120" stroke="rgba(255,255,255,.12)" stroke-dasharray="4 4"/>
+          <line x1="0" y1="70" x2="320" y2="70" stroke="rgba(255,255,255,.08)" stroke-dasharray="4 4"/>
+          <polyline points="10,118 70,108 130,92 190,66 250,40 310,18" fill="none" stroke="#2fd38a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="10,118 70,116 130,116 190,114 250,115 310,113" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-dasharray="5 5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="light">
+  <div class="sec">
+    <div style="text-align:center; max-width:46rem; margin:0 auto 50px;">
+      <span class="sec-tag">{{contratar.landing.pain.eyebrow}}</span>
+      <h2 class="serif-h" style="font-size:clamp(1.9rem,3.2vw,2.7rem); margin:22px 0 14px;">{{contratar.landing.pain.titleA}} {{contratar.landing.pain.titleB}}</h2>
+      <p style="color:#5b616e; line-height:1.6;">{{contratar.landing.pain.sub}}</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="pain-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6"/></svg></div><h3>{{contratar.landing.pain.p1t}}</h3><p>{{contratar.landing.pain.p1d}}</p></div>
+      <div class="pain-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div><h3>{{contratar.landing.pain.p2t}}</h3><p>{{contratar.landing.pain.p2d}}</p></div>
+      <div class="pain-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 6-5M15 11a3 3 0 100-6M21 20c0-2.5-1.8-4.4-4.5-4.9"/></svg></div><h3>{{contratar.landing.pain.p3t}}</h3><p>{{contratar.landing.pain.p3d}}</p></div>
+      <div class="pain-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3>{{contratar.landing.pain.p4t}}</h3><p>{{contratar.landing.pain.p4d}}</p></div>
+      <div class="pain-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></div><h3>{{contratar.landing.pain.p5t}}</h3><p>{{contratar.landing.pain.p5d}}</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ INCLUYE -->
+<section id="incluye" class="light" style="background:#fff;">
+  <div class="sec">
+    <div style="text-align:center; max-width:44rem; margin:0 auto 50px;">
+      <span class="sec-tag">{{contratar.landing.incluye.eyebrow}}</span>
+      <h2 class="serif-h" style="font-size:clamp(1.9rem,3.2vw,2.7rem); margin:22px 0 14px;">{{contratar.landing.incluye.title}}</h2>
+      <p style="color:#5b616e; line-height:1.6;">{{contratar.landing.incluye.sub}}</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="feat-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></div><h3>{{contratar.landing.incluye.f1t}}</h3><p>{{contratar.landing.incluye.f1d}}</p></div>
+      <div class="feat-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8"/></svg></div><h3>{{contratar.landing.incluye.f2t}}</h3><p>{{contratar.landing.incluye.f2d}}</p></div>
+      <div class="feat-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><h3>{{contratar.landing.incluye.f3t}}</h3><p>{{contratar.landing.incluye.f3d}}</p></div>
+      <div class="feat-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><h3>{{contratar.landing.incluye.f4t}}</h3><p>{{contratar.landing.incluye.f4d}}</p></div>
+      <div class="feat-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg></div><h3>{{contratar.landing.incluye.f5t}}</h3><p>{{contratar.landing.incluye.f5d}}</p></div>
+      <div class="feat-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>{{contratar.landing.incluye.f6t}}</h3><p>{{contratar.landing.incluye.f6d}}</p></div>
+      <div class="feat-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div><h3>{{contratar.landing.incluye.f7t}}</h3><p>{{contratar.landing.incluye.f7d}}</p></div>
+      <div class="feat-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></div><h3>{{contratar.landing.incluye.f8t}}</h3><p>{{contratar.landing.incluye.f8d}}</p></div>
+      <div class="feat-card"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>{{contratar.landing.incluye.f9t}}</h3><p>{{contratar.landing.incluye.f9d}}</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="light">
+  <div class="sec">
+    <div style="text-align:center; max-width:44rem; margin:0 auto 54px;">
+      <span class="sec-tag">{{contratar.landing.proceso.eyebrow}}</span>
+      <h2 class="serif-h" style="font-size:clamp(1.9rem,3.2vw,2.7rem); margin:22px 0 14px;">{{contratar.landing.proceso.title}}</h2>
+      <p style="color:#5b616e; line-height:1.6;">{{contratar.landing.proceso.sub}}</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+      <div class="step"><div class="step-num">01</div><h3>{{contratar.landing.proceso.s1t}}</h3><p>{{contratar.landing.proceso.s1d}}</p></div>
+      <div class="step"><div class="step-num">02</div><h3>{{contratar.landing.proceso.s2t}}</h3><p>{{contratar.landing.proceso.s2d}}</p></div>
+      <div class="step"><div class="step-num">03</div><h3>{{contratar.landing.proceso.s3t}}</h3><p>{{contratar.landing.proceso.s3d}}</p></div>
+      <div class="step"><div class="step-num">04</div><h3>{{contratar.landing.proceso.s4t}}</h3><p>{{contratar.landing.proceso.s4d}}</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIO -->
+<section id="precio" class="light" style="background:#fff;">
+  <div class="sec" style="max-width:980px;">
+    <div style="text-align:center; max-width:44rem; margin:0 auto 50px;">
+      <span class="sec-tag">{{contratar.landing.precio.eyebrow}}</span>
+      <h2 class="serif-h" style="font-size:clamp(1.9rem,3.2vw,2.7rem); margin:22px 0 14px;">{{contratar.landing.precio.title}}</h2>
+      <p style="color:#5b616e; line-height:1.6;">{{contratar.landing.precio.sub}}</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6 items-stretch" style="margin-top:22px;">
+
+      <!-- Plan Mensual (featured) -->
+      <article class="plan feat">
+        <span class="plan-badge">{{contratar.landing.precio.badge}}</span>
+        <p class="pname">{{contratar.landing.precio.mName}}</p>
+        <div style="margin:14px 0 4px;"><span class="old">{{contratar.landing.precio.mOld}}</span><span class="price">{{contratar.landing.precio.mPrice}}</span><span class="per">{{contratar.landing.precio.mPer}}</span></div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f1}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f2}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f3}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f4}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f5}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f6}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f7}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f8}}</li>
+        </ul>
+        <button type="button" class="pay-btn primary" data-checkout="web_monthly">{{contratar.landing.precio.payNow}}</button>
+        <a class="pay-btn ghost" href="#form">{{contratar.landing.precio.askInfo}}</a>
+        <p class="meta" style="color:#9aa0ad; margin-top:14px; text-align:center; letter-spacing:.08em;">{{contratar.landing.precio.mNote}}</p>
+      </article>
+
+      <!-- Pago Único -->
+      <article class="plan">
+        <p class="pname">{{contratar.landing.precio.oName}}</p>
+        <div style="margin:14px 0 4px;"><span class="price">{{contratar.landing.precio.oPrice}}</span><span class="per">{{contratar.landing.precio.oPer}}</span></div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f1}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f2}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f3}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f4}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f5}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f6}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f7}}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f8}}</li>
+        </ul>
+        <button type="button" class="pay-btn primary" data-checkout="web_onetime">{{contratar.landing.precio.payNow}}</button>
+        <a class="pay-btn ghost" href="#form">{{contratar.landing.precio.askInfo}}</a>
+        <p class="meta" style="color:#9aa0ad; margin-top:14px; text-align:center; letter-spacing:.08em;">{{contratar.landing.precio.oNote}}</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="light">
+  <div class="sec" style="max-width:820px;">
+    <div style="text-align:center; margin-bottom:44px;">
+      <span class="sec-tag">{{contratar.landing.faq.eyebrow}}</span>
+      <h2 class="serif-h" style="font-size:clamp(1.9rem,3.2vw,2.7rem); margin:22px 0 14px;">{{contratar.landing.faq.title}}</h2>
+      <p style="color:#5b616e; line-height:1.6;">{{contratar.landing.faq.sub}}</p>
+    </div>
+    <details class="faq-item"><summary>{{contratar.landing.faq.q1}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{contratar.landing.faq.a1}}</div></details>
+    <details class="faq-item"><summary>{{contratar.landing.faq.q2}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{contratar.landing.faq.a2}}</div></details>
+    <details class="faq-item"><summary>{{contratar.landing.faq.q3}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{contratar.landing.faq.a3}}</div></details>
+    <details class="faq-item"><summary>{{contratar.landing.faq.q4}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{contratar.landing.faq.a4}}</div></details>
+    <details class="faq-item"><summary>{{contratar.landing.faq.q5}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{contratar.landing.faq.a5}}</div></details>
+    <details class="faq-item"><summary>{{contratar.landing.faq.q6}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{contratar.landing.faq.a6}}</div></details>
+    <details class="faq-item"><summary>{{contratar.landing.faq.q7}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{contratar.landing.faq.a7}}</div></details>
+    <details class="faq-item"><summary>{{contratar.landing.faq.q8}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{contratar.landing.faq.a8}}</div></details>
+  </div>
+</section>
+
+<!-- DARK CTA BAND -->
+<section class="cta-band">
+  <div class="sec" style="display:flex; flex-wrap:wrap; gap:24px; align-items:center; justify-content:space-between;">
+    <div style="max-width:34rem;">
+      <p class="eyebrow" style="color:#b9a8ff; margin-bottom:14px;">{{contratar.landing.ctaband.kicker}}</p>
+      <p style="color:rgba(255,255,255,.78); font-size:1.05rem; line-height:1.6;">{{contratar.landing.ctaband.text}}</p>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:12px;">
+      <a href="{{nav.servicios}}" style="display:inline-flex; align-items:center; gap:9px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); color:#fff; font-weight:700; font-size:14px; padding:13px 20px; border-radius:9999px; text-decoration:none;">{{contratar.landing.ctaband.servicesBtn}}</a>
+      <a class="wa-btn" href="https://wa.me/34650257684" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>{{contratar.landing.ctaband.whatsappBtn}}</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top:1px solid rgba(255,255,255,.08); padding:36px 26px;">
+  <div style="max-width:1180px; margin:0 auto; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center;">
+    <a class="wordmark" href="{{nav.home}}"><span class="gem"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2l5 6-5 14L7 8z"/></svg></span>santipulse.com</a>
+    <span class="meta">{{common.footer}}</span>
+  </div>
+</footer>
+
+<!-- STICKY BOTTOM CTA -->
+<div class="sticky-bar"><a href="#precio">{{contratar.landing.sticky}}</a></div>
 
 <!-- i18n strings for the form's JS (success/error/validation messages) -->
 <script id="i18n-data" type="application/json">{{i18n.formJson}}</script>
