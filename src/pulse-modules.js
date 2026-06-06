@@ -38,7 +38,7 @@
 
   var SantiPulse = {
     init: function (active) {
-      var bodies = ['recepBody', 'insightsBody', 'adsBody'];
+      var bodies = ['recepBody', 'insightsBody', 'adsBody', 'vaultBody'];
       var anyHost = bodies.some(function (id) { return !!el(id); });
       if (!anyHost) return;
       if (!active) {
@@ -49,6 +49,7 @@
       this.renderReceptionist();
       this.renderInsights();
       this.renderAds();
+      this.renderVault();
       this.handleOAuthFlash();
     },
 
@@ -87,6 +88,7 @@
             '</div>' +
             '<div class="msg ok hidden" id="recepOk"></div><div class="msg err hidden" id="recepErr"></div>' +
           '</form>' +
+          voiceConsole(s.voice, c) +
           metricStrip([
             ['Leads', (d.leads || []).length],
             ['Llamadas', (d.calls || []).length],
@@ -139,6 +141,53 @@
               btn.textContent = original;
             });
         });
+        var panic = el('panicBtn');
+        if (panic) {
+          panic.addEventListener('click', function () {
+            clearMsg('recepOk'); clearMsg('recepErr');
+            var original = panic.textContent;
+            panic.disabled = true;
+            panic.textContent = 'Avisando...';
+            api('/api/receptionist/sos', {
+              method: 'POST',
+              body: JSON.stringify({ reason: 'panic_button', detail: 'SOS humano pulsado desde el panel.' }),
+            })
+              .then(function (sosRes) {
+                if (!sosRes.ok) throw new Error(errorText(sosRes.d, 'No se pudo avisar al equipo humano.'));
+                msg('recepOk', 'ok', 'SOS humano enviado. El aviso quedo registrado y se notifico al contacto de emergencia.');
+              })
+              .catch(function (err) { msg('recepErr', 'err', err.message || 'No se pudo enviar SOS.'); })
+              .finally(function () {
+                panic.disabled = false;
+                panic.textContent = original;
+              });
+          });
+        }
+        var callForm = el('testCallForm');
+        if (callForm) {
+          callForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            clearMsg('recepOk'); clearMsg('recepErr');
+            var payload = formData(callForm);
+            var btn = el('testCallBtn');
+            var original = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'Llamando...';
+            api('/api/receptionist/dashboard', {
+              method: 'POST',
+              body: JSON.stringify({ action: 'call', to: payload.to }),
+            })
+              .then(function (callRes) {
+                if (!callRes.ok) throw new Error(errorText(callRes.d, 'No se pudo lanzar la llamada.'));
+                msg('recepOk', 'ok', 'Llamada de prueba lanzada desde Vapi.');
+              })
+              .catch(function (err) { msg('recepErr', 'err', err.message || 'No se pudo llamar.'); })
+              .finally(function () {
+                btn.disabled = false;
+                btn.textContent = original;
+              });
+          });
+        }
         bindConnect('[data-connect-calendar]', '/api/integrations/calendar/authorize', 'recepErr', 'Google Calendar');
       });
     },
@@ -232,8 +281,10 @@
             '<div class="simple-status">' + statusRow([
               ['Meta Ads', { configured: s.meta && s.meta.configured, connected: s.connected }],
               ['TikTok Ads', { configured: s.tiktok && s.tiktok.configured, connected: s.connected }],
+              ['Revealbot', { configured: s.revealbot && s.revealbot.configured, connected: false }],
             ]) + '</div>' +
           '</div>' +
+          '<div id="adsRoiCard">' + loadingLine() + '</div>' +
           '<form id="adLaunchForm" class="easy-form ad-launch" novalidate>' +
             adPostChooser(posts) +
             grid2(
@@ -254,6 +305,8 @@
             ['Alertas', (d.alerts || []).length],
           ]) +
           '<details class="quiet-details"><summary>Ver campanas actuales</summary>' + campaignsTable(d.campaigns || []) + '</details>';
+
+        renderRoiPulse('adsRoiCard');
 
         var form = el('adLaunchForm');
         form.addEventListener('submit', function (e) {
@@ -290,6 +343,98 @@
       });
     },
 
+    renderVault: function () {
+      var box = el('vaultBody');
+      if (!box) return;
+      box.innerHTML = loadingLine();
+      api('/api/vault').then(function (res) {
+        if (!res.ok) { box.innerHTML = errLine(res); return; }
+        var items = (res.d && res.d.items) || [];
+        box.innerHTML =
+          '<div class="simple-panel accent-green">' +
+            '<div><p class="eyebrow">Knowledge Vault</p><h2>Tu IA estudia tu negocio real</h2>' +
+            '<p>Sube menus, PDFs o notas. SantiPulse resume el contexto y lo usa en Recepcionista IA e Insights de Redes.</p></div>' +
+            '<div class="simple-status">' + metricStrip([
+              ['Documentos', items.length],
+              ['Estado', items.some(function (x) { return x.status === 'metadata_only'; }) ? 'Revisar' : 'Listo'],
+            ]) + '</div>' +
+          '</div>' +
+          '<form id="vaultForm" class="easy-form" novalidate>' +
+            grid2(
+              field('Titulo', 'title', '', 'Menu de verano / FAQ / Servicios', 'text', 'required'),
+              '<div><label>Archivo PDF, menu o texto</label><input name="vault_file" type="file" accept=".pdf,.txt,.md,.csv,.json,image/*,application/pdf" /></div>'
+            ) +
+            '<div style="margin-bottom:12px"><label>Notas del negocio</label><textarea name="notes" rows="5" placeholder="Precios, horarios, servicios, politicas, preguntas frecuentes..."></textarea></div>' +
+            '<div class="module-actions"><button class="btn" type="submit" id="saveVault">Guardar en Boveda</button></div>' +
+            '<div class="msg ok hidden" id="vaultOk"></div><div class="msg err hidden" id="vaultErr"></div>' +
+          '</form>' +
+          '<div class="edge-grid">' +
+            '<div class="edge-card"><b>Recepcionista IA</b><p>Usa la Boveda para responder con contexto real del negocio.</p></div>' +
+            '<div class="edge-card"><b>Insights de Redes</b><p>Mezcla tendencias con servicios, menus y tono propio.</p></div>' +
+            '<div class="edge-card"><b>Human SOS</b><p>Si la IA no sabe, escala a una persona con historial guardado.</p></div>' +
+          '</div>' +
+          vaultList(items);
+
+        var form = el('vaultForm');
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          clearMsg('vaultOk'); clearMsg('vaultErr');
+          var payload = formData(form);
+          var file = form.vault_file && form.vault_file.files && form.vault_file.files[0];
+          if (!payload.title && !file) {
+            msg('vaultErr', 'err', 'Pon un titulo o sube un archivo.');
+            return;
+          }
+          if (!payload.notes && !file) {
+            msg('vaultErr', 'err', 'Anade notas o sube un archivo para guardar contexto.');
+            return;
+          }
+          var btn = el('saveVault');
+          var original = btn.textContent;
+          btn.disabled = true;
+          btn.textContent = 'Guardando...';
+          fileToBase64(file).then(function (fileBase64) {
+            return api('/api/vault', {
+              method: 'POST',
+              body: JSON.stringify({
+                title: payload.title,
+                notes: payload.notes,
+                fileName: file ? file.name : '',
+                mimeType: file ? file.type : '',
+                fileBase64: fileBase64 || '',
+              }),
+            });
+          }).then(function (saveRes) {
+            if (!saveRes.ok) throw new Error(errorText(saveRes.d, 'No se pudo guardar la Boveda.'));
+            msg('vaultOk', 'ok', 'Guardado. La IA ya puede usar este contexto en los modulos.');
+            form.reset();
+            SantiPulse.renderVault();
+          }).catch(function (err) {
+            msg('vaultErr', 'err', err.message || 'No se pudo guardar.');
+          }).finally(function () {
+            btn.disabled = false;
+            btn.textContent = original;
+          });
+        });
+
+        document.querySelectorAll('[data-delete-vault]').forEach(function (button) {
+          button.addEventListener('click', function () {
+            var id = button.getAttribute('data-delete-vault');
+            button.disabled = true;
+            api('/api/vault', { method: 'DELETE', body: JSON.stringify({ id: id }) })
+              .then(function (delRes) {
+                if (!delRes.ok) throw new Error(errorText(delRes.d, 'No se pudo borrar.'));
+                SantiPulse.renderVault();
+              })
+              .catch(function (err) {
+                button.disabled = false;
+                msg('vaultErr', 'err', err.message || 'No se pudo borrar.');
+              });
+          });
+        });
+      });
+    },
+
     handleOAuthFlash: function () {
       var q = new URLSearchParams(window.location.search);
       var flash = el('pulseFlash');
@@ -307,6 +452,47 @@
 
   function loadingLine() {
     return '<p class="muted" style="font-size:13px">Cargando...</p>';
+  }
+
+  function voiceConsole(voiceStatus, config) {
+    var ready = !!(voiceStatus && voiceStatus.configured && voiceStatus.connected && config && config.vapi_phone_number_id);
+    return '<div class="voice-console">' +
+      '<form id="testCallForm" novalidate>' +
+        '<p><b>Control de voz IA</b><br>Zona lista para Vapi Web SDK. Hoy lanza llamadas de prueba desde el backend y mantiene el SOS humano a mano.</p>' +
+        '<label>Telefono para prueba</label><input name="to" type="tel" placeholder="+34600000000" ' + (ready ? '' : 'disabled') + ' />' +
+        '<div class="module-actions">' +
+          '<button class="btn ghost" id="testCallBtn" type="submit" ' + (ready ? '' : 'disabled title="Conecta Vapi y un phone number id primero"') + '>Llamar prueba</button>' +
+          '<button class="btn danger" id="panicBtn" type="button">SOS humano</button>' +
+        '</div>' +
+      '</form>' +
+    '</div>';
+  }
+
+  function renderRoiPulse(hostId) {
+    var host = el(hostId);
+    if (!host) return;
+    api('/api/ads/roi-pulse').then(function (res) {
+      if (!res.ok) {
+        host.innerHTML = '<div class="msg err">No se pudo cargar ROI Pulse.</div>';
+        return;
+      }
+      var p = (res.d && res.d.pulse) || {};
+      host.innerHTML = roiTiles(p, false);
+    }).catch(function () {
+      host.innerHTML = '<div class="msg err">No se pudo cargar ROI Pulse.</div>';
+    });
+  }
+
+  function roiTiles(p, compact) {
+    var currency = p.currency || 'EUR';
+    var status = p.status === 'empty' ? 'Sin campanas sincronizadas' : (p.source === 'revealbot' ? 'Revealbot conectado' : 'Meta/TikTok');
+    return '<div class="roi-pulse' + (compact ? ' compact' : '') + '">' +
+      '<div class="roi-tile lead"><div class="k">ROI Pulse</div><div class="v">' + esc(status) + '</div><div class="s">' + esc(String(p.campaign_count || 0)) + ' campanas visibles.</div></div>' +
+      '<div class="roi-tile"><div class="k">Gasto</div><div class="v">' + esc(formatMoney(p.spend, currency)) + '</div><div class="s">Ads</div></div>' +
+      '<div class="roi-tile"><div class="k">Ingresos</div><div class="v">' + esc(formatMoney(p.revenue, currency)) + '</div><div class="s">Atribuido</div></div>' +
+      '<div class="roi-tile"><div class="k">ROAS</div><div class="v">' + esc(p.roas == null ? '-' : Number(p.roas).toFixed(2) + 'x') + '</div><div class="s">Retorno</div></div>' +
+      '<div class="roi-tile"><div class="k">Beneficio</div><div class="v">' + esc(formatMoney(p.profit, currency)) + '</div><div class="s">Estimado</div></div>' +
+    '</div>';
   }
 
   function runPulse(type) {
@@ -406,6 +592,31 @@
     }).join('') + '</div>';
   }
 
+  function vaultList(items) {
+    if (!items.length) {
+      return '<div class="vault-list"><div class="vault-item"><div><h4>Boveda vacia</h4><p>Sube tu menu, servicios, FAQs o politicas para personalizar la IA.</p></div></div></div>';
+    }
+    return '<div class="vault-list">' + items.map(function (item) {
+      var status = item.status === 'metadata_only' ? 'Archivo pendiente' : 'Listo';
+      return '<div class="vault-item">' +
+        '<div><h4>' + esc(item.title || item.file_name || 'Documento') + '</h4>' +
+        '<p>' + esc(item.summary || 'Contexto guardado.') + '</p>' +
+        '<p class="mono" style="margin-top:7px;font-size:10.5px">' + esc(status) + (item.file_name ? ' - ' + esc(item.file_name) : '') + '</p></div>' +
+        '<button class="btn ghost sm" type="button" data-delete-vault="' + esc(item.id) + '">Borrar</button>' +
+      '</div>';
+    }).join('') + '</div>';
+  }
+
+  function fileToBase64(file) {
+    if (!file) return Promise.resolve('');
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () { resolve(String(reader.result || '')); };
+      reader.onerror = function () { reject(new Error('No se pudo leer el archivo.')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
   function validateReceptionist(payload, form) {
     var fields = [];
     var names = {
@@ -483,6 +694,15 @@
     var n = Number(value);
     return Number.isFinite(n) ? n.toFixed(2) : '-';
   }
+  function formatMoney(value, currency) {
+    var n = Number(value);
+    if (!Number.isFinite(n)) return '-';
+    try {
+      return new Intl.NumberFormat('es-ES', { style: 'currency', currency: currency || 'EUR', maximumFractionDigits: 0 }).format(n);
+    } catch {
+      return n.toFixed(0) + ' ' + (currency || 'EUR');
+    }
+  }
   function errorText(data, fallback) {
     if (!data) return fallback;
     var map = {
@@ -495,6 +715,10 @@
       invalid_duration: 'La duracion debe estar entre 1 y 60 dias.',
       missing_post: 'Elige un post o escribe el texto del anuncio.',
       stripe_not_configured: 'Stripe no esta configurado.',
+      missing_sos_email: 'Configura el email SOS antes de avisar al equipo humano.',
+      empty_vault_item: 'Anade notas o sube un archivo para guardar contexto.',
+      file_too_large: 'El archivo es demasiado grande para la Boveda.',
+      save_failed: 'No se pudo guardar en la Boveda.',
     };
     return data.message || map[data.error] || fallback;
   }

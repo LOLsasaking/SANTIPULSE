@@ -15,6 +15,7 @@ import { parseBody } from '../lib/http.js';
 import * as vapi from '../lib/vapi.js';
 import * as wa from '../lib/whatsapp.js';
 import * as cal from '../lib/calendar.js';
+import { getVaultContext } from '../lib/vault.js';
 import {
   getConfig, saveConfig, listLeads, listCalls, listMessages, listBookings, listSos,
 } from '../lib/receptionist.js';
@@ -65,6 +66,7 @@ export default async function handler(req, res) {
   if (action === 'provision_assistant') {
     if (!vapi.isConfigured()) return res.status(503).json({ error: 'integration_not_configured' });
     const config = await getConfig(user.id);
+    const vaultContext = await getVaultContext(user.id);
     const validation = validateReceptionistConfig({ ...config, ...body });
     if (!validation.ok) {
       return res.status(400).json({
@@ -78,6 +80,7 @@ export default async function handler(req, res) {
         assistantId: config?.vapi_assistant_id || null,
         name: profile?.business_name || 'Recepcionista IA',
         greeting: config?.greeting || body.greeting,
+        systemPrompt: buildReceptionistPrompt(profile, config, vaultContext),
         language: 'es',
       });
       if (!assistantId) return res.status(503).json({ error: 'provision_failed' });
@@ -107,6 +110,22 @@ export default async function handler(req, res) {
   }
 
   return res.status(400).json({ error: 'unknown_action' });
+}
+
+function buildReceptionistPrompt(profile = {}, config = {}, vaultContext = '') {
+  const business = profile?.business_name || 'el negocio';
+  const industry = profile?.industry || 'servicios locales';
+  const target = profile?.target_market || 'clientes potenciales';
+  const greeting = config?.greeting || `Hola, gracias por llamar a ${business}.`;
+  return [
+    `Eres la Recepcionista IA de ${business}. Hablas espanol claro, calido y profesional.`,
+    `Sector: ${industry}. Cliente ideal: ${target}.`,
+    `Saludo preferido: ${greeting}`,
+    'Objetivo: responder llamadas, captar nombre/telefono/motivo, detectar urgencia y ayudar a reservar.',
+    'Si el cliente pide una persona, esta molesto o hay confusion, avisa que activaras SOS humano.',
+    'No inventes precios, disponibilidad ni politicas. Si algo no esta en el contexto, pide confirmacion.',
+    vaultContext ? `Boveda de Conocimiento del negocio:\n${vaultContext}` : '',
+  ].filter(Boolean).join('\n');
 }
 
 function validateReceptionistConfig(body = {}) {

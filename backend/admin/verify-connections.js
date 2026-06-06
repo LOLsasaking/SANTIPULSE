@@ -10,6 +10,8 @@
    Auth: requires a logged-in admin (Supabase bearer token).
    ============================================================ */
 import { requireUser } from '../lib/auth.js';
+import { pingRevealbot } from '../lib/revealbot.js';
+import { vaultReadiness } from '../lib/vault.js';
 
 const TIMEOUT_MS = 8000;
 
@@ -43,6 +45,8 @@ export default async function handler(req, res) {
     meta: missing('Falta META_ACCESS_TOKEN'),
     stripe: missing('Falta STRIPE_SECRET_KEY'),
     supabase: missing('Falta SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY'),
+    revealbot: missing('Falta REVEALBOT_API_KEY / REVEALBOT_ACCOUNT_ID'),
+    vault: missing('Falta tabla/bucket de Boveda en Supabase'),
   };
 
   // ── 1. Vapi (AI voice) ──
@@ -96,6 +100,12 @@ export default async function handler(req, res) {
       results.supabase = { status: 'error', message: `Error ${r.status || 'red'}` };
     }
   }
+
+  // ── 5. Revealbot (optional ads engine) ──
+  results.revealbot = await pingRevealbot();
+
+  // ── 6. Knowledge Vault readiness ──
+  results.vault = await vaultReadiness();
 
   res.setHeader('Cache-Control', 'no-store');
   return res.status(200).json({

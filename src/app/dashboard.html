@@ -80,6 +80,8 @@
   .btn:disabled{ opacity:.55; cursor:wait; }
   .btn.ghost{ background:#fff; color:var(--ink); border:1px solid var(--line); }
   .btn.ghost:hover:not(:disabled){ background:var(--panel-2); }
+  .btn.danger{ background:var(--red); color:#fff; }
+  .btn.danger:hover:not(:disabled){ background:var(--red-dark); }
   .btn.sm{ padding:8px 14px; font-size:12px; }
 
   label{ font-size:11px; font-weight:700; letter-spacing:.02em; color:var(--muted); display:block; margin-bottom:6px; }
@@ -154,6 +156,29 @@
   .quiet-details summary{ cursor:pointer; color:var(--ink); font-weight:800; margin-bottom:10px; }
   .mini-done p{ margin:8px 0 0; color:var(--muted); line-height:1.55; }
   @media (max-width:780px){ .simple-panel{ grid-template-columns:1fr; } }
+
+  .roi-pulse{ display:grid; grid-template-columns:1.2fr repeat(4,minmax(110px,1fr)); gap:12px; margin-bottom:22px; }
+  .roi-tile{ background:#fff; border:1px solid var(--line); border-radius:24px; padding:18px 20px; box-shadow:var(--shadow); min-width:0; }
+  .roi-tile.lead{ background:#11141a; color:#fff; }
+  .roi-tile .k{ color:var(--muted); font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+  .roi-tile.lead .k{ color:rgba(255,255,255,.58); }
+  .roi-tile .v{ margin-top:7px; font-size:26px; font-weight:850; letter-spacing:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .roi-tile .s{ margin-top:4px; color:var(--muted); font-size:12px; line-height:1.35; }
+  .roi-tile.lead .s{ color:rgba(255,255,255,.66); }
+  @media (max-width:960px){ .roi-pulse{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .roi-pulse{ grid-template-columns:1fr; } }
+
+  .edge-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:16px; }
+  .edge-card{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:18px; }
+  .edge-card b{ display:block; font-size:14px; margin-bottom:6px; }
+  .edge-card p{ margin:0; color:var(--muted); font-size:12.5px; line-height:1.5; }
+  .vault-list{ display:grid; gap:10px; margin-top:16px; }
+  .vault-item{ display:flex; align-items:flex-start; justify-content:space-between; gap:14px; border:1px solid var(--line); border-radius:18px; background:#fff; padding:15px; }
+  .vault-item h4{ margin:0 0 5px; font-size:14px; }
+  .vault-item p{ margin:0; color:var(--muted); font-size:12.5px; line-height:1.5; }
+  .voice-console{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:end; background:#fff; border:1px solid var(--line); border-radius:20px; padding:18px; margin-top:16px; }
+  .voice-console p{ margin:0 0 12px; color:var(--muted); font-size:12.5px; line-height:1.5; }
+  @media (max-width:640px){ .voice-console{ grid-template-columns:1fr; } }
 
   /* status chips inside module panels */
   .status-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
@@ -253,6 +278,7 @@
       <button class="nav-item" data-nav="receptionist"><span class="ic">☎</span> Recepcionista IA</button>
       <button class="nav-item" data-nav="insights"><span class="ic">◎</span> Insights de Redes</button>
       <button class="nav-item" data-nav="ads"><span class="ic">$</span> Gestor de Ads</button>
+      <button class="nav-item" data-nav="vault"><span class="ic">KV</span> Bóveda</button>
       <div class="nav-label">Cuenta</div>
       <button class="nav-item" data-nav="connections"><span class="ic">⛓</span> Conexiones</button>
       <button class="nav-item" data-nav="profile"><span class="ic">🗂</span> Perfil</button>
@@ -289,6 +315,14 @@
         <section class="section active" data-section="overview">
           <div class="page-head">
             <div><h1>Panel</h1><p>Resumen de tus módulos Pulse y actividad.</p></div>
+          </div>
+
+          <div id="roiPulseTicker" class="roi-pulse">
+            <div class="roi-tile lead"><div class="k">ROI Pulse</div><div class="v">Cargando...</div><div class="s">Gasto, ingresos y beneficio desde tus campañas sincronizadas.</div></div>
+            <div class="roi-tile"><div class="k">Gasto</div><div class="v">-</div><div class="s">Ads</div></div>
+            <div class="roi-tile"><div class="k">Ingresos</div><div class="v">-</div><div class="s">Atribuido</div></div>
+            <div class="roi-tile"><div class="k">ROAS</div><div class="v">-</div><div class="s">Retorno</div></div>
+            <div class="roi-tile"><div class="k">Beneficio</div><div class="v">-</div><div class="s">Estimado</div></div>
           </div>
 
           <div class="stats" id="overviewStats">
@@ -343,6 +377,12 @@
           <div class="card"><div id="adsBody"></div></div>
         </section>
 
+        <!-- ══ BÓVEDA DE CONOCIMIENTO ══ -->
+        <section class="section" data-section="vault">
+          <div class="page-head"><div><h1>Bóveda de Conocimiento</h1><p>Menús, PDFs y notas que entrenan el contexto de tu IA.</p></div></div>
+          <div class="card"><div id="vaultBody"></div></div>
+        </section>
+
         <!-- ══ CONEXIONES (Truth Layer — verificación real de APIs) ══ -->
         <section class="section" data-section="connections">
           <div class="page-head">
@@ -365,6 +405,14 @@
               </div>
               <div class="conn-row" data-integration="supabase">
                 <div class="conn-meta"><span class="conn-ico">🗄</span><div><div class="conn-name">Supabase (Base de datos)</div><p class="status-message muted">Comprobando…</p></div></div>
+                <span class="status-badge badge none">Comprobando…</span>
+              </div>
+              <div class="conn-row" data-integration="revealbot">
+                <div class="conn-meta"><span class="conn-ico">RB</span><div><div class="conn-name">Revealbot (Ads avanzado)</div><p class="status-message muted">Comprobando…</p></div></div>
+                <span class="status-badge badge none">Comprobando…</span>
+              </div>
+              <div class="conn-row" data-integration="vault">
+                <div class="conn-meta"><span class="conn-ico">KV</span><div><div class="conn-name">Bóveda de Conocimiento</div><p class="status-message muted">Comprobando…</p></div></div>
                 <span class="status-badge badge none">Comprobando…</span>
               </div>
             </div>

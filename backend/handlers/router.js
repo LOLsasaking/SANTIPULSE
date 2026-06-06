@@ -5,14 +5,18 @@ import dashboardRun from '../dashboard/run.js';
 import dashboardRuns from '../dashboard/runs.js';
 import lead from '../lead.js';
 import receptionistDashboard from '../receptionist/dashboard.js';
+import receptionistSos from '../receptionist/sos.js';
 import receptionistVapiWebhook from '../receptionist/vapi-webhook.js';
 import receptionistWhatsappWebhook from '../receptionist/whatsapp-webhook.js';
 import insightsDashboard from '../insights/dashboard.js';
 import insightsIngest from '../insights/ingest.js';
 import adsDashboard from '../ads/dashboard.js';
+import adsRoiPulse from '../ads/roi-pulse.js';
+import vaultDashboard from '../vault/dashboard.js';
 import adsAuthorize from '../integrations/ads/authorize.js';
 import adsCallback from '../integrations/ads/callback.js';
 import adsTiktokCallback from '../integrations/ads/tiktok-callback.js';
+import revealbotStatus from '../integrations/revealbot/status.js';
 import calendarAuthorize from '../integrations/calendar/authorize.js';
 import calendarCallback from '../integrations/calendar/callback.js';
 import socialAuthorize from '../integrations/social/authorize.js';
@@ -26,16 +30,20 @@ import stripeWebhook from '../stripe/webhook.js';
 const ROUTES = new Map([
   ['lead', lead],
   ['receptionist/dashboard', receptionistDashboard],
+  ['receptionist/sos', receptionistSos],
   ['receptionist/vapi-webhook', receptionistVapiWebhook],
   ['receptionist/whatsapp-webhook', receptionistWhatsappWebhook],
   ['insights/dashboard', insightsDashboard],
   ['insights/ingest', insightsIngest],
+  ['vault', vaultDashboard],
   ['integrations/social/authorize', socialAuthorize],
   ['integrations/social/callback', socialCallback],
   ['ads/dashboard', adsDashboard],
+  ['ads/roi-pulse', adsRoiPulse],
   ['integrations/ads/authorize', adsAuthorize],
   ['integrations/ads/callback', adsCallback],
   ['integrations/ads/tiktok-callback', adsTiktokCallback],
+  ['integrations/revealbot/status', revealbotStatus],
   ['integrations/calendar/authorize', calendarAuthorize],
   ['integrations/calendar/callback', calendarCallback],
   ['admin/verify-connections', adminVerifyConnections],

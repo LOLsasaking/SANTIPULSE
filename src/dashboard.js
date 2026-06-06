@@ -65,11 +65,13 @@
       show(document.getElementById('plans'));
       hide(document.getElementById('portalBtn'));
       show(document.getElementById('lockedNote'));
+      renderLockedRoiTicker();
     }
 
     // Boot the 3 Pulse modules' live panels (Recepcionista IA / Insights de
     // Redes / Gestor de Ads), gated on the subscription state we just computed.
     if (window.SantiPulseModules) window.SantiPulseModules.init(!!sub.active);
+    if (sub.active) loadRoiPulseTicker();
   }
 
   function fillProfile(p) {
@@ -78,6 +80,47 @@
     ['business_name', 'website_url', 'industry', 'sender_name', 'target_market'].forEach(function (k) {
       if (form[k] != null && p[k] != null) form[k].value = p[k];
     });
+  }
+
+  function loadRoiPulseTicker() {
+    var host = document.getElementById('roiPulseTicker');
+    if (!host) return;
+    window.SantiAuth.apiFetch('/api/ads/roi-pulse')
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (!res.ok) return;
+        var p = (res.d && res.d.pulse) || {};
+        var currency = p.currency || 'EUR';
+        var status = p.status === 'empty' ? 'Sin campanas' : (p.source === 'revealbot' ? 'Revealbot' : 'Meta/TikTok');
+        host.innerHTML =
+          '<div class="roi-tile lead"><div class="k">ROI Pulse</div><div class="v">' + esc(status) + '</div><div class="s">' + esc(String(p.campaign_count || 0)) + ' campanas sincronizadas.</div></div>' +
+          '<div class="roi-tile"><div class="k">Gasto</div><div class="v">' + esc(formatMoney(p.spend, currency)) + '</div><div class="s">Ads</div></div>' +
+          '<div class="roi-tile"><div class="k">Ingresos</div><div class="v">' + esc(formatMoney(p.revenue, currency)) + '</div><div class="s">Atribuido</div></div>' +
+          '<div class="roi-tile"><div class="k">ROAS</div><div class="v">' + esc(p.roas == null ? '-' : Number(p.roas).toFixed(2) + 'x') + '</div><div class="s">Retorno</div></div>' +
+          '<div class="roi-tile"><div class="k">Beneficio</div><div class="v">' + esc(formatMoney(p.profit, currency)) + '</div><div class="s">Estimado</div></div>';
+      })
+      .catch(function () {});
+  }
+
+  function renderLockedRoiTicker() {
+    var host = document.getElementById('roiPulseTicker');
+    if (!host) return;
+    host.innerHTML =
+      '<div class="roi-tile lead"><div class="k">ROI Pulse</div><div class="v">Bloqueado</div><div class="s">Activa un plan para ver gasto, ingresos y ROAS.</div></div>' +
+      '<div class="roi-tile"><div class="k">Gasto</div><div class="v">-</div><div class="s">Ads</div></div>' +
+      '<div class="roi-tile"><div class="k">Ingresos</div><div class="v">-</div><div class="s">Atribuido</div></div>' +
+      '<div class="roi-tile"><div class="k">ROAS</div><div class="v">-</div><div class="s">Retorno</div></div>' +
+      '<div class="roi-tile"><div class="k">Beneficio</div><div class="v">-</div><div class="s">Estimado</div></div>';
+  }
+
+  function formatMoney(value, currency) {
+    var n = Number(value);
+    if (!Number.isFinite(n)) return '-';
+    try {
+      return new Intl.NumberFormat('es-ES', { style: 'currency', currency: currency || 'EUR', maximumFractionDigits: 0 }).format(n);
+    } catch {
+      return n.toFixed(0) + ' ' + (currency || 'EUR');
+    }
   }
 
   // ── Save profile ──

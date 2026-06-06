@@ -30,9 +30,15 @@ assertFile('README.md');
 assertFile('backend/handlers/router.js');
 assertFile('backend/lib/auth.js');
 assertFile('backend/lib/db.js');
+assertFile('backend/lib/vault.js');
+assertFile('backend/lib/revealbot.js');
 assertFile('backend/pulse/modules.js');
 assertFile('backend/pulse/stripe-plans.js');
 assertFile('backend/dashboard/run.js');
+assertFile('backend/vault/dashboard.js');
+assertFile('backend/receptionist/sos.js');
+assertFile('backend/ads/roi-pulse.js');
+assertFile('backend/integrations/revealbot/status.js');
 assertFile('backend/stripe/ad-checkout.js');
 assertFile('backend-archive/api/demo/price-monitor.js');
 assertFile('backend-archive/api/demo/lead-scraper.js');
@@ -89,6 +95,8 @@ for (const alias of ['recepcionista', 'social', 'ads']) {
 const pulseModulesJs = readFileSync(join(ROOT, 'src/pulse-modules.js'), 'utf8');
 const dashboardHtml = readFileSync(join(ROOT, 'src/app/dashboard.html'), 'utf8');
 const receptionistApi = readFileSync(join(ROOT, 'backend/receptionist/dashboard.js'), 'utf8');
+const routerJs = readFileSync(join(ROOT, 'backend/handlers/router.js'), 'utf8');
+const verifyConnectionsApi = readFileSync(join(ROOT, 'backend/admin/verify-connections.js'), 'utf8');
 const adCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/ad-checkout.js'), 'utf8');
 const pulseModulesApi = readFileSync(join(ROOT, 'backend/pulse/modules.js'), 'utf8');
 const dashboardRunApi = readFileSync(join(ROOT, 'backend/dashboard/run.js'), 'utf8');
@@ -98,6 +106,15 @@ const pricingJs = readFileSync(join(ROOT, 'src/precios.js'), 'utf8');
 const spanishI18n = readFileSync(join(ROOT, 'src/i18n/es.json'), 'utf8');
 
 if (!dashboardHtml.includes('Automatizar ahora')) fail('dashboard must use easy automation copy');
+for (const required of ['Bóveda de Conocimiento', 'ROI Pulse', 'SOS humano']) {
+  if (!dashboardHtml.includes(required) && !pulseModulesJs.includes(required)) fail(`dashboard missing ${required}`);
+}
+for (const route of ["'vault'", "'receptionist/sos'", "'ads/roi-pulse'", "'integrations/revealbot/status'"]) {
+  if (!routerJs.includes(route)) fail(`router missing ${route}`);
+}
+for (const key of ['revealbot', 'vaultReadiness', 'pingRevealbot']) {
+  if (!verifyConnectionsApi.includes(key)) fail(`verify-connections missing ${key}`);
+}
 if (!pulseModulesJs.includes('/api/stripe/ad-checkout')) fail('ads panel must use one-off ad checkout');
 if (!pulseModulesJs.includes('Pagar y lanzar anuncio')) fail('ads panel must present a simple pay-and-launch CTA');
 if (pulseModulesJs.includes('adRuleForm') || pulseModulesJs.includes('Nombre de la regla')) {
@@ -117,6 +134,9 @@ if (!pulseModulesApi.includes('export async function runPulseModule')) {
 }
 if (!pulseModulesApi.includes('upsertAssistant') || !pulseModulesApi.includes('queuePost')) {
   fail('Pulse Execute must provision voice and queue social posts where possible');
+}
+if (!pulseModulesApi.includes('getVaultContext') || !receptionistApi.includes('getVaultContext')) {
+  fail('Knowledge Vault context must feed Recepcionista IA and Pulse Execute');
 }
 if (!dashboardRunApi.includes('await runPulseModule')) {
   fail('/api/dashboard/run must await real Pulse module actions');

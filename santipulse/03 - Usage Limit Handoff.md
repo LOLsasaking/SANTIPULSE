@@ -38,6 +38,15 @@ If Codex hits a usage limit, resume from this project only:
   - `Recepcionista IA` provisions/updates the Vapi assistant when config is valid.
   - `Insights de Redes` queues a post from the top stored trend when available.
   - `Gestor de Ads` prepares the simple paid launch path.
+- Added the Next Architecture Pass:
+  - `backend/lib/vault.js` and `/api/vault` for Boveda uploads, notes, summaries, list and delete.
+  - `backend/receptionist/sos.js` and `/api/receptionist/sos` for the Human SOS panic button.
+  - `backend/ads/roi-pulse.js` and `/api/ads/roi-pulse` for spend/revenue/ROAS/profit ticker.
+  - `backend/lib/revealbot.js` plus `/api/integrations/revealbot/status` as an env-gated Revealbot adapter.
+  - `backend/admin/verify-connections.js` now checks Vapi, Meta, Stripe, Supabase, Revealbot and Vault readiness.
+  - Vapi assistant provisioning receives Knowledge Vault context through `getVaultContext`.
+  - Insights captions include Knowledge Vault context when available.
+  - Dashboard now shows Boveda de Conocimiento, ROI Pulse, Vapi-ready voice controls and SOS humano.
 
 ## Resume Commands
 
@@ -48,6 +57,15 @@ npm run verify:pulse
 node -e "import('./api/[...route].js').then(()=>console.log('api import ok'))"
 git status --short
 ```
+
+## New Manual Checks
+
+- Run `supabase/pulse-modules.sql` in Supabase SQL editor so `knowledge_vault_items` and bucket `knowledge-vault` exist.
+- Log in, open `Boveda`, upload a note or menu, and confirm it appears in the list.
+- Activate/provision `Recepcionista IA` again so the assistant receives Vault context.
+- Press `SOS humano` and confirm a `receptionist_sos_alerts` row is created.
+- Open Ads and confirm `ROI Pulse` loads from synced campaigns.
+- Revealbot should stay red/error until real `REVEALBOT_STATUS_URL` / metrics/action endpoints are provided.
 
 ## Current Live Status
 

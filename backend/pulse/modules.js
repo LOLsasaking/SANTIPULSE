@@ -7,6 +7,7 @@
 import * as vapi from '../lib/vapi.js';
 import { getConfig as getReceptionistConfig, saveConfig as saveReceptionistConfig } from '../lib/receptionist.js';
 import { getConfig as getInsightsConfig, listTrends, queuePost, listQueue } from '../lib/insights.js';
+import { getVaultContext } from '../lib/vault.js';
 
 export const PULSE_MODULES = {
   ai_receptionist: {
@@ -48,6 +49,7 @@ export async function runPulseModule(type, profile = {}) {
   const industry = clean(profile.industry) || 'servicios locales';
   const site = clean(profile.website_url) || 'sin web conectada';
   const userId = profile.id || profile.user_id || null;
+  const vaultContext = userId ? await getVaultContext(userId) : '';
 
   if (type === 'ai_receptionist') {
     const config = userId ? await getReceptionistConfig(userId) : null;
@@ -60,6 +62,7 @@ export async function runPulseModule(type, profile = {}) {
         assistantId,
         name: business,
         greeting: config.greeting || `Hola, gracias por llamar a ${business}.`,
+        systemPrompt: buildReceptionistPrompt({ business, industry, site, config, vaultContext }),
         language: 'es',
       });
       if (assistantId && userId) {
@@ -98,7 +101,7 @@ export async function runPulseModule(type, profile = {}) {
     const trends = userId ? await listTrends(userId, { limit: 1 }) : [];
     const topTrend = trends[0] || null;
     const caption = topTrend
-      ? buildCaption({ business, industry, trend: topTrend, config })
+      ? buildCaption({ business, industry, trend: topTrend, config, vaultContext })
       : null;
     const queuedPost = userId && topTrend
       ? await queuePost(userId, {
@@ -125,6 +128,7 @@ export async function runPulseModule(type, profile = {}) {
       ],
       autoActions: [
         'Contexto de nicho y zona aplicado al escaneo.',
+        vaultContext ? 'Boveda de Conocimiento aplicada al caption.' : 'Boveda pendiente: sube menu, PDFs o notas para personalizar mejor.',
         queuedPost ? 'Post programado automaticamente desde la tendencia principal.' : 'No habia tendencias guardadas todavia; GitHub Actions recolectara nuevas senales.',
         'Resumen guardado en el historial del panel.',
       ],
@@ -167,9 +171,22 @@ function validateReceptionistConfig(config = {}) {
   };
 }
 
-function buildCaption({ business, industry, trend, config }) {
+function buildReceptionistPrompt({ business, industry, site, config, vaultContext }) {
+  return [
+    `Eres la Recepcionista IA de ${business}. Hablas espanol claro, calido y profesional.`,
+    `Sector: ${industry}. Web: ${site}.`,
+    `Saludo: ${config?.greeting || `Hola, gracias por llamar a ${business}.`}`,
+    'Capta nombre, telefono, motivo y urgencia. Ayuda a reservar cuando sea posible.',
+    'Si el cliente pide una persona o hay confusion, activa el flujo SOS humano.',
+    'No inventes precios ni disponibilidad.',
+    vaultContext ? `Boveda de Conocimiento:\n${vaultContext}` : '',
+  ].filter(Boolean).join('\n');
+}
+
+function buildCaption({ business, industry, trend, config, vaultContext }) {
   const style = clean(trend?.style) || 'una idea que esta funcionando';
   const niche = clean(config?.niche) || industry;
   const region = clean(config?.region) || 'tu zona';
-  return `${business}: ${style} para ${niche} en ${region}. Reserva o pide info hoy.`;
+  const vaultHint = vaultContext ? ` Dato del negocio: ${clean(vaultContext, 120)}` : '';
+  return `${business}: ${style} para ${niche} en ${region}.${vaultHint} Reserva o pide info hoy.`;
 }

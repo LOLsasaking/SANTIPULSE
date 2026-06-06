@@ -12,6 +12,7 @@ import { requireUser } from '../lib/auth.js';
 import { getProfile, hasActiveSubscription } from '../lib/profile.js';
 import { parseBody } from '../lib/http.js';
 import { metaConfigured, tiktokConfigured } from '../lib/adsProviders.js';
+import { revealbotConfigured } from '../lib/revealbot.js';
 import {
   listAccounts, listCampaigns, listRules, listAlerts,
   syncAccount, createRule, updateRule, deleteRule, disconnectAccount,
@@ -32,6 +33,7 @@ export default async function handler(req, res) {
       status: {
         meta: { configured: metaConfigured() },
         tiktok: { configured: tiktokConfigured() },
+        revealbot: { configured: revealbotConfigured() },
         connected: accounts.length > 0,
       },
     });

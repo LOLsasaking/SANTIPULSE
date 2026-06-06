@@ -411,6 +411,48 @@ DROP POLICY IF EXISTS "ad alerts read own" ON ad_alerts;
 CREATE POLICY "ad alerts read own" ON ad_alerts
   FOR SELECT USING (auth.uid() = user_id);
 
+-- Knowledge Vault - private context used by Recepcionista IA and Insights
+CREATE TABLE IF NOT EXISTS knowledge_vault_items (
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id       UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  title         TEXT NOT NULL,
+  kind          VARCHAR(16) NOT NULL DEFAULT 'note',
+  file_name     TEXT,
+  mime_type     TEXT,
+  storage_path  TEXT,
+  content_text  TEXT,
+  summary       TEXT,
+  source        VARCHAR(32) NOT NULL DEFAULT 'dashboard',
+  status        VARCHAR(32) NOT NULL DEFAULT 'ready',
+  error_message TEXT,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_vault_user ON knowledge_vault_items(user_id);
+CREATE INDEX IF NOT EXISTS idx_vault_created ON knowledge_vault_items(user_id, created_at DESC);
+
+INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+VALUES (
+  'knowledge-vault',
+  'knowledge-vault',
+  false,
+  5242880,
+  ARRAY['application/pdf','text/plain','text/markdown','text/csv','application/json','image/png','image/jpeg','image/webp']::text[]
+)
+ON CONFLICT (id) DO UPDATE SET
+  public = false,
+  file_size_limit = EXCLUDED.file_size_limit,
+  allowed_mime_types = EXCLUDED.allowed_mime_types;
+
+DROP TRIGGER IF EXISTS knowledge_vault_updated_at ON knowledge_vault_items;
+CREATE TRIGGER knowledge_vault_updated_at BEFORE UPDATE ON knowledge_vault_items
+  FOR EACH ROW EXECUTE FUNCTION public.touch_updated_at();
+
+ALTER TABLE knowledge_vault_items ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "vault read own" ON knowledge_vault_items;
+CREATE POLICY "vault read own" ON knowledge_vault_items
+  FOR SELECT USING (auth.uid() = user_id);
+
 -- ═══════════════════════════════════════════════════════════════════════════
 -- End Pulse Modules schema.
 -- ═══════════════════════════════════════════════════════════════════════════

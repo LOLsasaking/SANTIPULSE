@@ -9,8 +9,14 @@ capturing leads, publishing social content, and managing ads from one panel.
 The active production modules are:
 
 - `Recepcionista IA`: AI voice, WhatsApp, calendar booking, lead capture, and human SOS alerts.
-- `Insights de Redes`: trend collection, content scoring, and post queue management.
-- `Gestor de Ads`: Meta/TikTok campaign visibility, rules, budget actions, and alerts.
+- `Insights de Redes`: trend collection, content scoring, Knowledge Vault context, and post queue management.
+- `Gestor de Ads`: simple post promotion, Meta/TikTok campaign visibility, ROI Pulse, optional Revealbot adapter, and alerts.
+
+The 1% Edge features are now part of the dashboard:
+
+- `Bóveda de Conocimiento`: upload PDFs, menus, and business notes so the AI has client-specific context.
+- `ROI Pulse`: live spend/revenue/profit ticker from synced ad metrics.
+- `SOS humano`: panic button that records and notifies a manual escalation.
 
 Legacy demos such as Price Monitor and Lead Scraper are archived under
 `backend-archive/` and are not part of the production API.
@@ -23,6 +29,7 @@ Legacy demos such as Price Monitor and Lead Scraper are archived under
 - `api/[...route].js`: the consolidated Vercel API adapter.
 - `backend/handlers/`: route map and request hydration for the catch-all API.
 - `backend/lib/`: shared server utilities for auth, data, products, providers, and HTTP.
+- `backend/vault/` and `backend/lib/vault.js`: Knowledge Vault upload/list/delete and AI prompt context.
 - `backend/`: active package handlers for integrations, modules, Stripe, auth, and cron.
 - `backend/pulse/stripe-plans.js`: Stripe plan map using environment-backed price IDs.
 - `supabase/`: setup SQL for leads, profiles, subscriptions, and Pulse module tables.
@@ -57,8 +64,10 @@ Set these in Vercel before selling or testing live payments:
 - `VAPI_API_KEY`
 - `META_ACCESS_TOKEN`
 - `CRON_SECRET`
+- `VAULT_BUCKET`
 
 Optional integration keys are documented in `.env.example`.
+Revealbot requires `REVEALBOT_API_KEY`, `REVEALBOT_ACCOUNT_ID`, and real status/metrics/action URLs from your Revealbot account. If absent, Gestor de Ads keeps using the native Meta/TikTok fallback.
 
 ## Deployment Notes
 
@@ -82,6 +91,7 @@ Then verify the live site manually:
 
 - `/admin` redirects to login, and authenticated users reach `/dashboard/`.
 - `/api/admin/verify-connections` returns `401` without a bearer session.
-- The dashboard Truth Layer shows Vapi, Meta, Stripe, and Supabase as connected when real keys are valid.
+- The dashboard Truth Layer shows Vapi, Meta, Stripe, Supabase, Revealbot, and Vault readiness when real keys/storage are valid.
+- The dashboard shows Bóveda de Conocimiento, ROI Pulse, and SOS humano.
 - Pricing buttons start Stripe Checkout for the selected plan.
 - `/bienvenida/` and `/privacidad/` render with complete social metadata.
