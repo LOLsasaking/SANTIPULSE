@@ -102,26 +102,109 @@
                 content.innerHTML = `
                     <header class="mb-12">
                         <h2 class="text-4xl font-black mb-2">Social Media IA</h2>
-                        <p class="text-zinc-500">Escaneo de tendencias y auto-poster.</p>
+                        <p class="text-zinc-500">Escaneo de tendencias y auto-poster automático.</p>
                     </header>
-                    <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
-                        <p class="text-zinc-500">Cargando radar de tendencias...</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                            <h3 class="font-bold mb-4">Tendencias Virales</h3>
+                            <div id="trends-list" class="space-y-3 text-sm">
+                                <p class="text-zinc-500">Cargando...</p>
+                            </div>
+                        </div>
+                        <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                            <h3 class="font-bold mb-4">Posts Programados</h3>
+                            <div id="queue-list" class="space-y-3 text-sm">
+                                <p class="text-zinc-500">Cargando...</p>
+                            </div>
+                        </div>
                     </div>
                 `;
+                loadSocialData();
+            } else if (tab === 'ads') {
+                content.innerHTML = `
+                    <header class="mb-12">
+                        <h2 class="text-4xl font-black mb-2">Gestor de Ads Automático</h2>
+                        <p class="text-zinc-500">Optimización y escalado de campañas en tiempo real.</p>
+                    </header>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                        <div class="bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 text-center">
+                            <span class="text-xs text-zinc-500 uppercase font-bold block mb-2">Gasto Total</span>
+                            <span class="text-3xl font-black text-white">€225.50</span>
+                        </div>
+                        <div class="bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 text-center">
+                            <span class="text-xs text-zinc-500 uppercase font-bold block mb-2">ROAS</span>
+                            <span class="text-3xl font-black text-green-500">3.19x</span>
+                        </div>
+                        <div class="bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 text-center">
+                            <span class="text-xs text-zinc-500 uppercase font-bold block mb-2">Leads</span>
+                            <span class="text-3xl font-black text-white">45</span>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                        <h3 class="font-bold mb-4">Campañas Activas</h3>
+                        <div id="campaigns-list" class="space-y-3 text-sm">
+                            <p class="text-zinc-500">Cargando...</p>
+                        </div>
+                    </div>
+                `;
+                loadAdData();
             } else if (tab === 'vault') {
                 content.innerHTML = `
                     <header class="mb-12">
                         <h2 class="text-4xl font-black mb-2">Knowledge Vault</h2>
                         <p class="text-zinc-500">Entrena a tu IA con el ADN de tu negocio.</p>
                     </header>
-                    <div class="bg-zinc-900/50 p-12 rounded-3xl border border-dashed border-zinc-800 text-center">
+                    <div class="bg-zinc-900/50 p-12 rounded-3xl border border-dashed border-zinc-800 text-center mb-8">
                         <p class="text-zinc-500 mb-4">Arrastra tus archivos PDF o TXT aquí</p>
                         <button class="bg-white text-black px-6 py-2 rounded-xl font-bold">Subir Documentos</button>
                     </div>
+                    <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                        <h3 class="font-bold mb-4">Documentos Cargados</h3>
+                        <div id="vault-docs" class="space-y-3 text-sm">
+                            <p class="text-zinc-500">Cargando...</p>
+                        </div>
+                    </div>
                 `;
+                loadVaultData();
             } else if (tab === 'receptionist') {
                 location.reload(); 
             }
+        }
+
+        async function loadSocialData() {
+            try {
+                const res = await fetch('/api/admin/social/trends');
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('trends-list').innerHTML = data.trends.map(t => 
+                        `<div class="p-2 bg-zinc-800/50 rounded"><span class="text-white">${t.hook}</span> <span class="text-green-500 text-xs">${t.reach}</span></div>`
+                    ).join('');
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        async function loadAdData() {
+            try {
+                const res = await fetch('/api/admin/ads/campaigns');
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('campaigns-list').innerHTML = data.campaigns.map(c => 
+                        `<div class="p-3 bg-zinc-800/50 rounded flex justify-between"><span>${c.name}</span> <span class="text-xs text-zinc-500">${c.status}</span></div>`
+                    ).join('');
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        async function loadVaultData() {
+            try {
+                const res = await fetch('/api/admin/vault/documents');
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('vault-docs').innerHTML = data.documents.map(d => 
+                        `<div class="p-3 bg-zinc-800/50 rounded flex justify-between"><span>${d.name}</span> <span class="text-xs text-zinc-500">${d.size}</span></div>`
+                    ).join('');
+                }
+            } catch (e) { console.error(e); }
         }
 
         async function verifyConnections() {
