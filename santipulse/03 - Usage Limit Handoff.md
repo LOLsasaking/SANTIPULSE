@@ -32,6 +32,9 @@ If Codex hits a usage limit, resume from this project only:
     it can save or activate.
   - OAuth connect buttons show a visible error/timeout instead of spinning.
   - `Gestor de Ads` is now "choose post, choose budget/days, pay and launch".
+  - OAuth state is table-first with a signed fallback. If `oauth_states` is
+    missing, Google Calendar, Instagram/Facebook, and Meta Ads connect buttons
+    can still open provider consent URLs instead of failing with `state_failed`.
 - Added one-off Stripe ad checkout at `backend/stripe/ad-checkout.js`.
 - Stripe webhook records paid ad launches as `Gestor de Ads` history jobs.
 - `/api/dashboard/run` now awaits real module actions where safely possible:
@@ -76,10 +79,13 @@ git status --short
 - Vercel Production has `VAPI_API_KEY`, `META_ACCESS_TOKEN`,
   `STRIPE_SECRET_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` present.
 - `META_ACCESS_TOKEN` was validated against Graph API before deployment.
-- Latest deployed commit: `70adb3c fix: simplify pulse dashboard actions`.
-- Remaining user-session check: log into `/admin`, open `Integraciones`, click
-  `Verificar Conexiones`, and confirm Vapi, Meta, Stripe, and Supabase badges.
-- Remaining OAuth checks: click Google Calendar, Instagram/Facebook, and Meta
+- Latest local checks: `npm run build` and `npm run verify:pulse` pass.
+- Temporary authenticated production smoke passed for Vault save/list/delete,
+  ROI Pulse, and SOS humano. Cleanup completed.
+- Truth Layer smoke result: Vapi, Stripe, Supabase, and Vault were connected;
+  Meta requested reauth; Revealbot was missing because optional env vars are not
+  configured.
+- Remaining after deploy: click Google Calendar, Instagram/Facebook, and Meta
   Ads from the logged-in dashboard and confirm they redirect to the provider
   consent screen instead of staying in a loading state.
 

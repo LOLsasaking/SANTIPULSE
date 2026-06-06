@@ -68,6 +68,10 @@ Set these in Vercel before selling or testing live payments:
 
 Optional integration keys are documented in `.env.example`.
 Revealbot requires `REVEALBOT_API_KEY`, `REVEALBOT_ACCOUNT_ID`, and real status/metrics/action URLs from your Revealbot account. If absent, Gestor de Ads keeps using the native Meta/TikTok fallback.
+OAuth connect flows prefer the `oauth_states` table from the Supabase SQL, but
+fall back to short-lived signed state tokens if that table has not been migrated
+yet. Set `OAUTH_STATE_SECRET` if you want a dedicated signing key; otherwise the
+server uses `SUPABASE_SERVICE_ROLE_KEY`.
 
 ## Deployment Notes
 

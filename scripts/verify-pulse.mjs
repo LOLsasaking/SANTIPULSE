@@ -97,6 +97,7 @@ const dashboardHtml = readFileSync(join(ROOT, 'src/app/dashboard.html'), 'utf8')
 const receptionistApi = readFileSync(join(ROOT, 'backend/receptionist/dashboard.js'), 'utf8');
 const routerJs = readFileSync(join(ROOT, 'backend/handlers/router.js'), 'utf8');
 const verifyConnectionsApi = readFileSync(join(ROOT, 'backend/admin/verify-connections.js'), 'utf8');
+const automationsApi = readFileSync(join(ROOT, 'backend/lib/automations.js'), 'utf8');
 const adCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/ad-checkout.js'), 'utf8');
 const pulseModulesApi = readFileSync(join(ROOT, 'backend/pulse/modules.js'), 'utf8');
 const dashboardRunApi = readFileSync(join(ROOT, 'backend/dashboard/run.js'), 'utf8');
@@ -125,6 +126,9 @@ if (!pulseModulesJs.includes('validateReceptionist') || !receptionistApi.include
 }
 if (!pulseModulesJs.includes('tardando demasiado') || !pulseModulesJs.includes('12000')) {
   fail('OAuth connect buttons need visible timeout/error handling');
+}
+if (!automationsApi.includes('createSignedOAuthState') || !automationsApi.includes('tableMissing(error)')) {
+  fail('OAuth state helper must fall back to signed state when oauth_states is not migrated');
 }
 if (!adCheckoutApi.includes("mode: 'payment'") || !adCheckoutApi.includes("kind: 'ad_launch'")) {
   fail('ad checkout must be a one-off payment tagged as ad_launch');
