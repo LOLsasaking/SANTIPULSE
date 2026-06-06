@@ -6,6 +6,7 @@
   "common": {
     "acceder": "Acceder",
     "volver": "Volver",
+    "privacidad": "Privacidad",
     "footer": "© 2026 Santipulse · 🇺🇸 EE.UU. · Tenerife 🇪🇸"
   },
   "home": {
@@ -17,8 +18,8 @@
       "eyebrow": "Para Empresas",
       "titleA": "Quiero",
       "titleB": "una web",
-      "desc": "Diseño y desarrollo a medida. Entrega en 2–4 semanas.",
-      "meta": "Webs reales · Reservas integradas"
+      "desc": "Diseño profesional a medida, online en 7 días. Desde 49€/mes, sin pago inicial.",
+      "meta": "Entrega 7 días · Sin pago inicial"
     },
     "panel2": {
       "eyebrow": "Mis Trabajos",
@@ -46,9 +47,9 @@
       "eyebrow": "Diseño y Desarrollo",
       "titleA": "Una",
       "titleB": "web",
-      "desc": "Diseño y desarrollo a medida con reservas y presupuestos integrados. Entrega en 2–4 semanas.",
-      "meta": "Webs reales · 2–4 semanas",
-      "cta": "Cuéntame tu proyecto"
+      "desc": "Web profesional a medida, online en 7 días. Desde 49€/mes sin pago inicial — o 400€ pago único.",
+      "meta": "7 días · Desde 49€/mes",
+      "cta": "Quiero mi web"
     },
     "ai": {
       "eyebrow": "Automatización IA",

@@ -6,6 +6,7 @@
   "common": {
     "acceder": "Enter",
     "volver": "Back",
+    "privacidad": "Privacy",
     "footer": "© 2026 Santipulse · 🇺🇸 USA · Tenerife 🇪🇸"
   },
   "home": {
@@ -17,8 +18,8 @@
       "eyebrow": "For Businesses",
       "titleA": "I want",
       "titleB": "a website",
-      "desc": "Custom design and development. Delivered in 2–4 weeks.",
-      "meta": "Real sites · Integrated bookings"
+      "desc": "Custom professional design, online in 7 days. From €49/mo, no upfront payment.",
+      "meta": "7-day delivery · No upfront fee"
     },
     "panel2": {
       "eyebrow": "My Work",
@@ -46,9 +47,9 @@
       "eyebrow": "Design & Development",
       "titleA": "A",
       "titleB": "website",
-      "desc": "Custom design and development with integrated bookings and quotes. Delivered in 2–4 weeks.",
-      "meta": "Real sites · 2–4 weeks",
-      "cta": "Tell me about your project"
+      "desc": "Custom professional website, online in 7 days. From €49/mo with no upfront payment — or €400 one-time.",
+      "meta": "7 days · From €49/mo",
+      "cta": "I want my website"
     },
     "ai": {
       "eyebrow": "AI Automation",

@@ -6,6 +6,7 @@
   "common": {
     "acceder": "Öffnen",
     "volver": "Zurück",
+    "privacidad": "Datenschutz",
     "footer": "© 2026 Santipulse · 🇺🇸 USA · Teneriffa 🇪🇸"
   },
   "home": {
@@ -17,8 +18,8 @@
       "eyebrow": "Für Unternehmen",
       "titleA": "Ich will",
       "titleB": "eine Website",
-      "desc": "Individuelles Design und Entwicklung. Lieferung in 2–4 Wochen.",
-      "meta": "Echte Sites · Integrierte Buchungen"
+      "desc": "Maßgeschneidertes Profi-Design, in 7 Tagen online. Ab 49€/Monat, ohne Anzahlung.",
+      "meta": "Lieferung 7 Tage · Ohne Anzahlung"
     },
     "panel2": {
       "eyebrow": "Meine Arbeiten",
@@ -46,9 +47,9 @@
       "eyebrow": "Design & Entwicklung",
       "titleA": "Eine",
       "titleB": "Website",
-      "desc": "Maßgeschneidertes Design und Entwicklung mit integrierten Buchungen und Angeboten. Lieferung in 2–4 Wochen.",
-      "meta": "Echte Sites · 2–4 Wochen",
-      "cta": "Erzähl mir von deinem Projekt"
+      "desc": "Professionelle Website nach Maß, in 7 Tagen online. Ab 49€/Monat ohne Anzahlung — oder 400€ Einmalzahlung.",
+      "meta": "7 Tage · Ab 49€/Monat",
+      "cta": "Ich will meine Website"
     },
     "ai": {
       "eyebrow": "KI-Automatisierung",
