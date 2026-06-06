@@ -23,7 +23,6 @@
 <script src="{{asset.prefix}}tw-config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="{{asset.prefix}}demo-media/panel-1.jpg" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -75,9 +74,9 @@
   .stage:hover .panel .panel-bg{ filter:grayscale(1) brightness(.45); }
   .stage .panel:hover .panel-bg{ filter:grayscale(0) brightness(1.15); transform:scale(1.06); }
 
-  .panel-1 .panel-bg{ background:#070708 url('{{asset.prefix}}demo-media/panel-1.jpg') center/cover no-repeat; }
-  .panel-2 .panel-bg{ background:#060608 url('{{asset.prefix}}demo-media/panel-2.jpg') center/cover no-repeat; }
-  .panel-3 .panel-bg{ background:#060607 url('{{asset.prefix}}demo-media/panel-3.jpg') center/cover no-repeat; }
+  .panel-1 .panel-bg{ background:radial-gradient(circle at 28% 22%, rgba(255,255,255,.18), transparent 34%), linear-gradient(135deg,#070708,#15151a 52%,#050506); }
+  .panel-2 .panel-bg{ background:radial-gradient(circle at 70% 28%, rgba(255,255,255,.14), transparent 32%), linear-gradient(135deg,#060608,#111827 55%,#040405); }
+  .panel-3 .panel-bg{ background:radial-gradient(circle at 50% 20%, rgba(255,255,255,.13), transparent 30%), linear-gradient(135deg,#060607,#18181b 55%,#040404); }
 
   .panel-veil{ position:absolute; inset:0; z-index:1;
     background:linear-gradient(180deg, rgba(5,5,5,.45) 0%, rgba(5,5,5,.25) 40%, rgba(5,5,5,.92) 100%); }
@@ -178,8 +177,8 @@
 
   <div class="v-divider"></div>
 
-  <!-- PANEL 2 -> /demos -->
-  <a class="panel panel-2" href="{{nav.demos}}">
+  <!-- PANEL 2 -> pricing/contact; public automation demos are archived out of production -->
+  <a class="panel panel-2" href="{{nav.precios}}">
     <div class="panel-bg"></div><div class="panel-veil"></div>
     <div class="panel-content">
       <span class="eyebrow">{{home.panel2.eyebrow}}</span>

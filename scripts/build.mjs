@@ -58,7 +58,6 @@ const PAGES = [
   { tpl: 'home.html',      ns: 'home',      path: '' },
   { tpl: 'servicios.html', ns: 'servicios', path: 'servicios' },
   { tpl: 'contratar.html', ns: 'contratar', path: 'contratar' },
-  { tpl: 'demos.html',     ns: 'demos',     path: 'demos' },
   { tpl: 'nosotros.html',  ns: 'nosotros',  path: 'nosotros' },
   { tpl: 'precios.html',   ns: 'precios',   path: 'precios' },
   { tpl: 'bienvenida.html', ns: 'bienvenida', path: 'bienvenida' },
@@ -68,7 +67,7 @@ const PAGES = [
 // Single-file JS + static assets copied verbatim into dist root
 const JS_FILES = ['tw-config.js', 'lang.js', 'contratar.js', 'demos.js', 'auth.js', 'login.js', 'dashboard.js', 'dashboard-nav.js', 'pulse-modules.js', 'precios.js'];
 const ROOT_ASSETS = ['santilogo.png', 'santipulse-logo.webm'];
-const ASSET_DIRS = ['demo-media'];
+const ASSET_DIRS = [];
 
 // Public (browser-safe) Supabase config — injected into app pages at build time.
 // The anon key is DESIGNED to be public; RLS protects the data. Never inject the
@@ -76,11 +75,11 @@ const ASSET_DIRS = ['demo-media'];
 const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
 
-// App-like pages (login/dashboard): single-language, no SEO/i18n treatment.
-// Built from src/app/*.html, served at /login/ and /dashboard/.
+// App-like pages (login/admin): single-language, no SEO/i18n treatment.
+// Built from src/app/*.html, served at /login/ and /admin/.
 const APP_PAGES = [
-  { tpl: 'login.html',     path: 'login' },
-  { tpl: 'dashboard.html', path: 'dashboard' },
+  { tpl: 'login.html', path: 'login' },
+  { tpl: 'admin.html', path: 'admin' },
 ];
 
 // ---- Helpers ----
@@ -123,7 +122,7 @@ function switchHref(fromLang, toLang, pagePath) {
   return target === '' ? './' : target;
 }
 
-// Nav links (home/contratar/demos/nosotros) relative to current page, same lang
+// Nav links (home/servicios/contratar/nosotros/precios) relative to current page, same lang
 function navLinks(lang, pagePath) {
   const prefix = assetPrefix(lang, pagePath);
   const langSeg = lang === DEFAULT_LANG ? '' : `${lang}/`;
@@ -302,7 +301,11 @@ console.log('  ✓ aprender redirects');
 for (const f of JS_FILES) {
   copyFileSync(join(SRC, f), join(DIST, f));
 }
+for (const f of CSS_FILES) {
+  copyFileSync(join(SRC, f), join(DIST, f));
+}
 console.log('  ✓ JS:', JS_FILES.join(', '));
+console.log('  ✓ CSS:', CSS_FILES.join(', '));
 
 for (const a of ROOT_ASSETS) {
   const from = join(ROOT, a);
@@ -322,7 +325,7 @@ for (const d of ASSET_DIRS) {
   else console.warn('  ! supabase UMD bundle not found — run npm install');
 }
 
-// ---- App pages (login / dashboard): single-language, no SEO/i18n ----
+// ---- App pages (login / admin): single-language, no SEO/i18n ----
 // Config is written to a SEPARATE /sb-config.js file (not an inline <script>),
 // because the production CSP is script-src 'self' with no 'unsafe-inline' —
 // an inline config script would be blocked. A same-origin .js file is allowed.

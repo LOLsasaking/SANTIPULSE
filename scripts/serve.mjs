@@ -81,9 +81,9 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  const mode = process.env.SUPABASE_URL ? 'LIVE Supabase' : 'DEMO (no DB writes)';
+  const mode = process.env.SUPABASE_URL ? 'LIVE Supabase' : 'LOCAL PREVIEW (no DB writes)';
   console.log(`\n  ▲ Santipulse preview`);
   console.log(`  → http://localhost:${PORT}/            (ES home)`);
-  console.log(`  → /en/  /fr/  /de/  /it/   ·   /contratar/  /demos/  /nosotros/`);
+  console.log(`  → /en/  /fr/  /de/  /it/   ·   /contratar/  /precios/  /nosotros/  /admin/`);
   console.log(`  Form backend: ${mode}\n`);
 });

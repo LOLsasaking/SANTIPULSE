@@ -18,11 +18,11 @@
     return client;
   }
 
-  // Send a magic link to the given email. redirectTo returns the user to /dashboard.
+  // Send a magic link to the given email. redirectTo returns the user to /admin.
   function sendMagicLink(email) {
     var c = sb();
     if (!c) return Promise.reject(new Error('auth-unavailable'));
-    var redirectTo = window.location.origin + '/dashboard/';
+    var redirectTo = window.location.origin + '/admin/';
     return c.auth.signInWithOtp({ email: email, options: { emailRedirectTo: redirectTo } });
   }
 

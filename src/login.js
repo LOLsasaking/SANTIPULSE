@@ -12,10 +12,10 @@
 
   function showErr(msg) { err.textContent = msg; err.classList.remove('hidden'); ok.classList.add('hidden'); }
 
-  // If already logged in, go straight to the dashboard.
+  // If already logged in, go straight to the admin dashboard.
   if (window.SantiAuth && window.SantiAuth.available()) {
     window.SantiAuth.getSession().then(function (s) {
-      if (s) window.location.replace('/dashboard/');
+      if (s) window.location.replace('/admin/');
     });
   }
 

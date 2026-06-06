@@ -1,14 +1,12 @@
 /* ============================================================
-   Shared serverless helpers for the demo endpoints (ESM)
+   Shared serverless HTTP helpers (ESM)
    ------------------------------------------------------------
-   Mirrors the security patterns already used in api/lead.js:
-   IP extraction, hashed fingerprint, body parsing, and a
-   best-effort in-memory per-IP rate limiter.
+   Generic parsing, validation, request fingerprinting, and
+   best-effort in-memory rate limiting for production routes.
    ============================================================ */
 import crypto from 'node:crypto';
 
-// Best-effort in-memory rate limit (per warm instance). Scrapes are heavy, so
-// keep this tight: a few runs per minute per IP.
+// Best-effort in-memory rate limit (per warm instance).
 const RATE = new Map();
 const WINDOW_MS = 60 * 1000;
 const MAX_PER_WINDOW = 4;
@@ -27,7 +25,7 @@ export function getIp(req) {
   return (req.socket && req.socket.remoteAddress) || 'unknown';
 }
 
-/** Stable hashed fingerprint for the one-time trial gate (IP + UA, salted). */
+/** Stable hashed fingerprint for request auditing (IP + UA, salted). */
 export function getFingerprint(req) {
   const ip = getIp(req);
   const ua = req.headers['user-agent'] || 'unknown';
@@ -53,14 +51,3 @@ export function isValidHttpUrl(value) {
   }
 }
 
-export const UPGRADE_URL =
-  (process.env.SITE_URL ? process.env.SITE_URL.replace(/\/$/, '') : 'https://santipulse.com') + '/contratar/';
-
-export function trialBlocked(res, automationType) {
-  return res.status(403).json({
-    success: false,
-    trialUsed: true,
-    error: `Your free demo for "${automationType.replace(/_/g, ' ')}" has already been used. Get in touch to run unlimited automations.`,
-    upgradeUrl: UPGRADE_URL,
-  });
-}

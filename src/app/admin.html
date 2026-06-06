@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SantiPulse | Unified Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .active-tab { border-left: 4px solid white; background: rgba(255,255,255,0.05); color: white; }
+        .ticker-item { animation: slide 20s linear infinite; }
+        @keyframes slide { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+    </style>
+</head>
+<body class="bg-[#050505] text-white font-sans flex h-screen overflow-hidden">
+
+    <!-- Sidebar (The Unified Navigation) -->
+    <aside class="w-64 border-r border-zinc-800 flex flex-col p-6 space-y-8">
+        <h1 class="text-xl font-black tracking-tighter">SANTIPULSE</h1>
+        
+        <nav class="flex-1 space-y-2">
+            <button class="w-full text-left p-3 text-zinc-400 hover:text-white transition active-tab" onclick="switchTab('receptionist')">
+                <span class="text-xs block text-zinc-600 uppercase font-bold mb-1">Package 1</span>
+                Recepcionista IA
+            </button>
+            <button class="w-full text-left p-3 text-zinc-400 hover:text-white transition" onclick="switchTab('social')">
+                <span class="text-xs block text-zinc-600 uppercase font-bold mb-1">Package 2</span>
+                Social Media IA
+            </button>
+            <button class="w-full text-left p-3 text-zinc-400 hover:text-white transition" onclick="switchTab('ads')">
+                <span class="text-xs block text-zinc-600 uppercase font-bold mb-1">Package 3</span>
+                Gestor de Ads
+            </button>
+            <div class="h-4"></div>
+            <button class="w-full text-left p-3 text-zinc-400 hover:text-white transition" onclick="switchTab('vault')">
+                <span class="text-xs block text-zinc-600 uppercase font-bold mb-1">Elite</span>
+                Knowledge Vault
+            </button>
+        </nav>
+
+        <div class="pt-6 border-t border-zinc-800">
+            <button class="text-xs text-zinc-500 hover:text-white">Cerrar Sesión</button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto p-12">
+        <!-- ROI Pulse Ticker -->
+        <div class="mb-8 p-4 bg-zinc-900/80 border border-white/5 rounded-2xl flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <div>
+                    <span class="text-[10px] uppercase text-zinc-500 font-bold block">Profit Hoy</span>
+                    <span class="text-green-500 font-mono font-bold">€0.00</span>
+                </div>
+                <div class="h-8 w-px bg-zinc-800"></div>
+                <div>
+                    <span class="text-[10px] uppercase text-zinc-500 font-bold block">Ad Spend</span>
+                    <span class="text-red-500 font-mono font-bold">€0.00</span>
+                </div>
+            </div>
+            <div class="text-right">
+                <span class="text-[10px] uppercase text-zinc-500 font-bold block">System Status</span>
+                <span class="text-white text-xs font-mono">PULSE: ACTIVE</span>
+            </div>
+        </div>
+
+        <div id="content-area">
+            <!-- Default Content: Package 1 -->
+            <header class="mb-12">
+                <h2 class="text-4xl font-black mb-2">Recepcionista IA</h2>
+                <p class="text-zinc-500">Toda tu comunicación y leads en un solo lugar.</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                    <h3 class="font-bold mb-4">Estado de Conexión</h3>
+                    <div id="integration-status-list" class="space-y-4">
+                        <div data-integration="vapi" class="flex justify-between items-center">
+                            <span class="text-sm text-zinc-400">Vapi AI</span>
+                            <span class="status-badge bg-zinc-800 text-zinc-500 px-2 py-1 rounded-full text-[10px] font-bold">Checking...</span>
+                        </div>
+                        <div data-integration="supabase" class="flex justify-between items-center">
+                            <span class="text-sm text-zinc-400">Database</span>
+                            <span class="status-badge bg-zinc-800 text-zinc-500 px-2 py-1 rounded-full text-[10px] font-bold">Checking...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                    <h3 class="font-bold mb-4">Leads Recientes</h3>
+                    <p class="text-zinc-500 text-sm">No hay leads nuevos en las últimas 24h.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active-tab'));
+            event.currentTarget.classList.add('active-tab');
+
+            const content = document.getElementById('content-area');
+            if(tab === 'social') {
+                content.innerHTML = `
+                    <header class="mb-12">
+                        <h2 class="text-4xl font-black mb-2">Social Media IA</h2>
+                        <p class="text-zinc-500">Escaneo de tendencias y auto-poster automático.</p>
+                    </header>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                            <h3 class="font-bold mb-4">Tendencias Virales</h3>
+                            <div id="trends-list" class="space-y-3 text-sm">
+                                <p class="text-zinc-500">Cargando...</p>
+                            </div>
+                        </div>
+                        <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                            <h3 class="font-bold mb-4">Posts Programados</h3>
+                            <div id="queue-list" class="space-y-3 text-sm">
+                                <p class="text-zinc-500">Cargando...</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                loadSocialData();
+            } else if (tab === 'ads') {
+                content.innerHTML = `
+                    <header class="mb-12">
+                        <h2 class="text-4xl font-black mb-2">Gestor de Ads Automático</h2>
+                        <p class="text-zinc-500">Optimización y escalado de campañas en tiempo real.</p>
+                    </header>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                        <div class="bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 text-center">
+                            <span class="text-xs text-zinc-500 uppercase font-bold block mb-2">Gasto Total</span>
+                            <span class="text-3xl font-black text-white">€225.50</span>
+                        </div>
+                        <div class="bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 text-center">
+                            <span class="text-xs text-zinc-500 uppercase font-bold block mb-2">ROAS</span>
+                            <span class="text-3xl font-black text-green-500">3.19x</span>
+                        </div>
+                        <div class="bg-zinc-900/50 p-6 rounded-3xl border border-zinc-800 text-center">
+                            <span class="text-xs text-zinc-500 uppercase font-bold block mb-2">Leads</span>
+                            <span class="text-3xl font-black text-white">45</span>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                        <h3 class="font-bold mb-4">Campañas Activas</h3>
+                        <div id="campaigns-list" class="space-y-3 text-sm">
+                            <p class="text-zinc-500">Cargando...</p>
+                        </div>
+                    </div>
+                `;
+                loadAdData();
+            } else if (tab === 'vault') {
+                content.innerHTML = `
+                    <header class="mb-12">
+                        <h2 class="text-4xl font-black mb-2">Knowledge Vault</h2>
+                        <p class="text-zinc-500">Entrena a tu IA con el ADN de tu negocio.</p>
+                    </header>
+                    <div class="bg-zinc-900/50 p-12 rounded-3xl border border-dashed border-zinc-800 text-center mb-8">
+                        <p class="text-zinc-500 mb-4">Arrastra tus archivos PDF o TXT aquí</p>
+                        <button class="bg-white text-black px-6 py-2 rounded-xl font-bold">Subir Documentos</button>
+                    </div>
+                    <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                        <h3 class="font-bold mb-4">Documentos Cargados</h3>
+                        <div id="vault-docs" class="space-y-3 text-sm">
+                            <p class="text-zinc-500">Cargando...</p>
+                        </div>
+                    </div>
+                `;
+                loadVaultData();
+            } else if (tab === 'receptionist') {
+                location.reload(); 
+            }
+        }
+
+        async function loadSocialData() {
+            try {
+                const res = await fetch('/api/admin/social/trends');
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('trends-list').innerHTML = data.trends.map(t => 
+                        `<div class="p-2 bg-zinc-800/50 rounded"><span class="text-white">${t.hook}</span> <span class="text-green-500 text-xs">${t.reach}</span></div>`
+                    ).join('');
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        async function loadAdData() {
+            try {
+                const res = await fetch('/api/admin/ads/campaigns');
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('campaigns-list').innerHTML = data.campaigns.map(c => 
+                        `<div class="p-3 bg-zinc-800/50 rounded flex justify-between"><span>${c.name}</span> <span class="text-xs text-zinc-500">${c.status}</span></div>`
+                    ).join('');
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        async function loadVaultData() {
+            try {
+                const res = await fetch('/api/admin/vault/documents');
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('vault-docs').innerHTML = data.documents.map(d => 
+                        `<div class="p-3 bg-zinc-800/50 rounded flex justify-between"><span>${d.name}</span> <span class="text-xs text-zinc-500">${d.size}</span></div>`
+                    ).join('');
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        async function verifyConnections() {
+            try {
+                const res = await fetch('/api/admin/verify');
+                const data = await res.json();
+                if (data.success) {
+                    Object.entries(data.integrations).forEach(([key, info]) => {
+                        const el = document.querySelector(`[data-integration="${key}"]`);
+                        if (el) {
+                            const badge = el.querySelector('.status-badge');
+                            badge.innerText = info.status === 'connected' ? 'Connected' : 'Error';
+                            badge.className = `status-badge ${info.status === 'connected' ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'} px-2 py-1 rounded-full text-[10px] font-bold`;
+                        }
+                    });
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', verifyConnections);
+    </script>
+</body>
+</html>

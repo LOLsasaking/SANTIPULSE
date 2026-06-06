@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Santipulse marketing site — multilingual multi-page static build + serverless lead API",
+  "description": "SantiPulse public site with isolated modular admin automation backend",
   "scripts": {
     "build": "node scripts/build.mjs",
     "preview": "npm run build && node scripts/serve.mjs",
