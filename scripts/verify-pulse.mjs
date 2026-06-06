@@ -93,6 +93,7 @@ const adCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/ad-checkout.js'), 
 const pulseModulesApi = readFileSync(join(ROOT, 'backend/pulse/modules.js'), 'utf8');
 const dashboardRunApi = readFileSync(join(ROOT, 'backend/dashboard/run.js'), 'utf8');
 const stripeCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/checkout.js'), 'utf8');
+const stripeWebhookApi = readFileSync(join(ROOT, 'backend/stripe/webhook.js'), 'utf8');
 const pricingJs = readFileSync(join(ROOT, 'src/precios.js'), 'utf8');
 const spanishI18n = readFileSync(join(ROOT, 'src/i18n/es.json'), 'utf8');
 
@@ -125,6 +126,12 @@ if (!stripeCheckoutApi.includes('getUser') || stripeCheckoutApi.includes('requir
 }
 if (!stripeCheckoutApi.includes('public_checkout') || !stripeCheckoutApi.includes('/precios/?payment=cancelled')) {
   fail('public pricing checkout must use public onboarding/cancel URLs');
+}
+if (!stripeCheckoutApi.includes('resolveCheckoutPrice') || !stripeCheckoutApi.includes("startsWith('prod_')")) {
+  fail('Stripe checkout must resolve product IDs to active price IDs for safer Vercel env setup');
+}
+if (!stripeWebhookApi.includes('normalizePlanKey') || !stripeWebhookApi.includes('subscription.metadata?.plan')) {
+  fail('Stripe webhook must use checkout/subscription metadata to map plans');
 }
 if (!pricingJs.includes("fetch('/api/stripe/checkout'") || pricingJs.includes('loginHref(')) {
   fail('/precios/ buttons must open Stripe publicly instead of forcing login first');

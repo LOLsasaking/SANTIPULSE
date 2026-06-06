@@ -18,11 +18,14 @@ export default async function handler(req, res) {
   const plan = normalizePlanKey(body.plan || req.query?.plan);
   if (!PLANS[plan]) return res.status(400).json({ error: 'invalid_plan' });
 
-  const priceId = priceIdFor(plan);
-  if (!priceId) return res.status(500).json({ error: 'price_not_configured' });
+  const priceRef = priceIdFor(plan);
+  if (!priceRef) return res.status(500).json({ error: 'price_not_configured' });
 
   const stripe = await getStripe();
   if (!stripe) return res.status(500).json({ error: 'stripe_not_configured' });
+
+  const priceId = await resolveCheckoutPrice(stripe, plan, priceRef);
+  if (!priceId) return res.status(500).json({ error: 'stripe_price_invalid' });
 
   const origin = req.headers.origin || (process.env.SITE_URL || 'https://santipulse.com').replace(/\/$/, '');
   const user = await getUser(req);
@@ -52,5 +55,29 @@ export default async function handler(req, res) {
   } catch (err) {
     console.error('[stripe/checkout]', err.message);
     return res.status(500).json({ error: 'checkout_failed' });
+  }
+}
+
+async function resolveCheckoutPrice(stripe, plan, priceRef) {
+  const ref = String(priceRef || '').trim();
+  if (ref.startsWith('price_')) return ref;
+  if (!ref.startsWith('prod_')) {
+    console.error(`[stripe/checkout] ${plan} has invalid price ref`);
+    return null;
+  }
+
+  try {
+    const prices = await stripe.prices.list({ product: ref, active: true, limit: 10 });
+    const monthly = prices.data.find((p) => p.recurring?.interval === 'month');
+    const recurring = monthly || prices.data.find((p) => p.recurring);
+    const fallback = recurring || prices.data[0];
+    if (!fallback?.id) {
+      console.error(`[stripe/checkout] ${plan} product has no active prices`);
+      return null;
+    }
+    return fallback.id;
+  } catch (err) {
+    console.error('[stripe/checkout] price lookup failed:', err.message);
+    return null;
   }
 }

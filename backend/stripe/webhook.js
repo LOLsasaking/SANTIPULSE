@@ -9,7 +9,7 @@
    is read from the stream manually.
    ============================================================ */
 import { getStripe, alreadyProcessed, recordEvent, updateSubscription, findProfileBySubscription, findProfileByCustomer } from '../lib/stripe.js';
-import { planByPriceId } from '../lib/products.js';
+import { normalizePlanKey, planByPriceId } from '../lib/products.js';
 import { createJob, finishJob } from '../lib/db.js';
 
 // Disable Vercel's automatic JSON body parsing for this route.
@@ -103,10 +103,11 @@ export default async function handler(req, res) {
 
         const subscription = await stripe.subscriptions.retrieve(session.subscription);
         const priceId = subscription.items.data[0]?.price?.id;
+        const plan = normalizePlanKey(session.metadata?.plan || subscription.metadata?.plan || planByPriceId(priceId));
         await updateSubscription(userId, {
           status: subscription.status,
           subscriptionId: subscription.id,
-          plan: planByPriceId(priceId),
+          plan,
           expiresAt: new Date(subscription.current_period_end * 1000).toISOString(),
           customerId: session.customer,
         });
@@ -118,10 +119,11 @@ export default async function handler(req, res) {
         const profile = (await findProfileBySubscription(sub.id)) || (await findProfileByCustomer(sub.customer));
         if (!profile) break;
         const priceId = sub.items.data[0]?.price?.id;
+        const plan = normalizePlanKey(sub.metadata?.plan || planByPriceId(priceId));
         await updateSubscription(profile.id, {
           status: sub.status,
           subscriptionId: sub.id,
-          plan: planByPriceId(priceId),
+          plan,
           expiresAt: new Date(sub.current_period_end * 1000).toISOString(),
         });
         break;
