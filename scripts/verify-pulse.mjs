@@ -86,6 +86,27 @@ for (const alias of ['recepcionista', 'social', 'ads']) {
   if (!haystack.includes(alias)) fail(`missing PRICING_LOGIC.js plan alias ${alias}`);
 }
 
+const pulseModulesJs = readFileSync(join(ROOT, 'src/pulse-modules.js'), 'utf8');
+const dashboardHtml = readFileSync(join(ROOT, 'src/app/dashboard.html'), 'utf8');
+const receptionistApi = readFileSync(join(ROOT, 'backend/receptionist/dashboard.js'), 'utf8');
+const adCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/ad-checkout.js'), 'utf8');
+
+if (!dashboardHtml.includes('Automatizar ahora')) fail('dashboard must use easy automation copy');
+if (!pulseModulesJs.includes('/api/stripe/ad-checkout')) fail('ads panel must use one-off ad checkout');
+if (!pulseModulesJs.includes('Pagar y lanzar anuncio')) fail('ads panel must present a simple pay-and-launch CTA');
+if (pulseModulesJs.includes('adRuleForm') || pulseModulesJs.includes('Nombre de la regla')) {
+  fail('ads panel should not expose the rule-builder-first workflow');
+}
+if (!pulseModulesJs.includes('validateReceptionist') || !receptionistApi.includes('missing_required_config')) {
+  fail('Recepcionista IA must validate required config before save/activation');
+}
+if (!pulseModulesJs.includes('tardando demasiado') || !pulseModulesJs.includes('12000')) {
+  fail('OAuth connect buttons need visible timeout/error handling');
+}
+if (!adCheckoutApi.includes("mode: 'payment'") || !adCheckoutApi.includes("kind: 'ad_launch'")) {
+  fail('ad checkout must be a one-off payment tagged as ad_launch');
+}
+
 const distPages = [
   'dist/index.html',
   'dist/servicios/index.html',
