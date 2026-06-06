@@ -15,14 +15,27 @@
   try { STRINGS = JSON.parse(document.getElementById('precios-i18n').textContent); }
   catch (e) { STRINGS = {}; }
   var t = STRINGS.cta || {};
+  var PLAN_ALIASES = {
+    recepcionista: 'starter',
+    social: 'pro',
+    ads: 'agency',
+    ai_receptionist: 'starter',
+    social_insights: 'pro',
+    ad_manager: 'agency',
+  };
 
-  function setAllDisabled(state) {
-    document.querySelectorAll('[data-checkout]').forEach(function (b) { b.disabled = state; });
+  function normalizePlan(plan) {
+    return PLAN_ALIASES[plan] || plan;
   }
 
-  document.querySelectorAll('[data-checkout]').forEach(function (btn) {
+  function setAllDisabled(state) {
+    document.querySelectorAll('[data-checkout], .btn-elegir-plan[data-plan]').forEach(function (b) { b.disabled = state; });
+  }
+
+  document.querySelectorAll('[data-checkout], .btn-elegir-plan[data-plan]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var plan = btn.getAttribute('data-checkout');
+      var plan = normalizePlan(btn.getAttribute('data-checkout') || btn.getAttribute('data-plan'));
+      if (!plan) return;
       var orig = btn.textContent;
       setAllDisabled(true);
       btn.textContent = t.redirecting || 'Redirecting…';

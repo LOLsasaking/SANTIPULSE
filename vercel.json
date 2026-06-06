@@ -7,6 +7,10 @@
   "functions": {
     "api/index.js": { "maxDuration": 60 }
   },
+  "redirects": [
+    { "source": "/admin", "destination": "/login/", "permanent": false },
+    { "source": "/admin/", "destination": "/login/", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/api", "destination": "/api/index" },
     { "source": "/api/(.*)", "destination": "/api/index" }

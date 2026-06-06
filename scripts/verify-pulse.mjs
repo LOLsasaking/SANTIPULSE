@@ -26,6 +26,7 @@ function walk(dir, out = []) {
 }
 
 assertFile('api/index.js');
+assertFile('README.md');
 assertFile('backend/pulse/modules.js');
 assertFile('backend/pulse/stripe-plans.js');
 assertFile('backend/dashboard/run.js');
@@ -60,6 +61,34 @@ const labels = ['Recepcionista IA', 'Insights de Redes', 'Gestor de Ads'];
 const haystack = activeFiles.map((file) => readFileSync(join(ROOT, file), 'utf8')).join('\n');
 for (const label of labels) {
   if (!haystack.includes(label)) fail(`missing label ${label}`);
+}
+
+const vercel = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
+const hasAdminRedirect = (vercel.redirects || []).some((r) => r.source === '/admin' && r.destination === '/login/');
+if (!hasAdminRedirect) fail('missing /admin -> /login/ redirect');
+
+for (const alias of ['recepcionista', 'social', 'ads']) {
+  if (!haystack.includes(alias)) fail(`missing PRICING_LOGIC.js plan alias ${alias}`);
+}
+
+const distPages = [
+  'dist/index.html',
+  'dist/servicios/index.html',
+  'dist/contratar/index.html',
+  'dist/demos/index.html',
+  'dist/nosotros/index.html',
+  'dist/precios/index.html',
+  'dist/bienvenida/index.html',
+  'dist/privacidad/index.html',
+];
+for (const page of distPages) {
+  const abs = join(ROOT, page);
+  if (!existsSync(abs)) continue;
+  const html = readFileSync(abs, 'utf8');
+  if (/\{\{[^}]+\}\}/.test(html)) fail(`unresolved template token in ${page}`);
+  if (!/property="og:image"\s+content="https:\/\/santipulse\.com\/santilogo\.png"/.test(html)) fail(`missing og:image in ${page}`);
+  if (!/name="twitter:image"\s+content="https:\/\/santipulse\.com\/santilogo\.png"/.test(html)) fail(`missing twitter:image in ${page}`);
+  if (!/name="twitter:card"\s+content="summary_large_image"/.test(html)) fail(`twitter card is not summary_large_image in ${page}`);
 }
 
 // ── Environment readiness (warning-only) ──────────────────────────────

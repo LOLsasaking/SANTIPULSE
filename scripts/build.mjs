@@ -32,6 +32,8 @@ const DIST = join(ROOT, 'dist');
 
 // ---- Config ----
 const SITE_URL = (process.env.SITE_URL || 'https://santipulse.com').replace(/\/$/, '');
+const SOCIAL_IMAGE = `${SITE_URL}/santilogo.png`;
+const SOCIAL_IMAGE_ALT = 'SantiPulse logo';
 
 // Cache-busting build id: appended as ?v=… to every local .js URL so browsers
 // fetch fresh scripts on each deploy (JS files are cached for 24h by vercel.json).
@@ -140,7 +142,47 @@ function buildSeo(lang, pagePath) {
     'seo.canonical': canonical,
     'seo.hreflang': alts.join('\n'),
     'seo.ogUrl': urlFor(lang, pagePath),
+    'seo.ogImage': SOCIAL_IMAGE,
+    'seo.ogImageAlt': SOCIAL_IMAGE_ALT,
   };
+}
+
+function escapeAttr(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeRe(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function setMetaContent(html, attrName, attrValue, content) {
+  const tag = `<meta ${attrName}="${attrValue}" content="${escapeAttr(content)}" />`;
+  const re = new RegExp(`<meta\\s+${attrName}="${escapeRe(attrValue)}"\\s+content="[^"]*"\\s*/?>`, 'i');
+  if (re.test(html)) return html.replace(re, tag);
+
+  const ogUrl = /(<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>)/i;
+  if (ogUrl.test(html)) return html.replace(ogUrl, `$1\n${tag}`);
+  return html.replace('</head>', `${tag}\n</head>`);
+}
+
+function ensureSocialPreviewMeta(html, pageStrings) {
+  html = setMetaContent(html, 'property', 'og:image', SOCIAL_IMAGE);
+  html = setMetaContent(html, 'property', 'og:image:alt', SOCIAL_IMAGE_ALT);
+  html = setMetaContent(html, 'name', 'twitter:card', 'summary_large_image');
+  html = setMetaContent(html, 'name', 'twitter:title', pageStrings.title);
+  html = setMetaContent(html, 'name', 'twitter:description', pageStrings.metaDescription);
+  html = setMetaContent(html, 'name', 'twitter:image', SOCIAL_IMAGE);
+  html = setMetaContent(html, 'name', 'twitter:image:alt', SOCIAL_IMAGE_ALT);
+  return html;
+}
+
+function assertNoTemplateTokens(html, ctx) {
+  const tokens = html.match(/\{\{[^}]+\}\}/g);
+  if (tokens) throw new Error(`[build] Unresolved template tokens in ${ctx}: ${[...new Set(tokens)].join(', ')}`);
 }
 
 function switcherHtml(lang, pagePath) {
@@ -227,7 +269,10 @@ for (const lang of LANGS) {
       data['sb.config'] = `<script src="${data['asset.prefix']}sb-config.js"></script>`;
     }
 
-    const html = bustJsCache(fill(tpl, data, `${lang}/${page.tpl}`));
+    let html = fill(tpl, data, `${lang}/${page.tpl}`);
+    html = ensureSocialPreviewMeta(html, dotGet(s, page.ns));
+    html = bustJsCache(html);
+    assertNoTemplateTokens(html, `${lang}/${page.tpl}`);
 
     const outDir = join(DIST, lang === DEFAULT_LANG ? '' : lang, page.path);
     mkdirSync(outDir, { recursive: true });

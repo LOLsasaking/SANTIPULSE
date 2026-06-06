@@ -2,7 +2,7 @@
    Auth required. Body: { plan: "starter"|"pro"|"agency" }. Returns { url }. */
 import { requireUser } from '../_lib/auth.js';
 import { getStripe, getProfileByUserId } from '../_lib/stripe.js';
-import { priceIdFor, PLANS } from '../_lib/products.js';
+import { normalizePlanKey, priceIdFor, PLANS } from '../_lib/products.js';
 import { parseBody } from '../_lib/http.js';
 
 export default async function handler(req, res) {
@@ -12,7 +12,8 @@ export default async function handler(req, res) {
   const user = await requireUser(req, res);
   if (!user) return;
 
-  const { plan } = parseBody(req);
+  const body = parseBody(req);
+  const plan = normalizePlanKey(body.plan || req.query?.plan);
   if (!PLANS[plan]) return res.status(400).json({ error: 'invalid_plan' });
 
   const priceId = priceIdFor(plan);

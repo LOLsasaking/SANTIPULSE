@@ -14,7 +14,6 @@ export async function getProfile(userId) {
 // Whitelisted, server-controlled set of editable business-profile fields.
 const EDITABLE = [
   'business_name', 'website_url', 'industry', 'target_market', 'sender_name',
-  'my_current_price', 'floor_price', 'competitor_urls', 'lead_target_urls', 'max_leads_per_run',
 ];
 
 export async function saveProfile(userId, body) {

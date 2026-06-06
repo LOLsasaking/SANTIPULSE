@@ -78,13 +78,6 @@
     ['business_name', 'website_url', 'industry', 'sender_name', 'target_market'].forEach(function (k) {
       if (form[k] != null && p[k] != null) form[k].value = p[k];
     });
-    // URL fields are stored as JSONB arrays; show as text.
-    if (form.competitor_urls && Array.isArray(p.competitor_urls)) {
-      form.competitor_urls.value = p.competitor_urls.join('\n');
-    }
-    if (form.lead_target_urls && Array.isArray(p.lead_target_urls)) {
-      form.lead_target_urls.value = p.lead_target_urls[0] || '';
-    }
   }
 
   // ── Save profile ──
@@ -99,16 +92,6 @@
     var fd = new FormData(profileForm);
     var payload = {};
     fd.forEach(function (v, k) { if (v !== '') payload[k] = v; });
-
-    // URL fields are stored as JSONB arrays — convert from the form's text.
-    if (payload.competitor_urls != null) {
-      payload.competitor_urls = String(payload.competitor_urls)
-        .split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
-    }
-    if (payload.lead_target_urls != null) {
-      var u = String(payload.lead_target_urls).trim();
-      payload.lead_target_urls = u ? [u] : [];
-    }
 
     saveBtn.disabled = true;
     var orig = saveBtn.textContent; saveBtn.textContent = 'Guardando…';
