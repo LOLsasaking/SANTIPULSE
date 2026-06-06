@@ -120,6 +120,18 @@
     font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.4em; text-transform:uppercase;
     color:rgba(255,255,255,.4); pointer-events:none; text-align:center;
   }
+  .voice-widget{
+    position:fixed; right:24px; bottom:22px; z-index:65;
+    display:flex; align-items:center; gap:11px;
+    border:1px solid rgba(255,255,255,.16); border-radius:9999px;
+    background:rgba(8,8,10,.72); backdrop-filter:blur(16px);
+    padding:9px 13px 9px 10px; color:#fff;
+    box-shadow:0 18px 50px rgba(0,0,0,.45);
+  }
+  .voice-dot{ width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background:#E23B4E; color:#fff; font-family:'Archivo',sans-serif; font-size:13px; font-weight:900; }
+  .voice-copy{ display:flex; flex-direction:column; gap:2px; }
+  .voice-k{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.45); }
+  .voice-v{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.86); }
 
   @media (max-width:767px){
     body{ overflow:auto; }
@@ -130,6 +142,8 @@
     .panel-content{ justify-content:flex-end; padding:0 26px 40px; padding-top:90px; }
     .headline{ font-size:clamp(2.6rem,12vw,4rem); }
     .panel:hover .headline{ transform:none; }
+    .voice-widget{ right:16px; bottom:16px; }
+    .voice-copy{ display:none; }
   }
   @media (prefers-reduced-motion: reduce){
     .panel,.panel-bg,.headline,.panel-desc,.acceder svg,.acceder::after{ transition:none !important; }
@@ -192,6 +206,14 @@
 </main>
 
 <div class="omas">{{home.omas}}</div>
+
+<div class="voice-widget" aria-label="Recepcionista IA">
+  <span class="voice-dot">IA</span>
+  <span class="voice-copy">
+    <span class="voice-k">Vapi / Bland</span>
+    <span class="voice-v">Recepcionista IA</span>
+  </span>
+</div>
 
 <script src="{{asset.prefix}}lang.js" defer></script>
 </body>

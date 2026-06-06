@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS demo_trials (
   id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id         UUID REFERENCES auth.users(id) ON DELETE CASCADE,
   fingerprint     VARCHAR(128),
-  automation_type VARCHAR(64)  NOT NULL,  -- 'price_monitor' | 'lead_scraper'
+  automation_type VARCHAR(64)  NOT NULL,  -- Pulse module id
   used_at         TIMESTAMPTZ  NOT NULL DEFAULT NOW()
 );
 -- Partial unique indexes: one trial per (user, type) AND one per (fingerprint, type).

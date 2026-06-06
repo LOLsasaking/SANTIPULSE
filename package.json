@@ -8,7 +8,7 @@
     "build": "node scripts/build.mjs",
     "preview": "npm run build && node scripts/serve.mjs",
     "serve": "node scripts/serve.mjs",
-    "check:admin": "node scripts/check-admin-env.mjs"
+    "verify:pulse": "node scripts/verify-pulse.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

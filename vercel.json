@@ -5,13 +5,18 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "functions": {
-    "api/lead.js": { "maxDuration": 10 },
-    "api/admin/**/*.js": { "maxDuration": 30 },
-    "api/stripe/webhook.js": { "maxDuration": 15 }
+    "api/[...route].js": { "maxDuration": 60 }
   },
   "redirects": [
-    { "source": "/dashboard/", "destination": "/admin/", "permanent": false },
-    { "source": "/demos/", "destination": "/", "permanent": false }
+    { "source": "/admin", "destination": "/login/", "permanent": false },
+    { "source": "/admin/", "destination": "/login/", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/api", "destination": "/api/[...route]" },
+    { "source": "/api/(.*)", "destination": "/api/[...route]" }
+  ],
+  "crons": [
+    { "path": "/api/cron/process", "schedule": "0 9 * * *" }
   ],
   "headers": [
     {

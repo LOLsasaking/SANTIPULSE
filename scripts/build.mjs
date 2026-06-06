@@ -32,6 +32,8 @@ const DIST = join(ROOT, 'dist');
 
 // ---- Config ----
 const SITE_URL = (process.env.SITE_URL || 'https://santipulse.com').replace(/\/$/, '');
+const SOCIAL_IMAGE = `${SITE_URL}/santilogo.png`;
+const SOCIAL_IMAGE_ALT = 'SantiPulse logo';
 
 // Cache-busting build id: appended as ?v=… to every local .js URL so browsers
 // fetch fresh scripts on each deploy (JS files are cached for 24h by vercel.json).
@@ -58,11 +60,12 @@ const PAGES = [
   { tpl: 'contratar.html', ns: 'contratar', path: 'contratar' },
   { tpl: 'nosotros.html',  ns: 'nosotros',  path: 'nosotros' },
   { tpl: 'precios.html',   ns: 'precios',   path: 'precios' },
+  { tpl: 'bienvenida.html', ns: 'bienvenida', path: 'bienvenida' },
+  { tpl: 'privacidad.html', ns: 'privacidad', path: 'privacidad' },
 ];
 
 // Single-file JS + static assets copied verbatim into dist root
-const JS_FILES = ['tw-config.js', 'lang.js', 'contratar.js', 'auth.js', 'login.js', 'admin-dashboard.js', 'precios.js'];
-const CSS_FILES = ['admin-dashboard.css'];
+const JS_FILES = ['tw-config.js', 'lang.js', 'contratar.js', 'demos.js', 'auth.js', 'login.js', 'dashboard.js', 'dashboard-nav.js', 'pulse-modules.js', 'precios.js'];
 const ROOT_ASSETS = ['santilogo.png', 'santipulse-logo.webm'];
 const ASSET_DIRS = [];
 
@@ -138,7 +141,47 @@ function buildSeo(lang, pagePath) {
     'seo.canonical': canonical,
     'seo.hreflang': alts.join('\n'),
     'seo.ogUrl': urlFor(lang, pagePath),
+    'seo.ogImage': SOCIAL_IMAGE,
+    'seo.ogImageAlt': SOCIAL_IMAGE_ALT,
   };
+}
+
+function escapeAttr(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeRe(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function setMetaContent(html, attrName, attrValue, content) {
+  const tag = `<meta ${attrName}="${attrValue}" content="${escapeAttr(content)}" />`;
+  const re = new RegExp(`<meta\\s+${attrName}="${escapeRe(attrValue)}"\\s+content="[^"]*"\\s*/?>`, 'i');
+  if (re.test(html)) return html.replace(re, tag);
+
+  const ogUrl = /(<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>)/i;
+  if (ogUrl.test(html)) return html.replace(ogUrl, `$1\n${tag}`);
+  return html.replace('</head>', `${tag}\n</head>`);
+}
+
+function ensureSocialPreviewMeta(html, pageStrings) {
+  html = setMetaContent(html, 'property', 'og:image', SOCIAL_IMAGE);
+  html = setMetaContent(html, 'property', 'og:image:alt', SOCIAL_IMAGE_ALT);
+  html = setMetaContent(html, 'name', 'twitter:card', 'summary_large_image');
+  html = setMetaContent(html, 'name', 'twitter:title', pageStrings.title);
+  html = setMetaContent(html, 'name', 'twitter:description', pageStrings.metaDescription);
+  html = setMetaContent(html, 'name', 'twitter:image', SOCIAL_IMAGE);
+  html = setMetaContent(html, 'name', 'twitter:image:alt', SOCIAL_IMAGE_ALT);
+  return html;
+}
+
+function assertNoTemplateTokens(html, ctx) {
+  const tokens = html.match(/\{\{[^}]+\}\}/g);
+  if (tokens) throw new Error(`[build] Unresolved template tokens in ${ctx}: ${[...new Set(tokens)].join(', ')}`);
 }
 
 function switcherHtml(lang, pagePath) {
@@ -167,6 +210,16 @@ function copyDir(from, to) {
   }
 }
 
+function mergeFallback(base, override) {
+  if (Array.isArray(base) || Array.isArray(override)) return override ?? base;
+  if (!base || typeof base !== 'object') return override ?? base;
+  const out = { ...base };
+  for (const key of Object.keys(override || {})) {
+    out[key] = mergeFallback(base[key], override[key]);
+  }
+  return out;
+}
+
 // ---- Build ----
 console.log('• Cleaning dist/');
 if (existsSync(DIST)) rmSync(DIST, { recursive: true, force: true });
@@ -174,8 +227,10 @@ mkdirSync(DIST, { recursive: true });
 
 // Load all language strings up front
 const STRINGS = {};
+const ES_STRINGS = JSON.parse(readFileSync(join(SRC, 'i18n', `${DEFAULT_LANG}.json`), 'utf8'));
 for (const lang of LANGS) {
-  STRINGS[lang] = JSON.parse(readFileSync(join(SRC, 'i18n', `${lang}.json`), 'utf8'));
+  const langStrings = JSON.parse(readFileSync(join(SRC, 'i18n', `${lang}.json`), 'utf8'));
+  STRINGS[lang] = lang === DEFAULT_LANG ? langStrings : mergeFallback(ES_STRINGS, langStrings);
 }
 
 for (const lang of LANGS) {
@@ -203,6 +258,9 @@ for (const lang of LANGS) {
     if (page.ns === 'contratar') {
       data['i18n.formJson'] = JSON.stringify({ lang, form: s.contratar.form });
     }
+    if (page.ns === 'demos') {
+      data['i18n.demosJson'] = JSON.stringify({ lang, live: s.demos.live, items: s.demos.items });
+    }
     if (page.ns === 'precios') {
       // Checkout strings for precios.js + the Supabase auth config tag (real
       // asset prefix baked in, since fill() is a single pass).
@@ -210,7 +268,10 @@ for (const lang of LANGS) {
       data['sb.config'] = `<script src="${data['asset.prefix']}sb-config.js"></script>`;
     }
 
-    const html = bustJsCache(fill(tpl, data, `${lang}/${page.tpl}`));
+    let html = fill(tpl, data, `${lang}/${page.tpl}`);
+    html = ensureSocialPreviewMeta(html, dotGet(s, page.ns));
+    html = bustJsCache(html);
+    assertNoTemplateTokens(html, `${lang}/${page.tpl}`);
 
     const outDir = join(DIST, lang === DEFAULT_LANG ? '' : lang, page.path);
     mkdirSync(outDir, { recursive: true });

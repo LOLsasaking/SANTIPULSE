@@ -8,8 +8,9 @@
    body, so Vercel's body parser is disabled below and the body
    is read from the stream manually.
    ============================================================ */
-import { getStripe, alreadyProcessed, recordEvent, updateSubscription, findProfileBySubscription, findProfileByCustomer } from '../_lib/stripe.js';
-import { planByPriceId } from '../_lib/products.js';
+import { getStripe, alreadyProcessed, recordEvent, updateSubscription, findProfileBySubscription, findProfileByCustomer } from '../lib/stripe.js';
+import { normalizePlanKey, planByPriceId } from '../lib/products.js';
+import { createJob, finishJob } from '../lib/db.js';
 
 // Disable Vercel's automatic JSON body parsing for this route.
 export const config = { api: { bodyParser: false } };
@@ -50,16 +51,63 @@ export default async function handler(req, res) {
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object;
-        if (session.mode !== 'subscription') break;
         const userId = session.client_reference_id || session.metadata?.user_id;
-        if (!userId) { console.error('[webhook] no user_id on session'); break; }
+
+        if (session.mode === 'payment' && session.metadata?.kind === 'ad_launch') {
+          if (!userId) { console.error('[webhook] no user_id on ad launch session'); break; }
+          const inputParams = {
+            platform: session.metadata.platform || 'meta',
+            post_id: session.metadata.post_id || null,
+            caption: session.metadata.caption || null,
+            budget_eur: Number(session.metadata.budget_eur || 0),
+            duration_days: Number(session.metadata.duration_days || 0),
+            stripe_session_id: session.id,
+            paid_amount_total: session.amount_total,
+          };
+          const jobId = await createJob({
+            automationType: 'ad_manager',
+            userId,
+            isDemo: false,
+            inputParams,
+          });
+          await finishJob({
+            jobId,
+            status: 'completed',
+            result: {
+              success: true,
+              module: 'ad_manager',
+              title: 'Gestor de Ads',
+              summary: 'Pago recibido. SantiPulse recibio la orden para lanzar el anuncio.',
+              status: 'ad_launch_paid',
+              metrics: [
+                { label: 'Presupuesto', value: `${inputParams.budget_eur} EUR` },
+                { label: 'Duracion', value: `${inputParams.duration_days} dias` },
+                { label: 'Plataforma', value: inputParams.platform },
+              ],
+              autoActions: [
+                'Pago confirmado en Stripe.',
+                'Solicitud de anuncio registrada en el panel.',
+                'El equipo puede lanzar o revisar la campana sin pedirle reglas al cliente.',
+              ],
+            },
+          });
+          break;
+        }
+
+        if (session.mode !== 'subscription') break;
+        if (!userId) {
+          // Public pricing checkout: Stripe collected payment/email. The buyer
+          // lands on /bienvenida/ to create or log into their dashboard.
+          break;
+        }
 
         const subscription = await stripe.subscriptions.retrieve(session.subscription);
         const priceId = subscription.items.data[0]?.price?.id;
+        const plan = normalizePlanKey(session.metadata?.plan || subscription.metadata?.plan || planByPriceId(priceId));
         await updateSubscription(userId, {
           status: subscription.status,
           subscriptionId: subscription.id,
-          plan: planByPriceId(priceId),
+          plan,
           expiresAt: new Date(subscription.current_period_end * 1000).toISOString(),
           customerId: session.customer,
         });
@@ -71,10 +119,11 @@ export default async function handler(req, res) {
         const profile = (await findProfileBySubscription(sub.id)) || (await findProfileByCustomer(sub.customer));
         if (!profile) break;
         const priceId = sub.items.data[0]?.price?.id;
+        const plan = normalizePlanKey(sub.metadata?.plan || planByPriceId(priceId));
         await updateSubscription(profile.id, {
           status: sub.status,
           subscriptionId: sub.id,
-          plan: planByPriceId(priceId),
+          plan,
           expiresAt: new Date(sub.current_period_end * 1000).toISOString(),
         });
         break;

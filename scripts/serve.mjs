@@ -1,8 +1,7 @@
 /* ============================================================
    Local preview server — mimics the Vercel runtime.
    • Serves dist/ with clean URLs (/contratar/ -> /contratar/index.html)
-   • Routes POST /api/lead to the real handler in api/lead.js
-   • No Supabase env -> local preview mode (validates + simulates, no DB write)
+   • Routes /api/* through the consolidated API handler
    Run:  npm run preview   (build then serve)   |   npm run serve
    ============================================================ */
 import { createServer } from 'node:http';
@@ -33,13 +32,13 @@ const MIME = {
   '.txt': 'text/plain; charset=utf-8', '.ico': 'image/x-icon',
 };
 
-let leadHandler = null;
-async function getLeadHandler() {
-  if (!leadHandler) {
-    const mod = await import(pathToFileURL(join(ROOT, 'api', 'lead.js')).href);
-    leadHandler = mod.default;
+let apiHandler = null;
+async function getApiHandler() {
+  if (!apiHandler) {
+    const mod = await import(pathToFileURL(join(ROOT, 'api', '[...route].js')).href);
+    apiHandler = mod.default;
   }
-  return leadHandler;
+  return apiHandler;
 }
 function send(res, status, body, headers = {}) { res.writeHead(status, headers); res.end(body); }
 
@@ -47,40 +46,21 @@ const server = createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
   const pathname = decodeURIComponent(url.pathname);
 
-  if (pathname === '/api/lead') {
-    if (req.method !== 'POST') return send(res, 405, 'Method Not Allowed');
-
-    // Local preview mode: no Supabase configured -> simulate
-    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-      let raw = '';
-      req.on('data', (c) => (raw += c));
-      req.on('end', () => {
-        try {
-          const b = JSON.parse(raw || '{}');
-          if ((b.company || '').trim() !== '') return send(res, 200, JSON.stringify({ ok: true }), { 'Content-Type': 'application/json' });
-          const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((b.email || '').trim());
-          if (!b.name || b.name.trim().length < 2 || !emailOk) {
-            return send(res, 400, JSON.stringify({ ok: false, error: 'invalid' }), { 'Content-Type': 'application/json' });
-          }
-          console.log('  [LOCAL PREVIEW] lead (not saved):', { name: b.name, email: b.email, need: b.need });
-          send(res, 200, JSON.stringify({ ok: true, preview: true }), { 'Content-Type': 'application/json' });
-        } catch {
-          send(res, 400, JSON.stringify({ ok: false, error: 'invalid' }), { 'Content-Type': 'application/json' });
-        }
-      });
-      return;
+  if (pathname === '/api' || pathname.startsWith('/api/')) {
+    res.status = (code) => { res.statusCode = code; return res; };
+    res.json = (obj) => {
+      if (!res.headersSent) res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(obj));
+      return res;
+    };
+    res.send = (body) => { res.end(body); return res; };
+    try {
+      const h = await getApiHandler();
+      await h(req, res);
+    } catch (e) {
+      console.error(e);
+      if (!res.headersSent) send(res, 500, JSON.stringify({ ok: false, error: 'server' }), { 'Content-Type': 'application/json' });
     }
-
-    // LIVE mode: env configured -> call the real handler
-    let raw = '';
-    req.on('data', (c) => (raw += c));
-    req.on('end', async () => {
-      req.body = raw;
-      res.status = (code) => { res.statusCode = code; return res; };
-      res.json = (obj) => { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(obj)); return res; };
-      try { const h = await getLeadHandler(); await h(req, res); }
-      catch (e) { console.error(e); if (!res.headersSent) send(res, 500, JSON.stringify({ ok: false, error: 'server' }), { 'Content-Type': 'application/json' }); }
-    });
     return;
   }
 

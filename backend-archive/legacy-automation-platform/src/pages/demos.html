@@ -95,6 +95,18 @@
   .roi-cell .ico{ font-size:14px; line-height:1; }
   .roi-cell .val{ font-family:'Archivo',sans-serif; font-weight:800; font-size:15px; margin-top:4px; }
   .roi-cell .key{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.42); margin-top:3px; }
+  .video-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .video-card{ position:relative; overflow:hidden; border-radius:14px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08); padding:20px; min-height:360px; display:flex; flex-direction:column; transition:border-color .35s ease, transform .35s ease; }
+  .video-card:hover{ border-color:rgba(226,59,78,.45); transform:translateY(-3px); }
+  .video-frame{ aspect-ratio:16/10; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:linear-gradient(135deg,rgba(226,59,78,.22),rgba(255,255,255,.04)); display:grid; place-items:center; margin-bottom:18px; position:relative; overflow:hidden; }
+  .video-frame::before{ content:''; position:absolute; inset:16px; border:1px solid rgba(255,255,255,.12); border-radius:8px; }
+  .video-frame span{ position:relative; z-index:1; font-family:'Archivo',sans-serif; font-size:34px; font-weight:900; letter-spacing:.04em; }
+  .video-card h3{ font-family:'Archivo',sans-serif; font-size:20px; font-weight:900; text-transform:uppercase; letter-spacing:-.01em; margin-bottom:10px; }
+  .video-card p{ color:rgba(255,255,255,.62); font-size:13px; line-height:1.65; }
+  .video-card ul{ list-style:none; padding:0; margin:16px 0 0; display:flex; flex-direction:column; gap:8px; }
+  .video-card li{ color:rgba(255,255,255,.72); font-size:12px; line-height:1.45; }
+  .video-card li::before{ content:'-'; color:#E23B4E; margin-right:8px; }
+  @media (max-width:900px){ .video-grid{ grid-template-columns:1fr; } .video-card{ min-height:0; } }
 </style>
 </head>
 <body>
@@ -120,52 +132,49 @@
     {{demos.note}}
   </div>
 
-  <!-- ── Live interactive automations (real backend, one free run each) ── -->
-  <section class="mt-20 pt-14 border-t border-white/10">
+  <!-- Pulse video strategy placeholders -->
+  <section id="video-strategy" class="mt-20 pt-14 border-t border-white/10">
     <header class="mb-10">
-      <p class="eyebrow mb-5" data-i18n="tools.eyebrow"></p>
-      <h2 class="headline text-4xl md:text-5xl mb-4" data-i18n="tools.heading"></h2>
-      <p class="text-white/60 max-w-2xl" data-i18n="tools.intro"></p>
+      <p class="eyebrow mb-5">{{demos.videos.eyebrow}}</p>
+      <h2 class="headline text-4xl md:text-5xl mb-4">{{demos.videos.heading}}</h2>
+      <p class="text-white/60 max-w-2xl">{{demos.videos.intro}}</p>
     </header>
 
-    <div class="grid lg:grid-cols-2 gap-5">
-      <!-- Price monitor -->
-      <form class="tool card rounded-2xl p-6" data-tool="price">
-        <h3 class="font-display font-extrabold text-xl uppercase tracking-tight mb-2"><span class="mr-2">🏷️</span><span data-i18n="tools.pm.title"></span></h3>
-        <p class="text-white/55 text-sm mb-5" data-i18n="tools.pm.desc"></p>
-        <div class="space-y-4">
-          <div><label data-i18n="tools.pm.url"></label><input name="competitorUrl" type="url" inputmode="url" placeholder="https://" required></div>
-          <div class="grid grid-cols-2 gap-3">
-            <div><label data-i18n="tools.pm.price"></label><input name="myCurrentPrice" type="number" step="0.01" min="0" placeholder="49.99"></div>
-            <div><label data-i18n="tools.pm.floor"></label><input name="floorPrice" type="number" step="0.01" min="0" placeholder="35.00"></div>
-          </div>
-        </div>
-        <button type="submit" class="tool-btn mt-6" data-i18n-label="tools.pm.run"></button>
-        <div class="result" data-result hidden></div>
-      </form>
-
-      <!-- Lead scraper -->
-      <form class="tool card rounded-2xl p-6" data-tool="leads">
-        <h3 class="font-display font-extrabold text-xl uppercase tracking-tight mb-2"><span class="mr-2">🎯</span><span data-i18n="tools.ls.title"></span></h3>
-        <p class="text-white/55 text-sm mb-5" data-i18n="tools.ls.desc"></p>
-        <div class="space-y-4">
-          <div><label data-i18n="tools.ls.url"></label><input name="targetUrl" type="url" inputmode="url" placeholder="https://" required></div>
-          <div><label data-i18n="tools.ls.max"></label><input name="maxLeads" type="number" min="1" max="10" placeholder="10"></div>
-        </div>
-        <button type="submit" class="tool-btn mt-6" data-i18n-label="tools.ls.run"></button>
-        <div class="result" data-result hidden></div>
-      </form>
+    <div class="video-grid">
+      <article class="video-card">
+        <div class="video-frame"><span>01</span></div>
+        <p class="meta mb-3">{{demos.videos.receptionist.kicker}}</p>
+        <h3>{{demos.videos.receptionist.title}}</h3>
+        <p>{{demos.videos.receptionist.body}}</p>
+        <ul>
+          <li>{{demos.videos.receptionist.point1}}</li>
+          <li>{{demos.videos.receptionist.point2}}</li>
+          <li>{{demos.videos.receptionist.point3}}</li>
+        </ul>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><span>02</span></div>
+        <p class="meta mb-3">{{demos.videos.social.kicker}}</p>
+        <h3>{{demos.videos.social.title}}</h3>
+        <p>{{demos.videos.social.body}}</p>
+        <ul>
+          <li>{{demos.videos.social.point1}}</li>
+          <li>{{demos.videos.social.point2}}</li>
+          <li>{{demos.videos.social.point3}}</li>
+        </ul>
+      </article>
+      <article class="video-card">
+        <div class="video-frame"><span>03</span></div>
+        <p class="meta mb-3">{{demos.videos.ads.kicker}}</p>
+        <h3>{{demos.videos.ads.title}}</h3>
+        <p>{{demos.videos.ads.body}}</p>
+        <ul>
+          <li>{{demos.videos.ads.point1}}</li>
+          <li>{{demos.videos.ads.point2}}</li>
+          <li>{{demos.videos.ads.point3}}</li>
+        </ul>
+      </article>
     </div>
-  </section>
-
-  <!-- ── The 5 automations: plain-language + Before/After ROI ── -->
-  <section class="mt-20 pt-14 border-t border-white/10">
-    <header class="mb-10">
-      <p class="eyebrow mb-5" id="autos-eyebrow"></p>
-      <h2 class="headline text-4xl md:text-5xl mb-4" id="autos-heading"></h2>
-      <p class="text-white/60 max-w-2xl" id="autos-intro"></p>
-    </header>
-    <div id="autos-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
   </section>
 
   <div class="mt-16">

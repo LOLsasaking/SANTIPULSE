@@ -54,8 +54,8 @@
       "eyebrow": "Automatización IA",
       "titleA": "IA que",
       "titleB": "trabaja por ti",
-      "desc": "Monitor de precios, captación de leads y más. Recupera horas cada semana con automatizaciones que se ejecutan solas.",
-      "meta": "Planes desde 1 automatización",
+      "desc": "Recepcionista IA, Insights de Redes y Gestor de Ads. Recupera horas con un panel pensado para vender y operar clientes.",
+      "meta": "3 m?dulos Pulse",
       "cta": "Ver planes y precios"
     }
   },
@@ -85,17 +85,20 @@
     "soonDate": "Septiembre 2026",
     "soonTag": "SEP 2026",
     "soon1": "Recepcionista IA",
-    "soon2": "Automatización IA (agente)",
-    "soon3": "Automatización de ventas y clientes potenciales",
-    "soon4": "Automatización generativa y de contenido de redes sociales",
+    "soon2": "Insights de Redes",
+    "soon3": "Gestor de Ads",
+    "soon4": "Pack completo Pulse",
     "fMessage": "Cuéntame más",
     "fMessagePh": "Qué buscas, referencias que te gusten, plazos, presupuesto aproximado...",
     "submit": "Enviar solicitud",
     "success": "✓ ¡Solicitud enviada! Te respondo en menos de 24 horas.",
+    "gdprText": "Acepto la política de privacidad y doy permiso para que Santipulse me contacte sobre mi solicitud.",
+    "gdprLinkText": "Ver política de privacidad",
     "form": {
       "sending": "Enviando...",
       "error": "Algo salió mal. Inténtalo de nuevo o escríbeme directamente.",
-      "invalid": "Revisa tu nombre y un email válido."
+      "invalid": "Revisa tu nombre y un email válido.",
+      "consentRequired": "Acepta la política de privacidad para enviar la solicitud."
     }
   },
   "demos": {
@@ -108,6 +111,35 @@
     "note": "<b class=\"text-ember\">🎯 Reservas y presupuestos integrados:</b> en restaurantes, barberías, uñas y tours el cliente reserva de verdad; en oficios pide presupuesto. El negocio lo ve al instante en su panel de administración.",
     "cta": "Quiero algo así",
     "live": "Ver en vivo",
+    "videos": {
+      "eyebrow": "Estrategia de vídeo · The Pulse System",
+      "heading": "Tres demos para vender",
+      "intro": "Estos espacios sustituyen las herramientas antiguas. Están pensados para grabar vídeos claros del panel y explicar cada paquete sin depender de scrapers pesados.",
+      "receptionist": {
+        "kicker": "Recepcionista IA",
+        "title": "The 24/7 Front Desk",
+        "body": "Un vídeo mostrando una llamada fuera de horario, la IA respondiendo y el lead apareciendo en el panel.",
+        "point1": "Llamada o WhatsApp entra al sistema.",
+        "point2": "El panel crea el perfil del lead en tiempo real.",
+        "point3": "La cita queda lista para confirmar."
+      },
+      "social": {
+        "kicker": "Insights de Redes",
+        "title": "Viral Content on Autopilot",
+        "body": "Un vídeo del panel detectando estilos virales, explicando por qué funcionan y enviándolos a una cola de publicación.",
+        "point1": "Escaneo de tendencias por nicho.",
+        "point2": "Puntuación de probabilidad viral.",
+        "point3": "Post preparado para publicar."
+      },
+      "ads": {
+        "kicker": "Gestor de Ads",
+        "title": "The Digital Media Buyer",
+        "body": "Un vídeo de campañas activas donde una regla sube presupuesto, pausa anuncios caros y avisa al dueño.",
+        "point1": "Reglas de ROAS y CPC visibles.",
+        "point2": "Presupuesto ajustado automáticamente.",
+        "point3": "Alerta humana antes de escalar."
+      }
+    },
     "items": {
       "onfleek": "Barbería premium y tienda de productos. Cortes, barba y cuidado capilar.",
       "suehtam": "Marca de moda exclusiva — streetwear de lujo por drops limitados.",
@@ -116,112 +148,6 @@
       "burgur": "El club definitivo de la hamburguesa. Smash burgers y vídeo al hacer scroll.",
       "sakana": "Sushi bar y cocina japonesa. El arte del sushi, pescado fresco.",
       "tours": "Web de tours en 4 idiomas con hero de vídeo cinemático y galería que se desvela al hacer scroll."
-    },
-    "tools": {
-      "eyebrow": "Pruébalo tú mismo · En tiempo real",
-      "heading": "Automatizaciones en vivo",
-      "intro": "No son vídeos: estas dos herramientas se ejecutan de verdad en mi servidor ahora mismo. Tienes una prueba gratis de cada una.",
-      "pm": {
-        "title": "Monitor de precios",
-        "desc": "Pega la URL de un producto de la competencia. Leo su precio en vivo y te digo a cuánto deberías vender para ganarle.",
-        "url": "URL del producto de la competencia",
-        "price": "Tu precio actual (€)",
-        "floor": "Precio mínimo (€)",
-        "run": "Ejecutar gratis",
-        "running": "Leyendo precio…"
-      },
-      "ls": {
-        "title": "Captador de leads",
-        "desc": "Pega la URL de un directorio o listado de empresas. Extraigo nombres, emails y teléfonos en segundos.",
-        "url": "URL del directorio / listado",
-        "max": "Máx. de leads",
-        "run": "Captar leads gratis",
-        "running": "Buscando leads…"
-      },
-      "res": {
-        "competitor": "Precio competencia",
-        "suggestion": "Tu precio sugerido",
-        "action": "Acción",
-        "leads": "leads encontrados",
-        "name": "Nombre",
-        "email": "Email",
-        "phone": "Teléfono",
-        "web": "Web",
-        "empty": "No se encontró nada legible en esa página. Prueba con otra URL."
-      },
-      "err": {
-        "generic": "Algo falló. Inténtalo de nuevo.",
-        "trial": "Ya usaste tu prueba gratis. Escríbeme para automatizaciones ilimitadas.",
-        "badurl": "Introduce una URL válida (http/https)."
-      }
-    },
-    "autos": {
-      "eyebrow": "Lo que automatizo · Antes y después",
-      "heading": "Tus 5 automatizaciones",
-      "intro": "Cada una hace un trabajo repetitivo por ti, en automático. Esto es lo que hace cada una y lo que te ahorra.",
-      "liveTag": "Demo gratis",
-      "paidTag": "Para clientes",
-      "beforeLabel": "Antes",
-      "afterLabel": "Después",
-      "timeKey": "Tiempo",
-      "moneyKey": "Ingresos",
-      "items": {
-        "price": {
-          "name": "Monitor de precios",
-          "what": "Vigila los precios de tu competencia y te avisa cuándo bajar o subir el tuyo para ganar más sin perder ventas.",
-          "before": "Revisas precios a mano, tarde y mal",
-          "after": "Precio óptimo, vigilado 24/7",
-          "time": "5 h/semana",
-          "money": "+€600/mes",
-          "extraK": "Margen",
-          "extraV": "+12%",
-          "status": "live"
-        },
-        "leads": {
-          "name": "Captación de leads",
-          "what": "Extrae nombres, emails y teléfonos de directorios y webs para que empieces el día con una lista de clientes potenciales.",
-          "before": "Copias contactos uno a uno",
-          "after": "100+ leads listos cada mañana",
-          "time": "8 h/semana",
-          "money": "+€900/mes",
-          "extraK": "Leads",
-          "extraV": "100+/día",
-          "status": "live"
-        },
-        "outreach": {
-          "name": "Outreach en frío",
-          "what": "Envía emails personalizados a tus leads automáticamente y hace seguimiento, para que tu bandeja de salida nunca pare.",
-          "before": "Escribes cada email a mano",
-          "after": "Cientos de emails personalizados/día (típico)",
-          "time": "10 h/semana",
-          "money": "Hasta €1.200/mes",
-          "extraK": "Respuestas",
-          "extraV": "Hasta 3× más",
-          "status": "paid"
-        },
-        "cart": {
-          "name": "Recuperación de carritos",
-          "what": "Detecta carritos abandonados en tu tienda y envía una secuencia de emails para recuperar la venta perdida.",
-          "before": "Pierdes el 70% de los carritos",
-          "after": "Recuperas 1 de cada 4 ventas (típico)",
-          "time": "6 h/semana",
-          "money": "Hasta €1.500/mes",
-          "extraK": "Recuperación",
-          "extraV": "Hasta 25%",
-          "status": "paid"
-        },
-        "social": {
-          "name": "Programador de redes",
-          "what": "Programa y publica tus posts en Instagram y Facebook solo, para que tu presencia online nunca se apague.",
-          "before": "Publicas cuando te acuerdas",
-          "after": "Contenido constante, sin pensar (típico)",
-          "time": "7 h/semana",
-          "money": "Hasta €500/mes",
-          "extraK": "Alcance",
-          "extraV": "Hasta 40%",
-          "status": "paid"
-        }
-      }
     }
   },
   "nosotros": {
@@ -263,29 +189,29 @@
   },
   "precios": {
     "title": "Santipulse · Planes y precios",
-    "metaDescription": "Planes de automatización de Santipulse — Starter, Pro y Agency. Monitor de precios, generación de leads y outreach. Cancela cuando quieras.",
-    "eyebrow": "Planes · Automatización",
+    "metaDescription": "Planes de The Pulse System de Santipulse ? Recepcionista IA, Insights de Redes y Gestor de Ads. Cancela cuando quieras.",
+    "eyebrow": "Planes ? The Pulse System",
     "titleA": "Elige",
     "titleB": "tu plan.",
-    "intro": "Empieza a automatizar hoy. Sin permanencia, cancela cuando quieras. Todos los planes incluyen los datos en vivo de tus demos.",
+    "intro": "Empieza con una arquitectura de agencia IA lista para vender: atenci?n, contenido y anuncios desde un panel en espa?ol.",
     "perMonth": "/mes",
     "popular": "Más popular",
     "plans": {
       "starterName": "Starter",
-      "starterTagline": "Para empezar en solitario.",
-      "starterF1": "1 automatización a tu elección",
-      "starterF2": "Monitor de precios · 5 URLs",
-      "starterF3": "Analíticas básicas",
+      "starterTagline": "Para activar el primer m?dulo.",
+      "starterF1": "Recepcionista IA",
+      "starterF2": "50 ejecuciones Pulse al mes",
+      "starterF3": "Leads y alertas humanas",
       "starterF4": "Soporte por email",
       "proName": "Pro",
       "proTagline": "Para negocios en crecimiento.",
-      "proF1": "Las 3 automatizaciones",
-      "proF2": "Monitor de precios · 25 URLs",
-      "proF3": "Analíticas avanzadas + CSV",
+      "proF1": "Recepcionista IA",
+      "proF2": "Insights de Redes",
+      "proF3": "Gestor de Ads",
       "proF4": "Soporte prioritario",
       "agencyName": "Agency",
       "agencyTagline": "Para agencias con muchos clientes.",
-      "agencyF1": "Las 3 automatizaciones",
+      "agencyF1": "Los 3 m?dulos Pulse",
       "agencyF2": "Ejecuciones ilimitadas",
       "agencyF3": "Marca blanca + acceso API",
       "agencyF4": "Equipo + integraciones a medida"
@@ -297,5 +223,40 @@
       "error": "No se pudo iniciar el pago. Inténtalo de nuevo."
     },
     "footer": "© 2026 SantiPulse · Cancela cuando quieras"
+  },
+  "bienvenida": {
+    "title": "Santipulse · Bienvenida",
+    "metaDescription": "Bienvenida a The Pulse System de Santipulse después de activar tu suscripción.",
+    "eyebrow": "Pago confirmado · Bienvenida",
+    "titleA": "Bienvenido",
+    "titleB": "a Pulse.",
+    "intro": "Tu pago está confirmado. Ahora entra al panel con el mismo email que usaste en Stripe para preparar tu perfil y ejecutar tus módulos.",
+    "nextTitle": "Qué pasa ahora",
+    "step1": "Abre el panel. Si compraste sin iniciar sesión, crea o entra con el mismo email del pago.",
+    "step2": "Completa el perfil del negocio: web, sector, persona de contacto y cliente ideal.",
+    "step3": "Ejecuta Recepcionista IA, Insights de Redes o Gestor de Ads para activar el primer flujo Pulse.",
+    "panelEyebrow": "Panel de cliente",
+    "panelText": "El panel es donde se gestionan los módulos, la suscripción y las integraciones del cliente.",
+    "dashboardCta": "Abrir panel"
+  },
+  "privacidad": {
+    "title": "Santipulse · Privacidad",
+    "metaDescription": "Política de privacidad de Santipulse para formularios, leads, pagos y servicios de automatización.",
+    "eyebrow": "Legal · Privacidad",
+    "titleA": "Política",
+    "titleB": "de privacidad",
+    "intro": "Esta página explica cómo Santipulse trata los datos enviados por formularios, paneles, pagos e integraciones, incluyendo el consentimiento GDPR de los formularios.",
+    "section1Title": "Responsable",
+    "section1Body": "El responsable del tratamiento es Santipulse. Puedes contactar en santipulse@gmail.com para cualquier solicitud relacionada con tus datos.",
+    "section2Title": "Datos que recogemos",
+    "data1": "Datos de contacto enviados por formularios: nombre, email, teléfono, negocio, mensaje y necesidades marcadas.",
+    "data2": "Datos técnicos de seguridad: IP anonimizada, navegador, hora de envío y estado de consentimiento.",
+    "data3": "Datos de cuenta, suscripción e integraciones cuando usas el panel de cliente.",
+    "section3Title": "Finalidad",
+    "section3Body": "Usamos estos datos para responder solicitudes, prestar servicios contratados, gestionar pagos con Stripe, operar el panel y proteger la web frente a abuso.",
+    "section4Title": "Servicios externos",
+    "section4Body": "Podemos usar Supabase para almacenar datos, Stripe para pagos, Resend para emails y proveedores oficiales de integración cuando el cliente los conecte.",
+    "section5Title": "Tus derechos",
+    "section5Body": "Puedes solicitar acceso, rectificación, eliminación u oposición escribiendo a santipulse@gmail.com. Conservamos los datos solo el tiempo necesario para responder, prestar el servicio o cumplir obligaciones legales."
   }
 }
