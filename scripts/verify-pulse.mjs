@@ -62,10 +62,32 @@ for (const label of labels) {
   if (!haystack.includes(label)) fail(`missing label ${label}`);
 }
 
+// ── Environment readiness (warning-only) ──────────────────────────────
+// Missing keys do NOT fail the build (the static site builds fine without
+// secrets, and Vercel injects them at runtime), but we surface exactly what
+// is unset so a deploy is never silently "broken". The live Truth Layer is
+// /api/admin/verify-connections, which proves each key actually works.
+const ENV_GROUPS = {
+  core: ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'SUPABASE_ANON_KEY'],
+  payments: ['STRIPE_SECRET_KEY', 'STRIPE_WEBHOOK_SECRET'],
+  receptionist: ['VAPI_API_KEY'],
+  social: ['META_APP_ID', 'META_APP_SECRET', 'META_ACCESS_TOKEN'],
+};
+const missingEnv = [];
+for (const [group, keys] of Object.entries(ENV_GROUPS)) {
+  for (const key of keys) if (!process.env[key]) missingEnv.push(`${group}/${key}`);
+}
+if (missingEnv.length) {
+  console.warn('\nEnv readiness — unset keys (set these in Vercel before going live):');
+  for (const key of missingEnv) console.warn(`  ○ ${key}`);
+} else {
+  console.log('\nEnv readiness — all required keys present.');
+}
+
 if (failures.length) {
-  console.error('Pulse verification failed:');
+  console.error('\nPulse verification failed:');
   for (const item of failures) console.error(`- ${item}`);
   process.exit(1);
 }
 
-console.log('Pulse verification passed.');
+console.log('\nPulse verification passed.');

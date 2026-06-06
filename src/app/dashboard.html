@@ -103,6 +103,19 @@
   .badge{ display:inline-block; font-size:11px; font-weight:700; padding:5px 11px; border-radius:9999px; text-transform:capitalize; }
   .badge.active{ background:var(--green-soft); color:var(--green); }
   .badge.none{ background:var(--bg); color:var(--muted); }
+  .badge.ok{ background:var(--green-soft); color:var(--green); }
+  .badge.err{ background:var(--red-soft); color:var(--red); }
+  /* Conexiones — Truth Layer */
+  .conn-list{ display:flex; flex-direction:column; gap:2px; }
+  .conn-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 4px; border-bottom:1px solid var(--line); }
+  .conn-row:last-child{ border-bottom:0; }
+  .conn-meta{ display:flex; align-items:center; gap:13px; min-width:0; }
+  .conn-ico{ width:34px; height:34px; flex:0 0 34px; border-radius:9px; background:var(--panel-2); display:grid; place-items:center; font-size:15px; }
+  .conn-name{ font-size:13.5px; font-weight:700; color:var(--ink); }
+  .conn-row .status-message{ font-size:11.5px; margin:2px 0 0; }
+  .conn-side{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
+  .reauth-btn{ font-size:11px; font-weight:700; padding:6px 11px; border-radius:9px; background:var(--red); color:#fff; border:0; cursor:pointer; }
+  .reauth-btn:hover{ filter:brightness(1.08); }
   .pill{ font-size:10.5px; font-weight:700; padding:4px 9px; border-radius:9999px; white-space:nowrap; }
   .pill.raise{ background:var(--green-soft); color:var(--green); }
   .pill.lower{ background:var(--red-soft); color:var(--red); }
@@ -199,6 +212,7 @@
       <button class="nav-item" data-nav="insights"><span class="ic">◎</span> Insights de Redes</button>
       <button class="nav-item" data-nav="ads"><span class="ic">$</span> Gestor de Ads</button>
       <div class="nav-label">Cuenta</div>
+      <button class="nav-item" data-nav="connections"><span class="ic">⛓</span> Conexiones</button>
       <button class="nav-item" data-nav="profile"><span class="ic">🗂</span> Perfil</button>
       <button class="nav-item" data-nav="billing"><span class="ic">⚡</span> Suscripción</button>
       <button class="nav-item" data-nav="history"><span class="ic">🕓</span> Historial</button>
@@ -285,6 +299,35 @@
         <section class="section" data-section="ads">
           <div class="page-head"><div><h1>Gestor de Ads</h1><p>Meta/TikTok · ROAS/CPC · reglas y alertas.</p></div></div>
           <div class="card"><div id="adsBody"></div></div>
+        </section>
+
+        <!-- ══ CONEXIONES (Truth Layer — verificación real de APIs) ══ -->
+        <section class="section" data-section="connections">
+          <div class="page-head">
+            <div><h1>Conexiones</h1><p>Estado real de tus integraciones. Verde solo si la API responde 200.</p></div>
+            <button id="recheckConnections" class="btn ghost sm" type="button">Re-verificar</button>
+          </div>
+          <div class="card">
+            <div id="integration-status-list" class="conn-list">
+              <div class="conn-row" data-integration="vapi">
+                <div class="conn-meta"><span class="conn-ico">☎</span><div><div class="conn-name">Vapi (Voz IA)</div><p class="status-message muted">Comprobando…</p></div></div>
+                <span class="status-badge badge none">Comprobando…</span>
+              </div>
+              <div class="conn-row" data-integration="meta">
+                <div class="conn-meta"><span class="conn-ico">◎</span><div><div class="conn-name">Meta (Facebook / Instagram)</div><p class="status-message muted">Comprobando…</p></div></div>
+                <span class="status-badge badge none">Comprobando…</span>
+              </div>
+              <div class="conn-row" data-integration="stripe">
+                <div class="conn-meta"><span class="conn-ico">⚡</span><div><div class="conn-name">Stripe (Pagos)</div><p class="status-message muted">Comprobando…</p></div></div>
+                <span class="status-badge badge none">Comprobando…</span>
+              </div>
+              <div class="conn-row" data-integration="supabase">
+                <div class="conn-meta"><span class="conn-ico">🗄</span><div><div class="conn-name">Supabase (Base de datos)</div><p class="status-message muted">Comprobando…</p></div></div>
+                <span class="status-badge badge none">Comprobando…</span>
+              </div>
+            </div>
+            <div id="connectionsError" class="msg err hidden" style="margin-top:14px"></div>
+          </div>
         </section>
 
         <!-- ══ PERFIL ══ -->

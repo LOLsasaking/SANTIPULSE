@@ -19,6 +19,7 @@ import calendarCallback from '../backend/integrations/calendar/callback.js';
 // through the user's connected social account (social_accounts + Graph API).
 import socialAuthorize from '../backend/integrations/social/authorize.js';
 import socialCallback from '../backend/integrations/social/callback.js';
+import adminVerifyConnections from '../backend/admin/verify-connections.js';
 import stripeCheckout from '../backend/stripe/checkout.js';
 import stripePortal from '../backend/stripe/portal.js';
 import stripeWebhook from '../backend/stripe/webhook.js';
@@ -44,6 +45,8 @@ const ROUTES = new Map([
   // Recepcionista IA — calendar booking
   ['integrations/calendar/authorize', calendarAuthorize],
   ['integrations/calendar/callback', calendarCallback],
+  // Admin — API connection truth
+  ['admin/verify-connections', adminVerifyConnections],
   // Account / billing / dashboard
   ['dashboard/me', dashboardMe],
   ['dashboard/profile', dashboardProfile],
