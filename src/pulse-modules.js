@@ -65,7 +65,7 @@
         box.innerHTML =
           '<div class="simple-panel accent-green">' +
             '<div><p class="eyebrow">Recepcionista IA</p><h2>Activa llamadas, WhatsApp y SOS humano</h2>' +
-            '<p>Completa los tres datos clave una vez. Despues SantiPulse crea o actualiza el asistente y deja el hub listo.</p></div>' +
+            '<p>Solo datos esenciales: si falta algo, no se guarda. Si todo esta listo, SantiPulse activa el asistente y el hub.</p></div>' +
             '<div class="simple-status">' + statusRow([
               ['Voz IA', s.voice],
               ['WhatsApp', s.whatsapp],
@@ -75,14 +75,14 @@
           '<form id="recepCfgForm" class="easy-form" novalidate>' +
             grid2(
               field('Saludo del agente', 'greeting', c.greeting || '', 'Hola, gracias por llamar...', 'text'),
-              field('Telefono del negocio', 'phone_number', c.phone_number || '', '+34600000000', 'tel', 'required')
+              field('Telefono publico del negocio', 'phone_number', c.phone_number || '', '+34600000000', 'tel', 'required')
             ) +
             grid2(
-              field('ID del numero de WhatsApp', 'whatsapp_phone_id', c.whatsapp_phone_id || '', 'Phone number ID de Meta', 'text', 'required'),
-              field('Email SOS humano', 'sos_email', c.sos_email || '', 'tu@email.com', 'email', 'required')
+              field('ID de telefono WhatsApp Business', 'whatsapp_phone_id', c.whatsapp_phone_id || '', 'Phone number ID de Meta', 'text', 'required'),
+              field('Email de emergencia SOS', 'sos_email', c.sos_email || '', 'tu@email.com', 'email', 'required')
             ) +
             '<div class="module-actions">' +
-              '<button class="btn" type="submit" id="activateReceptionist">Guardar y activar</button>' +
+              '<button class="btn" type="submit" id="activateReceptionist">Activar por mi</button>' +
               connectButton('calendar', s.calendar, 'Conectar Google Calendar') +
             '</div>' +
             '<div class="msg ok hidden" id="recepOk"></div><div class="msg err hidden" id="recepErr"></div>' +
@@ -127,7 +127,9 @@
               return saveRes;
             })
             .then(function () {
-              msg('recepOk', 'ok', 'Recepcionista IA activada. Las llamadas, WhatsApp y SOS quedan listos para operar.');
+              msg('recepOk', 'ok', (s.voice && s.voice.configured)
+                ? 'Recepcionista IA activada. Las llamadas, WhatsApp y SOS quedan listos para operar.'
+                : 'Datos guardados. Falta configurar Vapi en Vercel para activar llamadas automaticas.');
             })
             .catch(function (err) {
               msg('recepErr', 'err', err.message || 'No se pudo activar.');
@@ -154,7 +156,7 @@
         box.innerHTML =
           '<div class="simple-panel accent-blue">' +
             '<div><p class="eyebrow">Insights de Redes</p><h2>Escanea tendencias y prepara posts</h2>' +
-            '<p>Define nicho y zona. Al ejecutar, SantiPulse guarda el contexto y genera el resumen de accion.</p></div>' +
+            '<p>Define nicho y zona. SantiPulse escanea, resume y deja una idea lista para publicar cuando haya senales.</p></div>' +
             '<div class="simple-status">' + statusRow([
               ['Escaneo', { configured: true, connected: s.collection && s.collection.active }],
               ['Publicacion', s.publishing],
@@ -167,7 +169,7 @@
             ) +
             field('Hashtags base', 'hashtags_text', (c.hashtags || []).join(', '), '#barberia, #fade', 'text') +
             '<div class="module-actions">' +
-              '<button class="btn" type="submit" id="scanInsights">Guardar y escanear</button>' +
+              '<button class="btn" type="submit" id="scanInsights">Escanear y preparar post</button>' +
               connectButton('social', s.publishing, 'Conectar Instagram/Facebook') +
             '</div>' +
             '<div class="msg ok hidden" id="insOk"></div><div class="msg err hidden" id="insErr"></div>' +
@@ -226,7 +228,7 @@
         box.innerHTML =
           '<div class="simple-panel accent-yellow">' +
             '<div><p class="eyebrow">Gestor de Ads</p><h2>Elige un post, presupuesto y paga</h2>' +
-            '<p>El cliente no toca reglas. SantiPulse recibe la orden pagada y la deja lista para lanzar.</p></div>' +
+            '<p>Sin reglas tecnicas: eliges el contenido, presupuesto y dias. SantiPulse prepara el lanzamiento pagado.</p></div>' +
             '<div class="simple-status">' + statusRow([
               ['Meta Ads', { configured: s.meta && s.meta.configured, connected: s.connected }],
               ['TikTok Ads', { configured: s.tiktok && s.tiktok.configured, connected: s.connected }],
@@ -318,14 +320,15 @@
     return '<div class="status-grid">' + items.map(function (it) {
       var st = it[1] || {};
       var ok = !!(st.configured && st.connected);
-      var text = !st.configured ? 'No configurado' : ok ? 'Conectado' : 'Listo';
+      var text = !st.configured ? 'No configurado' : ok ? 'Conectado' : 'Pendiente';
       return '<div class="status-chip"><span class="k">' + esc(it[0]) + '</span><span class="v">' +
         '<span class="status-dot ' + (ok ? 'on' : 'off') + '"></span>' + esc(text) + '</span></div>';
     }).join('') + '</div>';
   }
 
   function connectButton(kind, status, label) {
-    if (!status || !status.configured || status.connected) return '';
+    if (!status || status.connected) return '';
+    if (!status.configured) return '<button class="btn ghost" type="button" disabled title="Faltan claves OAuth en Vercel">Pendiente de claves</button>';
     var attr = kind === 'calendar' ? 'data-connect-calendar' : kind === 'social' ? 'data-connect-social' : 'data-connect-ads-meta';
     return '<button class="btn ghost" type="button" ' + attr + '>' + esc(label) + '</button>';
   }
@@ -335,15 +338,21 @@
       button.addEventListener('click', function () {
         clearMsg(errId);
         var original = button.textContent;
+        var controller = window.AbortController ? new AbortController() : null;
+        var timedOut = false;
         button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
         button.textContent = 'Abriendo...';
         var timer = window.setTimeout(function () {
           if (!button.disabled) return;
+          timedOut = true;
+          if (controller) controller.abort();
           button.disabled = false;
+          button.removeAttribute('aria-busy');
           button.textContent = original;
-          msg(errId, 'err', label + ' esta tardando demasiado. Revisa las claves OAuth en Vercel e intenta otra vez.');
+          msg(errId, 'err', label + ' esta tardando demasiado. Revisa las claves OAuth y el redirect URL en Vercel.');
         }, 12000);
-        api(path)
+        api(path, controller ? { signal: controller.signal } : undefined)
           .then(function (res) {
             window.clearTimeout(timer);
             if (res.d && res.d.url) {
@@ -351,17 +360,31 @@
               return;
             }
             button.disabled = false;
+            button.removeAttribute('aria-busy');
             button.textContent = original;
-            msg(errId, 'err', errorText(res.d, label + ' no esta configurado en Vercel.'));
+            msg(errId, 'err', connectionErrorText(label, res.status, res.d));
           })
           .catch(function () {
             window.clearTimeout(timer);
+            if (timedOut) return;
             button.disabled = false;
+            button.removeAttribute('aria-busy');
             button.textContent = original;
             msg(errId, 'err', 'No se pudo abrir ' + label + '. Revisa la conexion y vuelve a intentar.');
           });
       });
     });
+  }
+
+  function connectionErrorText(label, status, data) {
+    if (status === 401) return 'Tu sesion expiro. Vuelve a entrar al panel.';
+    if (status === 503 || (data && data.error === 'integration_not_configured')) {
+      return label + ' no esta configurado todavia. Revisa las claves y el redirect URL en Vercel.';
+    }
+    if (data && data.error === 'state_failed') {
+      return 'No se pudo preparar la conexion OAuth. Revisa Supabase y vuelve a intentar.';
+    }
+    return errorText(data, 'No se pudo preparar la conexion con ' + label + '.');
   }
 
   function field(label, name, val, ph, type, attrs) {
@@ -385,6 +408,11 @@
 
   function validateReceptionist(payload, form) {
     var fields = [];
+    var names = {
+      phone_number: 'telefono publico del negocio',
+      whatsapp_phone_id: 'ID de telefono WhatsApp Business',
+      sos_email: 'email de emergencia SOS',
+    };
     form.querySelectorAll('.field-invalid').forEach(function (node) { node.classList.remove('field-invalid'); });
     if (!/^\+[1-9][0-9]{7,15}$/.test(payload.phone_number || '')) fields.push('phone_number');
     if (!payload.whatsapp_phone_id) fields.push('whatsapp_phone_id');
@@ -395,7 +423,9 @@
     });
     return {
       ok: fields.length === 0,
-      message: 'Completa telefono del negocio, ID de WhatsApp y email SOS antes de guardar.',
+      message: fields.length
+        ? 'Falta completar: ' + fields.map(function (name) { return names[name] || name; }).join(', ') + '.'
+        : 'ok',
     };
   }
 

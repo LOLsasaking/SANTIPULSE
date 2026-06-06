@@ -43,7 +43,7 @@ export default async function handler(req, res) {
   const description = caption || `Post ${postId}`;
 
   try {
-    const session = await stripe.checkout.sessions.create({
+    const sessionPayload = {
       mode: 'payment',
       line_items: [{
         price_data: {
@@ -56,9 +56,6 @@ export default async function handler(req, res) {
         },
         quantity: 1,
       }],
-      customer: profile?.stripe_customer_id || undefined,
-      customer_email: profile?.stripe_customer_id ? undefined : user.email,
-      client_reference_id: user.id,
       allow_promotion_codes: false,
       metadata: {
         kind: 'ad_launch',
@@ -71,7 +68,12 @@ export default async function handler(req, res) {
       },
       success_url: `${origin}/bienvenida/?ad=paid&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/dashboard/?ads=cancelled`,
-    });
+    };
+    if (profile?.stripe_customer_id) sessionPayload.customer = profile.stripe_customer_id;
+    else if (user.email) sessionPayload.customer_email = user.email;
+    if (user.id) sessionPayload.client_reference_id = user.id;
+
+    const session = await stripe.checkout.sessions.create(sessionPayload);
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error('[stripe/ad-checkout]', err.message);

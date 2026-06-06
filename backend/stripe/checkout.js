@@ -34,18 +34,20 @@ export default async function handler(req, res) {
       ? { user_id: user.id, plan, source: body.source || 'dashboard' }
       : { plan, source: 'public_pricing', public_checkout: 'true' };
 
-    const session = await stripe.checkout.sessions.create({
+    const sessionPayload = {
       mode: 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],
-      customer: profile?.stripe_customer_id || undefined,
-      customer_email: profile?.stripe_customer_id ? undefined : user?.email,
-      client_reference_id: user?.id,
       allow_promotion_codes: true,
       metadata,
       subscription_data: { metadata },
       success_url: `${origin}/bienvenida/?session_id={CHECKOUT_SESSION_ID}${isPublicPricing ? '&public_checkout=1' : ''}`,
       cancel_url: `${origin}${isPublicPricing ? '/precios/?payment=cancelled' : '/dashboard/?payment=cancelled'}`,
-    });
+    };
+    if (profile?.stripe_customer_id) sessionPayload.customer = profile.stripe_customer_id;
+    else if (user?.email) sessionPayload.customer_email = user.email;
+    if (user?.id) sessionPayload.client_reference_id = user.id;
+
+    const session = await stripe.checkout.sessions.create(sessionPayload);
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error('[stripe/checkout]', err.message);

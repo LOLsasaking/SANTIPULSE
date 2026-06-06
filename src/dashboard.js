@@ -122,7 +122,7 @@
           var ico = moduleIcon(j.automation_type);
           return '<tr><td><span class="mono" style="font-size:10px;color:#E23B4E">' + esc(ico) + '</span> ' + esc(moduleName(j.automation_type)) +
             '</td><td><span class="pill ' + scls + '">' + esc(stxt) + '</span></td><td>' +
-            (j.is_demo ? 'sí' : 'no') + '</td><td class="mono" style="font-size:11px;color:rgba(255,255,255,.6)">' + esc(date) + '</td></tr>';
+            (j.is_demo ? 'sí' : 'no') + '</td><td class="mono" style="font-size:11px;color:var(--muted)">' + esc(date) + '</td></tr>';
         }).join('');
       })
       .catch(function () {});
@@ -177,7 +177,7 @@
     var metrics = result.metrics || [];
     if (metrics.length) {
       html += '<div class="res-stats">' + metrics.map(function (m) {
-        return stat(m.label || 'Dato', esc(m.value || '—'), '#7fe0a3');
+        return stat(m.label || 'Dato', esc(m.value || '—'), '#1d9b68');
       }).join('') + '</div>';
     }
     html += '<p class="muted" style="font-size:13px;line-height:1.6;margin:0 0 12px">' + esc(result.summary || 'Módulo Pulse ejecutado.') + '</p>';
@@ -185,8 +185,8 @@
     var actions = result.autoActions || result.nextActions || [];
     if (actions.length) {
       html += '<div class="res-row" style="align-items:flex-start;display:block">' +
-        '<span class="pill raise">Acciones automáticas</span>' +
-        '<ul style="margin:12px 0 0 18px;color:rgba(255,255,255,.72);font-size:13px;line-height:1.7">' +
+        '<span class="pill raise">Hecho por SantiPulse</span>' +
+        '<ul style="margin:12px 0 0 18px;color:var(--muted);font-size:13px;line-height:1.7">' +
         actions.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') +
         '</ul></div>';
     }
@@ -216,10 +216,10 @@
             renderResult(type, d.result || {}, d.usage);
             loadRuns();
           } else if (res.status === 402 && d.error === 'needs_subscription') {
-            setRunMsg('err', 'Necesitas una suscripción activa. <a href="/precios/" style="color:#ff9aa6">Ver planes →</a>');
+            setRunMsg('err', 'Necesitas una suscripción activa. <a href="/precios/">Ver planes →</a>');
           } else if (res.status === 402 && d.error === 'quota_exceeded') {
             setRunMsg('err', 'Has alcanzado tu límite mensual (' + esc(String(d.used)) + '/' + esc(String(d.limit)) +
-              '). <a href="/precios/" style="color:#ff9aa6">Sube de plan →</a>');
+              '). <a href="/precios/">Sube de plan →</a>');
           } else if (res.status === 400 && d.error === 'invalid_type') {
             setRunMsg('err', 'Ese módulo Pulse no está disponible.');
           } else {
