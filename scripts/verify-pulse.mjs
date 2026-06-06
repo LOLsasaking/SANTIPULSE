@@ -90,6 +90,8 @@ const pulseModulesJs = readFileSync(join(ROOT, 'src/pulse-modules.js'), 'utf8');
 const dashboardHtml = readFileSync(join(ROOT, 'src/app/dashboard.html'), 'utf8');
 const receptionistApi = readFileSync(join(ROOT, 'backend/receptionist/dashboard.js'), 'utf8');
 const adCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/ad-checkout.js'), 'utf8');
+const pulseModulesApi = readFileSync(join(ROOT, 'backend/pulse/modules.js'), 'utf8');
+const dashboardRunApi = readFileSync(join(ROOT, 'backend/dashboard/run.js'), 'utf8');
 
 if (!dashboardHtml.includes('Automatizar ahora')) fail('dashboard must use easy automation copy');
 if (!pulseModulesJs.includes('/api/stripe/ad-checkout')) fail('ads panel must use one-off ad checkout');
@@ -105,6 +107,15 @@ if (!pulseModulesJs.includes('tardando demasiado') || !pulseModulesJs.includes('
 }
 if (!adCheckoutApi.includes("mode: 'payment'") || !adCheckoutApi.includes("kind: 'ad_launch'")) {
   fail('ad checkout must be a one-off payment tagged as ad_launch');
+}
+if (!pulseModulesApi.includes('export async function runPulseModule')) {
+  fail('Pulse run modules must be async so Execute can trigger real provider/data actions');
+}
+if (!pulseModulesApi.includes('upsertAssistant') || !pulseModulesApi.includes('queuePost')) {
+  fail('Pulse Execute must provision voice and queue social posts where possible');
+}
+if (!dashboardRunApi.includes('await runPulseModule')) {
+  fail('/api/dashboard/run must await real Pulse module actions');
 }
 
 const distPages = [

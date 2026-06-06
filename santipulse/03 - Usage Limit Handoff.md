@@ -31,6 +31,10 @@ If Codex hits a usage limit, resume from this project only:
   - `Gestor de Ads` is now "choose post, choose budget/days, pay and launch".
 - Added one-off Stripe ad checkout at `backend/stripe/ad-checkout.js`.
 - Stripe webhook records paid ad launches as `Gestor de Ads` history jobs.
+- `/api/dashboard/run` now awaits real module actions where safely possible:
+  - `Recepcionista IA` provisions/updates the Vapi assistant when config is valid.
+  - `Insights de Redes` queues a post from the top stored trend when available.
+  - `Gestor de Ads` prepares the simple paid launch path.
 
 ## Resume Commands
 

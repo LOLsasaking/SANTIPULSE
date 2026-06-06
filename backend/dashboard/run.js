@@ -1,5 +1,5 @@
 /* ============================================================
-   POST /api/dashboard/run - run a Pulse module scaffold.
+   POST /api/dashboard/run - run a Pulse module action.
    Auth required. Body: { type: 'ai_receptionist'|'social_insights'|'ad_manager' }.
    ============================================================ */
 import { requireUser } from '../lib/auth.js';
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
 
   const jobId = await createJob({ automationType: type, userId: user.id, isDemo: false, inputParams });
   try {
-    const result = runPulseModule(type, profile || {});
+    const result = await runPulseModule(type, { ...(profile || {}), id: user.id });
     await finishJob({
       jobId,
       status: result.success ? 'completed' : 'failed',
