@@ -24,4 +24,12 @@
 - `SUPABASE_URL`
 - `SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
+- `VAPI_API_KEY`
+- `META_ACCESS_TOKEN`
+- `CRON_SECRET`
 - Optional email vars: `RESEND_API_KEY`, `LEAD_NOTIFY_TO`, `LEAD_NOTIFY_FROM`
+
+## Current Live Blocker
+
+- `META_ACCESS_TOKEN` must exist in Vercel Production for the Meta badge in
+  `/api/admin/verify-connections` to turn green.

@@ -25,7 +25,7 @@ function walk(dir, out = []) {
   return out;
 }
 
-assertFile('api/index.js');
+assertFile('api/[...route].js');
 assertFile('README.md');
 assertFile('backend/pulse/modules.js');
 assertFile('backend/pulse/stripe-plans.js');
@@ -38,7 +38,7 @@ assertFile('.github/workflows/heavy-scraping.yml');
 assertFile('santipulse/03 - Usage Limit Handoff.md');
 
 const apiFiles = walk('api').filter((file) => file.endsWith('.js'));
-if (apiFiles.length !== 1 || apiFiles[0] !== 'api/index.js') {
+if (apiFiles.length !== 1 || apiFiles[0] !== 'api/[...route].js') {
   fail(`api function count expected 1 catch-all, found: ${apiFiles.join(', ')}`);
 }
 

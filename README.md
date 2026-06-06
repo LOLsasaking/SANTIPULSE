@@ -20,7 +20,7 @@ Legacy demos such as Price Monitor and Lead Scraper are archived under
 - `src/pages/`: public Spanish-first page templates.
 - `src/app/`: login and admin dashboard templates.
 - `src/*.js`: browser controllers copied into `dist/`.
-- `api/index.js`: the consolidated Vercel API function.
+- `api/[...route].js`: the consolidated Vercel API function.
 - `backend/`: active server logic, integrations, modules, Stripe, auth, and cron.
 - `backend/pulse/stripe-plans.js`: Stripe plan map using environment-backed price IDs.
 - `supabase/`: setup SQL for leads, profiles, subscriptions, and Pulse module tables.
@@ -61,7 +61,7 @@ Optional integration keys are documented in `.env.example`.
 ## Deployment Notes
 
 - Vercel should build with `npm run build` and publish `dist/`.
-- The API is intentionally consolidated at `api/index.js` so the serverless
+- The API is intentionally consolidated at `api/[...route].js` so the serverless
   function count stays safely under Vercel Hobby limits.
 - Stripe Checkout redirects successful payments to `/bienvenida/`.
 - Public lead forms require GDPR consent before `/api/lead` accepts them.

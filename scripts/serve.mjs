@@ -35,7 +35,7 @@ const MIME = {
 let apiHandler = null;
 async function getApiHandler() {
   if (!apiHandler) {
-    const mod = await import(pathToFileURL(join(ROOT, 'api', 'index.js')).href);
+    const mod = await import(pathToFileURL(join(ROOT, 'api', '[...route].js')).href);
     apiHandler = mod.default;
   }
   return apiHandler;

@@ -29,6 +29,14 @@ npm run verify:pulse
 git status --short
 ```
 
+## Current Live Status
+
+- Last verified production deployment was `Ready`.
+- `santipulse.com/admin` redirects to `/login/`.
+- `/api/admin/verify-connections` returns `401 Unauthorized` without a session.
+- Remaining external setup: add `META_ACCESS_TOKEN` to Vercel Production so
+  the Meta Truth Layer check can connect.
+
 ## Do Not Do
 
 - Do not use `F:\Brain Website`.
