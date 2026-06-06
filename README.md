@@ -29,7 +29,7 @@ Legacy demos such as Price Monitor and Lead Scraper are archived under
 - `api/[...route].js`: the consolidated Vercel API adapter.
 - `backend/handlers/`: route map and request hydration for the catch-all API.
 - `backend/lib/`: shared server utilities for auth, data, products, providers, and HTTP.
-- `backend/vault/` and `backend/lib/vault.js`: Knowledge Vault upload/list/delete and AI prompt context.
+- `backend/vault/` and `backend/lib/vault.js`: Knowledge Vault upload/list/delete and AI prompt context. It prefers the SQL table when present and falls back to a private Supabase Storage manifest when the table has not been applied yet.
 - `backend/`: active package handlers for integrations, modules, Stripe, auth, and cron.
 - `backend/pulse/stripe-plans.js`: Stripe plan map using environment-backed price IDs.
 - `supabase/`: setup SQL for leads, profiles, subscriptions, and Pulse module tables.
@@ -95,3 +95,4 @@ Then verify the live site manually:
 - The dashboard shows Bóveda de Conocimiento, ROI Pulse, and SOS humano.
 - Pricing buttons start Stripe Checkout for the selected plan.
 - `/bienvenida/` and `/privacidad/` render with complete social metadata.
+- Vault is operational with the private `knowledge-vault` bucket even before `knowledge_vault_items` is applied; running `supabase/pulse-modules.sql` later upgrades it to the table-backed path.

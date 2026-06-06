@@ -11,7 +11,7 @@
   - ROI Pulse
   - SOS humano
 - Confirm `/api/admin/verify-connections` includes Vapi, Meta, Stripe, Supabase, Revealbot and Vault.
-- Confirm `Boveda` can save a note/menu after `supabase/pulse-modules.sql` is applied.
+- Confirm `Boveda` can save a note/menu. It works through the private `knowledge-vault` Storage manifest even before the SQL table is applied.
 - Confirm `SOS humano` records an alert.
 - Confirm `ROI Pulse` loads from synced campaign metrics.
 - Confirm `/demos/` keeps the Webs Reales grid and shows the three video placeholders.
@@ -40,6 +40,6 @@
 
 ## Current Live Blocker
 
-- Run the updated `supabase/pulse-modules.sql` so the Knowledge Vault table and bucket exist.
+- `knowledge-vault` bucket is required. `knowledge_vault_items` is recommended but not a blocker because the API falls back to a private Storage manifest.
 - `META_ACCESS_TOKEN` must exist in Vercel Production for the Meta badge in `/api/admin/verify-connections` to turn green.
 - Revealbot should stay red/error until real private API URLs are configured.

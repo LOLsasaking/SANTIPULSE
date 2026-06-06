@@ -47,6 +47,7 @@ If Codex hits a usage limit, resume from this project only:
   - Vapi assistant provisioning receives Knowledge Vault context through `getVaultContext`.
   - Insights captions include Knowledge Vault context when available.
   - Dashboard now shows Boveda de Conocimiento, ROI Pulse, Vapi-ready voice controls and SOS humano.
+  - Vault now has a table-first, Storage-manifest fallback. If `knowledge_vault_items` is missing, metadata lives in `knowledge-vault/_manifests/<user>.json`.
 
 ## Resume Commands
 
@@ -60,8 +61,8 @@ git status --short
 
 ## New Manual Checks
 
-- Run `supabase/pulse-modules.sql` in Supabase SQL editor so `knowledge_vault_items` and bucket `knowledge-vault` exist.
-- Log in, open `Boveda`, upload a note or menu, and confirm it appears in the list.
+- `knowledge-vault` bucket was created and upload/delete was verified from local service-role checks.
+- Log in, open `Boveda`, upload a note or menu, and confirm it appears in the list. This should work even before `knowledge_vault_items` is applied because of the Storage manifest fallback.
 - Activate/provision `Recepcionista IA` again so the assistant receives Vault context.
 - Press `SOS humano` and confirm a `receptionist_sos_alerts` row is created.
 - Open Ads and confirm `ROI Pulse` loads from synced campaigns.

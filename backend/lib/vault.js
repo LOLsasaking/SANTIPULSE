@@ -5,6 +5,7 @@
    Spanish summaries, and provide compact context to AI prompts.
    ============================================================ */
 import { admin } from './auth.js';
+import { randomUUID } from 'node:crypto';
 
 const BUCKET = process.env.VAULT_BUCKET || 'knowledge-vault';
 const MAX_BYTES = Number(process.env.VAULT_MAX_BYTES || 5 * 1024 * 1024);
@@ -28,6 +29,7 @@ export async function listVaultItems(userId, limit = 50) {
     .order('created_at', { ascending: false })
     .limit(limit);
   if (error) {
+    if (tableMissing(error)) return listManifestItems(sb, userId, limit);
     console.error('[vault] list:', error.message);
     return [];
   }
@@ -43,7 +45,11 @@ export async function getVaultContext(userId, limit = 6) {
     .in('status', ['ready', 'metadata_only'])
     .order('updated_at', { ascending: false })
     .limit(limit);
-  if (error || !data?.length) return '';
+  if (error) {
+    if (tableMissing(error)) return manifestContext(sb, userId, limit);
+    return '';
+  }
+  if (!data?.length) return '';
 
   const chunks = data.map((item) => {
     const body = cleanText(item.summary || item.content_text || '').slice(0, 650);
@@ -103,6 +109,7 @@ export async function saveVaultItem(userId, input = {}) {
     .select('id,title,kind,file_name,mime_type,summary,status,error_message,created_at,updated_at')
     .single();
   if (error) {
+    if (tableMissing(error)) return saveManifestItem(sb, userId, row);
     console.error('[vault] save:', error.message);
     return { ok: false, error: 'save_failed', detail: error.message };
   }
@@ -112,11 +119,12 @@ export async function saveVaultItem(userId, input = {}) {
 export async function deleteVaultItem(userId, id) {
   const sb = admin();
   if (!sb || !id) return false;
-  const { data: item } = await sb.from('knowledge_vault_items')
+  const { data: item, error: getError } = await sb.from('knowledge_vault_items')
     .select('storage_path')
     .eq('user_id', userId)
     .eq('id', id)
     .maybeSingle();
+  if (tableMissing(getError)) return deleteManifestItem(sb, userId, id);
   if (item?.storage_path) {
     await sb.storage.from(BUCKET).remove([item.storage_path]).catch(() => {});
   }
@@ -124,6 +132,7 @@ export async function deleteVaultItem(userId, id) {
     .delete()
     .eq('user_id', userId)
     .eq('id', id);
+  if (tableMissing(error)) return deleteManifestItem(sb, userId, id);
   return !error;
 }
 
@@ -132,12 +141,8 @@ export async function vaultReadiness() {
   if (!sb) return { status: 'missing', message: 'Falta Supabase service role' };
 
   const table = await sb.from('knowledge_vault_items')
-    .select('id', { head: true, count: 'exact' })
+    .select('id')
     .limit(1);
-  if (table.error) {
-    return { status: 'error', message: 'Tabla knowledge_vault_items no encontrada' };
-  }
-
   try {
     const bucket = await sb.storage.getBucket(BUCKET);
     if (bucket.error) {
@@ -146,7 +151,121 @@ export async function vaultReadiness() {
   } catch {
     return { status: 'error', message: `Bucket ${BUCKET} no verificado` };
   }
+  if (table.error) {
+    if (tableMissing(table.error)) {
+      return { status: 'connected', message: 'Boveda lista (Storage manifest)' };
+    }
+    return { status: 'error', message: table.error.message || 'Boveda no verificada' };
+  }
   return { status: 'connected', message: 'Boveda lista' };
+}
+
+async function listManifestItems(sb, userId, limit = 50) {
+  const items = await readManifest(sb, userId);
+  return items
+    .sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || '')))
+    .slice(0, limit)
+    .map(publicVaultItem);
+}
+
+async function manifestContext(sb, userId, limit = 6) {
+  const items = await readManifest(sb, userId);
+  const chunks = items
+    .filter((item) => ['ready', 'metadata_only'].includes(item.status || 'ready'))
+    .sort((a, b) => String(b.updated_at || '').localeCompare(String(a.updated_at || '')))
+    .slice(0, limit)
+    .map((item) => {
+      const body = cleanText(item.summary || item.content_text || '').slice(0, 650);
+      const label = item.title || item.file_name || 'Documento';
+      return body ? `- ${label}: ${body}` : '';
+    })
+    .filter(Boolean);
+  return chunks.join('\n').slice(0, CONTEXT_LIMIT);
+}
+
+async function saveManifestItem(sb, userId, row) {
+  const now = new Date().toISOString();
+  const item = {
+    id: randomUUID(),
+    title: row.title,
+    kind: row.kind || 'note',
+    file_name: row.file_name || null,
+    mime_type: row.mime_type || null,
+    storage_path: row.storage_path || null,
+    content_text: row.content_text || null,
+    summary: row.summary || null,
+    status: row.status || 'ready',
+    error_message: row.error_message || null,
+    created_at: now,
+    updated_at: now,
+  };
+  const items = await readManifest(sb, userId);
+  items.unshift(item);
+  const ok = await writeManifest(sb, userId, items);
+  if (!ok) return { ok: false, error: 'save_failed', detail: 'manifest_write_failed' };
+  return { ok: true, item: publicVaultItem(item) };
+}
+
+async function deleteManifestItem(sb, userId, id) {
+  const items = await readManifest(sb, userId);
+  const item = items.find((x) => x.id === id);
+  if (!item) return false;
+  if (item.storage_path) await sb.storage.from(BUCKET).remove([item.storage_path]).catch(() => {});
+  return writeManifest(sb, userId, items.filter((x) => x.id !== id));
+}
+
+async function readManifest(sb, userId) {
+  const path = manifestPath(userId);
+  const { data, error } = await sb.storage.from(BUCKET).download(path);
+  if (error) {
+    if (/not found|does not exist|404/i.test(error.message || '')) return [];
+    console.error('[vault] manifest read:', error.message);
+    return [];
+  }
+  try {
+    const text = await data.text();
+    const parsed = JSON.parse(text);
+    return Array.isArray(parsed?.items) ? parsed.items : [];
+  } catch (err) {
+    console.error('[vault] manifest parse:', err.message);
+    return [];
+  }
+}
+
+async function writeManifest(sb, userId, items) {
+  const path = manifestPath(userId);
+  const payload = Buffer.from(JSON.stringify({ version: 1, items }, null, 2));
+  const { error } = await sb.storage.from(BUCKET).upload(path, payload, {
+    contentType: 'application/json',
+    upsert: true,
+  });
+  if (error) console.error('[vault] manifest write:', error.message);
+  return !error;
+}
+
+function manifestPath(userId) {
+  return `_manifests/${String(userId).replace(/[^a-z0-9-]/gi, '')}.json`;
+}
+
+function publicVaultItem(item) {
+  return {
+    id: item.id,
+    title: item.title,
+    kind: item.kind,
+    file_name: item.file_name,
+    mime_type: item.mime_type,
+    summary: item.summary,
+    status: item.status,
+    error_message: item.error_message,
+    created_at: item.created_at,
+    updated_at: item.updated_at,
+  };
+}
+
+function tableMissing(error) {
+  if (!error) return false;
+  const text = `${error.code || ''} ${error.message || ''} ${error.details || ''}`;
+  return /PGRST205|schema cache|knowledge_vault_items|relation .* does not exist|could not find the table/i.test(text);
 }
 
 async function summarizeVaultItem({ title, fileName, mimeType, contentText }) {
