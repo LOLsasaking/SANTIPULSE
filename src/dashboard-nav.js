@@ -92,6 +92,102 @@
     if (tries > 40) clearInterval(statTimer);
   }, 400);
 
+  // ══ Conexiones — Truth Layer ════════════════════════════════════════════
+  //   Calls the auth'd /api/admin/verify-connections route, which performs a
+  //   REAL handshake against each provider. A row only goes green when the
+  //   provider returned 2xx. Expired Meta tokens (reauth:true) swap the badge
+  //   for a "Re-autenticar con Facebook" button that kicks off OAuth again.
+  function escAttr(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (m) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]; }); }
+
+  function renderConnRow(key, info) {
+    var row = document.querySelector('.conn-row[data-integration="' + key + '"]');
+    if (!row) return;
+    var msg = row.querySelector('.status-message');
+    var side = row.querySelector('.conn-side') || row;
+    // strip any prior badge/button on the right side
+    row.querySelectorAll('.status-badge, .reauth-btn').forEach(function (n) { n.remove(); });
+
+    if (msg) msg.textContent = info.message || '';
+
+    if (info.status === 'connected') {
+      var ok = document.createElement('span');
+      ok.className = 'status-badge badge ok';
+      ok.textContent = 'Conectado';
+      side.appendChild(ok);
+      return;
+    }
+
+    // Expired Meta token → offer re-auth instead of a dead badge.
+    if (info.reauth) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'reauth-btn';
+      btn.textContent = 'Re-autenticar con Facebook';
+      btn.addEventListener('click', function () {
+        btn.disabled = true;
+        window.SantiAuth.apiFetch('/api/integrations/social/authorize')
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (d) { if (d && d.url) window.location.href = d.url; else btn.disabled = false; })
+          .catch(function () { btn.disabled = false; });
+      });
+      side.appendChild(btn);
+      return;
+    }
+
+    var bad = document.createElement('span');
+    bad.className = 'status-badge badge err';
+    bad.textContent = info.status === 'missing' ? 'Sin configurar' : 'Acción requerida';
+    side.appendChild(bad);
+  }
+
+  function loadConnections() {
+    if (!window.SantiAuth || !window.SantiAuth.available()) return;
+    var errEl = document.getElementById('connectionsError');
+    if (errEl) errEl.classList.add('hidden');
+    // reset rows to a checking state
+    document.querySelectorAll('.conn-row[data-integration]').forEach(function (row) {
+      var b = row.querySelector('.status-badge');
+      if (b) { b.className = 'status-badge badge none'; b.textContent = 'Comprobando…'; }
+    });
+    window.SantiAuth.apiFetch('/api/admin/verify-connections')
+      .then(function (r) {
+        if (r.status === 401) { window.location.replace('/login/'); throw new Error('401'); }
+        return r.json();
+      })
+      .then(function (data) {
+        if (!data || !data.success || !data.integrations) throw new Error('bad_response');
+        Object.keys(data.integrations).forEach(function (key) {
+          renderConnRow(key, data.integrations[key]);
+        });
+      })
+      .catch(function (e) {
+        if (e.message === '401') return;
+        if (errEl) { errEl.textContent = 'No se pudo verificar las conexiones.'; errEl.classList.remove('hidden'); }
+      });
+  }
+
+  // Wrap each row's badge in a .conn-side so the re-auth button has a home.
+  function ensureConnSides() {
+    document.querySelectorAll('.conn-row[data-integration]').forEach(function (row) {
+      if (row.querySelector('.conn-side')) return;
+      var badge = row.querySelector('.status-badge');
+      var side = document.createElement('div');
+      side.className = 'conn-side';
+      if (badge) { row.removeChild(badge); side.appendChild(badge); }
+      row.appendChild(side);
+    });
+  }
+
+  // Lazy-load when the Conexiones tab is first opened, plus a manual re-check.
+  var connectionsLoaded = false;
+  document.addEventListener('click', function (e) {
+    var nav = e.target.closest && e.target.closest('.nav-item[data-nav="connections"]');
+    if (nav && !connectionsLoaded) { ensureConnSides(); connectionsLoaded = true; loadConnections(); }
+    var recheck = e.target.closest && e.target.closest('#recheckConnections');
+    if (recheck) { ensureConnSides(); loadConnections(); }
+  });
+
   // Expose for other scripts if needed.
-  window.SantiDashNav = { switchTo: switchTo, loadStats: loadStats };
+  window.SantiDashNav = { switchTo: switchTo, loadStats: loadStats, loadConnections: loadConnections };
 })();
