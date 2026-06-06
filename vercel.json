@@ -11,6 +11,10 @@
     { "source": "/admin", "destination": "/login/", "permanent": false },
     { "source": "/admin/", "destination": "/login/", "permanent": false }
   ],
+  "rewrites": [
+    { "source": "/api", "destination": "/api/[...route]" },
+    { "source": "/api/(.*)", "destination": "/api/[...route]" }
+  ],
   "crons": [
     { "path": "/api/cron/process", "schedule": "0 9 * * *" }
   ],
