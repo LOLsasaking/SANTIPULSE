@@ -1,101 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="noindex,nofollow" />
-<title>SantiPulse Admin · Automation Control Plane</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/admin-dashboard.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SantiPulse | Unified Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .active-tab { border-left: 4px solid white; background: rgba(255,255,255,0.05); color: white; }
+        .ticker-item { animation: slide 20s linear infinite; }
+        @keyframes slide { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+    </style>
 </head>
-<body>
-  <header class="admin-topbar">
-    <a class="brand" href="/" aria-label="SantiPulse home">santipulse<span>.admin</span></a>
-    <div class="topbar-actions">
-      <span id="adminEmail" class="admin-email">Checking session…</span>
-      <button id="logoutBtn" class="btn ghost" type="button">Sign out</button>
-    </div>
-  </header>
+<body class="bg-[#050505] text-white font-sans flex h-screen overflow-hidden">
 
-  <main class="admin-shell">
-    <aside class="admin-sidebar" aria-label="Admin packages">
-      <p class="eyebrow">Control plane</p>
-      <h1>Automation backend</h1>
-      <p class="sidebar-copy">Three isolated modules. No legacy demos. No public automation UI.</p>
-      <nav class="package-nav">
-        <button class="nav-item active" type="button" data-module="receptionist-leads">
-          <span class="nav-kicker">Package 1</span>
-          <strong>Receptionist & Leads</strong>
-          <small>Voice, WhatsApp, CRM, calendar</small>
-        </button>
-        <button class="nav-item" type="button" data-module="social-insights-autoposter">
-          <span class="nav-kicker">Package 2</span>
-          <strong>Social Insights & Auto-Poster</strong>
-          <small>Trends, analytics, queue</small>
-        </button>
-        <button class="nav-item" type="button" data-module="auto-ad-manager">
-          <span class="nav-kicker">Package 3</span>
-          <strong>Auto-Ad Manager</strong>
-          <small>Campaigns, budgets, optimization</small>
-        </button>
-      </nav>
+    <!-- Sidebar (The Unified Navigation) -->
+    <aside class="w-64 border-r border-zinc-800 flex flex-col p-6 space-y-8">
+        <h1 class="text-xl font-black tracking-tighter">SANTIPULSE</h1>
+        
+        <nav class="flex-1 space-y-2">
+            <button class="w-full text-left p-3 text-zinc-400 hover:text-white transition active-tab" onclick="switchTab('receptionist')">
+                <span class="text-xs block text-zinc-600 uppercase font-bold mb-1">Package 1</span>
+                Recepcionista IA
+            </button>
+            <button class="w-full text-left p-3 text-zinc-400 hover:text-white transition" onclick="switchTab('social')">
+                <span class="text-xs block text-zinc-600 uppercase font-bold mb-1">Package 2</span>
+                Social Media IA
+            </button>
+            <button class="w-full text-left p-3 text-zinc-400 hover:text-white transition" onclick="switchTab('ads')">
+                <span class="text-xs block text-zinc-600 uppercase font-bold mb-1">Package 3</span>
+                Gestor de Ads
+            </button>
+            <div class="h-4"></div>
+            <button class="w-full text-left p-3 text-zinc-400 hover:text-white transition" onclick="switchTab('vault')">
+                <span class="text-xs block text-zinc-600 uppercase font-bold mb-1">Elite</span>
+                Knowledge Vault
+            </button>
+        </nav>
+
+        <div class="pt-6 border-t border-zinc-800">
+            <button class="text-xs text-zinc-500 hover:text-white">Cerrar Sesión</button>
+        </div>
     </aside>
 
-    <section class="admin-content">
-      <div id="loading" class="loading-card">Loading admin dashboard…</div>
-      <div id="app" class="hidden">
-        <section class="module-view active" data-view="receptionist-leads">
-          <div class="module-header">
-            <p class="eyebrow">Package 1</p>
-            <h2>The Receptionist & Leads Leadership Hub</h2>
-            <p>Manage AI voice intake, WhatsApp CRM streams, qualified lead records, calendar booking, and Human SOS escalation logs from a dedicated operational view.</p>
-          </div>
-          <div class="status-grid" data-status-grid="receptionist-leads"></div>
-          <div class="split-grid">
-            <article class="panel"><div class="panel-head"><h3>Lead management</h3><button class="btn" data-refresh="receptionist-leads/leads">Refresh</button></div><div id="leadsTable" class="table-wrap"></div></article>
-            <article class="panel"><div class="panel-head"><h3>CRM conversation logs</h3><button class="btn ghost" data-refresh="receptionist-leads/conversations">Refresh</button></div><div id="conversationsTable" class="table-wrap"></div></article>
-          </div>
-          <div class="split-grid">
-            <article class="panel"><div class="panel-head"><h3>Calendar scheduling sync</h3><button class="btn ghost" data-refresh="receptionist-leads/scheduling">Check slots</button></div><div id="schedulingPanel" class="empty-state"></div></article>
-            <article class="panel"><div class="panel-head"><h3>Human SOS</h3><button class="btn danger" data-action="human-sos">Trigger test alert</button></div><div id="sosPanel" class="empty-state">No active escalations.</div></article>
-          </div>
-        </section>
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto p-12">
+        <!-- ROI Pulse Ticker -->
+        <div class="mb-8 p-4 bg-zinc-900/80 border border-white/5 rounded-2xl flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <div>
+                    <span class="text-[10px] uppercase text-zinc-500 font-bold block">Profit Hoy</span>
+                    <span class="text-green-500 font-mono font-bold">€0.00</span>
+                </div>
+                <div class="h-8 w-px bg-zinc-800"></div>
+                <div>
+                    <span class="text-[10px] uppercase text-zinc-500 font-bold block">Ad Spend</span>
+                    <span class="text-red-500 font-mono font-bold">€0.00</span>
+                </div>
+            </div>
+            <div class="text-right">
+                <span class="text-[10px] uppercase text-zinc-500 font-bold block">System Status</span>
+                <span class="text-white text-xs font-mono">PULSE: ACTIVE</span>
+            </div>
+        </div>
 
-        <section class="module-view" data-view="social-insights-autoposter">
-          <div class="module-header">
-            <p class="eyebrow">Package 2</p>
-            <h2>The Social Media Insights & Auto-Poster</h2>
-            <p>Separate trend analytics and official publishing queue for Instagram, Facebook, and TikTok workflows. Scraping and publishing are represented as backend jobs, not public UI widgets.</p>
-          </div>
-          <div class="status-grid" data-status-grid="social-insights-autoposter"></div>
-          <div class="split-grid">
-            <article class="panel"><div class="panel-head"><h3>Trend analytics</h3><button class="btn" data-refresh="social-insights-autoposter/trends">Refresh</button></div><div id="trendsTable" class="table-wrap"></div></article>
-            <article class="panel"><div class="panel-head"><h3>Auto-posting queue</h3><button class="btn ghost" data-refresh="social-insights-autoposter/queue">Refresh</button></div><div id="queueTable" class="table-wrap"></div></article>
-          </div>
-        </section>
+        <div id="content-area">
+            <!-- Default Content: Package 1 -->
+            <header class="mb-12">
+                <h2 class="text-4xl font-black mb-2">Recepcionista IA</h2>
+                <p class="text-zinc-500">Toda tu comunicación y leads en un solo lugar.</p>
+            </header>
 
-        <section class="module-view" data-view="auto-ad-manager">
-          <div class="module-header">
-            <p class="eyebrow">Package 3</p>
-            <h2>Auto-Ad Manager</h2>
-            <p>Dedicated campaign governance view for Meta Ads and TikTok Ads readiness, campaign state, optimization rules, and budget/action recommendations.</p>
-          </div>
-          <div class="status-grid" data-status-grid="auto-ad-manager"></div>
-          <div class="split-grid">
-            <article class="panel"><div class="panel-head"><h3>Campaigns</h3><button class="btn" data-refresh="auto-ad-manager/campaigns">Refresh</button></div><div id="campaignsTable" class="table-wrap"></div></article>
-            <article class="panel"><div class="panel-head"><h3>Optimization rules</h3><button class="btn ghost" data-refresh="auto-ad-manager/rules">Refresh</button></div><div id="rulesTable" class="table-wrap"></div></article>
-          </div>
-          <article class="panel"><div class="panel-head"><h3>Budget recommendations</h3><button class="btn ghost" data-refresh="auto-ad-manager/recommendations">Refresh</button></div><div id="recommendationsTable" class="table-wrap"></div></article>
-        </section>
-      </div>
-    </section>
-  </main>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                    <h3 class="font-bold mb-4">Estado de Conexión</h3>
+                    <div id="integration-status-list" class="space-y-4">
+                        <div data-integration="vapi" class="flex justify-between items-center">
+                            <span class="text-sm text-zinc-400">Vapi AI</span>
+                            <span class="status-badge bg-zinc-800 text-zinc-500 px-2 py-1 rounded-full text-[10px] font-bold">Checking...</span>
+                        </div>
+                        <div data-integration="supabase" class="flex justify-between items-center">
+                            <span class="text-sm text-zinc-400">Database</span>
+                            <span class="status-badge bg-zinc-800 text-zinc-500 px-2 py-1 rounded-full text-[10px] font-bold">Checking...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                    <h3 class="font-bold mb-4">Leads Recientes</h3>
+                    <p class="text-zinc-500 text-sm">No hay leads nuevos en las últimas 24h.</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
-  {{sb.config}}
-  <script src="/supabase.js"></script>
-  <script src="/auth.js"></script>
-  <script src="/admin-dashboard.js" defer></script>
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active-tab'));
+            event.currentTarget.classList.add('active-tab');
+
+            const content = document.getElementById('content-area');
+            if(tab === 'social') {
+                content.innerHTML = `
+                    <header class="mb-12">
+                        <h2 class="text-4xl font-black mb-2">Social Media IA</h2>
+                        <p class="text-zinc-500">Escaneo de tendencias y auto-poster.</p>
+                    </header>
+                    <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800">
+                        <p class="text-zinc-500">Cargando radar de tendencias...</p>
+                    </div>
+                `;
+            } else if (tab === 'vault') {
+                content.innerHTML = `
+                    <header class="mb-12">
+                        <h2 class="text-4xl font-black mb-2">Knowledge Vault</h2>
+                        <p class="text-zinc-500">Entrena a tu IA con el ADN de tu negocio.</p>
+                    </header>
+                    <div class="bg-zinc-900/50 p-12 rounded-3xl border border-dashed border-zinc-800 text-center">
+                        <p class="text-zinc-500 mb-4">Arrastra tus archivos PDF o TXT aquí</p>
+                        <button class="bg-white text-black px-6 py-2 rounded-xl font-bold">Subir Documentos</button>
+                    </div>
+                `;
+            } else if (tab === 'receptionist') {
+                location.reload(); 
+            }
+        }
+
+        async function verifyConnections() {
+            try {
+                const res = await fetch('/api/admin/verify');
+                const data = await res.json();
+                if (data.success) {
+                    Object.entries(data.integrations).forEach(([key, info]) => {
+                        const el = document.querySelector(`[data-integration="${key}"]`);
+                        if (el) {
+                            const badge = el.querySelector('.status-badge');
+                            badge.innerText = info.status === 'connected' ? 'Connected' : 'Error';
+                            badge.className = `status-badge ${info.status === 'connected' ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'} px-2 py-1 rounded-full text-[10px] font-bold`;
+                        }
+                    });
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', verifyConnections);
+    </script>
 </body>
 </html>

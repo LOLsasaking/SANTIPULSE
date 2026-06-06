@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recepcionista IA | SantiPulse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white font-sans">
+    <nav class="p-6 border-b border-zinc-800 flex justify-between items-center">
+        <h1 class="text-xl font-bold tracking-tighter">SANTIPULSE <span class="text-zinc-500">/ RECEPCIONISTA</span></h1>
+        <a href="/admin" class="text-sm text-zinc-400 hover:text-white">Volver al Panel</a>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-8">
+        <header class="mb-12">
+            <h2 class="text-4xl font-black mb-4">Control de Recepción IA</h2>
+            <p class="text-zinc-400">Gestiona tus llamadas, WhatsApp y agenda en tiempo real.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Voice Control -->
+            <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+                <h3 class="text-lg font-bold mb-4">Voz (Vapi/Bland)</h3>
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-sm text-zinc-500">Estado:</span>
+                    <span class="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-xs font-bold">ACTIVO</span>
+                </div>
+                <button class="w-full bg-white text-black py-3 rounded-xl font-bold hover:bg-zinc-200 transition">Configurar Agente</button>
+            </div>
+
+            <!-- WhatsApp Control -->
+            <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+                <h3 class="text-lg font-bold mb-4">WhatsApp CRM</h3>
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-sm text-zinc-500">Estado:</span>
+                    <span class="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-xs font-bold">CONECTADO</span>
+                </div>
+                <button class="w-full bg-zinc-800 text-white py-3 rounded-xl font-bold hover:bg-zinc-700 transition">Ver Chats</button>
+            </div>
+
+            <!-- Calendar Control -->
+            <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+                <h3 class="text-lg font-bold mb-4">Agenda & Citas</h3>
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-sm text-zinc-500">Próxima Cita:</span>
+                    <span class="text-white font-mono text-sm">Hoy, 14:30</span>
+                </div>
+                <button class="w-full bg-zinc-800 text-white py-3 rounded-xl font-bold hover:bg-zinc-700 transition">Sincronizar Google Cal</button>
+            </div>
+        </div>
+
+        <!-- Embedded Control Widget Area -->
+        <section class="mt-12">
+            <h3 class="text-xl font-bold mb-6">Consola de Control en Vivo</h3>
+            <div class="aspect-video bg-zinc-950 rounded-3xl border border-dashed border-zinc-800 flex items-center justify-center">
+                <p class="text-zinc-600 italic">Embed de Consola Vapi/Make.com cargando...</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
