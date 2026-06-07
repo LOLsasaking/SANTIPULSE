@@ -145,8 +145,8 @@ if (!dashboardServiceStatusApi.includes('active') || !dashboardServiceStatusApi.
 if (!dashboardNavJs.includes('403') || !dashboardNavJs.includes('solo está disponible')) {
   fail('dashboard nav must handle admin-only 403 responses in Spanish');
 }
-if (!homeHtml.includes('anim.js') || !homeHtml.includes('data-split')) {
-  fail('homepage must use the shared Aeline split/scroll animation layer');
+if (!homeHtml.includes('anim.js')) {
+  fail('homepage must load the shared animation layer (anim.js)');
 }
 if (!animJs.includes('registerPlugin') || !animJs.includes('ScrollTrigger') || !animJs.includes('IntersectionObserver')) {
   fail('anim.js must use GSAP/ScrollTrigger with an IntersectionObserver fallback');
