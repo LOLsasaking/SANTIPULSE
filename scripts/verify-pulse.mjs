@@ -173,6 +173,9 @@ if (!authJs.includes('finishAuthCallback') || !authJs.includes('exchangeCodeForS
 if (!authJs.includes('hasAuthCallback') || !authJs.includes('waitForSession')) {
   fail('auth helper must detect callback URLs and wait for session persistence');
 }
+if (authJs.includes("'/admin/'") || authJs.includes('"/admin/"') || loginJs.includes("'/admin/'") || loginJs.includes('"/admin/"')) {
+  fail('login/auth success redirects must go to /dashboard/, not legacy /admin/');
+}
 if (!loginJs.includes('Accediendo') || !loginJs.includes('finishAuthCallback')) {
   fail('/login/ must show an accessing state and finish magic-link callbacks');
 }
