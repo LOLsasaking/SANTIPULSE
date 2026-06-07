@@ -5,6 +5,7 @@
    of the API still loads if it's not installed locally.
    ============================================================ */
 import { admin } from './auth.js';
+import { normalizePlanKey, planByPriceId } from './products.js';
 
 let _stripe = null;
 export async function getStripe() {
@@ -51,6 +52,52 @@ export async function updateSubscription(userId, { status, subscriptionId, plan,
   const patch = { subscription_status: status, subscription_id: subscriptionId, plan, plan_expires_at: expiresAt };
   if (customerId) patch.stripe_customer_id = customerId;
   await sb.from('profiles').update(patch).eq('id', userId);
+}
+
+// Like updateSubscription but creates the profile row if it doesn't exist yet —
+// needed when a public (logged-out) buyer logs in for the first time after paying.
+export async function upsertSubscription(userId, { status, subscriptionId, plan, expiresAt, customerId }) {
+  const sb = admin();
+  if (!sb) return;
+  const patch = { id: userId, subscription_status: status, subscription_id: subscriptionId, plan, plan_expires_at: expiresAt };
+  if (customerId) patch.stripe_customer_id = customerId;
+  await sb.from('profiles').upsert(patch, { onConflict: 'id' });
+}
+
+// Option A reconciliation: a buyer can pay on /precios WITHOUT being logged in,
+// so the webhook has no user_id to attach. When that buyer later logs in with the
+// same email, this links their paid Stripe subscription to their account by email:
+// look up the Stripe customer(s) for the email, find a live subscription, and
+// upsert it onto their profile. Returns the linked { status, plan } or null.
+export async function reconcileSubscriptionByEmail(user) {
+  if (!user?.id || !user?.email) return null;
+  const stripe = await getStripe();
+  if (!stripe) return null;
+  try {
+    const customers = await stripe.customers.list({ email: user.email, limit: 10 });
+    let best = null;
+    for (const customer of customers.data) {
+      const subs = await stripe.subscriptions.list({ customer: customer.id, status: 'all', limit: 10 });
+      for (const sub of subs.data) {
+        if (!['active', 'trialing', 'past_due'].includes(sub.status)) continue;
+        if (!best || sub.created > best.sub.created) best = { sub, customerId: customer.id };
+      }
+    }
+    if (!best) return null;
+    const priceId = best.sub.items.data[0]?.price?.id;
+    const plan = normalizePlanKey(best.sub.metadata?.plan || planByPriceId(priceId));
+    await upsertSubscription(user.id, {
+      status: best.sub.status,
+      subscriptionId: best.sub.id,
+      plan,
+      expiresAt: best.sub.current_period_end ? new Date(best.sub.current_period_end * 1000).toISOString() : null,
+      customerId: best.customerId,
+    });
+    return { status: best.sub.status, plan };
+  } catch (err) {
+    console.error('[stripe] reconcileSubscriptionByEmail:', err.message);
+    return null;
+  }
 }
 
 // ── Idempotency ─────────────────────────────────────────────────────────────
