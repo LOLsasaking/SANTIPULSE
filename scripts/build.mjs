@@ -11,6 +11,7 @@
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, rmSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execSync } from 'node:child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -245,6 +246,7 @@ for (const lang of LANGS) {
       'lang': lang,
       'site.url': SITE_URL,
       'asset.prefix': assetPrefix(lang, page.path),
+      'tw.css': `<link rel="stylesheet" href="${assetPrefix(lang, page.path)}tw.css?v=${BUILD_ID}">`,
       'lang.switcher': switcherHtml(lang, page.path),
       'nav.home': nav.home,
       'nav.servicios': nav.servicios,
@@ -347,6 +349,19 @@ for (const d of ASSET_DIRS) {
     writeFileSync(join(outDir, 'index.html'), html, 'utf8');
   }
   console.log('  ✓ app pages + /sb-config.js:', APP_PAGES.map((p) => '/' + p.path + '/').join(', '));
+}
+
+// ---- Compile Tailwind to a static stylesheet (replaces the runtime CDN) ----
+// Scans the dist HTML just written, so tw.css contains only the classes used.
+{
+  try {
+    execSync('npx tailwindcss -c tailwind.config.cjs -i src/tw-input.css -o dist/tw.css --minify', {
+      cwd: ROOT, stdio: 'inherit',
+    });
+    console.log('  ✓ tw.css (compiled Tailwind, no runtime CDN)');
+  } catch (err) {
+    console.warn('  ! tailwind compile failed:', err.message);
+  }
 }
 
 // ---- sitemap.xml (all langs × pages) ----

@@ -120,4 +120,20 @@
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   }
+
+  // ── Perf: only let autoplay videos play while on screen ─────────────
+  //   Decoding several full-screen loops at once is the main source of
+  //   scroll lag on phones. Pause any autoplay video that scrolls out of
+  //   view and resume it when it comes back.
+  var autoVids = document.querySelectorAll('video[autoplay]');
+  if (autoVids.length && 'IntersectionObserver' in window) {
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var v = entry.target;
+        if (entry.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else if (!v.paused) { v.pause(); }
+      });
+    }, { rootMargin: '120px' });
+    autoVids.forEach(function (v) { vio.observe(v); });
+  }
 })();
