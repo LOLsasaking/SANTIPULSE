@@ -49,6 +49,19 @@ export function isAdminUser(user) {
   return String(user?.email || '').trim().toLowerCase() === ADMIN_EMAIL;
 }
 
+// Comped accounts: full access without paying — the admin, plus any email listed
+// in the COMP_EMAILS env var (comma-separated). Use this to grant a test login a
+// working subscription locally/in staging without a real Stripe purchase. Leave
+// COMP_EMAILS unset in production and only real subscribers get access.
+const COMP_EMAILS = String(process.env.COMP_EMAILS || '')
+  .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+
+export function isCompedEmail(user) {
+  const email = String(user?.email || '').trim().toLowerCase();
+  if (!email) return false;
+  return email === ADMIN_EMAIL || COMP_EMAILS.includes(email);
+}
+
 /** Guard helper: responds 401/403 and returns null unless the user is the owner admin. */
 export async function requireAdmin(req, res) {
   const user = await requireUser(req, res);

@@ -61,10 +61,28 @@
       var pill = statusClass(svc.status);
       return '<article class="service-card">' +
         '<div class="service-top"><div><h3>' + esc(svc.name) + '</h3><p>' + esc(svc.description) + '</p></div><span class="service-icon">' + esc(icon) + '</span></div>' +
-        '<div class="status-line"><span class="pill ' + pill + '">' + esc(svc.label || svc.status || 'Estado') + '</span><span class="muted mono">' + esc(svc.action || 'Automatizar ahora') + '</span></div>' +
+        '<div class="status-line"><span class="pill ' + pill + '">' + esc(svc.label || svc.status || 'Estado') + '</span>' +
+          '<button type="button" class="svc-action mono" data-svc-action data-svc-status="' + esc(svc.status || '') + '" style="background:none;border:0;padding:0;cursor:pointer;color:var(--red);font-weight:700;font-family:inherit;font-size:inherit">' + esc(svc.action || 'Automatizar ahora') + '</button>' +
+        '</div>' +
         '<p style="margin-top:14px">' + esc(svc.summary || '') + '</p>' +
       '</article>';
     }).join('');
+
+    // Bind the action buttons once: "Reintentar" re-fetches status (works for
+    // any user, subscribed or not); an active-state action jumps to Servicios.
+    if (!host.dataset.bound) {
+      host.dataset.bound = '1';
+      host.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('[data-svc-action]');
+        if (!btn) return;
+        if (btn.getAttribute('data-svc-status') === 'issue') {
+          loadServiceStatus();
+          return;
+        }
+        var nav = document.querySelector('.nav-item[data-nav="services"]');
+        if (nav) nav.click(); else loadServiceStatus();
+      });
+    }
   }
 
   function loadServiceStatus() {

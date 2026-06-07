@@ -2,7 +2,7 @@
    POST /api/dashboard/run - run a Pulse module action.
    Auth required. Body: { type: 'ai_receptionist'|'social_insights'|'ad_manager' }.
    ============================================================ */
-import { requireUser } from '../lib/auth.js';
+import { isCompedEmail, requireUser } from '../lib/auth.js';
 import { createJob, countUserRunsThisMonth, dbEnabled, finishJob } from '../lib/db.js';
 import { parseBody } from '../lib/http.js';
 import { getProfile, hasActiveSubscription } from '../lib/profile.js';
@@ -25,11 +25,12 @@ export default async function handler(req, res) {
   if (!PULSE_TYPES.includes(type)) return res.status(400).json({ error: 'invalid_type' });
 
   const profile = await getProfile(user.id);
-  if (!hasActiveSubscription(profile)) {
+  const comped = isCompedEmail(user);
+  if (!hasActiveSubscription(profile) && !comped) {
     return res.status(402).json({ error: 'needs_subscription', upgradeUrl: '/precios/' });
   }
 
-  const plan = profile?.plan || 'none';
+  const plan = (profile?.plan && profile.plan !== 'none') ? profile.plan : (comped ? 'agency' : 'none');
   const limits = limitsFor(plan);
   const used = await countUserRunsThisMonth(user.id);
   if (used >= limits.runsPerMonth) {
