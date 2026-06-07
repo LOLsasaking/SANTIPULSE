@@ -61,30 +61,35 @@
     splits.forEach(function (el) { el.classList.add('split-in'); });
   }
 
+  // Anything already in the first screen must animate immediately — pages like
+  // the no-scroll home triptych never fire a ScrollTrigger, which would leave
+  // split headings stuck off-screen (invisible). In-view = play now, rest = on scroll.
+  var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+  function inViewNow(el) {
+    var r = el.getBoundingClientRect();
+    return r.top < vh * 0.95 && r.bottom > 0;
+  }
+
   if (reduce) {
     revealAll();
   } else if (hasGsap) {
     splits.forEach(function (el) {
       var words = el.querySelectorAll('.rw-i');
-      window.gsap.fromTo(words, { yPercent: 115 }, {
-        yPercent: 0,
-        duration: 0.95,
-        ease: 'power3.out',
-        stagger: 0.045,
-        scrollTrigger: { trigger: el, start: 'top 86%', once: true },
+      var opts = {
+        yPercent: 0, duration: 0.95, ease: 'power3.out', stagger: 0.045,
         onStart: function () { el.classList.add('split-in'); },
-      });
+      };
+      if (!inViewNow(el)) opts.scrollTrigger = { trigger: el, start: 'top 86%', once: true };
+      window.gsap.fromTo(words, { yPercent: 115 }, opts);
     });
 
     document.querySelectorAll('[data-reveal]').forEach(function (el) {
-      window.gsap.fromTo(el, { autoAlpha: 0, y: 30 }, {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.75,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      var opts = {
+        autoAlpha: 1, y: 0, duration: 0.75, ease: 'power3.out',
         onStart: function () { el.classList.add('is-in'); },
-      });
+      };
+      if (!inViewNow(el)) opts.scrollTrigger = { trigger: el, start: 'top 88%', once: true };
+      window.gsap.fromTo(el, { autoAlpha: 0, y: 30 }, opts);
     });
   } else if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
