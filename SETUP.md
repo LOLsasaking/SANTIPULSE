@@ -19,8 +19,13 @@ Everything in code is built and locally tested. These are the steps **only you c
    **"Confirm email" / magic link** is on. (Email/OTP is on by default.)
 2. **Authentication → URL Configuration**:
    - **Site URL**: `https://santipulse.com`
-   - **Redirect URLs**: add `https://santipulse.com/dashboard/` and (for local testing)
-     `http://localhost:4599/dashboard/`.
+   - **Redirect URLs**: add the exact trailing-slash callback URLs
+     `https://santipulse.com/dashboard/` and `https://santipulse.com/login/`.
+     For local testing also add `http://localhost:4599/dashboard/` and
+     `http://localhost:4599/login/`.
+   - Keep the trailing slash. Vercel redirects slashless URLs, and redirecting a
+     magic-link callback can drop the auth code/fragment before Supabase stores
+     the session.
 3. Supabase's built-in email sender is rate-limited. For production volume, set up a custom
    SMTP sender under **Authentication → Emails → SMTP** (you can reuse Resend).
 

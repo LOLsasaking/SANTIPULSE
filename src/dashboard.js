@@ -31,11 +31,28 @@
     return;
   }
 
-  // Gate: must be logged in.
-  window.SantiAuth.getSession().then(function (session) {
-    if (!session) { window.location.replace('/login/'); return; }
-    boot();
-  });
+  // dashboard_auth_gate: must be logged in, but first let Supabase finish any
+  // magic-link callback so /dashboard/?code=... does not bounce back to /login/.
+  function dashboard_auth_gate() {
+    var auth = window.SantiAuth;
+    var callback = auth.hasAuthCallback && auth.hasAuthCallback();
+    var first = callback && auth.finishAuthCallback
+      ? auth.finishAuthCallback('/dashboard/').catch(function () { return null; })
+      : auth.waitForSession
+        ? auth.waitForSession(3)
+        : auth.getSession();
+
+    first.then(function (session) {
+      if (session) { boot(); return; }
+      return auth.getSession().then(function (latest) {
+        if (!latest) { window.location.replace('/login/'); return; }
+        boot();
+      });
+    }).catch(function () {
+      window.location.replace('/login/');
+    });
+  }
+  dashboard_auth_gate();
 
   function boot() {
     window.SantiAuth.apiFetch('/api/dashboard/me')
