@@ -10,6 +10,8 @@
    ============================================================ */
 import { createClient } from '@supabase/supabase-js';
 
+export const ADMIN_EMAIL = 'santiagogoncalves07@gmail.com';
+
 let _admin = null;
 export function admin() {
   if (_admin) return _admin;
@@ -40,5 +42,17 @@ export async function getUser(req) {
 export async function requireUser(req, res) {
   const user = await getUser(req);
   if (!user) { res.status(401).json({ error: 'unauthorized' }); return null; }
+  return user;
+}
+
+export function isAdminUser(user) {
+  return String(user?.email || '').trim().toLowerCase() === ADMIN_EMAIL;
+}
+
+/** Guard helper: responds 401/403 and returns null unless the user is the owner admin. */
+export async function requireAdmin(req, res) {
+  const user = await requireUser(req, res);
+  if (!user) return null;
+  if (!isAdminUser(user)) { res.status(403).json({ error: 'forbidden' }); return null; }
   return user;
 }

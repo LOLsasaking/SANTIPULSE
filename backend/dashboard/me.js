@@ -1,5 +1,5 @@
 /* GET /api/dashboard/me — current user + profile + subscription state. */
-import { requireUser } from '../lib/auth.js';
+import { isAdminUser, requireUser } from '../lib/auth.js';
 import { getProfile, hasActiveSubscription } from '../lib/profile.js';
 
 export default async function handler(req, res) {
@@ -12,6 +12,7 @@ export default async function handler(req, res) {
   const profile = await getProfile(user.id);
   return res.status(200).json({
     user: { id: user.id, email: user.email },
+    isAdmin: isAdminUser(user),
     profile: profile || null,
     subscription: {
       status: profile?.subscription_status || 'none',

@@ -66,6 +66,11 @@
   .chooser-eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:14px; }
   .chooser-title{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.9; letter-spacing:-.02em; font-size:clamp(2rem,5vw,3.6rem); }
   .chooser-intro{ color:rgba(255,255,255,.6); font-size:.95rem; margin-top:14px; max-width:30rem; }
+  [data-split] .rw{ display:inline-block; overflow:hidden; vertical-align:bottom; }
+  [data-split] .rw-i{ display:inline-block; transform:translateY(110%); transition:transform .9s cubic-bezier(.22,.7,.18,1); }
+  [data-split].split-in .rw-i{ transform:translateY(0); }
+  [data-reveal]{ opacity:0; transform:translateY(28px); transition:opacity .75s ease, transform .75s cubic-bezier(.22,.7,.18,1); }
+  [data-reveal].is-in{ opacity:1; transform:translateY(0); }
 
   /* ===== Diptych ===== */
   .stage{ display:flex; height:100vh; width:100vw; }
@@ -134,9 +139,9 @@
   </div>
 </header>
 
-<div class="chooser-head">
+<div class="chooser-head" data-reveal>
   <p class="chooser-eyebrow">{{servicios.eyebrow}}</p>
-  <h1 class="chooser-title">{{servicios.titleA}}<br>{{servicios.titleB}}</h1>
+  <h1 class="chooser-title" data-split>{{servicios.titleA}}<br>{{servicios.titleB}}</h1>
   <p class="chooser-intro">{{servicios.intro}}</p>
 </div>
 
@@ -147,7 +152,7 @@
     <div class="panel-bg"></div><video class="panel-video" data-src="{{asset.prefix}}demo-media/panel-1.mp4" muted loop playsinline preload="none"></video><div class="panel-veil"></div>
     <div class="panel-content">
       <span class="eyebrow">{{servicios.web.eyebrow}}</span>
-      <h2 class="headline">{{servicios.web.titleA}}<br>{{servicios.web.titleB}}</h2>
+      <h2 class="headline" data-split>{{servicios.web.titleA}}<br>{{servicios.web.titleB}}</h2>
       <p class="panel-desc">{{servicios.web.desc}}</p>
       <p class="panel-meta">{{servicios.web.meta}}</p>
       <span class="acceder">{{servicios.web.cta}} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
@@ -161,7 +166,7 @@
     <div class="panel-bg"></div><video class="panel-video" data-src="{{asset.prefix}}demo-media/panel-2.mp4" muted loop playsinline preload="none"></video><div class="panel-veil"></div>
     <div class="panel-content">
       <span class="eyebrow">{{servicios.ai.eyebrow}}</span>
-      <h2 class="headline">{{servicios.ai.titleA}}<br>{{servicios.ai.titleB}}</h2>
+      <h2 class="headline" data-split>{{servicios.ai.titleA}}<br>{{servicios.ai.titleB}}</h2>
       <p class="panel-desc">{{servicios.ai.desc}}</p>
       <p class="panel-meta">{{servicios.ai.meta}}</p>
       <span class="acceder">{{servicios.ai.cta}} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
@@ -171,6 +176,9 @@
 </main>
 
 <script src="{{asset.prefix}}lang.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="{{asset.prefix}}anim.js" defer></script>
 <script src="{{asset.prefix}}home.js" defer></script>
 </body>
 </html>

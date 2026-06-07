@@ -3,6 +3,7 @@ import dashboardMe from '../dashboard/me.js';
 import dashboardProfile from '../dashboard/profile.js';
 import dashboardRun from '../dashboard/run.js';
 import dashboardRuns from '../dashboard/runs.js';
+import dashboardServiceStatus from '../dashboard/service-status.js';
 import lead from '../lead.js';
 import receptionistDashboard from '../receptionist/dashboard.js';
 import receptionistSos from '../receptionist/sos.js';
@@ -51,6 +52,7 @@ const ROUTES = new Map([
   ['dashboard/profile', dashboardProfile],
   ['dashboard/run', dashboardRun],
   ['dashboard/runs', dashboardRuns],
+  ['dashboard/service-status', dashboardServiceStatus],
   ['stripe/checkout', stripeCheckout],
   ['stripe/ad-checkout', stripeAdCheckout],
   ['stripe/portal', stripePortal],

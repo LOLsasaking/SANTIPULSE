@@ -28,6 +28,11 @@
   .font-display{ font-family:'Archivo',sans-serif; }
   .font-mono{ font-family:'Space Mono',monospace; }
   .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.86; letter-spacing:-.02em; }
+  [data-split] .rw{ display:inline-block; overflow:hidden; vertical-align:bottom; }
+  [data-split] .rw-i{ display:inline-block; transform:translateY(110%); transition:transform .9s cubic-bezier(.22,.7,.18,1); }
+  [data-split].split-in .rw-i{ transform:translateY(0); }
+  [data-reveal]{ opacity:0; transform:translateY(30px); transition:opacity .75s ease, transform .75s cubic-bezier(.22,.7,.18,1); }
+  [data-reveal].is-in{ opacity:1; transform:translateY(0); }
   .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:14px; }
   .eyebrow::before{ content:''; width:34px; height:1px; background:rgba(255,255,255,.5); }
   .meta{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.42); }
@@ -120,27 +125,27 @@
 </div>
 
 <main class="pt-32 pb-24 px-6 md:px-10 max-w-6xl mx-auto">
-  <header class="mb-12">
+  <header class="mb-12" data-reveal>
     <p class="eyebrow mb-5">{{demos.eyebrow}}</p>
-    <h1 class="headline text-5xl md:text-7xl mb-6">{{demos.titleA}}<br>{{demos.titleB}}</h1>
+    <h1 class="headline text-5xl md:text-7xl mb-6" data-split>{{demos.titleA}}<br>{{demos.titleB}}</h1>
     <p class="text-white/65 max-w-2xl text-lg">{{demos.intro}}</p>
   </header>
 
-  <div id="gallery" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+  <div id="gallery" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-reveal></div>
 
-  <div class="mt-10 p-5 rounded-2xl border border-ember/20 bg-ember/5 text-sm text-white/70 leading-relaxed max-w-3xl">
+  <div class="mt-10 p-5 rounded-2xl border border-ember/20 bg-ember/5 text-sm text-white/70 leading-relaxed max-w-3xl" data-reveal>
     {{demos.note}}
   </div>
 
   <!-- Pulse video strategy placeholders -->
   <section id="video-strategy" class="mt-20 pt-14 border-t border-white/10">
-    <header class="mb-10">
+    <header class="mb-10" data-reveal>
       <p class="eyebrow mb-5">{{demos.videos.eyebrow}}</p>
-      <h2 class="headline text-4xl md:text-5xl mb-4">{{demos.videos.heading}}</h2>
+      <h2 class="headline text-4xl md:text-5xl mb-4" data-split>{{demos.videos.heading}}</h2>
       <p class="text-white/60 max-w-2xl">{{demos.videos.intro}}</p>
     </header>
 
-    <div class="video-grid">
+    <div class="video-grid" data-stagger>
       <article class="video-card">
         <div class="video-frame"><span>01</span></div>
         <p class="meta mb-3">{{demos.videos.receptionist.kicker}}</p>
@@ -197,6 +202,9 @@
 <!-- demo descriptions (translated) for the gallery JS -->
 <script id="i18n-data" type="application/json">{{i18n.demosJson}}</script>
 <script src="{{asset.prefix}}lang.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="{{asset.prefix}}anim.js" defer></script>
 <script src="{{asset.prefix}}demos.js" defer></script>
 </body>
 </html>

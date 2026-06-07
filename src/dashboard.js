@@ -25,6 +25,61 @@
   function moduleIcon(type) {
     return (MODULES[type] && MODULES[type].icon) || 'PLS';
   }
+  function statusClass(status) {
+    return status === 'active' ? 'raise' : status === 'pending' ? 'warn' : status === 'issue' ? 'lower' : 'hold';
+  }
+
+  function applyAdminVisibility(isAdmin) {
+    document.body.setAttribute('data-role', isAdmin ? 'admin' : 'client');
+    document.querySelectorAll('[data-admin-only]').forEach(function (el) {
+      el.classList.toggle('hidden', !isAdmin);
+      el.setAttribute('aria-hidden', isAdmin ? 'false' : 'true');
+    });
+
+    var activeAdmin = document.querySelector('.section.active[data-admin-only]');
+    if (!isAdmin && activeAdmin) {
+      if (window.SantiDashNav && window.SantiDashNav.switchTo) window.SantiDashNav.switchTo('overview');
+      else {
+        activeAdmin.classList.remove('active');
+        var overview = document.querySelector('.section[data-section="overview"]');
+        if (overview) overview.classList.add('active');
+      }
+    }
+  }
+
+  function renderServiceStatus(services) {
+    var host = document.getElementById('serviceStatusGrid');
+    if (!host) return;
+    var list = services && services.length ? services : [
+      { id: 'ai_receptionist', name: 'Recepcionista IA', description: 'Atiende llamadas, WhatsApp y reservas con contexto.', status: 'issue', label: 'Sin datos', summary: 'No se pudo leer el estado todavía.', action: 'Reintentar' },
+      { id: 'social_insights', name: 'Insights de Redes', description: 'Tendencias y captions listos para publicar.', status: 'issue', label: 'Sin datos', summary: 'No se pudo leer el estado todavía.', action: 'Reintentar' },
+      { id: 'ad_manager', name: 'Gestor de Ads', description: 'Post, presupuesto y ROI en una vista simple.', status: 'issue', label: 'Sin datos', summary: 'No se pudo leer el estado todavía.', action: 'Reintentar' },
+    ];
+
+    host.innerHTML = list.map(function (svc) {
+      var icon = moduleIcon(svc.id);
+      var pill = statusClass(svc.status);
+      return '<article class="service-card">' +
+        '<div class="service-top"><div><h3>' + esc(svc.name) + '</h3><p>' + esc(svc.description) + '</p></div><span class="service-icon">' + esc(icon) + '</span></div>' +
+        '<div class="status-line"><span class="pill ' + pill + '">' + esc(svc.label || svc.status || 'Estado') + '</span><span class="muted mono">' + esc(svc.action || 'Automatizar ahora') + '</span></div>' +
+        '<p style="margin-top:14px">' + esc(svc.summary || '') + '</p>' +
+      '</article>';
+    }).join('');
+  }
+
+  function loadServiceStatus() {
+    var host = document.getElementById('serviceStatusGrid');
+    if (!host) return;
+    window.SantiAuth.apiFetch('/api/dashboard/service-status')
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (!res.ok || !res.d || !res.d.services) throw new Error('service_status');
+        renderServiceStatus(res.d.services);
+      })
+      .catch(function () {
+        renderServiceStatus(null);
+      });
+  }
 
   if (!window.SantiAuth || !window.SantiAuth.available()) {
     loading.textContent = 'Acceso no configurado.';
@@ -69,6 +124,10 @@
 
   function renderUser(data) {
     document.getElementById('userEmail').textContent = data.user.email;
+    var isAdmin = !!data.isAdmin;
+    applyAdminVisibility(isAdmin);
+    loadServiceStatus();
+
     var badge = document.getElementById('planBadge');
     var sub = data.subscription || {};
     badge.textContent = sub.plan && sub.plan !== 'none' ? sub.plan : (sub.status || 'none');
@@ -294,6 +353,43 @@
         });
     });
   });
+
+  // Human SOS: one-click escalation for the client-facing support panel.
+  var supportSosBtn = document.getElementById('supportSosBtn');
+  var supportMsg = document.getElementById('supportMsg');
+  function setSupportMsg(kind, text) {
+    if (!supportMsg) return;
+    supportMsg.className = 'msg ' + kind;
+    supportMsg.textContent = text;
+    show(supportMsg);
+  }
+  if (supportSosBtn) {
+    supportSosBtn.addEventListener('click', function () {
+      var orig = supportSosBtn.textContent;
+      supportSosBtn.disabled = true;
+      supportSosBtn.textContent = 'Activando...';
+      setSupportMsg('', 'Registrando alerta humana...');
+      window.SantiAuth.apiFetch('/api/receptionist/sos', {
+        method: 'POST',
+        body: JSON.stringify({
+          reason: 'support_button',
+          detail: 'SOS humano solicitado desde el panel cliente.',
+        }),
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error((res.d && res.d.error) || 'sos_failed');
+          setSupportMsg('ok', 'SOS registrado. Una persona revisará esta cuenta.');
+        })
+        .catch(function () {
+          setSupportMsg('err', 'No se pudo activar el SOS. Inténtalo de nuevo.');
+        })
+        .finally(function () {
+          supportSosBtn.disabled = false;
+          supportSosBtn.textContent = orig;
+        });
+    });
+  }
 
   // ── Manage subscription → Stripe portal ──
   var portalBtn = document.getElementById('portalBtn');

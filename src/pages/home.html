@@ -104,6 +104,9 @@
     transform-origin:left bottom;
     margin-bottom:20px;
   }
+  [data-split] .rw{ display:inline-block; overflow:hidden; vertical-align:bottom; }
+  [data-split] .rw-i{ display:inline-block; transform:translateY(110%); transition:transform .9s cubic-bezier(.22,.7,.18,1); }
+  [data-split].split-in .rw-i{ transform:translateY(0); }
   .panel:hover .headline{ transform:scale(1.08) translateY(-4px); letter-spacing:-.01em; }
 
   .panel-desc{ color:rgba(255,255,255,.72); font-size:1rem; max-width:22rem; margin-bottom:12px;
@@ -172,7 +175,7 @@
     <div class="panel-bg"></div><video class="panel-video" data-src="{{asset.prefix}}demo-media/panel-1.mp4" muted loop playsinline preload="none"></video><div class="panel-veil"></div>
     <div class="panel-content">
       <span class="eyebrow">{{home.panel1.eyebrow}}</span>
-      <h1 class="headline">{{home.panel1.titleA}}<br>{{home.panel1.titleB}}</h1>
+      <h1 class="headline" data-split>{{home.panel1.titleA}}<br>{{home.panel1.titleB}}</h1>
       <p class="panel-desc">{{home.panel1.desc}}</p>
       <p class="panel-meta">{{home.panel1.meta}}</p>
       <span class="acceder">{{common.acceder}} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
@@ -186,7 +189,7 @@
     <div class="panel-bg"></div><video class="panel-video" data-src="{{asset.prefix}}demo-media/panel-2.mp4" muted loop playsinline preload="none"></video><div class="panel-veil"></div>
     <div class="panel-content">
       <span class="eyebrow">{{home.panel2.eyebrow}}</span>
-      <h1 class="headline">{{home.panel2.titleA}}<br>{{home.panel2.titleB}}</h1>
+      <h1 class="headline" data-split>{{home.panel2.titleA}}<br>{{home.panel2.titleB}}</h1>
       <p class="panel-desc">{{home.panel2.desc}}</p>
       <p class="panel-meta">{{home.panel2.meta}}</p>
       <span class="acceder">{{common.acceder}} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
@@ -200,7 +203,7 @@
     <div class="panel-bg"></div><video class="panel-video" data-src="{{asset.prefix}}demo-media/panel-3.mp4" muted loop playsinline preload="none"></video><div class="panel-veil"></div>
     <div class="panel-content">
       <span class="eyebrow">{{home.panel3.eyebrow}}</span>
-      <h1 class="headline">{{home.panel3.titleA}}<br>{{home.panel3.titleB}}</h1>
+      <h1 class="headline" data-split>{{home.panel3.titleA}}<br>{{home.panel3.titleB}}</h1>
       <p class="panel-desc">{{home.panel3.desc}}</p>
       <p class="panel-meta">{{home.panel3.meta}}</p>
       <span class="acceder">{{common.acceder}} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
@@ -220,6 +223,9 @@
 </div>
 
 <script src="{{asset.prefix}}lang.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="{{asset.prefix}}anim.js" defer></script>
 <script src="{{asset.prefix}}home.js" defer></script>
 </body>
 </html>

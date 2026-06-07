@@ -9,7 +9,7 @@
 
    Auth: requires a logged-in admin (Supabase bearer token).
    ============================================================ */
-import { requireUser } from '../lib/auth.js';
+import { requireAdmin } from '../lib/auth.js';
 import { pingRevealbot } from '../lib/revealbot.js';
 import { vaultReadiness } from '../lib/vault.js';
 
@@ -36,8 +36,8 @@ function missing(message) {
 }
 
 export default async function handler(req, res) {
-  const user = await requireUser(req, res);
-  if (!user) return; // requireUser already sent 401
+  const user = await requireAdmin(req, res);
+  if (!user) return; // requireAdmin already sent 401/403
 
   const env = process.env;
   const results = {

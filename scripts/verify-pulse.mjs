@@ -35,6 +35,7 @@ assertFile('backend/lib/revealbot.js');
 assertFile('backend/pulse/modules.js');
 assertFile('backend/pulse/stripe-plans.js');
 assertFile('backend/dashboard/run.js');
+assertFile('backend/dashboard/service-status.js');
 assertFile('backend/vault/dashboard.js');
 assertFile('backend/receptionist/sos.js');
 assertFile('backend/ads/roi-pulse.js');
@@ -98,9 +99,13 @@ const loginHtml = readFileSync(join(ROOT, 'src/app/login.html'), 'utf8');
 const authJs = readFileSync(join(ROOT, 'src/auth.js'), 'utf8');
 const loginJs = readFileSync(join(ROOT, 'src/login.js'), 'utf8');
 const dashboardJs = readFileSync(join(ROOT, 'src/dashboard.js'), 'utf8');
+const dashboardNavJs = readFileSync(join(ROOT, 'src/dashboard-nav.js'), 'utf8');
 const receptionistApi = readFileSync(join(ROOT, 'backend/receptionist/dashboard.js'), 'utf8');
 const routerJs = readFileSync(join(ROOT, 'backend/handlers/router.js'), 'utf8');
 const verifyConnectionsApi = readFileSync(join(ROOT, 'backend/admin/verify-connections.js'), 'utf8');
+const backendAuthJs = readFileSync(join(ROOT, 'backend/lib/auth.js'), 'utf8');
+const dashboardMeApi = readFileSync(join(ROOT, 'backend/dashboard/me.js'), 'utf8');
+const dashboardServiceStatusApi = readFileSync(join(ROOT, 'backend/dashboard/service-status.js'), 'utf8');
 const automationsApi = readFileSync(join(ROOT, 'backend/lib/automations.js'), 'utf8');
 const adCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/ad-checkout.js'), 'utf8');
 const pulseModulesApi = readFileSync(join(ROOT, 'backend/pulse/modules.js'), 'utf8');
@@ -108,9 +113,52 @@ const dashboardRunApi = readFileSync(join(ROOT, 'backend/dashboard/run.js'), 'ut
 const stripeCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/checkout.js'), 'utf8');
 const stripeWebhookApi = readFileSync(join(ROOT, 'backend/stripe/webhook.js'), 'utf8');
 const pricingJs = readFileSync(join(ROOT, 'src/precios.js'), 'utf8');
+const homeHtml = readFileSync(join(ROOT, 'src/pages/home.html'), 'utf8');
+const animJs = readFileSync(join(ROOT, 'src/anim.js'), 'utf8');
 const spanishI18n = readFileSync(join(ROOT, 'src/i18n/es.json'), 'utf8');
 
 if (!dashboardHtml.includes('Automatizar ahora')) fail('dashboard must use easy automation copy');
+if (!dashboardHtml.includes('data-admin-only') || !dashboardHtml.includes('Ingredients')) {
+  fail('dashboard must include an admin-only Ingredients section');
+}
+if (!dashboardHtml.includes('serviceStatusGrid') || !dashboardHtml.includes('supportSosBtn')) {
+  fail('dashboard must include simplified client service status and support/SOS areas');
+}
+if (!dashboardJs.includes('isAdmin') || !dashboardJs.includes('data-admin-only') || !dashboardJs.includes('/api/dashboard/service-status')) {
+  fail('dashboard JS must gate Ingredients by isAdmin and load client service status');
+}
+if (!dashboardMeApi.includes('isAdmin') || !dashboardMeApi.includes('isAdminUser')) {
+  fail('/api/dashboard/me must return the email-based isAdmin flag');
+}
+if (!backendAuthJs.includes('ADMIN_EMAIL') || !backendAuthJs.includes('requireAdmin') || !backendAuthJs.includes('403')) {
+  fail('backend auth must expose email-based requireAdmin with 403 for non-admin users');
+}
+if (!verifyConnectionsApi.includes('requireAdmin')) {
+  fail('/api/admin/verify-connections must enforce admin-only access');
+}
+if (!routerJs.includes("'dashboard/service-status'")) {
+  fail('router missing dashboard/service-status');
+}
+if (!dashboardServiceStatusApi.includes('active') || !dashboardServiceStatusApi.includes('pending') || !dashboardServiceStatusApi.includes('locked')) {
+  fail('/api/dashboard/service-status must return client-safe service states');
+}
+if (!dashboardNavJs.includes('403') || !dashboardNavJs.includes('solo está disponible')) {
+  fail('dashboard nav must handle admin-only 403 responses in Spanish');
+}
+if (!homeHtml.includes('anim.js') || !homeHtml.includes('data-split')) {
+  fail('homepage must use the shared Aeline split/scroll animation layer');
+}
+if (!animJs.includes('registerPlugin') || !animJs.includes('ScrollTrigger') || !animJs.includes('IntersectionObserver')) {
+  fail('anim.js must use GSAP/ScrollTrigger with an IntersectionObserver fallback');
+}
+const motionPages = ['home', 'precios', 'contratar', 'demos', 'servicios', 'nosotros'];
+for (const page of motionPages) {
+  const html = readFileSync(join(ROOT, `src/pages/${page}.html`), 'utf8');
+  if (!html.includes('gsap.min.js') || !html.includes('ScrollTrigger.min.js') || !html.includes('anim.js')) {
+    fail(`${page}.html missing GSAP/ScrollTrigger/anim.js motion scripts`);
+  }
+  if (!html.includes('data-split')) fail(`${page}.html missing split headline hook`);
+}
 for (const required of ['Bóveda de Conocimiento', 'ROI Pulse', 'SOS humano']) {
   if (!dashboardHtml.includes(required) && !pulseModulesJs.includes(required)) fail(`dashboard missing ${required}`);
 }

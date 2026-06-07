@@ -28,6 +28,11 @@
   .font-display{ font-family:'Archivo',sans-serif; }
   .font-mono{ font-family:'Space Mono',monospace; }
   .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.86; letter-spacing:-.02em; }
+  [data-split] .rw{ display:inline-block; overflow:hidden; vertical-align:bottom; }
+  [data-split] .rw-i{ display:inline-block; transform:translateY(110%); transition:transform .9s cubic-bezier(.22,.7,.18,1); }
+  [data-split].split-in .rw-i{ transform:translateY(0); }
+  [data-reveal]{ opacity:0; transform:translateY(30px); transition:opacity .75s ease, transform .75s cubic-bezier(.22,.7,.18,1); }
+  [data-reveal].is-in{ opacity:1; transform:translateY(0); }
   .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:14px; }
   .eyebrow::before{ content:''; width:34px; height:1px; background:rgba(255,255,255,.5); }
   .meta{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.42); }
@@ -58,14 +63,14 @@
 
 <main class="pt-36 pb-28 px-6 md:px-10 max-w-3xl mx-auto">
 
-  <header class="mb-24">
+  <header class="mb-24" data-reveal>
     <p class="eyebrow mb-6">{{nosotros.eyebrow}}</p>
-    <h1 class="headline text-5xl md:text-8xl mb-8">{{nosotros.titleA}}<br>{{nosotros.titleB}}</h1>
+    <h1 class="headline text-5xl md:text-8xl mb-8" data-split>{{nosotros.titleA}}<br>{{nosotros.titleB}}</h1>
     <p class="text-white/75 max-w-2xl text-lg md:text-xl leading-relaxed font-light">{{nosotros.intro}}</p>
     <p class="meta mt-8">{{nosotros.badges}}</p>
   </header>
 
-  <section class="grid grid-cols-3 border-y border-white/10 mb-24">
+  <section class="grid grid-cols-3 border-y border-white/10 mb-24" data-stagger>
     <div class="py-8 pr-4">
       <div class="stat-num mb-3">{{nosotros.stat1Num}}</div>
       <p class="meta">{{nosotros.stat1Label}}</p>
@@ -80,16 +85,16 @@
     </div>
   </section>
 
-  <section class="mb-24">
+  <section class="mb-24" data-reveal>
     <p class="eyebrow mb-8">{{nosotros.missionEyebrow}}</p>
-    <h2 class="headline text-3xl md:text-5xl mb-10">{{nosotros.missionTitleA}}<br>{{nosotros.missionTitleB}}</h2>
+    <h2 class="headline text-3xl md:text-5xl mb-10" data-split>{{nosotros.missionTitleA}}<br>{{nosotros.missionTitleB}}</h2>
     <div class="space-y-6 max-w-2xl">
       <p class="text-white/70 leading-relaxed font-light text-lg">{{nosotros.missionP1}}</p>
       <p class="text-white/70 leading-relaxed font-light text-lg">{{nosotros.missionP2}}</p>
     </div>
   </section>
 
-  <section class="mb-24">
+  <section class="mb-24" data-reveal>
     <p class="eyebrow mb-10">{{nosotros.believeEyebrow}}</p>
     <div class="divide-y divide-white/10 border-t border-white/10">
       <div class="grid md:grid-cols-[3rem_1fr] gap-x-8 gap-y-2 py-8">
@@ -116,7 +121,7 @@
     </div>
   </section>
 
-  <section class="mb-24">
+  <section class="mb-24" data-reveal>
     <p class="eyebrow mb-10">{{nosotros.doEyebrow}}</p>
     <div class="divide-y divide-white/10 border-t border-white/10">
       <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 py-7">
@@ -155,5 +160,8 @@
 </footer>
 
 <script src="{{asset.prefix}}lang.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="{{asset.prefix}}anim.js" defer></script>
 </body>
 </html>

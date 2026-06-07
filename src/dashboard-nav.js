@@ -36,9 +36,9 @@
   function initialTab() {
     var q = new URLSearchParams(window.location.search);
     if (q.get('tab')) return q.get('tab');
-    if (q.has('ads')) return 'ads';
-    if (q.has('social')) return 'insights';
-    if (q.has('calendar')) return 'receptionist';
+    if (q.has('ads')) return 'services';
+    if (q.has('social')) return 'services';
+    if (q.has('calendar')) return 'services';
     return null;
   }
   var t = initialTab();
@@ -153,6 +153,7 @@
     window.SantiAuth.apiFetch('/api/admin/verify-connections')
       .then(function (r) {
         if (r.status === 401) { window.location.replace('/login/'); throw new Error('401'); }
+        if (r.status === 403) throw new Error('403');
         return r.json();
       })
       .then(function (data) {
@@ -163,7 +164,12 @@
       })
       .catch(function (e) {
         if (e.message === '401') return;
-        if (errEl) { errEl.textContent = 'No se pudo verificar las conexiones.'; errEl.classList.remove('hidden'); }
+        if (errEl) {
+          errEl.textContent = e.message === '403'
+            ? 'Esta vista solo está disponible para el administrador.'
+            : 'No se pudo verificar las conexiones.';
+          errEl.classList.remove('hidden');
+        }
       });
   }
 
