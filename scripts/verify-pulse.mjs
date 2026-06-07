@@ -94,6 +94,10 @@ for (const alias of ['recepcionista', 'social', 'ads']) {
 
 const pulseModulesJs = readFileSync(join(ROOT, 'src/pulse-modules.js'), 'utf8');
 const dashboardHtml = readFileSync(join(ROOT, 'src/app/dashboard.html'), 'utf8');
+const loginHtml = readFileSync(join(ROOT, 'src/app/login.html'), 'utf8');
+const authJs = readFileSync(join(ROOT, 'src/auth.js'), 'utf8');
+const loginJs = readFileSync(join(ROOT, 'src/login.js'), 'utf8');
+const dashboardJs = readFileSync(join(ROOT, 'src/dashboard.js'), 'utf8');
 const receptionistApi = readFileSync(join(ROOT, 'backend/receptionist/dashboard.js'), 'utf8');
 const routerJs = readFileSync(join(ROOT, 'backend/handlers/router.js'), 'utf8');
 const verifyConnectionsApi = readFileSync(join(ROOT, 'backend/admin/verify-connections.js'), 'utf8');
@@ -162,6 +166,24 @@ if (!pricingJs.includes("fetch('/api/stripe/checkout'") || pricingJs.includes('l
 }
 if (!spanishI18n.includes('mismo email')) {
   fail('/bienvenida/ must explain same-email onboarding after public Stripe checkout');
+}
+if (!authJs.includes('finishAuthCallback') || !authJs.includes('exchangeCodeForSession') || !authJs.includes('replaceState')) {
+  fail('auth helper must explicitly finish Supabase magic-link callbacks and clean callback URLs');
+}
+if (!authJs.includes('hasAuthCallback') || !authJs.includes('waitForSession')) {
+  fail('auth helper must detect callback URLs and wait for session persistence');
+}
+if (authJs.includes("'/admin/'") || authJs.includes('"/admin/"') || loginJs.includes("'/admin/'") || loginJs.includes('"/admin/"')) {
+  fail('login/auth success redirects must go to /dashboard/, not legacy /admin/');
+}
+if (!loginJs.includes('Accediendo') || !loginJs.includes('finishAuthCallback')) {
+  fail('/login/ must show an accessing state and finish magic-link callbacks');
+}
+if (!dashboardJs.includes('finishAuthCallback') || !dashboardJs.includes('dashboard_auth_gate')) {
+  fail('/dashboard/ auth gate must wait for callback processing before redirecting to /login/');
+}
+if (!loginHtml.includes('loginStatus')) {
+  fail('/login/ must include a visible status node for callback/auth errors');
 }
 
 const distPages = [

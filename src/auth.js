@@ -18,12 +18,85 @@
     return client;
   }
 
-  // Send a magic link to the given email. redirectTo returns the user to /admin.
+  // Send a magic link to the given email. redirectTo returns the user to /dashboard.
   function sendMagicLink(email) {
     var c = sb();
     if (!c) return Promise.reject(new Error('auth-unavailable'));
-    var redirectTo = window.location.origin + '/admin/';
+    var redirectTo = window.location.origin + '/dashboard/';
     return c.auth.signInWithOtp({ email: email, options: { emailRedirectTo: redirectTo } });
+  }
+
+  function hasAuthCallback() {
+    var qs = new URLSearchParams(window.location.search || '');
+    var hs = new URLSearchParams(String(window.location.hash || '').replace(/^#/, ''));
+    return qs.has('code') || qs.has('token_hash') || qs.has('error') ||
+      hs.has('access_token') || hs.has('refresh_token') || hs.has('error');
+  }
+
+  function cleanAuthUrl(targetPath) {
+    if (!window.history || !window.history.replaceState) return;
+    var path = targetPath || window.location.pathname || '/dashboard/';
+    window.history.replaceState({}, document.title, path);
+  }
+
+  function wait(ms) {
+    return new Promise(function (resolve) { window.setTimeout(resolve, ms); });
+  }
+
+  function waitForSession(attempts) {
+    attempts = attempts || 8;
+    var c = sb();
+    if (!c) return Promise.resolve(null);
+    function poll(left) {
+      return c.auth.getSession().then(function (r) {
+        var session = (r.data && r.data.session) || null;
+        if (session || left <= 0) return session;
+        return wait(160).then(function () { return poll(left - 1); });
+      });
+    }
+    return poll(attempts);
+  }
+
+  // Finish Supabase magic-link redirects explicitly. This covers both PKCE
+  // (?code=...) and implicit (#access_token=...) links, then removes callback
+  // credentials from the visible URL.
+  function finishAuthCallback(targetPath) {
+    var c = sb();
+    if (!c) return Promise.reject(new Error('auth-unavailable'));
+    var qs = new URLSearchParams(window.location.search || '');
+    var hs = new URLSearchParams(String(window.location.hash || '').replace(/^#/, ''));
+    var callback = hasAuthCallback();
+    var authError = qs.get('error_description') || qs.get('error') || hs.get('error_description') || hs.get('error');
+    if (authError) {
+      cleanAuthUrl(targetPath);
+      return Promise.reject(new Error(authError));
+    }
+
+    var work = Promise.resolve(null);
+    if (qs.has('code') && c.auth.exchangeCodeForSession) {
+      work = c.auth.exchangeCodeForSession(qs.get('code')).then(function (r) {
+        if (r && r.error) throw r.error;
+        return (r.data && r.data.session) || null;
+      });
+    } else if (hs.has('access_token') && hs.has('refresh_token') && c.auth.setSession) {
+      work = c.auth.setSession({
+        access_token: hs.get('access_token'),
+        refresh_token: hs.get('refresh_token'),
+      }).then(function (r) {
+        if (r && r.error) throw r.error;
+        return (r.data && r.data.session) || null;
+      });
+    }
+
+    return work.then(function (session) {
+      return session || waitForSession(callback ? 10 : 3);
+    }).then(function (session) {
+      if (callback) cleanAuthUrl(targetPath);
+      return session || null;
+    }).catch(function (err) {
+      if (callback) cleanAuthUrl(targetPath);
+      throw err;
+    });
   }
 
   // Current session (or null). Resolves after detectSessionInUrl handles the hash.
@@ -65,6 +138,9 @@
   window.SantiAuth = {
     available: function () { return !!sb(); },
     sendMagicLink: sendMagicLink,
+    hasAuthCallback: hasAuthCallback,
+    finishAuthCallback: finishAuthCallback,
+    waitForSession: waitForSession,
     getSession: getSession,
     signOut: signOut,
     apiFetch: apiFetch,
