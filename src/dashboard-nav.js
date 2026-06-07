@@ -21,7 +21,7 @@
   }
 
   document.addEventListener('click', function (e) {
-    var nav = e.target.closest && e.target.closest('.nav-item[data-nav]');
+    var nav = e.target.closest && e.target.closest('[data-nav]');
     if (nav) { switchTo(nav.getAttribute('data-nav')); return; }
   });
 
@@ -182,7 +182,7 @@
   // Lazy-load when the Conexiones tab is first opened, plus a manual re-check.
   var connectionsLoaded = false;
   document.addEventListener('click', function (e) {
-    var nav = e.target.closest && e.target.closest('.nav-item[data-nav="connections"]');
+    var nav = e.target.closest && e.target.closest('[data-nav="connections"]');
     if (nav && !connectionsLoaded) { ensureConnSides(); connectionsLoaded = true; loadConnections(); }
     var recheck = e.target.closest && e.target.closest('#recheckConnections');
     if (recheck) { ensureConnSides(); loadConnections(); }
