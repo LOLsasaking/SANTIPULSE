@@ -135,6 +135,15 @@
       return;
     }
 
+    // Optional providers that are simply not configured → neutral, not alarming.
+    if (info.optional && info.status === 'missing') {
+      var opt = document.createElement('span');
+      opt.className = 'status-badge badge none';
+      opt.textContent = 'Opcional';
+      side.appendChild(opt);
+      return;
+    }
+
     var bad = document.createElement('span');
     bad.className = 'status-badge badge err';
     bad.textContent = info.status === 'missing' ? 'Sin configurar' : 'Acción requerida';
