@@ -66,7 +66,7 @@ const PAGES = [
 ];
 
 // Single-file JS + static assets copied verbatim into dist root
-const JS_FILES = ['tw-config.js', 'lang.js', 'contratar.js', 'demos.js', 'auth.js', 'login.js', 'dashboard.js', 'dashboard-nav.js', 'pulse-modules.js', 'precios.js'];
+const JS_FILES = ['tw-config.js', 'lang.js', 'home.js', 'anim.js', 'contratar.js', 'demos.js', 'auth.js', 'login.js', 'dashboard.js', 'dashboard-nav.js', 'pulse-modules.js', 'precios.js'];
 const ROOT_ASSETS = ['santilogo.png', 'santipulse-logo.webm'];
 const ASSET_DIRS = ['demo-media'];
 

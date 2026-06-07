@@ -12,3 +12,6 @@ dist/
 # os / editor
 .DS_Store
 Thumbs.db
+
+# local source scratch (big mp4 sources; served copies live in demo-media/)
+website new thing/

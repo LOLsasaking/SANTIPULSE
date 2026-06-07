@@ -21,167 +21,388 @@
 <script src="{{asset.prefix}}tw-config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
-  body{ font-family:'Inter',sans-serif; background:#050505; color:#fff; }
-  .font-display{ font-family:'Archivo',sans-serif; }
-  .font-mono{ font-family:'Space Mono',monospace; }
-  .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.86; letter-spacing:-.02em; }
-  .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:14px; }
-  .eyebrow::before{ content:''; width:34px; height:1px; background:rgba(255,255,255,.5); }
+  body{ font-family:'Inter',sans-serif; background:#08080a; color:#fff; padding-bottom:64px; }
+  [id]{ scroll-margin-top:96px; }
+  .mono{ font-family:'Space Mono',monospace; }
+  /* Aeline-style headline: sentence-case grotesk, tight, big */
+  .h-aeline{ font-family:'Inter',sans-serif; font-weight:800; letter-spacing:-.03em; line-height:1.05; }
+  .eyebrow{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:9px; }
+  .eyebrow::before{ content:'■'; font-size:7px; color:#E23B4E; }
   .meta{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.42); }
-  .volver{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.8); text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition:color .3s; }
-  .volver:hover{ color:#fff; } .volver svg{ transition:transform .3s; } .volver:hover svg{ transform:translateX(-5px); }
-  .wordmark{ font-family:'Space Mono',monospace; font-size:13px; letter-spacing:.12em; color:rgba(255,255,255,.85); text-decoration:none; }
-  .topbar{ position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 30px; backdrop-filter:blur(14px); background:rgba(5,5,5,.55); }
-  .topbar-right{ display:flex; align-items:center; gap:16px; }
+  .wordmark{ display:inline-flex; align-items:center; text-decoration:none; }
+
+  /* inline icon chip inside headlines */
+  .chip{ display:inline-grid; place-items:center; width:.92em; height:.92em; border-radius:.26em; vertical-align:-.12em; margin:0 .06em; }
+  .chip svg{ width:56%; height:56%; }
+  .chip.red{ background:#E23B4E; color:#fff; }
+  .chip.white{ background:#fff; color:#08080a; }
+
+  /* pill CTA with circular arrow (Aeline) */
+  .pill-cta{ display:inline-flex; align-items:center; gap:14px; background:#fff; color:#08080a; font-family:'Space Mono',monospace; font-weight:700; font-size:13px; letter-spacing:.16em; text-transform:uppercase; padding:9px 9px 9px 24px; border-radius:9999px; text-decoration:none; transition:transform .15s; }
+  .pill-cta:hover{ transform:translateY(-2px); }
+  .pill-cta .circ{ width:38px; height:38px; border-radius:50%; background:#E23B4E; color:#fff; display:grid; place-items:center; flex:none; }
+  .pill-dark{ background:#141417; color:#fff; }
+  .pill-dark .circ{ background:#E23B4E; }
+  .wa-btn{ display:inline-flex; align-items:center; gap:8px; background:#1fb866; color:#fff; font-weight:700; font-size:14px; text-decoration:none; padding:11px 18px; border-radius:9999px; transition:background .2s; }
+  .wa-btn:hover{ background:#19a259; } .wa-btn svg{ width:17px; height:17px; }
+
+  /* announcement + nav */
+  .annc{ background:#E23B4E; color:#fff; font-size:13.5px; display:flex; align-items:center; justify-content:center; gap:14px; padding:9px 18px; text-align:center; }
+  .annc .pill{ background:#fff; color:#c82f42; font-weight:700; font-size:12px; border-radius:9999px; padding:5px 13px; text-decoration:none; white-space:nowrap; }
+  .nav{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:15px 26px; background:rgba(8,8,10,.82); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.07); }
+  .nav-links{ display:flex; align-items:center; gap:26px; }
+  .nav-links a{ color:rgba(255,255,255,.72); text-decoration:none; font-size:14px; font-weight:500; transition:color .2s; }
+  .nav-links a:hover{ color:#fff; }
+
+  /* hero — just the looping video, full screen, no text/overlay */
+  .hero{ position:relative; height:100vh; min-height:100svh; overflow:hidden; background:#000; }
+  .hero-vid{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+
+  /* sections */
+  .sec{ max-width:1180px; margin:0 auto; padding:96px 26px; }
+  .head-c{ text-align:center; max-width:50rem; margin:0 auto 54px; }
+  .head-c h2{ font-size:clamp(2rem,3.8vw,3.1rem); margin:20px 0 16px; }
+  .head-c p{ color:rgba(255,255,255,.6); font-size:1.05rem; line-height:1.6; }
+
+  /* cards */
+  .card{ background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08); border-radius:26px; transition:transform .4s cubic-bezier(.22,.7,.18,1), border-color .35s ease, box-shadow .4s ease; }
+  .icon-chip{ width:48px; height:48px; border-radius:14px; background:#E23B4E; color:#fff; display:grid; place-items:center; }
+
+  /* stat cards (about/ahorro) */
+  .stat-card{ padding:30px 26px; border-radius:26px; }
+  .stat-card.fill{ background:#E23B4E; color:#fff; }
+  .stat-card.soft{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
+  .stat-card .big{ font-family:'Inter',sans-serif; font-weight:800; font-size:3.1rem; line-height:1; letter-spacing:-.03em; }
+  .stat-card .lab{ font-size:13.5px; line-height:1.5; margin-top:14px; opacity:.82; }
+
+  /* service / module cards */
+  .svc{ padding:30px; display:flex; flex-direction:column; min-height:300px; }
+  .svc h3{ font-weight:700; font-size:1.35rem; letter-spacing:-.01em; margin:18px 0 10px; }
+  .svc p{ color:rgba(255,255,255,.6); font-size:14px; line-height:1.6; }
+  .svc ul{ list-style:none; margin-top:18px; display:flex; flex-direction:column; gap:8px; }
+  .svc li{ display:flex; gap:10px; align-items:flex-start; color:rgba(255,255,255,.8); font-size:13.5px; }
+  .svc li svg{ flex:none; margin-top:3px; color:#E23B4E; }
+  .svc-media{ flex:1; border-radius:16px; overflow:hidden; margin-top:18px; min-height:150px; background:#000; }
+  .svc-media video{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* process */
+  .step-num{ width:46px; height:46px; border-radius:50%; background:#E23B4E; color:#fff; font-family:'Space Mono',monospace; font-weight:700; display:grid; place-items:center; font-size:14px; }
+  .step h3{ font-weight:700; font-size:1.05rem; margin:18px 0 8px; }
+  .step p{ color:rgba(255,255,255,.6); font-size:13.5px; line-height:1.55; }
+
+  /* ── plans (Aeline 3-card, middle filled) — keep working checkout ── */
+  .plan{ border:1px solid rgba(255,255,255,.1); border-radius:26px; padding:34px 30px; display:flex; flex-direction:column; background:rgba(255,255,255,.02); }
+  .plan-featured{ background:#E23B4E; border-color:#E23B4E; color:#fff; }
+  .plan-name{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; display:inline-flex; align-items:center; gap:10px; }
+  .plan-name .chip{ width:30px; height:30px; border-radius:9px; }
+  .plan-tag{ font-size:13.5px; color:rgba(255,255,255,.55); margin:14px 0 18px; min-height:2.6rem; line-height:1.5; }
+  .plan-featured .plan-tag{ color:rgba(255,255,255,.85); }
+  .plan-price{ font-family:'Inter',sans-serif; font-weight:800; font-size:3rem; line-height:1; letter-spacing:-.03em; }
+  .plan-per{ font-family:'Space Mono',monospace; font-size:13px; opacity:.6; margin-left:4px; }
+  .plan-feat{ display:flex; gap:11px; align-items:flex-start; padding:8px 0; color:rgba(255,255,255,.78); font-size:14px; }
+  .plan-feat svg{ flex:none; margin-top:3px; }
+  .plan:not(.plan-featured) .plan-feat svg{ color:#E23B4E; }
+  .plan-featured .plan-feat{ color:rgba(255,255,255,.92); } .plan-featured .plan-feat svg{ color:#fff; }
+  .plan-btn{ font-family:'Space Mono',monospace; font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:12px; border-radius:9999px; padding:14px 20px; text-align:center; cursor:pointer; transition:all .2s; border:1px solid rgba(255,255,255,.25); background:transparent; color:#fff; }
+  .plan-btn:hover{ border-color:#fff; }
+  .plan-btn.primary{ background:#fff; color:#08080a; border-color:#fff; }
+  .plan-featured .plan-btn{ background:#fff; color:#08080a; border-color:#fff; }
+  .plan-btn:disabled{ opacity:.55; cursor:not-allowed; }
+
+  /* faq */
+  .faq-item{ border:1px solid rgba(255,255,255,.1); border-radius:16px; background:rgba(255,255,255,.03); margin-bottom:12px; overflow:hidden; }
+  .faq-item summary{ list-style:none; cursor:pointer; padding:20px 22px; font-weight:600; font-size:15.5px; display:flex; align-items:center; justify-content:space-between; gap:14px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary .chev{ transition:transform .25s; flex:none; color:#E23B4E; }
+  .faq-item[open] summary .chev{ transform:rotate(180deg); }
+  .faq-item .ans{ padding:0 22px 20px; color:rgba(255,255,255,.62); font-size:14px; line-height:1.6; }
+
+  /* footer (Aeline multi-column) */
+  .foot{ background:#0c0c0e; border-top:1px solid rgba(255,255,255,.07); border-radius:34px 34px 0 0; }
+  .foot-grid{ max-width:1180px; margin:0 auto; padding:60px 26px 30px; display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:34px; }
+  .foot-grid h4{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:16px; }
+  .foot-grid a{ display:block; color:rgba(255,255,255,.7); text-decoration:none; font-size:14px; padding:6px 0; transition:color .2s; }
+  .foot-grid a:hover{ color:#fff; }
+  .foot-desc{ color:rgba(255,255,255,.55); font-size:14px; line-height:1.6; margin:16px 0 20px; max-width:24rem; }
+  .news{ display:flex; gap:8px; max-width:24rem; }
+  .news input{ flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:9999px; padding:12px 16px; color:#fff; font-size:14px; }
+  .news input:focus{ outline:none; border-color:#E23B4E; }
+  .foot-bottom{ max-width:1180px; margin:0 auto; padding:22px 26px; border-top:1px solid rgba(255,255,255,.07); display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center; }
+
+  /* sticky */
+  .sticky-bar{ position:fixed; left:0; right:0; bottom:0; z-index:60; background:#E23B4E; }
+  .sticky-bar a{ display:block; text-align:center; color:#fff; font-weight:800; font-size:15px; padding:16px; text-decoration:none; }
+
+  /* lang switcher */
   .lang-wrap{ position:relative; }
-  .lang-btn{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.8); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:9999px; padding:7px 12px; display:inline-flex; align-items:center; gap:7px; cursor:pointer; transition:border-color .25s; }
+  .lang-btn{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.8); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:9999px; padding:7px 12px; display:inline-flex; align-items:center; gap:7px; cursor:pointer; }
   .lang-btn:hover{ border-color:rgba(255,255,255,.45); }
   .lang-menu{ position:absolute; right:0; top:calc(100% + 8px); min-width:150px; background:rgba(11,11,13,.97); border:1px solid rgba(255,255,255,.12); border-radius:12px; overflow:hidden; backdrop-filter:blur(12px); z-index:60; }
-  .lang-menu a{ display:flex; align-items:center; gap:10px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,.85); text-decoration:none; transition:background .2s; }
-  .lang-menu a:hover, .lang-menu a[aria-current="true"]{ background:rgba(226,59,78,.16); color:#fff; }
+  .lang-menu a{ display:flex; align-items:center; gap:10px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,.85); text-decoration:none; }
+  .lang-menu a:hover, .lang-menu a[aria-current="true"]{ background:rgba(226,59,78,.18); color:#fff; }
   .lang-menu.hidden{ display:none; }
 
-  /* ── Pricing cards (B's design language) ── */
-  .plan{ border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:34px 30px; display:flex; flex-direction:column; background:rgba(255,255,255,.015); transition:border-color .3s, transform .3s; }
-  .plan:hover{ border-color:rgba(255,255,255,.3); transform:translateY(-4px); }
-  .plan-featured{ border-color:rgba(226,59,78,.55); background:rgba(226,59,78,.05); }
-  .plan-featured:hover{ border-color:rgba(226,59,78,.8); }
-  .plan-badge{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#fff; background:rgba(226,59,78,.9); border-radius:9999px; padding:5px 12px; align-self:flex-start; margin-bottom:18px; }
-  .plan-name{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.6rem; letter-spacing:-.01em; }
-  .plan-price{ font-family:'Archivo',sans-serif; font-weight:900; font-size:3.2rem; line-height:1; letter-spacing:-.03em; }
-  .plan-feat{ display:flex; gap:12px; align-items:flex-start; padding:9px 0; color:rgba(255,255,255,.72); font-weight:300; }
-  .plan-feat svg{ flex:none; margin-top:3px; color:#E23B4E; }
-  .plan-btn{ font-family:'Space Mono',monospace; font-weight:700; letter-spacing:.16em; text-transform:uppercase; font-size:12px; border-radius:9999px; padding:13px 20px; text-align:center; cursor:pointer; transition:all .25s; border:1px solid rgba(255,255,255,.25); background:transparent; color:#fff; }
-  .plan-btn:hover{ border-color:#fff; }
-  .plan-btn.primary{ background:#fff; color:#050505; border-color:#fff; }
-  .plan-btn.primary:hover{ background:rgba(255,255,255,.88); }
-  .plan-btn:disabled{ opacity:.55; cursor:not-allowed; }
+  /* ── animation engine (anim.js) ── */
+  [data-reveal]{ opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.22,.7,.18,1), transform .7s cubic-bezier(.22,.7,.18,1); }
+  [data-reveal].is-in{ opacity:1; transform:none; }
+  .rw{ display:inline-block; overflow:hidden; vertical-align:top; }
+  .rw-i{ display:inline-block; transform:translateY(115%); transition:transform .8s cubic-bezier(.22,.7,.18,1); will-change:transform; }
+  [data-split].split-in .rw-i{ transform:translateY(0); }
+  .nav.scrolled{ padding-top:9px; padding-bottom:9px; background:rgba(8,8,10,.96); }
+  [data-magnetic]{ will-change:transform; transition:transform .25s cubic-bezier(.22,.7,.18,1); }
+  .card:hover{ transform:translateY(-6px); border-color:rgba(226,59,78,.45); box-shadow:0 26px 60px rgba(0,0,0,.45); }
+  .svc-media video{ transition:transform .6s ease; }
+  .card:hover .svc-media video{ transform:scale(1.06); }
+  .pill-cta .circ{ transition:transform .3s ease; }
+  .pill-cta:hover .circ{ transform:rotate(45deg); }
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal], [data-reveal].is-in, .rw-i{ transition:none !important; opacity:1 !important; transform:none !important; }
+  }
+
+  @media (max-width:900px){
+    .nav-links{ display:none; }
+    .sec{ padding:64px 22px; }
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+  }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <a class="volver" href="{{nav.home}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> {{common.volver}}</a>
-  <div class="topbar-right">
-    <a class="wordmark" href="{{nav.home}}">santipulse.com</a>
-    {{lang.switcher}}
-  </div>
+<div class="annc">
+  <span>{{precios.landing.bar.text}} <b>{{precios.landing.bar.strong}}</b> {{precios.landing.bar.tail}}</span>
+  <a class="pill" href="#planes">{{precios.landing.bar.cta}}</a>
 </div>
 
-<main class="pt-36 pb-28 px-6 md:px-10 max-w-5xl mx-auto">
+<header class="nav">
+  <a class="wordmark" href="{{nav.home}}"><img src="{{asset.prefix}}demo-media/pulse-logo.png" alt="Santipulse" style="height:30px;width:auto;display:block;"/></a>
+  <nav class="nav-links">
+    <a href="#por-que">{{precios.landing.nav.porque}}</a>
+    <a href="#modulos">{{precios.landing.nav.modulos}}</a>
+    <a href="#ahorro">{{precios.landing.nav.ahorro}}</a>
+    <a href="#planes">{{precios.landing.nav.planes}}</a>
+    <a href="#faq">{{precios.landing.nav.faq}}</a>
+  </nav>
+  <div style="display:flex; align-items:center; gap:14px;">
+    <a class="wa-btn" href="https://wa.me/34650257684" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>{{precios.landing.nav.whatsapp}}</a>
+    {{lang.switcher}}
+  </div>
+</header>
 
-  <header class="mb-16 max-w-2xl">
-    <p class="eyebrow mb-6">{{precios.eyebrow}}</p>
-    <h1 class="headline text-5xl md:text-8xl mb-8">{{precios.titleA}}<br>{{precios.titleB}}</h1>
-    <p class="text-white/75 text-lg md:text-xl leading-relaxed font-light">{{precios.intro}}</p>
-  </header>
+<!-- HERO — looping video only, no text/overlay -->
+<section id="top" class="hero">
+  <video class="hero-vid" src="{{asset.prefix}}demo-media/precios-hero.mp4" autoplay loop muted playsinline preload="auto" aria-label="Santipulse"></video>
+</section>
 
-  <section class="grid md:grid-cols-3 gap-5 items-stretch">
+<!-- AHORRO / ABOUT stat cards -->
+<section id="ahorro" class="sec">
+  <div class="head-c" data-reveal>
+    <span class="eyebrow">{{precios.landing.ahorro.eyebrow}}</span>
+    <h2 class="h-aeline" data-split>{{precios.landing.ahorro.title}}</h2>
+    <p>{{precios.landing.ahorro.sub}}</p>
+  </div>
+  <div data-stagger class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="stat-card fill"><div class="big">{{precios.landing.ahorro.s1v}}</div><div class="lab">{{precios.landing.ahorro.s1d}}</div></div>
+    <div class="stat-card soft"><div class="big">{{precios.landing.ahorro.s2v}}</div><div class="lab">{{precios.landing.ahorro.s2d}}</div></div>
+    <div class="stat-card soft"><div class="big">{{precios.landing.ahorro.s3v}}</div><div class="lab">{{precios.landing.ahorro.s3d}}</div></div>
+    <div class="stat-card soft"><div class="big">{{precios.landing.ahorro.s4v}}</div><div class="lab">{{precios.landing.ahorro.s4d}}</div></div>
+  </div>
+</section>
 
-    <!-- Starter -->
+<!-- PAIN / por qué -->
+<section id="por-que" class="sec" style="padding-top:0;">
+  <div class="head-c" data-reveal>
+    <span class="eyebrow">{{precios.landing.pain.eyebrow}}</span>
+    <h2 class="h-aeline" data-split>{{precios.landing.pain.titleA}} {{precios.landing.pain.titleB}}</h2>
+    <p>{{precios.landing.pain.sub}}</p>
+  </div>
+  <div data-stagger class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="card svc" style="min-height:0;"><span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3 style="font-size:1.05rem;">{{precios.landing.pain.p1t}}</h3><p>{{precios.landing.pain.p1d}}</p></div>
+    <div class="card svc" style="min-height:0;"><span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 16l4-6 3 3 4-7"/></svg></span><h3 style="font-size:1.05rem;">{{precios.landing.pain.p2t}}</h3><p>{{precios.landing.pain.p2d}}</p></div>
+    <div class="card svc" style="min-height:0;"><span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span><h3 style="font-size:1.05rem;">{{precios.landing.pain.p3t}}</h3><p>{{precios.landing.pain.p3d}}</p></div>
+    <div class="card svc" style="min-height:0;"><span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span><h3 style="font-size:1.05rem;">{{precios.landing.pain.p4t}}</h3><p>{{precios.landing.pain.p4d}}</p></div>
+  </div>
+</section>
+
+<!-- MÓDULOS / services (middle card has video media) -->
+<section id="modulos" class="sec" style="padding-top:0;">
+  <div class="head-c" data-reveal>
+    <span class="eyebrow">{{precios.landing.modulos.eyebrow}}</span>
+    <h2 class="h-aeline" data-split>{{precios.landing.modulos.title}}</h2>
+    <p>{{precios.landing.modulos.sub}}</p>
+  </div>
+  <div data-stagger class="grid md:grid-cols-3 gap-4 items-stretch">
+    <article class="card svc">
+      <span class="icon-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.4-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></span>
+      <span class="meta" style="margin-top:16px;">{{precios.landing.modulos.m1tag}}</span>
+      <h3>{{precios.landing.modulos.m1t}}</h3><p>{{precios.landing.modulos.m1d}}</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.landing.modulos.m1f1}}</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.landing.modulos.m1f2}}</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.landing.modulos.m1f3}}</li>
+      </ul>
+    </article>
+    <article class="card svc">
+      <span class="icon-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg></span>
+      <span class="meta" style="margin-top:16px;">{{precios.landing.modulos.m2tag}}</span>
+      <h3>{{precios.landing.modulos.m2t}}</h3><p>{{precios.landing.modulos.m2d}}</p>
+      <div class="svc-media"><video src="{{asset.prefix}}demo-media/panel-2.mp4" autoplay loop muted playsinline preload="none"></video></div>
+    </article>
+    <article class="card svc">
+      <span class="icon-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l3-3 3 3 5-6"/></svg></span>
+      <span class="meta" style="margin-top:16px;">{{precios.landing.modulos.m3tag}}</span>
+      <h3>{{precios.landing.modulos.m3t}}</h3><p>{{precios.landing.modulos.m3d}}</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.landing.modulos.m3f1}}</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.landing.modulos.m3f2}}</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.landing.modulos.m3f3}}</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- EDGE / expertise -->
+<section class="sec" style="padding-top:0;">
+  <div class="head-c" data-reveal>
+    <span class="eyebrow">{{precios.landing.edge.eyebrow}}</span>
+    <h2 class="h-aeline" data-split>{{precios.landing.edge.title}}</h2>
+    <p>{{precios.landing.edge.sub}}</p>
+  </div>
+  <div data-stagger class="grid md:grid-cols-3 gap-4">
+    <div class="card svc" style="min-height:0;"><span class="icon-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M9 5V3h6v2M9 12h6"/></svg></span><h3>{{precios.landing.edge.e1t}}</h3><p>{{precios.landing.edge.e1d}}</p></div>
+    <div class="card svc" style="min-height:0;"><span class="icon-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></span><h3>{{precios.landing.edge.e2t}}</h3><p>{{precios.landing.edge.e2d}}</p></div>
+    <div class="card svc" style="min-height:0;"><span class="icon-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>{{precios.landing.edge.e3t}}</h3><p>{{precios.landing.edge.e3d}}</p></div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="sec" style="padding-top:0;">
+  <div class="head-c" data-reveal>
+    <span class="eyebrow">{{precios.landing.proceso.eyebrow}}</span>
+    <h2 class="h-aeline" data-split>{{precios.landing.proceso.title}}</h2>
+    <p>{{precios.landing.proceso.sub}}</p>
+  </div>
+  <div data-stagger class="grid sm:grid-cols-3 gap-6">
+    <div class="card svc" style="min-height:0;"><div class="step-num">01</div><h3 style="font-size:1.1rem;">{{precios.landing.proceso.s1t}}</h3><p>{{precios.landing.proceso.s1d}}</p></div>
+    <div class="card svc" style="min-height:0;"><div class="step-num">02</div><h3 style="font-size:1.1rem;">{{precios.landing.proceso.s2t}}</h3><p>{{precios.landing.proceso.s2d}}</p></div>
+    <div class="card svc" style="min-height:0;"><div class="step-num">03</div><h3 style="font-size:1.1rem;">{{precios.landing.proceso.s3t}}</h3><p>{{precios.landing.proceso.s3d}}</p></div>
+  </div>
+</section>
+
+<!-- PLANES (kept checkout) -->
+<section id="planes" class="sec" style="padding-top:0;">
+  <div class="head-c" data-reveal>
+    <span class="eyebrow">{{precios.landing.planesHead.eyebrow}}</span>
+    <h2 class="h-aeline" data-split>{{precios.landing.planesHead.title}}</h2>
+    <p>{{precios.landing.planesHead.sub}}</p>
+  </div>
+  <div data-stagger class="grid md:grid-cols-3 gap-5 items-stretch">
+
     <article class="plan">
-      <h2 class="plan-name mb-1">{{precios.plans.starterName}}</h2>
-      <p class="text-white/50 text-sm font-light mb-7 min-h-[2.5rem]">{{precios.plans.starterTagline}}</p>
-      <div class="flex items-end gap-1 mb-7">
-        <span class="plan-price">€49</span>
-        <span class="text-white/50 mb-2 font-mono text-sm">{{precios.perMonth}}</span>
-      </div>
-      <div class="border-t border-white/10 mb-3"></div>
-      <ul class="flex-1 mb-8">
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.starterF1}}</li>
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.starterF2}}</li>
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.starterF3}}</li>
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.starterF4}}</li>
+      <span class="plan-name"><span class="chip red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5z"/></svg></span>{{precios.plans.starterName}}</span>
+      <p class="plan-tag">{{precios.plans.starterTagline}}</p>
+      <div><span class="plan-price">€49</span><span class="plan-per">{{precios.perMonth}}</span></div>
+      <ul class="flex-1 my-7" style="list-style:none;">
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.starterF1}}</li>
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.starterF2}}</li>
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.starterF3}}</li>
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.starterF4}}</li>
       </ul>
       <button type="button" class="plan-btn btn-elegir-plan" data-checkout="starter" data-plan="recepcionista">{{precios.cta.button}} Starter</button>
     </article>
 
-    <!-- Pro (featured) -->
     <article class="plan plan-featured">
-      <span class="plan-badge">{{precios.popular}}</span>
-      <h2 class="plan-name mb-1">{{precios.plans.proName}}</h2>
-      <p class="text-white/50 text-sm font-light mb-7 min-h-[2.5rem]">{{precios.plans.proTagline}}</p>
-      <div class="flex items-end gap-1 mb-7">
-        <span class="plan-price">€149</span>
-        <span class="text-white/50 mb-2 font-mono text-sm">{{precios.perMonth}}</span>
-      </div>
-      <div class="border-t border-white/10 mb-3"></div>
-      <ul class="flex-1 mb-8">
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.proF1}}</li>
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.proF2}}</li>
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.proF3}}</li>
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.proF4}}</li>
+      <span class="plan-name"><span class="chip white"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9l-5 4.7L18.2 21 12 17.3 5.8 21 7 13.7 2 9l7.1-.7z"/></svg></span>{{precios.plans.proName}} · {{precios.popular}}</span>
+      <p class="plan-tag">{{precios.plans.proTagline}}</p>
+      <div><span class="plan-price">€149</span><span class="plan-per">{{precios.perMonth}}</span></div>
+      <ul class="flex-1 my-7" style="list-style:none;">
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.proF1}}</li>
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.proF2}}</li>
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.proF3}}</li>
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.proF4}}</li>
       </ul>
       <button type="button" class="plan-btn primary btn-elegir-plan" data-checkout="pro" data-plan="social">{{precios.cta.button}} Pro</button>
     </article>
 
-    <!-- Agency -->
     <article class="plan">
-      <h2 class="plan-name mb-1">{{precios.plans.agencyName}}</h2>
-      <p class="text-white/50 text-sm font-light mb-7 min-h-[2.5rem]">{{precios.plans.agencyTagline}}</p>
-      <div class="flex items-end gap-1 mb-7">
-        <span class="plan-price">€399</span>
-        <span class="text-white/50 mb-2 font-mono text-sm">{{precios.perMonth}}</span>
-      </div>
-      <div class="border-t border-white/10 mb-3"></div>
-      <ul class="flex-1 mb-8">
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.agencyF1}}</li>
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.agencyF2}}</li>
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.agencyF3}}</li>
-        <li class="plan-feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.agencyF4}}</li>
+      <span class="plan-name"><span class="chip red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span>{{precios.plans.agencyName}}</span>
+      <p class="plan-tag">{{precios.plans.agencyTagline}}</p>
+      <div><span class="plan-price">€399</span><span class="plan-per">{{precios.perMonth}}</span></div>
+      <ul class="flex-1 my-7" style="list-style:none;">
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.agencyF1}}</li>
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.agencyF2}}</li>
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.agencyF3}}</li>
+        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{precios.plans.agencyF4}}</li>
       </ul>
       <button type="button" class="plan-btn btn-elegir-plan" data-checkout="agency" data-plan="ads">{{precios.cta.button}} Agency</button>
     </article>
 
-  </section>
+  </div>
+  <p class="meta text-center" style="margin-top:34px;">{{precios.cta.note}}</p>
+</section>
 
-  <p class="meta text-center mt-10">{{precios.cta.note}}</p>
+<!-- FAQ -->
+<section id="faq" class="sec" style="padding-top:0; max-width:820px;">
+  <div class="head-c" data-reveal>
+    <span class="eyebrow">{{precios.landing.faq.eyebrow}}</span>
+    <h2 class="h-aeline" data-split>{{precios.landing.faq.title}}</h2>
+    <p>{{precios.landing.faq.sub}}</p>
+  </div>
+  <details class="faq-item"><summary>{{precios.landing.faq.q1}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{precios.landing.faq.a1}}</div></details>
+  <details class="faq-item"><summary>{{precios.landing.faq.q2}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{precios.landing.faq.a2}}</div></details>
+  <details class="faq-item"><summary>{{precios.landing.faq.q3}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{precios.landing.faq.a3}}</div></details>
+  <details class="faq-item"><summary>{{precios.landing.faq.q4}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{precios.landing.faq.a4}}</div></details>
+  <details class="faq-item"><summary>{{precios.landing.faq.q5}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{precios.landing.faq.a5}}</div></details>
+  <details class="faq-item"><summary>{{precios.landing.faq.q6}}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">{{precios.landing.faq.a6}}</div></details>
+</section>
 
-</main>
-
-<footer class="border-t border-white/10 py-10 px-6 md:px-10">
-  <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-4 justify-between items-center">
-    <a class="wordmark" href="{{nav.home}}">santipulse.com</a>
-    <div style="display:flex; align-items:center; gap:18px;">
-      <a class="meta" href="{{asset.prefix}}privacidad/" style="text-decoration:none;">{{common.privacidad}}</a>
-      <span class="meta">{{precios.footer}}</span>
+<!-- FOOTER (Aeline multi-column) -->
+<footer class="foot">
+  <div class="foot-grid">
+    <div>
+      <a class="wordmark" href="{{nav.home}}"><img src="{{asset.prefix}}demo-media/pulse-logo.png" alt="Santipulse" style="height:32px;width:auto;display:block;"/></a>
+      <p class="foot-desc">{{precios.landing.ctaband.text}}</p>
+      <div class="news">
+        <input type="email" placeholder="tu@email.com" aria-label="email" />
+        <a class="pill-cta" data-magnetic href="https://wa.me/34650257684" target="_blank" rel="noopener" style="padding:8px 8px 8px 18px;">OK <span class="circ" style="width:32px;height:32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M9 7h8v8"/></svg></span></a>
+      </div>
     </div>
+    <div>
+      <h4>Santipulse</h4>
+      <a href="{{nav.home}}">{{precios.landing.nav.porque}}</a>
+      <a href="#modulos">{{precios.landing.nav.modulos}}</a>
+      <a href="#ahorro">{{precios.landing.nav.ahorro}}</a>
+    </div>
+    <div>
+      <h4>{{precios.landing.nav.planes}}</h4>
+      <a href="#planes">{{precios.landing.planesHead.title}}</a>
+      <a href="{{nav.contratar}}">{{precios.landing.ctaband.btn}}</a>
+      <a href="{{nav.demos}}">Webs Reales</a>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="{{asset.prefix}}privacidad/">{{common.privacidad}}</a>
+      <a href="#faq">{{precios.landing.nav.faq}}</a>
+      <a href="https://wa.me/34650257684" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span class="meta">{{precios.footer}}</span>
+    <a class="meta" href="{{asset.prefix}}privacidad/" style="text-decoration:none;">{{common.privacidad}}</a>
   </div>
 </footer>
 
-<!-- JS i18n payload for precios.js (cta strings: redirecting / error) -->
-<script id="precios-i18n" type="application/json">{{i18n.preciosJson}}</script>
+<div class="sticky-bar"><a href="#planes">{{precios.landing.sticky}}</a></div>
 
-<!-- Supabase auth (public anon config injected by build) + checkout logic -->
+<script id="precios-i18n" type="application/json">{{i18n.preciosJson}}</script>
 {{sb.config}}
 <script src="{{asset.prefix}}supabase.js"></script>
 <script src="{{asset.prefix}}auth.js"></script>
 <script src="{{asset.prefix}}lang.js" defer></script>
+<script src="{{asset.prefix}}anim.js" defer></script>
 <script src="{{asset.prefix}}precios.js" defer></script>
-
-<script>
-  async function checkout(planId) {
-    const email = prompt('Ingresa tu correo electrónico:');
-    if (!email) return;
-    try {
-      const res = await fetch('/api/admin/stripe/create-checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId, email })
-      });
-      const data = await res.json();
-      if (data.success) {
-        window.location.href = data.url;
-      } else {
-        alert('Error: ' + data.error);
-      }
-    } catch (e) {
-      alert('Error: ' + e.message);
-    }
-  }
-</script>
 </body>
 </html>

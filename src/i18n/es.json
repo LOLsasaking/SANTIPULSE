@@ -56,7 +56,7 @@
       "titleA": "IA que",
       "titleB": "trabaja por ti",
       "desc": "Recepcionista IA, Insights de Redes y Gestor de Ads. Recupera horas con un panel pensado para vender y operar clientes.",
-      "meta": "3 m?dulos Pulse",
+      "meta": "3 módulos Pulse",
       "cta": "Ver planes y precios"
     }
   },
@@ -347,16 +347,16 @@
   },
   "precios": {
     "title": "Santipulse · Planes y precios",
-    "metaDescription": "Planes de The Pulse System de Santipulse ? Recepcionista IA, Insights de Redes y Gestor de Ads. Cancela cuando quieras.",
-    "eyebrow": "Planes ? The Pulse System",
+    "metaDescription": "Planes de The Pulse System de Santipulse — Recepcionista IA, Insights de Redes y Gestor de Ads. Cancela cuando quieras.",
+    "eyebrow": "Planes · The Pulse System",
     "titleA": "Elige",
     "titleB": "tu plan.",
-    "intro": "Empieza con una arquitectura de agencia IA lista para vender: atenci?n, contenido y anuncios desde un panel en espa?ol.",
+    "intro": "Empieza con una arquitectura de agencia IA lista para vender: atención, contenido y anuncios desde un panel en español.",
     "perMonth": "/mes",
     "popular": "Más popular",
     "plans": {
       "starterName": "Starter",
-      "starterTagline": "Para activar el primer m?dulo.",
+      "starterTagline": "Para activar el primer módulo.",
       "starterF1": "Recepcionista IA",
       "starterF2": "50 ejecuciones Pulse al mes",
       "starterF3": "Leads y alertas humanas",
@@ -369,7 +369,7 @@
       "proF4": "Soporte prioritario",
       "agencyName": "Agency",
       "agencyTagline": "Para agencias con muchos clientes.",
-      "agencyF1": "Los 3 m?dulos Pulse",
+      "agencyF1": "Los 3 módulos Pulse",
       "agencyF2": "Ejecuciones ilimitadas",
       "agencyF3": "Marca blanca + acceso API",
       "agencyF4": "Equipo + integraciones a medida"
@@ -380,7 +380,134 @@
       "redirecting": "Redirigiendo…",
       "error": "No se pudo iniciar el pago. Inténtalo de nuevo."
     },
-    "footer": "© 2026 SantiPulse · Cancela cuando quieras"
+    "footer": "© 2026 SantiPulse · Cancela cuando quieras",
+    "landing": {
+      "bar": {
+        "text": "The Pulse System: tu agencia de IA",
+        "strong": "desde 49€/mes",
+        "tail": "— cancela cuando quieras",
+        "cta": "Ver planes"
+      },
+      "nav": {
+        "porque": "Por qué",
+        "modulos": "Módulos",
+        "ahorro": "Ahorro",
+        "planes": "Planes",
+        "faq": "FAQ",
+        "whatsapp": "WhatsApp"
+      },
+      "hero": {
+        "badge": "The Pulse System · Agencia IA",
+        "titleA": "Una agencia de IA",
+        "titleB": "que trabaja por ti,",
+        "titleC": "24/7.",
+        "sub": "Contesta clientes, crea contenido y escala tus anuncios desde un solo panel en español. Sin contratar a nadie, sin pelearte con la tecnología.",
+        "badges": "Atiende 24/7 · Sin permanencia · Cancela cuando quieras · Soporte humano",
+        "ctaPlanes": "Ver planes y precios",
+        "ctaWhats": "Hablar por WhatsApp"
+      },
+      "ahorro": {
+        "eyebrow": "Cuánto te ahorra la IA",
+        "title": "El trabajo de un equipo, por el precio de un café al día.",
+        "sub": "La mayoría de negocios locales pierden clientes y horas en tareas que la IA hace sola. Esto es lo que recuperas.",
+        "s1v": "24/7",
+        "s1d": "Atiende llamadas y mensajes a cualquier hora, sin sueldo ni descansos.",
+        "s2v": "~30h",
+        "s2d": "al mes ahorradas en contestar, publicar y optimizar anuncios.",
+        "s3v": "+40%",
+        "s3d": "de las llamadas a negocios locales quedan sin contestar — leads que hoy pierdes.",
+        "s4v": "49€",
+        "s4d": "al mes frente a ~1.200€ de una recepcionista a media jornada."
+      },
+      "pain": {
+        "eyebrow": "Por qué importa",
+        "titleA": "No pierdes clientes por mal servicio.",
+        "titleB": "Los pierdes por no estar.",
+        "sub": "Cada llamada sin contestar, cada post que no subes y cada euro mal gastado en ads es dinero que se va con la competencia.",
+        "p1t": "No contestas a tiempo.",
+        "p1d": "Si no respondes en minutos, el cliente escribe al siguiente. La IA contesta al instante.",
+        "p2t": "No sabes qué publicar.",
+        "p2d": "Publicar por publicar no vende. La IA detecta qué funciona en tu nicho.",
+        "p3t": "Quemas presupuesto en ads.",
+        "p3d": "Sin reglas, los anuncios malos se comen tu dinero. La IA pausa lo que no rinde.",
+        "p4t": "No tienes tiempo para todo.",
+        "p4d": "Atender, publicar y vender a la vez es imposible solo. El panel lo centraliza."
+      },
+      "modulos": {
+        "eyebrow": "Los 3 módulos Pulse",
+        "title": "Tres motores. Un solo panel.",
+        "sub": "Actívalos por separado o juntos. Cada uno ataca una fuga de dinero distinta.",
+        "m1tag": "Paquete 1",
+        "m1t": "Recepcionista IA",
+        "m1d": "Una recepcionista por IA que contesta llamadas y WhatsApp 24/7, responde dudas, reserva citas y guarda cada lead en tu panel.",
+        "m1f1": "Contesta 24/7, también fuera de horario",
+        "m1f2": "Reserva citas y captura leads automáticamente",
+        "m1f3": "Botón SOS: un humano toma el control si hace falta",
+        "m2tag": "Paquete 2",
+        "m2t": "Insights de Redes",
+        "m2d": "Deja de adivinar qué publicar. La IA escanea tendencias de tu nicho, puntúa qué puede hacerse viral y te deja los posts listos en una cola.",
+        "m2f1": "Escaneo de tendencias por sector",
+        "m2f2": "Puntuación de probabilidad viral",
+        "m2f3": "Posts y captions listos para publicar",
+        "m3tag": "Paquete 3",
+        "m3t": "Gestor de Ads",
+        "m3d": "Tu comprador de medios automático. Sube el presupuesto de lo que vende, pausa lo que pierde dinero y te avisa antes de escalar.",
+        "m3f1": "Reglas de ROAS y CPC automáticas",
+        "m3f2": "Ajusta el presupuesto de Meta y TikTok solo",
+        "m3f3": "Alerta humana antes de escalar gasto"
+      },
+      "edge": {
+        "eyebrow": "El 1% que nos diferencia",
+        "title": "No es IA genérica. Es IA que conoce tu negocio.",
+        "sub": "Tres cosas que las agencias normales no te dan.",
+        "e1t": "La Bóveda de Conocimiento",
+        "e1d": "Sube tus PDFs, menús y notas. La IA estudia tu negocio y responde como alguien de tu equipo, no como un robot genérico.",
+        "e2t": "ROI Pulse en directo",
+        "e2d": "Un marcador de Gasto vs Beneficio en vivo en tu panel. Ves tu dinero en tiempo real, no en un informe a fin de mes.",
+        "e3t": "Botón SOS Humano",
+        "e3d": "Si la IA se atasca, un humano de verdad toma el control. Adiós al miedo de dejar todo en manos de un robot."
+      },
+      "proceso": {
+        "eyebrow": "Cómo funciona",
+        "title": "De cero a vendiendo en 3 pasos.",
+        "sub": "Sin instalaciones raras, sin saber de tecnología.",
+        "s1t": "Elige tu plan.",
+        "s1d": "Pago seguro con Stripe. Sin permanencia, cancelas cuando quieras.",
+        "s2t": "Conecta tu negocio.",
+        "s2d": "Rellenas tu perfil y subes tus datos a la Bóveda. La IA aprende tu negocio.",
+        "s3t": "La IA empieza a trabajar.",
+        "s3d": "Contesta, publica y optimiza desde tu panel mientras tú te ocupas del resto."
+      },
+      "planesHead": {
+        "eyebrow": "Planes",
+        "title": "Elige tu plan.",
+        "sub": "Empieza por un módulo o llévate los tres. Sin permanencia, cancela cuando quieras."
+      },
+      "faq": {
+        "eyebrow": "Preguntas frecuentes",
+        "title": "¿Tienes dudas? Es normal.",
+        "sub": "Lo que casi todos preguntan antes de empezar.",
+        "q1": "¿Necesito saber de tecnología?",
+        "a1": "No. Tú nos cuentas tu negocio y nosotros dejamos la IA lista. Tú solo miras los resultados en el panel.",
+        "q2": "¿Puedo cancelar cuando quiera?",
+        "a2": "Sí. No hay permanencia. Cancelas desde el panel cuando quieras.",
+        "q3": "¿Qué diferencia hay entre los planes?",
+        "a3": "Starter activa la Recepcionista IA. Pro añade Insights de Redes y Gestor de Ads. Agency da los 3 módulos sin límites, marca blanca y API.",
+        "q4": "¿La IA suena como un robot?",
+        "a4": "No. Con la Bóveda de Conocimiento estudia tu negocio y responde con tu tono. Y si se atasca, un humano toma el control.",
+        "q5": "¿Y si la IA se equivoca con un cliente?",
+        "a5": "Para eso está el botón SOS Humano: una persona real puede tomar el control de la conversación en cualquier momento.",
+        "q6": "¿Funciona con WhatsApp y mis redes?",
+        "a6": "Sí. La Recepcionista IA trabaja por llamada y WhatsApp, e Insights de Redes prepara contenido para tus redes sociales."
+      },
+      "ctaband": {
+        "kicker": "Santipulse",
+        "text": "¿Solo quieres una página web? También la hacemos, desde 49€/mes. La IA y la web se complementan: una te encuentra, la otra atiende.",
+        "btn": "Quiero una web",
+        "whatsappBtn": "Hablar por WhatsApp"
+      },
+      "sticky": "Empezar desde 49€/mes"
+    }
   },
   "bienvenida": {
     "title": "Santipulse · Bienvenida",
