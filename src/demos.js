@@ -34,7 +34,6 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
     });
   }
-  function domain(u) { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return u; } }
   // Show the actual website: for videos render the first frame (#t=0.5) instead
   // of the generic panel poster; for image demos use the screenshot directly.
   function thumb(w) {
@@ -48,7 +47,7 @@
     gallery.innerHTML = WEBSITES.map(function (w, i) {
       return '<div class="exp-card" data-i="' + i + '">' +
         '<div class="exp-thumb">' + thumb(w) + '</div>' +
-        '<div class="exp-meta"><h3>' + esc(w.name) + '</h3><p>' + esc(domain(w.url)) + ' &middot; santipulse.com</p></div>' +
+        '<div class="exp-meta"><h3>' + esc(w.name) + '</h3></div>' +
         '<button class="exp-play" type="button" data-play="' + i + '">Play</button>' +
         '</div>';
     }).join('');
@@ -72,7 +71,8 @@
   function openModal(i) {
     var w = WEBSITES[i];
     modal.querySelector('h2').textContent = w.name;
-    modal.querySelector('.dom').textContent = domain(w.url) + ' · santipulse.com';
+    modal.querySelector('.dom').textContent = '';
+    modal.querySelector('.dom').hidden = true;
     modal.querySelector('.exp-bodytext').textContent = D[w.key] || '';
     var play = modal.querySelector('a.exp-play');
     play.href = w.url;
