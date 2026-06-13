@@ -34,6 +34,31 @@ export function dbEnabled() {
   return !!getClient();
 }
 
+// ── API cost / token logging (margin tracking → api_costs table) ──────────────
+// USD per 1M tokens [input, output]. Extend as you add models/providers.
+const TOKEN_PRICES = {
+  'gpt-4o-mini': [0.15, 0.60],
+  'gpt-4o': [2.5, 10],
+  'gpt-4.1-mini': [0.40, 1.60],
+  'gpt-4.1': [2.0, 8.0],
+};
+
+/** Record one AI request's token usage + estimated cost. Never throws. */
+export async function logApiCost({ userId = null, jobId = null, provider = 'openai', model = '', usage = null } = {}) {
+  const sb = getClient();
+  if (!sb || !usage) return;
+  const inTok = usage.prompt_tokens || usage.input_tokens || 0;
+  const outTok = usage.completion_tokens || usage.output_tokens || 0;
+  const [pIn, pOut] = TOKEN_PRICES[model] || [0.15, 0.60];
+  const cost = (inTok * pIn + outTok * pOut) / 1e6;
+  try {
+    await sb.from('api_costs').insert({
+      user_id: userId, job_id: jobId, provider, model,
+      input_tokens: inTok, output_tokens: outTok, cost_usd: Number(cost.toFixed(6)),
+    });
+  } catch (e) { /* best-effort */ }
+}
+
 // ── Demo trials ───────────────────────────────────────────────────────────────
 
 export async function hasUsedDemoTrial({ fingerprint, automationType }) {

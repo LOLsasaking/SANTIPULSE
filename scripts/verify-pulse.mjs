@@ -113,11 +113,15 @@ const dashboardRunApi = readFileSync(join(ROOT, 'backend/dashboard/run.js'), 'ut
 const stripeCheckoutApi = readFileSync(join(ROOT, 'backend/stripe/checkout.js'), 'utf8');
 const stripeWebhookApi = readFileSync(join(ROOT, 'backend/stripe/webhook.js'), 'utf8');
 const pricingJs = readFileSync(join(ROOT, 'src/precios.js'), 'utf8');
+const demosJs = readFileSync(join(ROOT, 'src/demos.js'), 'utf8');
 const homeHtml = readFileSync(join(ROOT, 'src/pages/home.html'), 'utf8');
 const animJs = readFileSync(join(ROOT, 'src/anim.js'), 'utf8');
 const spanishI18n = readFileSync(join(ROOT, 'src/i18n/es.json'), 'utf8');
 
 if (!dashboardHtml.includes('Automatizar ahora')) fail('dashboard must use easy automation copy');
+if (demosJs.includes("key: 'showreel'") || demosJs.includes('/demo-sites/showreel/') || spanishI18n.includes('"showreel"')) {
+  fail('showreel demo should not be present on the public demos page');
+}
 if (!dashboardHtml.includes('data-admin-only') || !dashboardHtml.includes('Ingredients')) {
   fail('dashboard must include an admin-only Ingredients section');
 }

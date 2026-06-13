@@ -43,7 +43,7 @@ export default async function handler(req, res) {
   const results = {
     openai: missing('Falta OPENAI_API_KEY'),
     vapi: missing('Falta VAPI_API_KEY'),
-    twilio: missing('Falta TWILIO_ACCOUNT_SID / TWILIO_AUTH_TOKEN'),
+    telnyx: missing('Falta TELNYX_API_KEY'),
     make: missing('Falta MAKE_WEBHOOK_URL / MAKE_API_KEY'),
     meta: missing('Falta META_ACCESS_TOKEN'),
     tiktok: missing('Falta TIKTOK_ACCESS_TOKEN'),
@@ -117,15 +117,14 @@ export default async function handler(req, res) {
     }
   }
 
-  // ── Twilio (phone numbers for the AI receptionist) ──
-  if (env.TWILIO_ACCOUNT_SID && env.TWILIO_AUTH_TOKEN) {
-    const auth = Buffer.from(`${env.TWILIO_ACCOUNT_SID}:${env.TWILIO_AUTH_TOKEN}`).toString('base64');
-    const r = await ping(`https://api.twilio.com/2010-04-01/Accounts/${encodeURIComponent(env.TWILIO_ACCOUNT_SID)}.json`, {
-      headers: { Authorization: `Basic ${auth}` },
+  // ── Telnyx (phone numbers for the AI receptionist — Twilio replacement) ──
+  if (env.TELNYX_API_KEY) {
+    const r = await ping('https://api.telnyx.com/v2/balance', {
+      headers: { Authorization: `Bearer ${env.TELNYX_API_KEY}` },
     });
-    results.twilio = r.ok
+    results.telnyx = r.ok
       ? { status: 'connected', message: 'Cuenta activa' }
-      : { status: 'error', message: r.status === 401 ? 'Credenciales inválidas' : `Error ${r.status || 'red'}` };
+      : { status: 'error', message: r.status === 401 ? 'Clave inválida' : `Error ${r.status || 'red'}` };
   }
 
   // ── Make.com (optional WhatsApp workflow bridge) — presence only, no health endpoint ──

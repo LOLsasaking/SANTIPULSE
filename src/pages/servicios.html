@@ -17,7 +17,8 @@
 <meta property="og:image" content="{{site.url}}/santilogo.png" />
 <meta name="twitter:card" content="summary" />
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+<link rel="icon" type="image/png" href="{{asset.prefix}}mascot-favicon.png"/>
+<link rel="apple-touch-icon" href="{{asset.prefix}}mascot-favicon.png"/>
 
 {{tw.css}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +30,7 @@
   html,body{ height:100%; }
   body{
     font-family:'Inter',sans-serif; background:#050505; color:#fff;
-    overflow:hidden; /* chooser = no scroll, like home */
+    overflow:hidden; /* diptych chooser = no scroll */
   }
   .font-display{ font-family:'Archivo',sans-serif; }
   .font-mono{ font-family:'Space Mono',monospace; }
@@ -56,11 +57,27 @@
   .lang-menu a:hover, .lang-menu a[aria-current="true"]{ background:rgba(226,59,78,.16); color:#fff; }
   .lang-menu.hidden{ display:none; }
 
+  /* ===== Animated hero (rotating words) ===== */
+  .svc-hero{ position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:26px; padding:120px 24px 80px; }
+  .svc-hero-badge{ display:inline-flex; align-items:center; gap:10px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04); border-radius:9999px; padding:8px 16px; }
+  .svc-hero-title{ font-family:'Archivo',sans-serif; font-weight:900; letter-spacing:-.03em; line-height:.95; font-size:clamp(2.6rem,7vw,5.4rem); max-width:20ch; }
+  .svc-hero-title .lead{ display:block; color:rgba(255,255,255,.92); }
+  .svc-hero-rotate{ position:relative; display:block; height:1.05em; overflow:hidden; }
+  .svc-hero-rotate .w{ position:absolute; left:50%; top:0; transform:translate(-50%,120%); opacity:0; white-space:nowrap; color:#E23B4E; transition:transform .6s cubic-bezier(.22,.7,.18,1),opacity .55s ease; }
+  .svc-hero-rotate .w.is-active{ transform:translate(-50%,0); opacity:1; }
+  .svc-hero-rotate .w.is-prev{ transform:translate(-50%,-120%); opacity:0; }
+  .svc-hero-sub{ color:rgba(255,255,255,.6); font-size:clamp(1rem,2vw,1.2rem); line-height:1.6; max-width:42rem; }
+  .svc-hero-cta{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .svc-hero-cta a{ display:inline-flex; align-items:center; gap:10px; font-family:'Space Mono',monospace; font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; padding:13px 24px; border-radius:9999px; text-decoration:none; transition:transform .25s,background .25s,border-color .25s; }
+  .svc-hero-cta .fill{ background:#fff; color:#050505; } .svc-hero-cta .fill:hover{ transform:translateY(-2px); background:rgba(255,255,255,.88); }
+  .svc-hero-cta .outline{ border:1px solid rgba(255,255,255,.2); color:#fff; } .svc-hero-cta .outline:hover{ transform:translateY(-2px); border-color:rgba(255,255,255,.5); }
+  .svc-scroll-hint{ position:absolute; bottom:24px; left:50%; transform:translateX(-50%); font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.4); }
+
   /* ===== Title band over the diptych ===== */
   .chooser-head{
     position:fixed; top:0; left:0; right:0; z-index:30;
     display:flex; flex-direction:column; align-items:center; text-align:center;
-    padding:88px 24px 0; pointer-events:none;
+    padding:120px 24px 0; pointer-events:none;
   }
   .chooser-eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:14px; }
   .chooser-title{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.9; letter-spacing:-.02em; font-size:clamp(2rem,5vw,3.6rem); }
@@ -133,7 +150,7 @@
 <header>
   <a class="volver" href="{{nav.home}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> {{common.volver}}</a>
   <div style="display:flex; align-items:center; gap:16px;">
-    <a class="wordmark" href="{{nav.home}}"><img src="{{asset.prefix}}demo-media/pulse-logo.png" alt="Santipulse" style="height:30px;width:auto;display:block;"/></a>
+    <a class="wordmark" href="{{nav.home}}" aria-label="SantiPulse" style="display:inline-flex;align-items:center;gap:9px;text-decoration:none;"><img src="{{asset.prefix}}mascot-favicon.png" alt="" style="height:32px;width:32px;border-radius:8px;display:block;flex:none;"/><span style="font-family:Archivo,sans-serif;font-weight:900;font-size:19px;letter-spacing:-.02em;color:#fff;line-height:1;">SantiPulse<span style="color:#E23B4E;">.</span></span></a>
     {{lang.switcher}}
   </div>
 </header>
@@ -146,12 +163,12 @@
 
 <main class="stage">
 
-  <!-- WEB -> /contratar -->
+  <!-- WEBSITE -> /contratar -->
   <a class="panel panel-web" href="{{nav.contratar}}">
     <div class="panel-bg"></div><div class="panel-veil"></div>
     <div class="panel-content">
       <span class="eyebrow">{{servicios.web.eyebrow}}</span>
-      <h2 class="headline">{{servicios.web.titleA}}<br>{{servicios.web.titleB}}</h2>
+      <h2 class="headline">Website</h2>
       <p class="panel-desc">{{servicios.web.desc}}</p>
       <p class="panel-meta">{{servicios.web.meta}}</p>
       <span class="acceder">{{servicios.web.cta}} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
@@ -160,12 +177,12 @@
 
   <div class="v-divider"></div>
 
-  <!-- AI -> /precios -->
+  <!-- AI AUTOMATION -> /precios -->
   <a class="panel panel-ai" href="{{nav.precios}}">
     <div class="panel-bg"></div><div class="panel-veil"></div>
     <div class="panel-content">
       <span class="eyebrow">{{servicios.ai.eyebrow}}</span>
-      <h2 class="headline">{{servicios.ai.titleA}}<br>{{servicios.ai.titleB}}</h2>
+      <h2 class="headline">AI Automation</h2>
       <p class="panel-desc">{{servicios.ai.desc}}</p>
       <p class="panel-meta">{{servicios.ai.meta}}</p>
       <span class="acceder">{{servicios.ai.cta}} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
@@ -174,10 +191,13 @@
 
 </main>
 
+
 <script src="{{asset.prefix}}lang.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="{{asset.prefix}}anim.js" defer></script>
 <script src="{{asset.prefix}}home.js" defer></script>
+  <script src="{{asset.prefix}}flags.js" defer></script>
+  <script src="{{asset.prefix}}site-chrome.js" defer></script>
 </body>
 </html>

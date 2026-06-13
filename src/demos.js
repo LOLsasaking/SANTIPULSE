@@ -1,12 +1,11 @@
-/* Demos gallery. Descriptions come translated from #i18n-data; URLs/media shared.
-   Videos lazy-load and only play when scrolled into view. */
+/* Demos — expandable cards (list → modal). Click a row to expand; Play opens
+   the live website. Descriptions come translated from #i18n-data. */
 (function () {
   'use strict';
 
   var I18N = {};
   try { I18N = JSON.parse(document.getElementById('i18n-data').textContent); } catch (e) { I18N = {}; }
   var D = I18N.items || {};
-  var liveLabel = I18N.live || 'Ver en vivo';
 
   var WEBSITES = [
     { key: 'onfleek', name: 'On Fleek', type: 'video', media: 'demo-media/onfleek.mp4', url: 'https://on-fleek-ten.vercel.app/' },
@@ -17,7 +16,14 @@
     { key: 'sakana', name: 'SAKANA', type: 'video', media: 'demo-media/sakana.mp4', url: 'https://restaurant-templates-rosy.vercel.app/sushi.html' },
     { key: 'tours', name: 'Tenerife Tours', type: 'video', media: 'demo-media/tenerife-tours.mp4', url: 'https://tenerife-tours.vercel.app/' },
     { key: 'vals', name: 'VALS', type: 'video', media: 'demo-media/vals.mp4', url: 'https://vals-xi.vercel.app/' },
+    { key: 'megasur', name: 'MEGASUR Tenerife', type: 'video', media: 'demo-media/megasur.mp4', url: 'https://megasur-tenerife-demo.vercel.app/' },
+    // ── NEW (2026-06-13) — live on Vercel.
+    { key: 'elevate', name: 'ELEVATE Barber', type: 'video', media: 'demo-media/elevate-barber.mp4', url: 'https://elevate-barbershop-cyan.vercel.app/' },
+    { key: 'bmwm3', name: 'BMW E30 M3', type: 'video', media: 'demo-media/bmw-e30.mp4', url: 'https://bmw-clone-eosin.vercel.app/' },
+    { key: 'lara', name: 'The Lara Collection', type: 'video', media: 'demo-media/lara-collection.mp4', url: 'https://lara-collection.vercel.app/' },
   ];
+
+  var PANELS = ['demo-media/panel-1.jpg', 'demo-media/panel-2.jpg', 'demo-media/panel-3.jpg'];
 
   var prefix = '';
   var me = document.querySelector('script[src*="demos.js"]');
@@ -28,45 +34,74 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
     });
   }
-
-  var PANELS = ['demo-media/panel-1.jpg', 'demo-media/panel-2.jpg', 'demo-media/panel-3.jpg'];
-  function card(w, i) {
-    var desc = D[w.key] || '';
-    var poster = prefix + PANELS[i % 3];
-    var preview = w.type === 'video'
-      ? '<video data-src="' + prefix + w.media + '" poster="' + poster + '" loop muted playsinline preload="none"></video>'
-      : '<img src="' + prefix + w.media + '" alt="' + esc(w.name) + '" loading="lazy" width="640" height="400"/>';
-    return '' +
-      '<a href="' + w.url + '" target="_blank" rel="noopener" class="demo-card card rounded-2xl overflow-hidden block group">' +
-      '  <div class="demo-thumb relative">' + preview +
-      '    <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent"></div>' +
-      '    <span class="absolute top-3 right-3 inline-flex items-center gap-1.5 text-[10px] font-mono font-bold tracking-[0.15em] uppercase px-2.5 py-1 rounded-full bg-white text-ink">' +
-      '      ' + esc(liveLabel) +
-      '    </span>' +
-      '  </div>' +
-      '  <div class="p-5">' +
-      '    <h3 class="font-display font-extrabold text-lg uppercase tracking-tight mb-1">' + esc(w.name) + '</h3>' +
-      '    <p class="text-white/55 text-xs leading-relaxed">' + esc(desc) + '</p>' +
-      '  </div>' +
-      '</a>';
+  function domain(u) { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return u; } }
+  // Show the actual website: for videos render the first frame (#t=0.5) instead
+  // of the generic panel poster; for image demos use the screenshot directly.
+  function thumb(w) {
+    if (w.type === 'image') return '<img src="' + prefix + w.media + '" alt="" loading="lazy" />';
+    return '<video src="' + prefix + w.media + '#t=0.5" muted playsinline preload="metadata"></video>';
   }
 
+  // ── List ──
   var gallery = document.getElementById('gallery');
-  if (gallery) gallery.innerHTML = WEBSITES.map(card).join('');
+  if (gallery) {
+    gallery.innerHTML = WEBSITES.map(function (w, i) {
+      return '<div class="exp-card" data-i="' + i + '">' +
+        '<div class="exp-thumb">' + thumb(w) + '</div>' +
+        '<div class="exp-meta"><h3>' + esc(w.name) + '</h3><p>' + esc(domain(w.url)) + ' &middot; santipulse.com</p></div>' +
+        '<button class="exp-play" type="button" data-play="' + i + '">Play</button>' +
+        '</div>';
+    }).join('');
+  }
 
-  if (!('IntersectionObserver' in window)) return;
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      var v = en.target;
-      if (en.isIntersecting) {
-        if (!v.src && v.dataset.src) v.src = v.dataset.src;
-        var p = v.play();
-        if (p && p.catch) p.catch(function () {});
-      } else if (!v.paused) {
-        v.pause();
-      }
+  // ── Modal ──
+  var overlay = document.createElement('div');
+  overlay.className = 'exp-overlay';
+  var modal = document.createElement('div');
+  modal.className = 'exp-modal';
+  modal.innerHTML =
+    '<div class="exp-dialog">' +
+      '<button class="exp-x" type="button" aria-label="Cerrar">&times;</button>' +
+      '<div class="exp-media-wrap"></div>' +
+      '<div class="exp-head"><div><h2></h2><p class="dom"></p></div><a class="exp-play" target="_blank" rel="noopener">Play &#9654;</a></div>' +
+      '<div class="exp-bodytext"></div>' +
+    '</div>';
+  document.body.appendChild(overlay);
+  document.body.appendChild(modal);
+
+  function openModal(i) {
+    var w = WEBSITES[i];
+    modal.querySelector('h2').textContent = w.name;
+    modal.querySelector('.dom').textContent = domain(w.url) + ' · santipulse.com';
+    modal.querySelector('.exp-bodytext').textContent = D[w.key] || '';
+    var play = modal.querySelector('a.exp-play');
+    play.href = w.url;
+    var mw = modal.querySelector('.exp-media-wrap');
+    mw.innerHTML = w.type === 'video'
+      ? '<video class="exp-media" src="' + prefix + w.media + '#t=0.5" autoplay loop muted playsinline></video>'
+      : '<img class="exp-media" src="' + prefix + w.media + '" alt="" />';
+    overlay.classList.add('open');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    var v = modal.querySelector('video');
+    if (v) { try { v.pause(); } catch (e) {} }
+  }
+
+  if (gallery) {
+    gallery.addEventListener('click', function (e) {
+      var play = e.target.closest('[data-play]');
+      if (play) { e.stopPropagation(); window.open(WEBSITES[+play.getAttribute('data-play')].url, '_blank', 'noopener'); return; }
+      var card = e.target.closest('.exp-card');
+      if (card) openModal(+card.getAttribute('data-i'));
     });
-  }, { rootMargin: '200px' });
-
-  document.querySelectorAll('#gallery video[data-src]').forEach(function (v) { io.observe(v); });
+  }
+  overlay.addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  modal.querySelector('.exp-x').addEventListener('click', closeModal);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
 })();

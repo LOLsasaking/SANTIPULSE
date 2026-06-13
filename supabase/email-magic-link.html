@@ -1,0 +1,69 @@
+<!--
+  SantiPulse · Magic Link email template (multilingual + mascot)
+  ────────────────────────────────────────────────────────────────
+  Paste into: Supabase Dashboard → Authentication → Email Templates
+  → "Magic Link" → Message body (and see subject below).
+
+  Language comes from {{ .Data.lang }} (set by auth.js when the link
+  is requested: es / en / fr / de / it). Defaults to Spanish.
+
+  SUBJECT line (paste in the Subject field):
+  {{ if eq .Data.lang "en" }}Welcome! Your sign-in link · SantiPulse{{ else if eq .Data.lang "fr" }}Bienvenue ! Ton lien de connexion · SantiPulse{{ else if eq .Data.lang "de" }}Willkommen! Dein Anmeldelink · SantiPulse{{ else if eq .Data.lang "it" }}Benvenuto! Il tuo link di accesso · SantiPulse{{ else }}¡Bienvenido! Tu enlace de acceso · SantiPulse{{ end }}
+-->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f7;padding:36px 12px;">
+  <tr>
+    <td align="center">
+      <table width="480" cellpadding="0" cellspacing="0" border="0" style="max-width:480px;width:100%;background-color:#ffffff;border-radius:20px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;">
+        <!-- header bar -->
+        <tr>
+          <td style="background-color:#0a0a0c;padding:22px 32px;" align="center">
+            <span style="font-size:22px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">SantiPulse<span style="color:#E23B4E;">.</span></span>
+          </td>
+        </tr>
+        <!-- mascot -->
+        <tr>
+          <td align="center" style="padding:34px 32px 0;">
+            <img src="https://santipulse.com/mascot-icon.png" width="150" alt="Pulse" style="display:block;width:150px;height:auto;"/>
+          </td>
+        </tr>
+        <!-- copy -->
+        <tr>
+          <td align="center" style="padding:22px 36px 0;">
+            <h1 style="margin:0;font-size:26px;line-height:1.2;color:#0a0a0c;">
+              {{ if eq .Data.lang "en" }}Welcome! 👋{{ else if eq .Data.lang "fr" }}Bienvenue&nbsp;! 👋{{ else if eq .Data.lang "de" }}Willkommen! 👋{{ else if eq .Data.lang "it" }}Benvenuto! 👋{{ else }}¡Bienvenido! 👋{{ end }}
+            </h1>
+            <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:#52525b;">
+              {{ if eq .Data.lang "en" }}I'm <strong>Pulse</strong>. Here is your sign-in link — it expires shortly and can only be used once.{{ else if eq .Data.lang "fr" }}Je suis <strong>Pulse</strong>. Voici ton lien de connexion — il expire bientôt et ne peut être utilisé qu'une seule fois.{{ else if eq .Data.lang "de" }}Ich bin <strong>Pulse</strong>. Hier ist dein Anmeldelink — er läuft bald ab und kann nur einmal verwendet werden.{{ else if eq .Data.lang "it" }}Sono <strong>Pulse</strong>. Ecco il tuo link di accesso — scade a breve e può essere usato una sola volta.{{ else }}Soy <strong>Pulse</strong>. Aquí tienes tu enlace de acceso — caduca en breve y solo puede usarse una vez.{{ end }}
+            </p>
+          </td>
+        </tr>
+        <!-- button -->
+        <tr>
+          <td align="center" style="padding:28px 36px 8px;">
+            <a href="{{ .ConfirmationURL }}" style="display:inline-block;background-color:#E23B4E;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;padding:15px 44px;border-radius:9999px;">
+              {{ if eq .Data.lang "en" }}Sign in{{ else if eq .Data.lang "fr" }}Se connecter{{ else if eq .Data.lang "de" }}Anmelden{{ else if eq .Data.lang "it" }}Accedi{{ else }}Iniciar sesión{{ end }}
+            </a>
+          </td>
+        </tr>
+        <!-- fallback link -->
+        <tr>
+          <td align="center" style="padding:14px 36px 34px;">
+            <p style="margin:0;font-size:12px;line-height:1.6;color:#a1a1aa;">
+              {{ if eq .Data.lang "en" }}If the button doesn't work, copy this link:{{ else if eq .Data.lang "fr" }}Si le bouton ne fonctionne pas, copie ce lien&nbsp;:{{ else if eq .Data.lang "de" }}Wenn der Button nicht funktioniert, kopiere diesen Link:{{ else if eq .Data.lang "it" }}Se il pulsante non funziona, copia questo link:{{ else }}Si el botón no funciona, copia este enlace:{{ end }}<br/>
+              <a href="{{ .ConfirmationURL }}" style="color:#E23B4E;word-break:break-all;">{{ .ConfirmationURL }}</a>
+            </p>
+          </td>
+        </tr>
+        <!-- footer -->
+        <tr>
+          <td align="center" style="background-color:#f8f8fa;padding:18px 32px;">
+            <p style="margin:0;font-size:11px;color:#a1a1aa;">
+              {{ if eq .Data.lang "en" }}You received this email because someone requested access with this address at santipulse.com. If it wasn't you, you can ignore it.{{ else if eq .Data.lang "fr" }}Tu reçois cet email car un accès a été demandé avec cette adresse sur santipulse.com. Si ce n'était pas toi, ignore-le.{{ else if eq .Data.lang "de" }}Du erhältst diese E-Mail, weil mit dieser Adresse Zugang auf santipulse.com angefragt wurde. Falls du das nicht warst, ignoriere sie.{{ else if eq .Data.lang "it" }}Ricevi questa email perché è stato richiesto l'accesso con questo indirizzo su santipulse.com. Se non sei stato tu, ignorala.{{ else }}Recibes este email porque alguien pidió acceso con esta dirección en santipulse.com. Si no fuiste tú, ignóralo.{{ end }}
+              <br/><br/>© 2026 SantiPulse
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

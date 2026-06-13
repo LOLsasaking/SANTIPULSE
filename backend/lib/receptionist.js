@@ -24,6 +24,10 @@ const CONFIG_FIELDS = [
   'whatsapp_phone_id', 'whatsapp_display', 'booking_enabled', 'booking_provider',
   'booking_timezone', 'booking_slot_minutes', 'booking_hours',
   'sos_enabled', 'sos_email', 'sos_whatsapp', 'sos_keywords',
+  // Client personalization + concierge WhatsApp (client gives their number;
+  // the agency wires the technical whatsapp_phone_id behind the scenes).
+  'voice', 'language', 'hours_text', 'extra_instructions', 'whatsapp_number',
+  'phone_country',
 ];
 
 export async function saveConfig(userId, body) {

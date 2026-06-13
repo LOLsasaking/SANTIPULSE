@@ -30,6 +30,7 @@
   }
 
   function applyAdminVisibility(isAdmin) {
+    window.__IS_ADMIN = !!isAdmin;
     document.body.setAttribute('data-role', isAdmin ? 'admin' : 'client');
     document.querySelectorAll('[data-admin-only]').forEach(function (el) {
       el.classList.toggle('hidden', !isAdmin);
@@ -142,6 +143,18 @@
 
   function renderUser(data) {
     document.getElementById('userEmail').textContent = data.user.email;
+
+    // Mascot welcome ("Hola, [User]. Soy Pulse…") — prefer a human name, fall
+    // back to the business name, then the email local-part.
+    var nameEl = document.getElementById('welcomeName');
+    if (nameEl) {
+      var p = data.profile || {};
+      var name = String(p.sender_name || p.business_name || (data.user.email || '').split('@')[0] || 'crack').trim();
+      nameEl.textContent = name;
+    }
+    var fab = document.getElementById('pulseMascotBtn');
+    if (fab) fab.classList.remove('hidden');
+
     var isAdmin = !!data.isAdmin;
     applyAdminVisibility(isAdmin);
     loadServiceStatus();
@@ -192,11 +205,33 @@
           '<div class="roi-tile"><div class="k">Ingresos</div><div class="v">' + esc(formatMoney(p.revenue, currency)) + '</div><div class="s">Atribuido</div></div>' +
           '<div class="roi-tile"><div class="k">ROAS</div><div class="v">' + esc(p.roas == null ? '-' : Number(p.roas).toFixed(2) + 'x') + '</div><div class="s">Retorno</div></div>' +
           '<div class="roi-tile"><div class="k">Beneficio</div><div class="v">' + esc(formatMoney(p.profit, currency)) + '</div><div class="s">Estimado</div></div>';
+
+        // Feed the same numbers to Pulse so the mascot tip reflects real ROI.
+        var roasTxt = p.roas == null ? null : Number(p.roas).toFixed(2) + 'x';
+        setPulseTip(
+          roasTxt
+            ? 'Tu ROAS actual es ' + roasTxt + '. ' + (Number(p.roas) >= 1
+                ? 'Vas en verde — sube el presupuesto del anuncio ganador.'
+                : 'Por debajo de 1x: revisa creatividades antes de subir gasto.')
+            : 'Sistema al 100%. Lanza tu primer anuncio y verás el ROI aquí en directo.',
+          roasTxt ? 'Beneficio estimado ' + formatMoney(p.profit, currency) : ''
+        );
       })
       .catch(function () {});
   }
 
+  // Pulse Tip + floating-mascot popover share one copy source.
+  function setPulseTip(body, metric) {
+    var b = document.getElementById('pulseTipBody');
+    var m = document.getElementById('pulseTipMetric');
+    var fb = document.getElementById('pulseFabBody');
+    if (b) b.textContent = body;
+    if (m) m.textContent = metric || '';
+    if (fb) fb.textContent = body;
+  }
+
   function renderLockedRoiTicker() {
+    setPulseTip('Activa un plan y desbloquearás el ROI en directo. A partir de ahí te aviso de cada oportunidad de inversión.', '');
     var host = document.getElementById('roiPulseTicker');
     if (!host) return;
     host.innerHTML =
@@ -332,17 +367,16 @@
     show(runResult);
   }
 
-  document.querySelectorAll('[data-run]').forEach(function (card) {
-    card.addEventListener('click', function () {
-      var type = card.getAttribute('data-run');
-      var go = card.querySelector('[data-go]');
-      var goOrig = go ? go.innerHTML : '';
-      var allCards = document.querySelectorAll('[data-run]');
-      allCards.forEach(function (c) { c.disabled = true; });
-      card.setAttribute('data-state', 'running');
-      if (go) go.innerHTML = '<span class="spinner"></span> Ejecutando…';
+  // Service Hub neo-toggles: flipping a module ON activates/runs it. On any
+  // failure (no sub, quota, error) the toggle reverts to OFF/standby.
+  document.querySelectorAll('input[data-run]').forEach(function (input) {
+    input.addEventListener('change', function () {
+      if (!input.checked) { hide(runMsg); return; }   // turned OFF = standby, no-op
+      var type = input.getAttribute('data-run');
+      var allInputs = document.querySelectorAll('input[data-run]');
+      allInputs.forEach(function (c) { c.disabled = true; });
       hide(runResult);
-      setRunMsg('', '<span class="spinner"></span> Preparando el módulo Pulse… esto puede tardar unos segundos.');
+      setRunMsg('', '<span class="spinner"></span> Activando el módulo Pulse… esto puede tardar unos segundos.');
 
       window.SantiAuth.apiFetch('/api/dashboard/run', { method: 'POST', body: JSON.stringify({ type: type }) })
         .then(function (r) { return r.json().then(function (d) { return { status: r.status, d: d }; }); })
@@ -352,23 +386,25 @@
             hide(runMsg);
             renderResult(type, d.result || {}, d.usage);
             loadRuns();
-          } else if (res.status === 402 && d.error === 'needs_subscription') {
-            setRunMsg('err', 'Necesitas una suscripción activa. <a href="/precios/">Ver planes →</a>');
-          } else if (res.status === 402 && d.error === 'quota_exceeded') {
-            setRunMsg('err', 'Has alcanzado tu límite mensual (' + esc(String(d.used)) + '/' + esc(String(d.limit)) +
-              '). <a href="/precios/">Sube de plan →</a>');
-          } else if (res.status === 400 && d.error === 'invalid_type') {
-            setRunMsg('err', 'Ese módulo Pulse no está disponible.');
+            // Module reported it could not activate (e.g. missing config):
+            // flip the toggle back to STANDBY so the state isn't misleading.
+            if (d.result && d.result.success === false) input.checked = false;
           } else {
-            setRunMsg('err', 'No se pudo ejecutar. Inténtalo de nuevo.');
+            input.checked = false;                    // revert on failure
+            if (res.status === 402 && d.error === 'needs_subscription') {
+              setRunMsg('err', 'Necesitas una suscripción activa. <a href="/precios/">Ver planes →</a>');
+            } else if (res.status === 402 && d.error === 'quota_exceeded') {
+              setRunMsg('err', 'Has alcanzado tu límite mensual (' + esc(String(d.used)) + '/' + esc(String(d.limit)) +
+                '). <a href="/precios/">Sube de plan →</a>');
+            } else if (res.status === 400 && d.error === 'invalid_type') {
+              setRunMsg('err', 'Ese módulo Pulse no está disponible.');
+            } else {
+              setRunMsg('err', 'No se pudo activar. Inténtalo de nuevo.');
+            }
           }
         })
-        .catch(function () { setRunMsg('err', 'No se pudo ejecutar. Inténtalo de nuevo.'); })
-        .finally(function () {
-          allCards.forEach(function (c) { c.disabled = false; });
-          card.setAttribute('data-state', 'idle');
-          if (go) go.innerHTML = goOrig;
-        });
+        .catch(function () { input.checked = false; setRunMsg('err', 'No se pudo activar. Inténtalo de nuevo.'); })
+        .finally(function () { allInputs.forEach(function (c) { c.disabled = false; }); });
     });
   });
 

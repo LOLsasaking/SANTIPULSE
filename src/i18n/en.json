@@ -7,7 +7,8 @@
     "acceder": "Enter",
     "volver": "Back",
     "privacidad": "Privacy",
-    "footer": "© 2026 Santipulse · 🇺🇸 USA · Tenerife 🇪🇸"
+    "footer": "© 2026 Santipulse · 🇺🇸 USA · Tenerife 🇪🇸",
+    "login": "Log in"
   },
   "home": {
     "title": "Santipulse · I want a website or more",
@@ -119,7 +120,11 @@
       "urban": "Urban variant of the barbershop: cuts, razor beard and online bookings.",
       "burgur": "The ultimate burger club. Smash burgers and video on scroll.",
       "sakana": "Sushi bar and Japanese cuisine. The art of sushi, fresh fish.",
-      "tours": "Tours site in 4 languages with a cinematic video hero and a gallery that reveals on scroll."
+      "tours": "Tours site in 4 languages with a cinematic video hero and a gallery that reveals on scroll.",
+      "megasur": "Electrician & renovations in Tenerife — dark site with video hero, centered logo and expandable services.",
+      "elevate": "High-end barbershop with a WebGL water-reveal hero — drag the cursor to swap the before/after cut. Online booking built in.",
+      "bmwm3": "Interactive 3D scroll experience — a BMW E30 M3 in WebGL that turns and reveals as you scroll. A cinematic product showcase.",
+      "lara": "Luxury digital archive for a private Mercedes, Porsche & Ferrari collection — rotating studio videos, a timeline and a curator dashboard."
     },
     "videos": {
       "eyebrow": "Estrategia de v?deo ? The Pulse System",
@@ -186,7 +191,18 @@
     "do3Body": "Fewer manual tasks, more free time.",
     "ctaPrimary": "I want to start",
     "ctaSecondary": "View live demos",
-    "footer": "© 2026 SantiPulse · Founded in the USA"
+    "footer": "© 2026 SantiPulse · Founded in the USA",
+    "heroBadge": "The Pulse System · AI Agency",
+    "heroLead": "Your business can be",
+    "heroW1": "faster",
+    "heroW2": "more profitable",
+    "heroW3": "automated",
+    "heroW4": "unstoppable",
+    "heroW5": "smarter",
+    "heroSub": "Websites that sell and AI employees that answer, post and optimize your ads 24/7.",
+    "globeEyebrow": "Global coverage",
+    "globeTitle": "We operate from Florida and Tenerife",
+    "globeSub": "An AI agency founded in the USA, also based in the Canary Islands — we serve clients on both sides of the Atlantic."
   },
   "precios": {
     "title": "Santipulse · Plans & pricing",
@@ -224,5 +240,20 @@
       "error": "Could not start checkout. Please try again."
     },
     "footer": "© 2026 SantiPulse · Cancel anytime"
+  },
+  "sponsors": {
+    "label": "Built with trusted technology"
+  },
+  "footer": {
+    "tagline": "AI automation agency. Websites that sell and AI employees that answer, post and optimize your ads 24/7.",
+    "servicesH": "Services",
+    "companyH": "Company",
+    "legalH": "Legal",
+    "website": "Website",
+    "aiauto": "AI Automation",
+    "demos": "Demos",
+    "about": "About",
+    "pricing": "Pricing",
+    "privacy": "Privacy"
   }
 }

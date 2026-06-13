@@ -18,12 +18,26 @@
     return client;
   }
 
-  // Send a magic link to the given email. redirectTo returns the user to /dashboard.
+  // Send a magic link via our backend (/api/auth/magic-link), which emails a
+  // branded, mascot + per-language sign-in message through Resend. Supabase's
+  // hosted templates can't localize, so the server owns the email now.
   function sendMagicLink(email) {
-    var c = sb();
-    if (!c) return Promise.reject(new Error('auth-unavailable'));
-    var redirectTo = window.location.origin + '/dashboard/';
-    return c.auth.signInWithOtp({ email: email, options: { emailRedirectTo: redirectTo } });
+    var lang = 'es';
+    try { lang = window.localStorage.getItem('sp_lang') || 'es'; } catch (e) {}
+    if (!/^(es|en|fr|de|it)$/.test(lang)) lang = 'es';
+    return fetch('/api/auth/magic-link', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, lang: lang }),
+    }).then(function (r) {
+      if (r.ok) return {};
+      return r.json().catch(function () { return {}; }).then(function (d) {
+        var msg = d.error === 'rate_limited' ? 'Demasiados intentos. Espera un minuto.' :
+          d.error === 'invalid_email' ? 'Introduce un email válido.' :
+          'No se pudo enviar el enlace.';
+        return { error: { message: msg } };
+      });
+    });
   }
 
   function hasAuthCallback() {
@@ -92,6 +106,13 @@
       return session || waitForSession(callback ? 10 : 3);
     }).then(function (session) {
       if (callback) cleanAuthUrl(targetPath);
+      // Keep the language fresh in user metadata for existing users (OTP
+      // `data` only applies on first signup) so future emails localize right.
+      if (session && c.auth.updateUser) {
+        var lang = 'es';
+        try { lang = window.localStorage.getItem('sp_lang') || 'es'; } catch (e) {}
+        if (/^(es|en|fr|de|it)$/.test(lang)) c.auth.updateUser({ data: { lang: lang } }).catch(function () {});
+      }
       return session || null;
     }).catch(function (err) {
       if (callback) cleanAuthUrl(targetPath);

@@ -7,7 +7,8 @@
     "acceder": "Accedi",
     "volver": "Indietro",
     "privacidad": "Privacy",
-    "footer": "© 2026 Santipulse · 🇺🇸 USA · Tenerife 🇪🇸"
+    "footer": "© 2026 Santipulse · 🇺🇸 USA · Tenerife 🇪🇸",
+    "login": "Accedi"
   },
   "home": {
     "title": "Santipulse · Voglio un sito web o di più",
@@ -119,7 +120,11 @@
       "urban": "Variante urban della barberia: tagli, barba a rasoio e prenotazioni online.",
       "burgur": "Il club definitivo dell'hamburger. Smash burger e video allo scroll.",
       "sakana": "Sushi bar e cucina giapponese. L'arte del sushi, pesce fresco.",
-      "tours": "Sito di tour in 4 lingue con hero video cinematografico e una galleria che si svela allo scroll."
+      "tours": "Sito di tour in 4 lingue con hero video cinematografico e una galleria che si svela allo scroll.",
+      "megasur": "Elettricista e ristrutturazioni a Tenerife — sito scuro con video hero, logo centrale e servizi espandibili.",
+      "elevate": "Barbiere di alta gamma con hero WebGL a rivelazione d'acqua — muovi il cursore per svelare il taglio prima/dopo. Prenotazione online integrata.",
+      "bmwm3": "Esperienza 3D interattiva allo scroll — una BMW E30 M3 in WebGL che ruota e si rivela. Una vetrina di prodotto cinematografica.",
+      "lara": "Archivio digitale di lusso per una collezione privata di Mercedes, Porsche e Ferrari — video di studio rotanti, una timeline e una dashboard del curatore."
     },
     "videos": {
       "eyebrow": "Estrategia de v?deo ? The Pulse System",
@@ -186,7 +191,18 @@
     "do3Body": "Meno attività manuali, più tempo libero.",
     "ctaPrimary": "Voglio iniziare",
     "ctaSecondary": "Guarda le demo dal vivo",
-    "footer": "© 2026 SantiPulse · Fondata negli USA"
+    "footer": "© 2026 SantiPulse · Fondata negli USA",
+    "heroBadge": "The Pulse System · Agenzia IA",
+    "heroLead": "Il tuo business può essere",
+    "heroW1": "più veloce",
+    "heroW2": "più redditizio",
+    "heroW3": "automatico",
+    "heroW4": "inarrestabile",
+    "heroW5": "più intelligente",
+    "heroSub": "Siti che vendono e dipendenti IA che rispondono, pubblicano e ottimizzano le tue ads 24/7.",
+    "globeEyebrow": "Copertura globale",
+    "globeTitle": "Operiamo da Florida e Tenerife",
+    "globeSub": "Un’agenzia IA fondata negli USA, con sede anche alle Canarie — serviamo clienti su entrambe le sponde dell’Atlantico."
   },
   "precios": {
     "title": "Santipulse · Piani e prezzi",
@@ -224,5 +240,20 @@
       "error": "Impossibile avviare il pagamento. Riprova."
     },
     "footer": "© 2026 SantiPulse · Disdici quando vuoi"
+  },
+  "sponsors": {
+    "label": "Costruito con tecnologia affidabile"
+  },
+  "footer": {
+    "tagline": "Agenzia di automazione IA. Siti che vendono e dipendenti IA che rispondono, pubblicano e ottimizzano le tue ads 24/7.",
+    "servicesH": "Servizi",
+    "companyH": "Azienda",
+    "legalH": "Legale",
+    "website": "Sito web",
+    "aiauto": "Automazione IA",
+    "demos": "Demo",
+    "about": "Chi siamo",
+    "pricing": "Prezzi",
+    "privacy": "Privacy"
   }
 }

@@ -7,7 +7,8 @@
     "acceder": "Acceder",
     "volver": "Volver",
     "privacidad": "Privacidad",
-    "footer": "© 2026 Santipulse · 🇺🇸 EE.UU. · Tenerife 🇪🇸"
+    "footer": "© 2026 Santipulse · 🇺🇸 EE.UU. · Tenerife 🇪🇸",
+    "login": "Acceder"
   },
   "home": {
     "title": "Santipulse · Quiero una web o más",
@@ -17,7 +18,7 @@
     "panel1": {
       "eyebrow": "Para Empresas",
       "titleA": "Quiero",
-      "titleB": "una web",
+      "titleB": "una web o más",
       "desc": "Diseño profesional a medida, online en 7 días. Desde 49€/mes, sin pago inicial.",
       "meta": "Entrega 7 días · Sin pago inicial"
     },
@@ -227,7 +228,9 @@
         "f7": "Email profesional",
         "f8": "Entrega en 7 días + soporte por WhatsApp",
         "payNow": "Pagar ahora",
-        "askInfo": "Prefiero que me asesoren"
+        "askInfo": "Prefiero que me asesoren",
+        "addon3dTitle": "Web 3D interactiva — +600€",
+        "addon3dDesc": "Como los demos en 3D: +600€ al precio y 1 día más de trabajo en la entrega."
       },
       "faq": {
         "eyebrow": "Preguntas frecuentes",
@@ -305,7 +308,11 @@
       "urban": "Variante urban de la barbería: cortes, barba a navaja y reservas online.",
       "burgur": "El club definitivo de la hamburguesa. Smash burgers y vídeo al hacer scroll.",
       "sakana": "Sushi bar y cocina japonesa. El arte del sushi, pescado fresco.",
-      "tours": "Web de tours en 4 idiomas con hero de vídeo cinemático y galería que se desvela al hacer scroll."
+      "tours": "Web de tours en 4 idiomas con hero de vídeo cinemático y galería que se desvela al hacer scroll.",
+      "megasur": "Electricista y reformas en Tenerife — web oscura con vídeo hero, logo central y servicios expandibles.",
+      "elevate": "Barbería premium con hero WebGL de agua — arrastra el cursor para revelar el corte antes/después. Reservas online integradas.",
+      "bmwm3": "Experiencia 3D interactiva al hacer scroll — un BMW E30 M3 en WebGL que gira y se revela. Un escaparate de producto cinematográfico.",
+      "lara": "Archivo digital de lujo para una colección privada de Mercedes, Porsche y Ferrari — vídeos giratorios de estudio, línea de tiempo y panel de curador."
     }
   },
   "nosotros": {
@@ -343,7 +350,18 @@
     "do3Body": "Menos tareas manuales, más tiempo libre.",
     "ctaPrimary": "Quiero empezar",
     "ctaSecondary": "Ver demos en vivo",
-    "footer": "© 2026 SantiPulse · Fundada en EE.UU."
+    "footer": "© 2026 SantiPulse · Fundada en EE.UU.",
+    "heroBadge": "The Pulse System · Agencia IA",
+    "heroLead": "Tu negocio puede ser",
+    "heroW1": "más rápido",
+    "heroW2": "más rentable",
+    "heroW3": "automático",
+    "heroW4": "imparable",
+    "heroW5": "inteligente",
+    "heroSub": "Webs que venden y empleados IA que atienden, publican y optimizan tus anuncios 24/7.",
+    "globeEyebrow": "Cobertura global",
+    "globeTitle": "Operamos desde Florida y Tenerife",
+    "globeSub": "Una agencia de IA fundada en EE.UU., con base también en Canarias — atendemos clientes a ambos lados del Atlántico."
   },
   "precios": {
     "title": "Santipulse · Planes y precios",
@@ -543,5 +561,20 @@
     "section4Body": "Podemos usar Supabase para almacenar datos, Stripe para pagos, Resend para emails y proveedores oficiales de integración cuando el cliente los conecte.",
     "section5Title": "Tus derechos",
     "section5Body": "Puedes solicitar acceso, rectificación, eliminación u oposición escribiendo a santipulse@gmail.com. Conservamos los datos solo el tiempo necesario para responder, prestar el servicio o cumplir obligaciones legales."
+  },
+  "sponsors": {
+    "label": "Construido con tecnología de confianza"
+  },
+  "footer": {
+    "tagline": "Agencia de automatización IA. Webs que venden y empleados IA que atienden, publican y optimizan tus anuncios 24/7.",
+    "servicesH": "Servicios",
+    "companyH": "Empresa",
+    "legalH": "Legal",
+    "website": "Sitio Web",
+    "aiauto": "Automatización IA",
+    "demos": "Demos",
+    "about": "Nosotros",
+    "pricing": "Precios",
+    "privacy": "Privacidad"
   }
 }

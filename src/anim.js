@@ -141,4 +141,75 @@
     }, { rootMargin: '120px' });
     autoVids.forEach(function (v) { vio.observe(v); });
   }
+
+  // ── Count-up numbers (stats + prices) when scrolled into view ───────
+  function countUp(el) {
+    var raw = el.getAttribute('data-cu') || el.textContent;
+    el.setAttribute('data-cu', raw);
+    var m = raw.match(/(\D*)(\d[\d.,]*)(.*)/);
+    if (!m) return;
+    var pre = m[1], suf = m[3];
+    var target = parseFloat(m[2].replace(/[.,]/g, ''));
+    if (!isFinite(target)) return;
+    var dur = 1100, t0 = null;
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var val = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      el.textContent = pre + val + suf;
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = raw;
+    }
+    requestAnimationFrame(step);
+  }
+  var nums = document.querySelectorAll('.stat-card .big, .plan-price');
+  if (nums.length && 'IntersectionObserver' in window && !reduce) {
+    var nio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { countUp(e.target); nio.unobserve(e.target); } });
+    }, { threshold: 0.4 });
+    nums.forEach(function (n) { nio.observe(n); });
+  }
+
+  // ── 3D tilt on cards toward the cursor (desktop) ────────────────────
+  if (!reduce && !matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.card, .plan').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var rx = ((e.clientY - r.top) / r.height - 0.5) * -7;
+        var ry = ((e.clientX - r.left) / r.width - 0.5) * 7;
+        card.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-6px)';
+      });
+      card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+    });
+  }
+
+  // ── Rotating words for the animated hero ([data-rotate] > .w) ───────
+  document.querySelectorAll('[data-rotate]').forEach(function (rot) {
+    var words = rot.querySelectorAll('.w');
+    if (!words.length) return;
+    words[0].classList.add('is-active');
+    if (reduce || words.length < 2) return;
+    var idx = 0;
+    setInterval(function () {
+      var prev = idx;
+      idx = (idx + 1) % words.length;
+      words[prev].classList.remove('is-active');
+      words[prev].classList.add('is-prev');
+      words[idx].classList.remove('is-prev');
+      words[idx].classList.add('is-active');
+      setTimeout(function () { words[prev].classList.remove('is-prev'); }, 650);
+    }, 2200);
+  });
+
+  // ── Scroll progress bar ─────────────────────────────────────────────
+  var bar = document.querySelector('.scroll-progress');
+  if (bar) {
+    var onProg = function () {
+      var h = document.documentElement;
+      var max = (h.scrollHeight - h.clientHeight) || 1;
+      bar.style.width = (Math.min(h.scrollTop / max, 1) * 100) + '%';
+    };
+    onProg();
+    window.addEventListener('scroll', onProg, { passive: true });
+  }
 })();

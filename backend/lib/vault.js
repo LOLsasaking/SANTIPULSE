@@ -5,6 +5,7 @@
    Spanish summaries, and provide compact context to AI prompts.
    ============================================================ */
 import { admin } from './auth.js';
+import { logApiCost } from './db.js';
 import { randomUUID } from 'node:crypto';
 
 const BUCKET = process.env.VAULT_BUCKET || 'knowledge-vault';
@@ -90,7 +91,7 @@ export async function saveVaultItem(userId, input = {}) {
     }
   }
 
-  const summary = await summarizeVaultItem({ title, fileName, mimeType, contentText });
+  const summary = await summarizeVaultItem({ title, fileName, mimeType, contentText, userId });
   const row = {
     user_id: userId,
     title,
@@ -268,9 +269,10 @@ function tableMissing(error) {
   return /PGRST205|schema cache|knowledge_vault_items|relation .* does not exist|could not find the table/i.test(text);
 }
 
-async function summarizeVaultItem({ title, fileName, mimeType, contentText }) {
+async function summarizeVaultItem({ title, fileName, mimeType, contentText, userId = null }) {
   const fallback = localSummary({ title, fileName, mimeType, contentText });
   if (!process.env.OPENAI_API_KEY || !contentText) return fallback;
+  const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
   try {
     const resp = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -279,7 +281,7 @@ async function summarizeVaultItem({ title, fileName, mimeType, contentText }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+        model,
         temperature: 0.2,
         max_tokens: 220,
         messages: [
@@ -289,6 +291,7 @@ async function summarizeVaultItem({ title, fileName, mimeType, contentText }) {
       }),
     });
     const json = await resp.json().catch(() => ({}));
+    if (json && json.usage) logApiCost({ userId, provider: 'openai', model, usage: json.usage });
     const text = json?.choices?.[0]?.message?.content;
     return cleanText(text || fallback).slice(0, 1600);
   } catch (err) {

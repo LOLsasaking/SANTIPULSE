@@ -7,7 +7,8 @@
     "acceder": "Öffnen",
     "volver": "Zurück",
     "privacidad": "Datenschutz",
-    "footer": "© 2026 Santipulse · 🇺🇸 USA · Teneriffa 🇪🇸"
+    "footer": "© 2026 Santipulse · 🇺🇸 USA · Teneriffa 🇪🇸",
+    "login": "Anmelden"
   },
   "home": {
     "title": "Santipulse · Ich will eine Website oder mehr",
@@ -119,7 +120,11 @@
       "urban": "Urban-Variante des Salons: Schnitte, Rasiermesser-Bart und Online-Buchungen.",
       "burgur": "Der ultimative Burger-Club. Smash Burgers und Video beim Scrollen.",
       "sakana": "Sushi-Bar und japanische Küche. Die Kunst des Sushi, frischer Fisch.",
-      "tours": "Touren-Site in 4 Sprachen mit cinematischem Video-Hero und einer Galerie, die sich beim Scrollen enthüllt."
+      "tours": "Touren-Site in 4 Sprachen mit cinematischem Video-Hero und einer Galerie, die sich beim Scrollen enthüllt.",
+      "megasur": "Elektriker & Sanierungen auf Teneriffa — dunkle Website mit Hero-Video, zentriertem Logo und aufklappbaren Leistungen.",
+      "elevate": "Hochwertiger Barbershop mit WebGL-Wasser-Reveal-Hero — bewege den Cursor, um den Vorher/Nachher-Schnitt zu zeigen. Online-Buchung integriert.",
+      "bmwm3": "Interaktives 3D-Scroll-Erlebnis — ein BMW E30 M3 in WebGL, der sich beim Scrollen dreht und enthüllt. Eine cinematische Produktbühne.",
+      "lara": "Luxuriöses digitales Archiv für eine private Sammlung von Mercedes, Porsche und Ferrari — rotierende Studiovideos, eine Zeitleiste und ein Kuratoren-Dashboard."
     },
     "videos": {
       "eyebrow": "Estrategia de v?deo ? The Pulse System",
@@ -186,7 +191,18 @@
     "do3Body": "Weniger manuelle Aufgaben, mehr Freizeit.",
     "ctaPrimary": "Ich will starten",
     "ctaSecondary": "Live-Demos ansehen",
-    "footer": "© 2026 SantiPulse · In den USA gegründet"
+    "footer": "© 2026 SantiPulse · In den USA gegründet",
+    "heroBadge": "The Pulse System · KI-Agentur",
+    "heroLead": "Dein Business kann sein",
+    "heroW1": "schneller",
+    "heroW2": "profitabler",
+    "heroW3": "automatisiert",
+    "heroW4": "unaufhaltsam",
+    "heroW5": "intelligenter",
+    "heroSub": "Websites, die verkaufen, und KI-Mitarbeiter, die rund um die Uhr antworten, posten und Anzeigen optimieren.",
+    "globeEyebrow": "Globale Abdeckung",
+    "globeTitle": "Wir arbeiten von Florida und Teneriffa aus",
+    "globeSub": "Eine in den USA gegründete KI-Agentur, auch auf den Kanaren — wir betreuen Kunden auf beiden Seiten des Atlantiks."
   },
   "precios": {
     "title": "Santipulse · Tarife & Preise",
@@ -224,5 +240,20 @@
       "error": "Zahlung konnte nicht gestartet werden. Bitte erneut versuchen."
     },
     "footer": "© 2026 SantiPulse · Jederzeit kündbar"
+  },
+  "sponsors": {
+    "label": "Mit bewährter Technologie gebaut"
+  },
+  "footer": {
+    "tagline": "KI-Automatisierungsagentur. Websites, die verkaufen, und KI-Mitarbeiter, die rund um die Uhr antworten, posten und Anzeigen optimieren.",
+    "servicesH": "Leistungen",
+    "companyH": "Unternehmen",
+    "legalH": "Rechtliches",
+    "website": "Webseite",
+    "aiauto": "KI-Automation",
+    "demos": "Demos",
+    "about": "Über uns",
+    "pricing": "Preise",
+    "privacy": "Datenschutz"
   }
 }

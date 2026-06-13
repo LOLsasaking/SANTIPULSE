@@ -67,8 +67,8 @@ const PAGES = [
 ];
 
 // Single-file JS + static assets copied verbatim into dist root
-const JS_FILES = ['tw-config.js', 'lang.js', 'home.js', 'anim.js', 'contratar.js', 'demos.js', 'auth.js', 'login.js', 'dashboard.js', 'dashboard-nav.js', 'pulse-modules.js', 'precios.js'];
-const ROOT_ASSETS = ['santilogo.png', 'santipulse-logo.webm'];
+const JS_FILES = ['tw-config.js', 'lang.js', 'home.js', 'anim.js', 'contratar.js', 'demos.js', 'auth.js', 'login.js', 'dashboard.js', 'dashboard-nav.js', 'pulse-modules.js', 'precios.js', 'site-chrome.js', 'globe.js', 'login-i18n.js', 'dashboard-i18n.js', 'flags.js'];
+const ROOT_ASSETS = ['santilogo.png', 'santipulse-logo.webm', 'mascot-favicon.png', 'mascot-icon.png'];
 const ASSET_DIRS = ['demo-media'];
 
 // Public (browser-safe) Supabase config — injected into app pages at build time.

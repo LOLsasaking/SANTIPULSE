@@ -16,7 +16,8 @@
 <meta property="og:url" content="{{seo.ogUrl}}" />
 <meta name="twitter:card" content="summary" />
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+<link rel="icon" type="image/png" href="{{asset.prefix}}mascot-favicon.png"/>
+<link rel="apple-touch-icon" href="{{asset.prefix}}mascot-favicon.png"/>
 {{tw.css}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,6 +49,29 @@
   .lang-menu a{ display:flex; align-items:center; gap:10px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,.85); text-decoration:none; transition:background .2s; }
   .lang-menu a:hover, .lang-menu a[aria-current="true"]{ background:rgba(226,59,78,.16); color:#fff; }
   .lang-menu.hidden{ display:none; }
+
+  /* ===== Animated hero (rotating words) ===== */
+  .svc-hero{ position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:26px; padding:120px 24px 80px; }
+  .svc-hero-badge{ display:inline-flex; align-items:center; gap:10px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04); border-radius:9999px; padding:8px 16px; }
+  .svc-hero-title{ font-family:'Archivo',sans-serif; font-weight:900; letter-spacing:-.03em; line-height:.95; font-size:clamp(2.6rem,7vw,5.4rem); max-width:20ch; }
+  .svc-hero-title .lead{ display:block; color:rgba(255,255,255,.92); }
+  .svc-hero-rotate{ position:relative; display:block; height:1.05em; overflow:hidden; }
+  .svc-hero-rotate .w{ position:absolute; left:50%; top:0; transform:translate(-50%,120%); opacity:0; white-space:nowrap; color:#E23B4E; transition:transform .6s cubic-bezier(.22,.7,.18,1),opacity .55s ease; }
+  .svc-hero-rotate .w.is-active{ transform:translate(-50%,0); opacity:1; }
+  .svc-hero-rotate .w.is-prev{ transform:translate(-50%,-120%); opacity:0; }
+  .svc-hero-sub{ color:rgba(255,255,255,.6); font-size:clamp(1rem,2vw,1.2rem); line-height:1.6; max-width:42rem; }
+  .svc-hero-cta{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .svc-hero-cta a{ display:inline-flex; align-items:center; gap:10px; font-family:'Space Mono',monospace; font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; padding:13px 24px; border-radius:9999px; text-decoration:none; transition:transform .25s,background .25s,border-color .25s; }
+  .svc-hero-cta .fill{ background:#fff; color:#050505; } .svc-hero-cta .fill:hover{ transform:translateY(-2px); background:rgba(255,255,255,.88); }
+  .svc-hero-cta .outline{ border:1px solid rgba(255,255,255,.2); color:#fff; } .svc-hero-cta .outline:hover{ transform:translateY(-2px); border-color:rgba(255,255,255,.5); }
+
+  /* ===== 3D globe ===== */
+  .globe-sec{ position:relative; padding:30px 24px 50px; text-align:center; }
+  .globe-sec h2{ font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-.02em; margin:14px 0 8px; }
+  .globe-sec .gsub{ color:rgba(255,255,255,.6); max-width:40rem; margin:0 auto; font-size:15px; line-height:1.6; }
+  #globe3d{ width:100%; max-width:640px; height:480px; margin:18px auto 0; cursor:grab; }
+  #globe3d canvas{ display:block; outline:none; }
+  @media (max-width:600px){ #globe3d{ height:360px; } }
 </style>
 </head>
 <body>
@@ -55,12 +79,38 @@
 <div class="topbar">
   <a class="volver" href="{{nav.home}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg> {{common.volver}}</a>
   <div class="topbar-right">
-    <a class="wordmark" href="{{nav.home}}"><img src="{{asset.prefix}}demo-media/pulse-logo.png" alt="Santipulse" style="height:30px;width:auto;display:block;"/></a>
+    <a class="wordmark" href="{{nav.home}}" aria-label="SantiPulse" style="display:inline-flex;align-items:center;gap:9px;text-decoration:none;"><img src="{{asset.prefix}}mascot-favicon.png" alt="" style="height:32px;width:32px;border-radius:8px;display:block;flex:none;"/><span style="font-family:Archivo,sans-serif;font-weight:900;font-size:19px;letter-spacing:-.02em;color:#fff;line-height:1;">SantiPulse<span style="color:#E23B4E;">.</span></span></a>
     {{lang.switcher}}
   </div>
 </div>
 
-<main class="pt-36 pb-28 px-6 md:px-10 max-w-3xl mx-auto">
+<section class="svc-hero">
+  <span class="svc-hero-badge">{{nosotros.heroBadge}} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+  <h1 class="svc-hero-title">
+    <span class="lead">{{nosotros.heroLead}}</span>
+    <span class="svc-hero-rotate" data-rotate>
+      <span class="w">{{nosotros.heroW1}}</span>
+      <span class="w">{{nosotros.heroW2}}</span>
+      <span class="w">{{nosotros.heroW3}}</span>
+      <span class="w">{{nosotros.heroW4}}</span>
+      <span class="w">{{nosotros.heroW5}}</span>
+    </span>
+  </h1>
+  <p class="svc-hero-sub">{{nosotros.heroSub}}</p>
+  <div class="svc-hero-cta">
+    <a class="outline" href="{{nav.contratar}}">{{footer.website}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a class="fill" href="{{nav.precios}}">{{footer.aiauto}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<section class="globe-sec">
+  <p class="eyebrow" style="justify-content:center">{{nosotros.globeEyebrow}}</p>
+  <h2>{{nosotros.globeTitle}}</h2>
+  <p class="gsub">{{nosotros.globeSub}}</p>
+  <div id="globe3d"></div>
+</section>
+
+<main class="pt-20 pb-28 px-6 md:px-10 max-w-3xl mx-auto">
 
   <header class="mb-24" data-reveal>
     <p class="eyebrow mb-6">{{nosotros.eyebrow}}</p>
@@ -150,7 +200,7 @@
 
 <footer class="border-t border-white/10 py-10 px-6 md:px-10">
   <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-4 justify-between items-center">
-    <a class="wordmark" href="{{nav.home}}"><img src="{{asset.prefix}}demo-media/pulse-logo.png" alt="Santipulse" style="height:30px;width:auto;display:block;"/></a>
+    <a class="wordmark" href="{{nav.home}}" aria-label="SantiPulse" style="display:inline-flex;align-items:center;gap:9px;text-decoration:none;"><img src="{{asset.prefix}}mascot-favicon.png" alt="" style="height:32px;width:32px;border-radius:8px;display:block;flex:none;"/><span style="font-family:Archivo,sans-serif;font-weight:900;font-size:19px;letter-spacing:-.02em;color:#fff;line-height:1;">SantiPulse<span style="color:#E23B4E;">.</span></span></a>
     <div style="display:flex; align-items:center; gap:18px;">
       <a class="meta" href="{{asset.prefix}}privacidad/" style="text-decoration:none;">{{common.privacidad}}</a>
       <span class="meta">{{nosotros.footer}}</span>
@@ -162,5 +212,9 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="{{asset.prefix}}anim.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl" defer></script>
+<script src="{{asset.prefix}}globe.js" defer></script>
+  <script src="{{asset.prefix}}flags.js" defer></script>
+  <script src="{{asset.prefix}}site-chrome.js" defer></script>
 </body>
 </html>

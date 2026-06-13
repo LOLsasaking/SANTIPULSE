@@ -55,7 +55,9 @@ export async function runPulseModule(type, profile = {}) {
     const config = userId ? await getReceptionistConfig(userId) : null;
     const ready = validateReceptionistConfig(config);
     let assistantId = config?.vapi_assistant_id || null;
+    let phoneNumberId = config?.vapi_phone_number_id || null;
     let voiceAction = 'Proveedor de voz pendiente.';
+    let numberAction = null;
 
     if (ready.ok && vapi.isConfigured()) {
       assistantId = await vapi.upsertAssistant({
@@ -63,34 +65,65 @@ export async function runPulseModule(type, profile = {}) {
         name: business,
         greeting: config.greeting || `Hola, gracias por llamar a ${business}.`,
         systemPrompt: buildReceptionistPrompt({ business, industry, site, config, vaultContext }),
-        language: 'es',
+        voice: config?.voice || 'femenina',
+        language: config?.language || 'es',
       });
       if (assistantId && userId) {
-        await saveReceptionistConfig(userId, { vapi_assistant_id: assistantId });
+        const patch = { vapi_assistant_id: assistantId };
+
+        // White-label provisioning: each client gets their own line inside
+        // the agency Vapi account. Buy once, then keep it pointed at the
+        // client's assistant. US numbers are instant (Vapi-managed); Spanish
+        // +34 numbers go through Telnyx regulatory onboarding → concierge.
+        const country = String(config?.phone_country || 'us').toLowerCase();
+        if (!phoneNumberId) {
+          if (country === 'es') {
+            numberAction = 'Número español (+34) en preparación: lo asignamos en 24-48h laborables.';
+          } else {
+            const bought = await vapi.buyPhoneNumber({ assistantId, label: business });
+            if (bought?.id) {
+              phoneNumberId = bought.id;
+              patch.vapi_phone_number_id = bought.id;
+              numberAction = bought.number
+                ? `Número de recepcionista asignado: ${bought.number}.`
+                : 'Número de recepcionista asignado.';
+            } else {
+              numberAction = 'Número pendiente: el equipo lo asignará en breve.';
+            }
+          }
+        } else {
+          await vapi.attachAssistant({ phoneNumberId, assistantId });
+        }
+
+        await saveReceptionistConfig(userId, patch);
         voiceAction = config?.vapi_assistant_id ? 'Asistente de voz actualizado en Vapi.' : 'Asistente de voz creado en Vapi.';
       }
     } else if (!ready.ok) {
-      voiceAction = 'Faltan datos obligatorios para activar voz/WhatsApp/SOS.';
+      voiceAction = 'Faltan datos obligatorios (teléfono del negocio y email SOS).';
     }
 
+    const waReady = !!config?.whatsapp_phone_id;
     return {
       success: ready.ok,
       module: type,
       title: 'Recepcionista IA',
       summary: ready.ok
         ? `${business}: Recepcionista IA activada para captar leads por llamadas, WhatsApp y formularios.`
-        : `${business}: completa telefono, WhatsApp y email SOS para activar la Recepcionista IA.`,
+        : `${business}: completa teléfono del negocio y email SOS para activar la Recepcionista IA.`,
       status: ready.ok ? 'automation_completed' : 'missing_config',
       error: ready.ok ? null : 'missing_required_config',
       metrics: [
-        { label: 'Canales', value: '3' },
+        { label: 'Canales', value: waReady ? '3' : '2' },
         { label: 'Tiempo de respuesta', value: '< 10s' },
         { label: 'SOS humano', value: ready.ok ? 'Activo' : 'Pendiente' },
       ],
       autoActions: [
         voiceAction,
+        ...(numberAction ? [numberAction] : []),
+        waReady
+          ? 'WhatsApp conectado y escuchando mensajes.'
+          : 'WhatsApp: lo conectamos por ti en menos de 24h laborables.',
         'Hub de leads revisado y listo para nuevas entradas.',
-        ready.ok ? 'Flujo de respuesta y alerta humana preparado.' : 'La activacion se detuvo antes de guardar una configuracion incompleta.',
       ],
       context: { business, industry, site },
     };
@@ -161,24 +194,29 @@ function clean(value) {
 }
 
 function validateReceptionistConfig(config = {}) {
+  // Concierge model: clients only need their business phone + SOS email.
+  // WhatsApp's technical phone_id is wired by the agency afterwards.
   const phone = String(config?.phone_number || '').trim();
-  const whatsappPhoneId = String(config?.whatsapp_phone_id || '').trim();
   const sosEmail = String(config?.sos_email || '').trim();
   return {
     ok: /^\+[1-9][0-9]{7,15}$/.test(phone)
-      && !!whatsappPhoneId
       && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sosEmail),
   };
 }
 
 function buildReceptionistPrompt({ business, industry, site, config, vaultContext }) {
+  const lang = String(config?.language || 'es').startsWith('en') ? 'en' : 'es';
   return [
-    `Eres la Recepcionista IA de ${business}. Hablas espanol claro, calido y profesional.`,
+    lang === 'en'
+      ? `You are the AI receptionist for ${business}. You speak clear, warm, professional English.`
+      : `Eres la Recepcionista IA de ${business}. Hablas espanol claro, calido y profesional.`,
     `Sector: ${industry}. Web: ${site}.`,
     `Saludo: ${config?.greeting || `Hola, gracias por llamar a ${business}.`}`,
+    config?.hours_text ? `Horario del negocio: ${String(config.hours_text).slice(0, 300)}` : '',
     'Capta nombre, telefono, motivo y urgencia. Ayuda a reservar cuando sea posible.',
     'Si el cliente pide una persona o hay confusion, activa el flujo SOS humano.',
     'No inventes precios ni disponibilidad.',
+    config?.extra_instructions ? `Instrucciones del negocio:\n${String(config.extra_instructions).slice(0, 1200)}` : '',
     vaultContext ? `Boveda de Conocimiento:\n${vaultContext}` : '',
   ].filter(Boolean).join('\n');
 }

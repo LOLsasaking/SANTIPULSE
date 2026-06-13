@@ -4,23 +4,46 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>Acceder · Santipulse</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3Cg fill='%23FFFFFF'%3E%3Cpolygon points='50,12 28,48 72,48'/%3E%3Cpolygon points='88,50 52,28 52,72'/%3E%3Cpolygon points='50,88 72,52 28,52'/%3E%3Cpolygon points='12,50 48,72 48,28'/%3E%3C/g%3E%3C/svg%3E"/>
+<title>Acceder · SantiPulse</title>
+<link rel="icon" type="image/png" href="/mascot-favicon.png" />
+<link rel="apple-touch-icon" href="/mascot-favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *{ box-sizing:border-box; }
-  body{ margin:0; font-family:'Inter',sans-serif; background:#050505; color:#fff; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+  body{ margin:0; font-family:'Inter',sans-serif; background:#050505; color:#fff; min-height:100vh; }
   .headline{ font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; line-height:.9; letter-spacing:-.02em; }
-  .mono{ font-family:'Space Mono',monospace; }
   .eyebrow{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.55); }
-  .card{ width:100%; max-width:420px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.09); border-radius:20px; padding:38px 32px; }
+
+  .login-wrap{ display:grid; grid-template-columns:1fr 1fr; min-height:100vh; }
+
+  /* ===== Left: orbiting tech icons around the mascot ===== */
+  .login-orbit{ position:relative; display:grid; place-items:center; overflow:hidden; border-right:1px solid rgba(255,255,255,.07); background:radial-gradient(60% 60% at 50% 45%, rgba(226,59,78,.10), transparent 70%); }
+  .orbit-core{ position:relative; z-index:3; display:grid; place-items:center; }
+  .orbit-core img{ height:320px; width:auto; max-width:92%; object-fit:contain; filter:drop-shadow(0 22px 44px rgba(0,0,0,.55)); }
+  .orbit{ position:absolute; top:50%; left:50%; border:1px dashed rgba(255,255,255,.1); border-radius:50%; }
+  .orbit-rot{ position:absolute; inset:0; animation:orbit-spin var(--d,24s) linear infinite; }
+  .orbit-rot .ic{ position:absolute; top:-34px; left:50%; width:68px; height:68px; margin-left:-34px; display:grid; place-items:center; animation:orbit-spin var(--d,24s) linear infinite reverse; }
+  .orbit-rot .ic img{ width:48px; height:48px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,.5)); }
+  .orbit-rot .ic img.wbig{ width:62px; height:auto; }
+  .orbit-rot .ic img.inv{ filter:brightness(0) invert(1) drop-shadow(0 4px 10px rgba(0,0,0,.5)); }
+  @keyframes orbit-spin{ to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .orbit-rot{ animation:none; } .orbit-rot .ic{ animation:none; } }
+
+  /* ===== Right: email form ===== */
+  .login-panel{ display:flex; align-items:center; justify-content:center; padding:24px; }
+  .card{ width:100%; max-width:400px; }
+  .brand{ display:flex; align-items:center; gap:10px; margin:0 0 22px; }
+  .brand img{ height:38px; width:38px; border-radius:10px; display:block; flex:none; border:1px solid rgba(255,255,255,.12); }
+  .brand .nm{ font-family:'Archivo',sans-serif; font-weight:900; font-size:20px; letter-spacing:-.02em; line-height:1; }
+  .brand .nm i{ color:#E23B4E; font-style:normal; }
   label{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.5); display:block; margin-bottom:7px; }
-  input{ width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:11px; padding:13px 14px; color:#fff; font-size:15px; transition:border-color .25s; }
-  input:focus{ outline:none; border-color:rgba(226,59,78,.6); }
+  input{ width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:11px; padding:13px 14px; color:#fff; font-size:15px; transition:border-color .25s, box-shadow .25s; }
+  input:focus{ outline:none; border-color:rgba(226,59,78,.6); box-shadow:0 0 0 3px rgba(226,59,78,.18); }
   input::placeholder{ color:rgba(255,255,255,.3); }
-  button{ width:100%; font-family:'Space Mono',monospace; font-weight:700; font-size:13px; letter-spacing:.16em; text-transform:uppercase; background:#fff; color:#050505; padding:14px; border-radius:9999px; border:0; cursor:pointer; margin-top:18px; transition:opacity .25s; }
+  button{ width:100%; font-family:'Space Mono',monospace; font-weight:700; font-size:13px; letter-spacing:.16em; text-transform:uppercase; background:#fff; color:#050505; padding:14px; border-radius:9999px; border:0; cursor:pointer; margin-top:18px; transition:opacity .25s, transform .2s; }
+  button:hover:not(:disabled){ transform:translateY(-1px); }
   button:disabled{ opacity:.5; cursor:wait; }
   .msg{ font-size:14px; margin-top:18px; padding:13px 15px; border-radius:11px; line-height:1.5; }
   .msg.ok{ background:rgba(64,200,120,.12); border:1px solid rgba(64,200,120,.35); color:#9ff0bd; }
@@ -28,30 +51,73 @@
   .hidden{ display:none; }
   a.back{ color:rgba(255,255,255,.55); text-decoration:none; font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.16em; text-transform:uppercase; }
   a.back:hover{ color:#fff; }
+
+  @media (max-width:900px){ .login-wrap{ grid-template-columns:1fr; } .login-orbit{ display:none; } }
+
+  /* user profile chip (Uiverse / reglobby) — top corner */
+  .user-profile{ position:fixed; top:20px; right:20px; z-index:8; width:131px; height:51px; border-radius:15px; cursor:pointer; text-decoration:none; transition:0.3s ease; background:linear-gradient(to bottom right,#2e8eff 0%,rgba(46,142,255,0) 30%); background-color:rgba(46,142,255,0.2); display:flex; align-items:center; justify-content:center; }
+  .user-profile:hover,.user-profile:focus{ background-color:rgba(46,142,255,0.7); box-shadow:0 0 10px rgba(46,142,255,0.5); outline:none; }
+  .user-profile-inner{ width:127px; height:47px; border-radius:13px; background-color:#1a1a1a; display:flex; align-items:center; justify-content:center; gap:12px; color:#fff; font-weight:600; font-family:'Inter',sans-serif; font-size:14px; }
+  .user-profile-inner svg{ width:24px; height:24px; fill:#fff; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <p class="eyebrow" style="margin:0 0 14px">Santipulse · Panel</p>
-    <h1 class="headline" style="font-size:34px; margin:0 0 8px">Acceder</h1>
-    <p style="color:rgba(255,255,255,.6); font-size:14px; margin:0 0 26px">Introduce tu email y te enviamos un enlace de acceso. Sin contraseñas.</p>
+  <a class="user-profile" href="/" aria-label="Cuenta">
+    <div class="user-profile-inner">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
+      <span data-i18n="account">Cuenta</span>
+    </div>
+  </a>
+  <div class="login-wrap">
+    <div class="login-orbit" aria-hidden="true">
+      <div class="orbit-core"><img src="/demo-media/login-mascot.png" alt="SantiPulse" /></div>
+      <!-- ring A (400) -->
+      <div class="orbit" style="width:400px;height:400px;margin:-200px 0 0 -200px;transform:rotate(0deg)"><div class="orbit-rot" style="--d:22s"><span class="ic"><img class="inv" src="/demo-media/sponsors/vercel.png" alt="" /></span></div></div>
+      <div class="orbit" style="width:400px;height:400px;margin:-200px 0 0 -200px;transform:rotate(120deg)"><div class="orbit-rot" style="--d:24s"><span class="ic"><img src="/demo-media/sponsors/claude.png" alt="" /></span></div></div>
+      <div class="orbit" style="width:400px;height:400px;margin:-200px 0 0 -200px;transform:rotate(240deg)"><div class="orbit-rot" style="--d:26s"><span class="ic"><img class="wbig" src="/demo-media/sponsors/windows.png" alt="" /></span></div></div>
+      <!-- ring B (540) -->
+      <div class="orbit" style="width:540px;height:540px;margin:-270px 0 0 -270px;transform:rotate(0deg)"><div class="orbit-rot" style="--d:32s"><span class="ic"><img src="/demo-media/sponsors/cloudflare.png" alt="" /></span></div></div>
+      <div class="orbit" style="width:540px;height:540px;margin:-270px 0 0 -270px;transform:rotate(90deg)"><div class="orbit-rot" style="--d:30s"><span class="ic"><img src="/demo-media/sponsors/chatgpt.png" alt="" /></span></div></div>
+      <div class="orbit" style="width:540px;height:540px;margin:-270px 0 0 -270px;transform:rotate(180deg)"><div class="orbit-rot" style="--d:34s"><span class="ic"><img src="/demo-media/sponsors/python.png" alt="" /></span></div></div>
+      <div class="orbit" style="width:540px;height:540px;margin:-270px 0 0 -270px;transform:rotate(270deg)"><div class="orbit-rot" style="--d:31s"><span class="ic"><img src="/demo-media/sponsors/gemini.webp" alt="" /></span></div></div>
+      <!-- ring C (680) -->
+      <div class="orbit" style="width:680px;height:680px;margin:-340px 0 0 -340px;transform:rotate(0deg)"><div class="orbit-rot" style="--d:40s"><span class="ic"><img src="/demo-media/sponsors/javascript.png" alt="" /></span></div></div>
+      <div class="orbit" style="width:680px;height:680px;margin:-340px 0 0 -340px;transform:rotate(72deg)"><div class="orbit-rot" style="--d:38s"><span class="ic"><img src="/demo-media/sponsors/vscode.png" alt="" /></span></div></div>
+      <div class="orbit" style="width:680px;height:680px;margin:-340px 0 0 -340px;transform:rotate(144deg)"><div class="orbit-rot" style="--d:42s"><span class="ic"><img src="/demo-media/sponsors/instagram.png" alt="" /></span></div></div>
+      <div class="orbit" style="width:680px;height:680px;margin:-340px 0 0 -340px;transform:rotate(216deg)"><div class="orbit-rot" style="--d:39s"><span class="ic"><img src="/demo-media/sponsors/canva.webp" alt="" /></span></div></div>
+      <div class="orbit" style="width:680px;height:680px;margin:-340px 0 0 -340px;transform:rotate(288deg)"><div class="orbit-rot" style="--d:41s"><span class="ic"><img class="inv" src="/demo-media/sponsors/apple.png" alt="" /></span></div></div>
+    </div>
 
-    <form id="loginForm">
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="tu@email.com" required />
-      <button id="submitBtn" type="submit">Enviar enlace</button>
-    </form>
+    <div class="login-panel">
+      <div class="card">
+        <div class="brand">
+          <img src="/mascot-favicon.png" alt="" />
+          <span class="nm">SantiPulse<i>.</i></span>
+        </div>
+        <p class="eyebrow" style="margin:0 0 14px" data-i18n="eyebrow">Panel · Acceso</p>
+        <h1 class="headline" style="font-size:34px; margin:0 0 8px" data-i18n="title">Acceder</h1>
+        <p style="color:rgba(255,255,255,.6); font-size:14px; margin:0 0 26px" data-i18n="subtitle">Introduce tu email y te enviamos un enlace de acceso. Sin contraseñas.</p>
 
-    <div id="ok" class="msg ok hidden">Revisa tu correo — te enviamos un enlace de acceso. Ábrelo en este dispositivo.</div>
-    <div id="err" class="msg err hidden"></div>
-    <div id="loginStatus" class="msg ok hidden" role="status">Accediendo...</div>
+        <form id="loginForm">
+          <label for="email" data-i18n="emailLabel">Email</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="tu@email.com" required />
+          <button id="submitBtn" type="submit" data-i18n="submit">Enviar enlace</button>
+        </form>
 
-    <p style="margin:26px 0 0"><a class="back" href="/">← Volver a santipulse.com</a></p>
+        <div id="ok" class="msg ok hidden" data-i18n="ok">Revisa tu correo — te enviamos un enlace de acceso. Ábrelo en este dispositivo.</div>
+        <div id="err" class="msg err hidden"></div>
+        <div id="loginStatus" class="msg ok hidden" role="status">Accediendo...</div>
+
+        <p style="margin:26px 0 0"><a class="back" href="/" data-i18n="back">← Volver a santipulse.com</a></p>
+      </div>
+    </div>
   </div>
 
   {{sb.config}}
   <script src="/supabase.js"></script>
   <script src="/auth.js"></script>
+  <script src="/flags.js" defer></script>
+  <script src="/login-i18n.js" defer></script>
   <script src="/login.js" defer></script>
 </body>
 </html>

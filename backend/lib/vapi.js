@@ -56,9 +56,19 @@ export function verifyWebhook(req) {
   return String(got) === expected;
 }
 
+/** Map a simple client-facing voice choice to a provider voice id. */
+function voiceFor(voice, language = 'es') {
+  const es = String(language).startsWith('es');
+  const v = String(voice || 'femenina').toLowerCase();
+  if (v.includes('masc') || v === 'male') {
+    return { provider: 'azure', voiceId: es ? 'es-ES-AlvaroNeural' : 'en-US-GuyNeural' };
+  }
+  return { provider: 'azure', voiceId: es ? 'es-ES-ElviraNeural' : 'en-US-JennyNeural' };
+}
+
 /** Create/update an assistant for a user. Returns the assistant id.
     `opts`: { name, greeting, systemPrompt, voice, language }. */
-export async function upsertAssistant({ assistantId, name, greeting, systemPrompt, language = 'es' } = {}) {
+export async function upsertAssistant({ assistantId, name, greeting, systemPrompt, voice, language = 'es' } = {}) {
   if (!isConfigured()) return null;
   const body = {
     name: name || 'Recepcionista IA',
@@ -68,7 +78,7 @@ export async function upsertAssistant({ assistantId, name, greeting, systemPromp
       model: 'gpt-4o-mini',
       messages: [{ role: 'system', content: systemPrompt || defaultSystemPrompt(name) }],
     },
-    voice: { provider: 'azure', voiceId: language.startsWith('es') ? 'es-ES-ElviraNeural' : 'en-US-JennyNeural' },
+    voice: voiceFor(voice, language),
     transcriber: { provider: 'deepgram', language: language.slice(0, 2) },
     serverMessages: ['end-of-call-report', 'status-update', 'transcript'],
   };
@@ -82,6 +92,38 @@ export async function upsertAssistant({ assistantId, name, greeting, systemPromp
     ? await vapiFetch(`/assistant/${assistantId}`, { method: 'PATCH', body })
     : await vapiFetch('/assistant', { method: 'POST', body });
   return out.id;
+}
+
+/** Buy a Vapi-provided phone number and attach an assistant for inbound calls.
+    Returns { id, number } or null. One per client — the white-label "their own
+    receptionist line". Vapi free/managed numbers are US-only today. */
+export async function buyPhoneNumber({ assistantId, label } = {}) {
+  if (!isConfigured()) return null;
+  const body = { provider: 'vapi', name: (label || 'SantiPulse client').slice(0, 40) };
+  if (assistantId) body.assistantId = assistantId;
+  if (process.env.SITE_URL) {
+    body.server = { url: `${process.env.SITE_URL.replace(/\/$/, '')}/api/receptionist/vapi-webhook/` };
+    if (process.env.VAPI_WEBHOOK_SECRET) body.server.secret = process.env.VAPI_WEBHOOK_SECRET;
+  }
+  try {
+    const out = await vapiFetch('/phone-number', { method: 'POST', body });
+    return { id: out.id, number: out.number || out.phoneNumber || null };
+  } catch (err) {
+    console.error('[vapi] buyPhoneNumber:', err.message);
+    return null;
+  }
+}
+
+/** Point an existing Vapi number at an assistant (idempotent). */
+export async function attachAssistant({ phoneNumberId, assistantId }) {
+  if (!isConfigured() || !phoneNumberId || !assistantId) return false;
+  try {
+    await vapiFetch(`/phone-number/${phoneNumberId}`, { method: 'PATCH', body: { assistantId } });
+    return true;
+  } catch (err) {
+    console.error('[vapi] attachAssistant:', err.message);
+    return false;
+  }
 }
 
 /** Place an outbound call from a connected number to a lead. */

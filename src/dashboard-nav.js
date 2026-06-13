@@ -6,6 +6,20 @@
 (function () {
   'use strict';
 
+  // ── GSAP + ScrollTrigger staggered reveal of a section's cards ──
+  // CSP-safe: GSAP is loaded from the allow-listed jsdelivr CDN in dashboard.html.
+  // Degrades gracefully (no-op) if GSAP failed to load.
+  function playReveal(name) {
+    if (!window.gsap) return;
+    var sec = document.querySelector('.section[data-section="' + name + '"]');
+    if (!sec) return;
+    var items = sec.querySelectorAll('[data-reveal]');
+    if (!items.length) return;
+    window.gsap.fromTo(items,
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out', stagger: 0.08, overwrite: true });
+  }
+
   // ── Sidebar section switching ──
   function switchTo(name) {
     document.querySelectorAll('.nav-item[data-nav]').forEach(function (b) {
@@ -17,6 +31,7 @@
     // close mobile sidebar after pick
     var sb = document.getElementById('sidebar');
     if (sb) sb.classList.remove('open');
+    playReveal(name);
     try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
   }
 
@@ -31,6 +46,21 @@
     var sb = document.getElementById('sidebar');
     if (sb) sb.classList.toggle('open');
   });
+
+  // ── Floating mascot → Pulse Tip popover (the 'Soul', always reachable) ──
+  var fab = document.getElementById('pulseMascotBtn');
+  var fabPop = document.getElementById('pulseFabPop');
+  if (fab && fabPop) {
+    fab.addEventListener('click', function (e) {
+      e.stopPropagation();
+      fabPop.classList.toggle('hidden');
+    });
+    document.addEventListener('click', function (e) {
+      if (fabPop.classList.contains('hidden')) return;
+      if (e.target.closest('#pulseFabPop') || e.target.closest('#pulseMascotBtn')) return;
+      fabPop.classList.add('hidden');
+    });
+  }
 
   // ── Deep-link via ?tab= and OAuth return (?ads=connected etc → relevant tab) ──
   function initialTab() {
@@ -88,7 +118,7 @@
   var statTimer = setInterval(function () {
     tries++;
     var app = document.getElementById('app');
-    if (app && !app.classList.contains('hidden')) { loadStats(); clearInterval(statTimer); }
+    if (app && !app.classList.contains('hidden')) { loadStats(); playReveal('overview'); clearInterval(statTimer); }
     if (tries > 40) clearInterval(statTimer);
   }, 400);
 
@@ -204,5 +234,70 @@
   });
 
   // Expose for other scripts if needed.
-  window.SantiDashNav = { switchTo: switchTo, loadStats: loadStats, loadConnections: loadConnections };
+  window.SantiDashNav = { switchTo: switchTo, loadStats: loadStats, loadConnections: loadConnections, playReveal: playReveal };
+})();
+
+// ── Corner mascot (= chatbot mascot, per language) + topbar language changer ──
+(function () {
+  'use strict';
+  function dlang() {
+    var l = 'es';
+    try { l = localStorage.getItem('sp_lang') || 'es'; } catch (e) {}
+    return /^(es|en|fr|de|it)$/.test(l) ? l : 'es';
+  }
+  var lang = dlang();
+  var FLAG = function (t) { return '/demo-media/flags/' + t + '.png'; };
+  var MASCOT = function (t) { return '/demo-media/chatbot-' + t + '.png'; };
+
+  var fabImg = document.getElementById('pulseMascotImg');
+  if (fabImg) fabImg.src = MASCOT(lang);
+
+  var tr = document.querySelector('.top-right');
+  if (!tr) return;
+  var NAMES = { es: 'Español', en: 'English', fr: 'Français', de: 'Deutsch', it: 'Italiano' };
+  var LANGS = ['es', 'en', 'fr', 'de', 'it'];
+
+  var wrap = document.createElement('div');
+  wrap.className = 'dash-lang';
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'dash-lang-btn';
+  btn.setAttribute('aria-haspopup', 'true');
+  btn.innerHTML = '<img src="' + FLAG(lang) + '" alt="" /><span>' + lang.toUpperCase() + '</span>' +
+    '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>';
+  var menu = document.createElement('div');
+  menu.className = 'dash-lang-menu hidden';
+  LANGS.forEach(function (t) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    if (t === lang) b.className = 'active';
+    b.innerHTML = '<img src="' + FLAG(t) + '" alt="" /><span>' + NAMES[t] + '</span>';
+    b.addEventListener('click', function () {
+      try { localStorage.setItem('sp_lang', t); } catch (e) {}
+      if (window.SantiDashI18n) window.SantiDashI18n.apply(t);
+      if (fabImg) fabImg.src = MASCOT(t);
+      btn.querySelector('img').src = FLAG(t);
+      btn.querySelector('span').textContent = t.toUpperCase();
+      menu.querySelectorAll('button').forEach(function (x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      menu.classList.add('hidden');
+      wrap.classList.remove('open');
+    });
+    menu.appendChild(b);
+  });
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = menu.classList.toggle('hidden') === false;
+    wrap.classList.toggle('open', open);
+  });
+  document.addEventListener('click', function (e) {
+    if (menu.classList.contains('hidden')) return;
+    if (e.target.closest('.dash-lang')) return;
+    menu.classList.add('hidden');
+    wrap.classList.remove('open');
+  });
+  wrap.appendChild(btn);
+  wrap.appendChild(menu);
+  var chip = tr.querySelector('.user-chip');
+  if (chip) tr.insertBefore(wrap, chip); else tr.appendChild(wrap);
 })();

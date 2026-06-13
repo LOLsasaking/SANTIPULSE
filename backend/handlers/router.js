@@ -23,6 +23,7 @@ import calendarCallback from '../integrations/calendar/callback.js';
 import socialAuthorize from '../integrations/social/authorize.js';
 import socialCallback from '../integrations/social/callback.js';
 import adminVerifyConnections from '../admin/verify-connections.js';
+import authMagicLink from '../auth/magic-link.js';
 import stripeCheckout from '../stripe/checkout.js';
 import stripeAdCheckout from '../stripe/ad-checkout.js';
 import stripePortal from '../stripe/portal.js';
@@ -48,6 +49,7 @@ const ROUTES = new Map([
   ['integrations/calendar/authorize', calendarAuthorize],
   ['integrations/calendar/callback', calendarCallback],
   ['admin/verify-connections', adminVerifyConnections],
+  ['auth/magic-link', authMagicLink],
   ['dashboard/me', dashboardMe],
   ['dashboard/profile', dashboardProfile],
   ['dashboard/run', dashboardRun],

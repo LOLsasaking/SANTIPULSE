@@ -79,9 +79,27 @@
               field('Telefono publico del negocio', 'phone_number', c.phone_number || '', '+34600000000', 'tel', 'required')
             ) +
             grid2(
-              field('ID de telefono WhatsApp Business', 'whatsapp_phone_id', c.whatsapp_phone_id || '', 'Phone number ID de Meta', 'text', 'required'),
-              field('Email de emergencia SOS', 'sos_email', c.sos_email || '', 'tu@email.com', 'email', 'required')
+              field('Email de emergencia SOS', 'sos_email', c.sos_email || '', 'tu@email.com', 'email', 'required'),
+              field('Tu WhatsApp del negocio (lo conectamos por ti)', 'whatsapp_number', c.whatsapp_number || '', '+34600000000', 'tel')
             ) +
+            (window.__IS_ADMIN
+              ? grid2(
+                  field('ID de telefono WhatsApp Business (admin)', 'whatsapp_phone_id', c.whatsapp_phone_id || '', 'Phone number ID de Meta', 'text'),
+                  field('Vapi phone number ID (admin)', 'vapi_phone_number_id', c.vapi_phone_number_id || '', 'ID del numero en Vapi (Telnyx import)', 'text')
+                )
+              : '') +
+            '<p class="node-sub" style="margin:16px 0 10px">Personaliza tu recepcionista</p>' +
+            grid2(
+              selectField('Pais del numero de tu recepcionista', 'phone_country', [['us', 'EE.UU. (+1) — al instante'], ['es', 'España (+34) — en 24-48h']], c.phone_country || 'us'),
+              selectField('Voz', 'voice', [['femenina', 'Voz femenina'], ['masculina', 'Voz masculina']], c.voice || 'femenina')
+            ) +
+            grid2(
+              selectField('Idioma', 'language', [['es', 'Español'], ['en', 'English']], c.language || 'es'),
+              '<div></div>'
+            ) +
+            field('Horario del negocio', 'hours_text', c.hours_text || '', 'L-V 9:00-19:00, S 10:00-14:00', 'text') +
+            '<div style="margin:12px 0"><label>Instrucciones para tu recepcionista</label>' +
+            '<textarea name="extra_instructions" rows="3" placeholder="Ej.: si preguntan por precios, di que un técnico llama en 1h; no aceptar reservas para hoy...">' + esc(c.extra_instructions || '') + '</textarea></div>' +
             '<div class="module-actions">' +
               '<button class="btn" type="submit" id="activateReceptionist">Activar por mi</button>' +
               connectButton('calendar', s.calendar, 'Conectar Google Calendar') +
@@ -621,12 +639,10 @@
     var fields = [];
     var names = {
       phone_number: 'telefono publico del negocio',
-      whatsapp_phone_id: 'ID de telefono WhatsApp Business',
       sos_email: 'email de emergencia SOS',
     };
     form.querySelectorAll('.field-invalid').forEach(function (node) { node.classList.remove('field-invalid'); });
     if (!/^\+[1-9][0-9]{7,15}$/.test(payload.phone_number || '')) fields.push('phone_number');
-    if (!payload.whatsapp_phone_id) fields.push('whatsapp_phone_id');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.sos_email || '')) fields.push('sos_email');
     fields.forEach(function (name) {
       var input = form.querySelector('[name="' + name + '"]');
