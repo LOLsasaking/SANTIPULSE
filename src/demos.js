@@ -70,6 +70,9 @@
       preview: 'Vista rapida',
       open: 'Ver proyecto',
       count: 'demos en vivo',
+      normalTitle: 'Webs normales',
+      threeDTitle: 'Webs 3D',
+      sectionCount: 'proyectos',
       category3d: 'Web 3D',
       categoryRental: 'Alquiler de lujo',
       categoryPortfolio: 'Portfolio',
@@ -90,6 +93,9 @@
       preview: 'Quick view',
       open: 'Live project',
       count: 'live demos',
+      normalTitle: 'Normal websites',
+      threeDTitle: '3D websites',
+      sectionCount: 'projects',
       category3d: '3D Web',
       categoryRental: 'Luxury rental',
       categoryPortfolio: 'Portfolio',
@@ -110,6 +116,9 @@
       preview: 'Apercu',
       open: 'Voir le projet',
       count: 'demos en direct',
+      normalTitle: 'Sites classiques',
+      threeDTitle: 'Sites 3D',
+      sectionCount: 'projets',
       category3d: 'Web 3D',
       categoryRental: 'Location luxe',
       categoryPortfolio: 'Portfolio',
@@ -130,6 +139,9 @@
       preview: 'Vorschau',
       open: 'Projekt ansehen',
       count: 'Live-Demos',
+      normalTitle: 'Normale Websites',
+      threeDTitle: '3D-Websites',
+      sectionCount: 'Projekte',
       category3d: '3D Web',
       categoryRental: 'Luxus-Miete',
       categoryPortfolio: 'Portfolio',
@@ -150,6 +162,9 @@
       preview: 'Anteprima',
       open: 'Vedi progetto',
       count: 'demo live',
+      normalTitle: 'Siti normali',
+      threeDTitle: 'Siti 3D',
+      sectionCount: 'progetti',
       category3d: 'Web 3D',
       categoryRental: 'Affitto luxury',
       categoryPortfolio: 'Portfolio',
@@ -199,10 +214,16 @@
     var count = document.getElementById('portfolio-count');
     if (count) count.textContent = DISPLAY_WEBSITES.length + ' ' + P.count;
 
-    target.innerHTML = DISPLAY_WEBSITES.map(function (w, i) {
+    var indexed = DISPLAY_WEBSITES.map(function (w, i) { return { w: w, i: i }; });
+    var normal = indexed.filter(function (item) { return item.w.cat !== '3d'; });
+    var threeD = indexed.filter(function (item) { return item.w.cat === '3d'; });
+
+    function card(item, cardIndex) {
+      var w = item.w;
+      var i = item.i;
       var n = String(i + 1).padStart(2, '0');
       var desc = D[w.key] || '';
-      return '<article class="portfolio-card is-in" data-demo-card="' + i + '" style="z-index:' + (i + 1) + ';--pop-delay:' + Math.min(i * 55, 700) + 'ms">' +
+      return '<article class="portfolio-card is-in" data-demo-card="' + i + '" style="z-index:' + (cardIndex + 1) + ';--pop-delay:' + Math.min(cardIndex * 55, 700) + 'ms">' +
         '<div class="portfolio-media">' + mediaHtml(w, '', 'autoplay') + '</div>' +
         '<div class="portfolio-info">' +
           '<div>' +
@@ -217,7 +238,20 @@
           '</div>' +
         '</div>' +
       '</article>';
-    }).join('');
+    }
+
+    function section(title, items, offset) {
+      if (!items.length) return '';
+      return '<section class="portfolio-section">' +
+        '<div class="portfolio-section-head">' +
+          '<h3 class="portfolio-section-title">' + esc(title) + '</h3>' +
+          '<p class="portfolio-section-count">' + items.length + ' ' + esc(P.sectionCount) + '</p>' +
+        '</div>' +
+        '<div class="portfolio-grid">' + items.map(function (item, index) { return card(item, offset + index); }).join('') + '</div>' +
+      '</section>';
+    }
+
+    target.innerHTML = section(P.normalTitle, normal, 0) + section(P.threeDTitle, threeD, normal.length);
 
     target.addEventListener('click', function (e) {
       var preview = e.target.closest('[data-preview]');
