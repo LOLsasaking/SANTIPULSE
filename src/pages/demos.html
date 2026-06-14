@@ -80,12 +80,13 @@
   .projects-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; max-width:1240px; margin:0 auto 44px; }
   .projects-kicker{ color:var(--muted); text-transform:uppercase; font-size:13px; line-height:1.6; max-width:440px; }
   .projects-count{ color:#fff; font-family:'Space Mono',monospace; font-size:12px; text-transform:uppercase; }
-  .portfolio-section{ max-width:1240px; margin:0 auto 54px; }
-  .portfolio-section:last-child{ margin-bottom:0; }
+  .portfolio-groups{ max-width:1240px; margin:0 auto; display:flex; flex-direction:column; gap:64px; }
+  .portfolio-section{ width:100%; max-width:1240px; margin:0 auto; }
   .portfolio-section-head{ display:flex; align-items:end; justify-content:space-between; gap:18px; margin-bottom:16px; border-top:1px solid var(--line); padding-top:22px; }
   .portfolio-section-title{ color:#d7e2ea; font-family:'Archivo',sans-serif; font-size:clamp(28px,4vw,56px); font-weight:900; line-height:.95; text-transform:uppercase; }
   .portfolio-section-count{ color:rgba(215,226,234,.58); font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase; }
   .portfolio-grid{ max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:start; }
+  .portfolio-section-3d .portfolio-grid{ grid-template-columns:minmax(280px,420px); justify-content:start; }
   .portfolio-card{ position:relative; display:flex; min-height:0; flex-direction:column; padding:10px; border:1px solid rgba(215,226,234,.28); background:#0c0c0c; box-shadow:0 22px 55px rgba(0,0,0,.34); }
   .portfolio-card.is-in{ animation:project-pop .7s cubic-bezier(.22,.7,.18,1) both; animation-delay:var(--pop-delay,0ms); }
   @keyframes project-pop{ from{ opacity:0; transform:translateY(34px) scale(.98); } to{ opacity:1; transform:translateY(0) scale(1); } }
@@ -167,7 +168,7 @@
       </div>
       <p class="projects-count" id="portfolio-count"></p>
     </header>
-    <div id="portfolio-projects" class="portfolio-grid" data-stagger></div>
+    <div id="portfolio-projects" class="portfolio-groups"></div>
   </section>
 
   <section id="contact" class="contact">

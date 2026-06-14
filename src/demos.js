@@ -240,9 +240,9 @@
       '</article>';
     }
 
-    function section(title, items, offset) {
+    function section(title, items, offset, kind) {
       if (!items.length) return '';
-      return '<section class="portfolio-section">' +
+      return '<section class="portfolio-section portfolio-section-' + esc(kind) + '">' +
         '<div class="portfolio-section-head">' +
           '<h3 class="portfolio-section-title">' + esc(title) + '</h3>' +
           '<p class="portfolio-section-count">' + items.length + ' ' + esc(P.sectionCount) + '</p>' +
@@ -251,7 +251,7 @@
       '</section>';
     }
 
-    target.innerHTML = section(P.normalTitle, normal, 0) + section(P.threeDTitle, threeD, normal.length);
+    target.innerHTML = section(P.normalTitle, normal, 0, 'normal') + section(P.threeDTitle, threeD, normal.length, '3d');
 
     target.addEventListener('click', function (e) {
       var preview = e.target.closest('[data-preview]');
