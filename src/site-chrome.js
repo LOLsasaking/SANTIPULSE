@@ -24,18 +24,17 @@
   // Emoji flags don't render on Windows/Chrome — use self-hosted flag PNGs.
   function flagImg(t) { return '<img class="fl" src="/demo-media/flags/' + t + '.png" alt="" width="20" height="15" loading="lazy" />'; }
 
-  // Pages like /contratar/ and /precios/ have a full-width fixed red ".sticky-bar"
-  // CTA at bottom:0 — lift the navbar + cookie above it so it isn't covered.
+  // Pages with a bottom sticky CTA lift the navbar + cookie above it.
   var stickyBar = document.querySelector('.sticky-bar');
   var barH = stickyBar ? (stickyBar.offsetHeight || 52) : 0;
 
   // ── i18n ──
   var NAV = {
-    es: ['Inicio', 'Sitio Web', 'Demos', 'Nosotros', 'Automatización IA'],
-    en: ['Home', 'Website', 'Demos', 'About', 'AI Automation'],
-    fr: ['Accueil', 'Site web', 'Démos', 'À propos', 'Automatisation IA'],
-    de: ['Start', 'Webseite', 'Demos', 'Über uns', 'KI-Automation'],
-    it: ['Home', 'Sito web', 'Demo', 'Chi siamo', 'Automazione IA'],
+    es: ['Inicio', 'Portfolio', 'About Me', 'Trabajar'],
+    en: ['Home', 'Portfolio', 'About Me', 'Work With Me'],
+    fr: ['Accueil', 'Portfolio', 'About Me', 'Travailler'],
+    de: ['Start', 'Portfolio', 'About Me', 'Zusammenarbeiten'],
+    it: ['Home', 'Portfolio', 'About Me', 'Lavora con me'],
   };
   var COOKIE = {
     es: { t: 'Cookies y privacidad', d: 'Usamos cookies para mejorar tu experiencia y medir el rendimiento del sitio.', link: 'Política de privacidad', pref: 'Solo esenciales', ok: 'Aceptar' },
@@ -47,17 +46,15 @@
   var navLabels = NAV[lang] || NAV.es;
   var ck = COOKIE[lang] || COOKIE.es;
 
-  // segments line up with navLabels: '' (home), Website→contratar, Demos,
-  // Nosotros, AI Automation→precios.
-  var SEGS = ['', 'contratar', 'demos', 'nosotros', 'precios'];
+  // segments line up with navLabels: home, portfolio, about, work inquiry.
+  var SEGS = ['', 'demos', 'nosotros', 'contratar'];
 
   // ── styles ──
   var ICONS = [
     '<path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1Z"/>',          // home
-    '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>',         // website (monitor)
-    '<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M10 9l4 2.5-4 2.5z"/>',      // demos (play)
-    '<circle cx="9" cy="8" r="3"/><path d="M2 21c0-3.5 3-6 7-6s7 2.5 7 6M17 11a3 3 0 0 0 0-6"/>', // about (users)
-    '<rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>', // AI automation (cpu)
+    '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>',         // portfolio
+    '<circle cx="12" cy="8" r="4"/><path d="M6 21c1.3-3.2 3.3-5 6-5s4.7 1.8 6 5"/>',       // about
+    '<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 5V3h8v2M4 11h16M12 11v3"/>', // work inquiry
   ];
 
   var css =
@@ -101,10 +98,6 @@
     '.sp-chat-input input{flex:1;background:#161619;border:1px solid rgba(255,255,255,.12);border-radius:9999px;padding:10px 14px;color:#fff;font-size:13.5px;outline:none;}' +
     '.sp-chat-input input:focus{border-color:rgba(226,59,78,.6);}' +
     '.sp-chat-send{background:#fff;color:#0a0a0c;border:0;border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:17px;display:grid;place-items:center;flex:none;}' +
-    '.sp-soon-badge{display:inline-block;margin-left:7px;font:700 8px Space Mono,monospace;letter-spacing:.06em;text-transform:uppercase;color:#fbbf24;border:1px solid rgba(251,191,36,.45);border-radius:6px;padding:2px 6px;vertical-align:middle;white-space:nowrap;}' +
-    '.sp-soon-banner{position:fixed;left:50%;top:118px;transform:translateX(-50%);z-index:54;display:flex;align-items:center;gap:9px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.45);color:#fbbf24;font:700 11px Space Mono,monospace;letter-spacing:.1em;text-transform:uppercase;padding:9px 18px;border-radius:9999px;backdrop-filter:blur(8px);max-width:calc(100vw - 32px);text-align:center;}' +
-    '.sp-soon-btn{opacity:.65 !important;cursor:not-allowed !important;}' +
-    '@media (max-width:767px){.sp-soon-banner{top:104px;font-size:10px;padding:8px 14px;}}' +
     '@media (max-width:767px){.sp-nav-item .sp-nav-txt{display:none;}.sp-nav-item .sp-nav-ico{display:block;}.sp-nav-item{padding:11px 13px;}.sp-lang-btn{padding:9px 10px;}}' +
     '@media (max-width:520px){.sp-chat{right:12px;left:12px;width:auto;bottom:150px;}.sp-chat-btn{right:8px;bottom:8px;}.sp-chat-btn img{height:116px;}}' +
     '.sp-cookie{position:fixed;left:22px;bottom:22px;z-index:60;max-width:340px;padding:18px;background:rgba(12,12,14,.96);border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.55);backdrop-filter:blur(12px);font-family:Inter,system-ui,sans-serif;transform:translateY(8px);opacity:0;transition:opacity .4s ease,transform .4s ease;}' +
@@ -212,69 +205,53 @@
   // ── 3. Pulse chatbot (mascot button + scripted FAQ, no backend) ──
   {
     var TMAP = {
-      es: { title: 'Pulse', sub: 'Asistente · en línea', greet: '¡Hola! Soy <b>Pulse</b> 🤖 Pregúntame por nuestros servicios, precios o cómo empezar.', chips: ['¿Qué hacéis?', 'Precios', '¿Cómo empiezo?', 'Hablar con un humano'], ph: 'Escribe tu pregunta…', fallback: 'Buena pregunta. Echa un ojo a [servicios] o habla con una persona en [contratar]. ¿Te abro una?' },
-      en: { title: 'Pulse', sub: 'Assistant · online', greet: 'Hi! I\'m <b>Pulse</b> 🤖 Ask me about our services, pricing or how to get started.', chips: ['What do you do?', 'Pricing', 'How do I start?', 'Talk to a human'], ph: 'Type your question…', fallback: 'Good question. Check [servicios] or talk to a person at [contratar]. Want me to open one?' },
-      fr: { title: 'Pulse', sub: 'Assistant · en ligne', greet: 'Salut ! Je suis <b>Pulse</b> 🤖 Pose-moi des questions sur nos services, nos tarifs ou comment démarrer.', chips: ['Que faites-vous ?', 'Tarifs', 'Comment démarrer ?', 'Parler à un humain'], ph: 'Écris ta question…', fallback: 'Bonne question. Regarde [servicios] ou parle à une personne sur [contratar]. Je t\'en ouvre une ?' },
-      de: { title: 'Pulse', sub: 'Assistent · online', greet: 'Hallo! Ich bin <b>Pulse</b> 🤖 Frag mich nach unseren Leistungen, Preisen oder wie du startest.', chips: ['Was macht ihr?', 'Preise', 'Wie fange ich an?', 'Mit einem Menschen sprechen'], ph: 'Schreib deine Frage…', fallback: 'Gute Frage. Schau dir [servicios] an oder sprich mit jemandem über [contratar]. Soll ich eine öffnen?' },
-      it: { title: 'Pulse', sub: 'Assistente · online', greet: 'Ciao! Sono <b>Pulse</b> 🤖 Chiedimi dei nostri servizi, prezzi o come iniziare.', chips: ['Cosa fate?', 'Prezzi', 'Come inizio?', 'Parlare con un umano'], ph: 'Scrivi la tua domanda…', fallback: 'Bella domanda. Guarda [servicios] o parla con una persona su [contratar]. Te ne apro una?' },
+      es: { title: 'Pulse', sub: 'Asistente de Santi · en línea', greet: '¡Hola! Soy <b>Pulse</b>. Puedo contarte quién es Santi, qué certificados tiene, qué proyectos ha hecho y cómo pedirle una web o un sistema con IA.', chips: ['¿Quién es Santi?', 'Certificados', 'Qué puede hacer', 'Quiero trabajar con él'], ph: 'Escribe tu pregunta...', fallback: 'Buena pregunta. Puedo hablarte de Santi, su portfolio, certificados, webs, chatbots o cómo contactarlo. También puedes dejar tu proyecto en [contratar].' },
+      en: { title: 'Pulse', sub: 'Santi assistant · online', greet: 'Hi! I am <b>Pulse</b>. I can tell you who Santi is, what certificates he has, what he builds, and how to ask for a website or AI project.', chips: ['Who is Santi?', 'Certificates', 'What can he build?', 'Work with him'], ph: 'Type your question...', fallback: 'Good question. I can explain Santi, his portfolio, certificates, websites, chatbots or how to contact him. You can also send a project at [contratar].' },
+      fr: { title: 'Pulse', sub: 'Assistant de Santi · en ligne', greet: 'Salut ! Je suis <b>Pulse</b>. Je peux présenter Santi, ses certificats, ses projets et comment le contacter pour un site ou un projet IA.', chips: ['Qui est Santi ?', 'Certificats', 'Que peut-il faire ?', 'Travailler avec lui'], ph: 'Écris ta question...', fallback: 'Bonne question. Je peux parler de Santi, de son portfolio, de ses certificats, de sites web, de chatbots ou du contact. Tu peux aussi envoyer ton projet sur [contratar].' },
+      de: { title: 'Pulse', sub: 'Santi-Assistent · online', greet: 'Hallo! Ich bin <b>Pulse</b>. Ich kann Santi, seine Zertifikate, seine Projekte und den Kontakt für Websites oder KI-Projekte erklären.', chips: ['Wer ist Santi?', 'Zertifikate', 'Was baut er?', 'Mit ihm arbeiten'], ph: 'Schreib deine Frage...', fallback: 'Gute Frage. Ich kann Santi, Portfolio, Zertifikate, Websites, Chatbots oder den Kontakt erklären. Du kannst dein Projekt auch über [contratar] senden.' },
+      it: { title: 'Pulse', sub: 'Assistente di Santi · online', greet: 'Ciao! Sono <b>Pulse</b>. Posso raccontarti chi è Santi, i suoi certificati, i suoi progetti e come contattarlo per un sito o un progetto IA.', chips: ['Chi è Santi?', 'Certificati', 'Cosa crea?', 'Lavora con lui'], ph: 'Scrivi la tua domanda...', fallback: 'Bella domanda. Posso parlare di Santi, portfolio, certificati, siti, chatbot o contatto. Puoi anche inviare il progetto su [contratar].' },
     };
     var IMAP = {
       es: [
-        { k: ['que haceis', 'qué hacéis', 'que haces', 'servicio', 'ofrece', 'hacéis', 'haceis'], a: 'Hacemos 2 cosas: 1) <b>Webs</b> profesionales que venden (desde 49€/mes). 2) <b>Empleados IA</b>: Recepcionista IA (llamadas y WhatsApp 24/7), Social Media IA y Gestor de Ads. Todo en un panel simple. → [servicios]' },
-        { k: ['precio', 'cuesta', 'coste', 'cuanto', 'cuánto', 'plan', 'tarifa'], a: 'Webs desde <b>49€/mes</b> (o 400€ pago único). Automatización IA: <b>Starter 99€ · Pro 199€ · Agency 299€/mes</b>. → [precios]' },
-        { k: ['empez', 'empiezo', 'comenz', 'start', 'contratar', 'quiero', 'apunt'], a: 'Fácil: elige <b>Website</b> (te contactamos) o <b>AI Automation</b> (eliges plan). → [contratar] o [precios]. ¿Ya tienes cuenta? [login]' },
-        { k: ['human', 'persona', 'contact', 'hablar', 'soporte', 'ayuda', 'llamar'], a: 'Te paso con una persona: déjanos tu proyecto en [contratar] y respondemos en menos de 24h.' },
-        { k: ['recepcion', 'llamada', 'whatsapp', 'telefono', 'teléfono'], a: 'La <b>Recepcionista IA</b> atiende llamadas y WhatsApp 24/7 y avisa a un humano (SOS). Desde el plan Starter.' },
-        { k: ['ads', 'anuncio', 'campaña', 'campana', 'publicidad', 'meta', 'tiktok'], a: 'El <b>Gestor de Ads</b> lanza y optimiza campañas Meta/TikTok con foco en ROI. Desde Pro. → [precios]' },
-        { k: ['web', 'pagina', 'página', 'sitio'], a: 'Hacemos <b>webs a medida</b>, online en 7 días, desde 49€/mes sin pago inicial. → [contratar]' },
-        { k: ['hola', 'buenas', 'hey', 'holi'], a: '¡Hola! ¿En qué te ayudo? Servicios, precios o empezar 🙂' },
-        { k: ['gracias', 'genial', 'perfecto'], a: '¡A ti! Cuando quieras empezar: [precios] 🚀' },
+        { k: ['quien es santi', 'quién es santi', 'sobre santi', 'about me', 'sobre mi', 'sobre mí'], a: 'Santi es el creador de <b>SantiPulse</b>. Construye webs modernas, portfolios, asistentes con IA, chatbots y automatizaciones sencillas para negocios. Está entre Tenerife y EE.UU. → [nosotros]' },
+        { k: ['certificado', 'certificados', 'certification', 'certificate', 'cuantos certificados', 'cuántos certificados'], a: 'Santi tiene <b>10+ certificados verificados</b> entre IA, machine learning, ciberseguridad, seguridad laboral y electricidad. Los principales: AWS Machine Learning Basics, LinkedIn Generative AI, HP LIFE AI for Business Professionals, HP LIFE AI for Beginners y Cisco Cybersecurity. → [nosotros]' },
+        { k: ['que sabe', 'qué sabe', 'habilidad', 'skills', 'bueno', 'especialidad'], a: 'Lo más fuerte de Santi: diseño web visual, páginas rápidas, formularios/contacto, portfolio profesional, chatbots con IA, automatizaciones básicas y entender negocios locales.' },
+        { k: ['que hace', 'qué hace', 'servicio', 'ofrece', 'puede hacer', 'construir'], a: 'Puede construir <b>webs para negocios</b>, portfolios personales, landing pages, asistentes IA, chatbots de preguntas frecuentes, analizadores y dashboards simples. Mira ejemplos en [demos].' },
+        { k: ['web', 'pagina', 'página', 'sitio'], a: 'Si quieres una web, Santi puede hacer una página clara con hero, servicios, portfolio, formulario, WhatsApp, móvil y SEO básico. Cuéntale tu idea en [contratar].' },
+        { k: ['ia', 'ai', 'chatbot', 'automatizacion', 'automatización', 'assistant', 'asistente'], a: 'Para IA, Santi puede preparar chatbots de soporte, asistentes de seguros, respuestas automáticas, formularios inteligentes y dashboards para ordenar leads. Lo mejor es explicar el caso en [contratar].' },
+        { k: ['portfolio', 'trabajos', 'proyectos', 'clientes', 'demos'], a: 'El portfolio empieza con proyectos reales como Barberia El Estimado, VALS BASL y Sol Morena Car Collection. También incluye previews de webs y proyectos IA en progreso como Easy Insurance. → [demos]' },
+        { k: ['empez', 'empiezo', 'comenz', 'start', 'contratar', 'quiero', 'trabajar', 'hire'], a: 'Para trabajar con Santi, deja tu nombre, email y una explicación corta del proyecto en [contratar]. No hay checkout público ahora mismo; primero se habla del proyecto.' },
+        { k: ['human', 'persona', 'contact', 'hablar', 'soporte', 'ayuda', 'llamar', 'whatsapp'], a: 'Puedes escribirle desde el formulario de [contratar]. Si quieres algo rápido, menciona tu negocio, qué necesitas y cuándo te gustaría tenerlo.' },
+        { k: ['precio', 'cuesta', 'coste', 'cuanto', 'cuánto', 'plan', 'tarifa'], a: 'Ahora mismo Santi no muestra precios públicos. Cada proyecto se revisa según alcance, urgencia, contenido y si incluye IA. Envíale la idea en [contratar].' },
+        { k: ['hola', 'buenas', 'hey', 'holi'], a: '¡Hola! Puedo contarte sobre Santi, certificados, portfolio, webs, IA o cómo pedir un proyecto.' },
+        { k: ['gracias', 'genial', 'perfecto'], a: '¡A ti! Cuando quieras, puedes enviar el proyecto por [contratar].' },
       ],
       en: [
-        { k: ['what do you', 'service', 'do you do', 'offer'], a: 'Two things: 1) <b>Websites</b> that sell (from €49/mo). 2) <b>AI employees</b>: AI Receptionist (calls & WhatsApp 24/7), Social Media AI and Ads Manager. All in one dashboard. → [servicios]' },
-        { k: ['price', 'pricing', 'cost', 'how much', 'plan'], a: 'Websites from <b>€49/mo</b> (or €400 one-off). AI automation: <b>Starter €99 · Pro €199 · Agency €299/mo</b>. → [precios]' },
-        { k: ['start', 'begin', 'get started', 'sign up', 'hire'], a: 'Easy: pick <b>Website</b> (we contact you) or <b>AI Automation</b> (choose a plan). → [contratar] or [precios]. Have an account? [login]' },
-        { k: ['human', 'person', 'contact', 'support', 'help', 'talk'], a: 'I\'ll connect you with a person: drop your project at [contratar] and we reply within 24h.' },
-        { k: ['reception', 'call', 'whatsapp', 'phone'], a: 'The <b>AI Receptionist</b> answers calls & WhatsApp 24/7 and escalates to a human (SOS). From the Starter plan.' },
-        { k: ['ads', 'campaign', 'meta', 'tiktok'], a: 'The <b>Ads Manager</b> launches & optimizes Meta/TikTok campaigns with an ROI focus. From Pro. → [precios]' },
-        { k: ['web', 'site', 'page'], a: 'We build <b>custom websites</b>, live in 7 days, from €49/mo with no upfront fee. → [contratar]' },
-        { k: ['hi', 'hello', 'hey'], a: 'Hi! How can I help? Services, pricing or getting started 🙂' },
-        { k: ['thanks', 'thank you', 'great'], a: 'Anytime! Whenever you\'re ready: [precios] 🚀' },
-      ],
-      fr: [
-        { k: ['que faites', 'service', 'offrez', 'faites-vous', 'proposez'], a: 'Deux choses : 1) <b>Sites web</b> qui vendent (dès 49€/mois). 2) <b>Employés IA</b> : Réceptionniste IA (appels & WhatsApp 24/7), Réseaux sociaux IA et Gestion de pub. → [servicios]' },
-        { k: ['prix', 'tarif', 'coûte', 'combien', 'plan'], a: 'Sites web dès <b>49€/mois</b> (ou 400€). Automatisation IA : <b>Starter 99€ · Pro 199€ · Agency 299€/mois</b>. → [precios]' },
-        { k: ['commenc', 'démarr', 'start', 'inscri', 'débuter'], a: 'Facile : choisis <b>Website</b> (on te contacte) ou <b>AI Automation</b> (choisis un plan). → [contratar] ou [precios]. Déjà un compte ? [login]' },
-        { k: ['humain', 'personne', 'contact', 'aide', 'parler'], a: 'Je te mets en relation avec une personne : laisse ton projet sur [contratar], réponse sous 24h.' },
-        { k: ['salut', 'bonjour', 'coucou'], a: 'Salut ! Comment puis-je aider ? Services, tarifs ou démarrer 🙂' },
-      ],
-      de: [
-        { k: ['was macht', 'leistung', 'service', 'bietet', 'angebot'], a: 'Zwei Dinge: 1) <b>Websites</b>, die verkaufen (ab 49€/Monat). 2) <b>KI-Mitarbeiter</b>: KI-Rezeption (Anrufe & WhatsApp 24/7), Social Media KI und Ads-Manager. → [servicios]' },
-        { k: ['preis', 'kostet', 'wie viel', 'plan', 'tarif'], a: 'Websites ab <b>49€/Monat</b> (oder 400€). KI-Automation: <b>Starter 99€ · Pro 199€ · Agency 299€/Monat</b>. → [precios]' },
-        { k: ['anfang', 'start', 'beginn', 'anmeld', 'starten'], a: 'Einfach: wähle <b>Website</b> (wir melden uns) oder <b>AI Automation</b> (Plan wählen). → [contratar] oder [precios]. Konto? [login]' },
-        { k: ['mensch', 'person', 'kontakt', 'hilfe', 'sprechen'], a: 'Ich verbinde dich mit einer Person: hinterlasse dein Projekt auf [contratar], Antwort in unter 24h.' },
-        { k: ['hallo', 'hi', 'hey', 'servus'], a: 'Hallo! Wie kann ich helfen? Leistungen, Preise oder Start 🙂' },
-      ],
-      it: [
-        { k: ['cosa fate', 'servizi', 'offrite', 'fate', 'proponete'], a: 'Due cose: 1) <b>Siti web</b> che vendono (da 49€/mese). 2) <b>Dipendenti IA</b>: Receptionist IA (chiamate & WhatsApp 24/7), Social Media IA e Gestore Ads. → [servicios]' },
-        { k: ['prezzo', 'prezzi', 'costa', 'quanto', 'piano'], a: 'Siti web da <b>49€/mese</b> (o 400€). Automazione IA: <b>Starter 99€ · Pro 199€ · Agency 299€/mese</b>. → [precios]' },
-        { k: ['inizi', 'comincia', 'start', 'registr', 'partire'], a: 'Facile: scegli <b>Website</b> (ti contattiamo) o <b>AI Automation</b> (scegli un piano). → [contratar] o [precios]. Hai un account? [login]' },
-        { k: ['umano', 'persona', 'contatt', 'aiuto', 'parlare'], a: 'Ti metto in contatto con una persona: lascia il tuo progetto su [contratar], rispondiamo entro 24h.' },
-        { k: ['ciao', 'salve', 'hey'], a: 'Ciao! Come posso aiutarti? Servizi, prezzi o iniziare 🙂' },
+        { k: ['who is santi', 'about santi', 'about me'], a: 'Santi is the creator of <b>SantiPulse</b>. He builds modern websites, portfolios, AI assistants, chatbots and simple automations for businesses. → [nosotros]' },
+        { k: ['certificate', 'certificates', 'certification', 'how many'], a: 'Santi has <b>10+ verified certificates</b> across AI, machine learning, cybersecurity, workplace safety and electrical training. Main ones: AWS Machine Learning Basics, LinkedIn Generative AI, HP LIFE AI for Business Professionals, HP LIFE AI for Beginners and Cisco Cybersecurity. → [nosotros]' },
+        { k: ['skill', 'good at', 'specialty', 'speciality'], a: 'His strongest areas are visual web design, fast landing pages, contact forms, professional portfolios, AI chatbots, simple automations and local-business workflows.' },
+        { k: ['what do you', 'service', 'do you do', 'offer', 'build'], a: 'He can build business websites, personal portfolios, landing pages, AI assistants, FAQ chatbots, analyzers and simple dashboards. See the portfolio at [demos].' },
+        { k: ['web', 'site', 'page'], a: 'For websites, Santi can create a clear page with hero, services, portfolio, contact form, WhatsApp, mobile optimization and basic SEO. Send the idea at [contratar].' },
+        { k: ['ai', 'chatbot', 'automation', 'assistant'], a: 'For AI, Santi can prepare support chatbots, insurance assistants, smart forms and dashboards to organize leads. Explain the use case at [contratar].' },
+        { k: ['portfolio', 'projects', 'clients', 'demos'], a: 'The portfolio starts with real projects like Barberia El Estimado, VALS BASL and Sol Morena Car Collection. It also includes website previews and upcoming AI work like Easy Insurance. → [demos]' },
+        { k: ['start', 'begin', 'get started', 'hire', 'work'], a: 'To work with Santi, send your name, email and a short project description at [contratar]. There is no public checkout right now; the project is discussed first.' },
+        { k: ['price', 'pricing', 'cost', 'how much', 'plan'], a: 'Santi is not showing public prices right now. Each project depends on scope, speed, content and whether it includes AI. Send the idea at [contratar].' },
+        { k: ['human', 'person', 'contact', 'support', 'help', 'talk'], a: 'Send the project through [contratar]. Include your business, what you need and the rough timeline.' },
+        { k: ['hi', 'hello', 'hey'], a: 'Hi! Ask me about Santi, certificates, portfolio, websites, AI or how to request a project.' },
+        { k: ['thanks', 'thank you', 'great'], a: 'Anytime. When you are ready, send the project at [contratar].' },
       ],
     };
     var T = TMAP[lang] || TMAP.en;
     var INTENTS = IMAP[lang] || IMAP.en;
     var LBL = {
       servicios: { es: 'Servicios', en: 'Services', fr: 'Services', de: 'Leistungen', it: 'Servizi' },
-      precios: { es: 'Precios', en: 'Pricing', fr: 'Tarifs', de: 'Preise', it: 'Prezzi' },
-      login: { es: 'Iniciar sesión', en: 'Log in', fr: 'Connexion', de: 'Anmelden', it: 'Accedi' },
+      nosotros: { es: 'About Me', en: 'About Me', fr: 'About Me', de: 'About Me', it: 'About Me' },
     };
     var LINKS = {
       servicios: [base + 'servicios/', LBL.servicios[lang] || LBL.servicios.en],
-      precios: [base + 'precios/', LBL.precios[lang] || LBL.precios.en],
-      contratar: [base + 'contratar/', 'Website'],
-      login: ['/login/', LBL.login[lang] || LBL.login.en],
+      contratar: [base + 'contratar/', 'Work With Me'],
+      demos: [base + 'demos/', 'Portfolio'],
+      nosotros: [base + 'nosotros/', LBL.nosotros[lang] || LBL.nosotros.en],
     };
     function linkify(s) { return s.replace(/\[(\w+)\]/g, function (m, k) { var L = LINKS[k]; return L ? '<a href="' + L[0] + '">' + L[1] + '</a>' : m; }); }
     function escc(s) { return String(s).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
@@ -342,44 +319,6 @@
       cinput.value = '';
       botReply(v);
     });
-  }
-
-  // ── 4. AI-automation launch freeze (toggle in flags.js) ──
-  if (window.__COMINGSOON) {
-    var SOON = (window.__COMINGSOON_LABEL && window.__COMINGSOON_LABEL[lang]) || 'Coming soon';
-    var SOONS = (window.__COMINGSOON_SHORT && window.__COMINGSOON_SHORT[lang]) || 'Soon';
-
-    // Block every payment trigger (capture phase, before precios.js / others).
-    document.addEventListener('click', function (e) {
-      var b = e.target.closest && e.target.closest('[data-checkout]');
-      if (!b) return;
-      e.preventDefault();
-      e.stopImmediatePropagation();
-    }, true);
-
-    // Relabel + soften the plan buttons.
-    document.querySelectorAll('[data-checkout]').forEach(function (b) {
-      b.classList.add('sp-soon-btn');
-      b.textContent = SOON;
-      b.setAttribute('aria-disabled', 'true');
-    });
-
-    // Badge the "AI Automation" nav item (it links to …/precios/).
-    var aiItem = document.querySelector('.sp-nav-item[href$="precios/"]');
-    if (aiItem && !aiItem.querySelector('.sp-soon-badge')) {
-      var bdg = document.createElement('span');
-      bdg.className = 'sp-soon-badge sp-nav-txt';
-      bdg.textContent = SOONS;
-      aiItem.appendChild(bdg);
-    }
-
-    // Banner on the AI pricing page.
-    if (here === norm(base + 'precios/')) {
-      var banner = document.createElement('div');
-      banner.className = 'sp-soon-banner';
-      banner.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:#fbbf24;display:inline-block;"></span>' + SOON;
-      document.body.appendChild(banner);
-    }
   }
 
   function localStorageGet(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }

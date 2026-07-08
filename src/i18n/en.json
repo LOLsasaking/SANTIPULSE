@@ -16,18 +16,18 @@
     "status": "Available",
     "omas": "Santipulse · And More",
     "panel1": {
-      "eyebrow": "For Businesses",
+      "eyebrow": "Work With Me",
       "titleA": "I want",
-      "titleB": "website or AI",
-      "desc": "Professional websites, chatbots and AI automations built to help businesses sell better and save time.",
-      "meta": "Websites · AI · Automation"
+      "titleB": "a website",
+      "desc": "Tell me what you need: a website, portfolio, chatbot or AI idea. We discuss the project first.",
+      "meta": "Websites · Portfolio · AI"
     },
     "panel2": {
       "eyebrow": "My Work",
       "titleA": "My",
       "titleB": "portfolio",
       "desc": "Real clients, AI systems and apps — see what I build, live.",
-      "meta": "Clients · AI · Apps · Demos"
+      "meta": "Clients · AI · Projects"
     },
     "panel3": {
       "eyebrow": "Who I Am",
@@ -38,27 +38,27 @@
     }
   },
   "servicios": {
-    "title": "Santipulse · What do you need?",
-    "metaDescription": "Pick what you need: a custom website, or AI automations that save you hours every week.",
-    "eyebrow": "For Businesses",
-    "titleA": "What do",
-    "titleB": "you need?",
-    "intro": "Two paths. Pick the one that fits — or ask me for both.",
+    "title": "Santipulse · Work with me",
+    "metaDescription": "Tell Santi what website, portfolio or AI project you want to build.",
+    "eyebrow": "Project · Contact",
+    "titleA": "I want",
+    "titleB": "a website",
+    "intro": "Ask for a website, portfolio or AI idea. There is no automatic payment: I review the project first.",
     "web": {
       "eyebrow": "Design & Development",
       "titleA": "A",
       "titleB": "website",
-      "desc": "Custom professional website, online in 7 days. From €49/mo with no upfront payment — or €400 one-time.",
-      "meta": "7 days · From €49/mo",
+      "desc": "A custom professional website to explain your business, show your work and receive contacts.",
+      "meta": "Design · Mobile · Contact",
       "cta": "I want my website"
     },
     "ai": {
-      "eyebrow": "AI Automation",
+      "eyebrow": "AI Idea",
       "titleA": "AI that",
-      "titleB": "works for you",
-      "desc": "AI assistants, specialized chatbots, analyzers and dashboards that answer customers, organize leads and reduce manual work.",
-      "meta": "Chatbots · Dashboards · Automation",
-      "cta": "See plans & pricing"
+      "titleB": "for your project",
+      "desc": "Chatbots, assistants, analyzers or simple dashboards to organize information and reduce manual work.",
+      "meta": "Chatbots · Forms · Dashboards",
+      "cta": "Tell me the idea"
     }
   },
   "contratar": {
@@ -114,19 +114,20 @@
     "cta": "I want something like this",
     "live": "View live",
     "items": {
-      "onfleek": "Premium barbershop and product store. Cuts, beard and hair care.",
-      "suehtam": "Exclusive fashion brand — luxury streetwear in limited drops.",
       "estimado": "Live site in production with its own domain. Cuts with character, razor beard and online bookings.",
-      "urban": "Urban variant of the barbershop: cuts, razor beard and online bookings.",
-      "burgur": "The ultimate burger club. Smash burgers and video on scroll.",
-      "sakana": "Sushi bar and Japanese cuisine. The art of sushi, fresh fish.",
-      "tours": "Tours site in 4 languages with a cinematic video hero and a gallery that reveals on scroll.",
-      "megasur": "Electrician & renovations in Tenerife — dark site with video hero, centered logo and expandable services.",
-      "elevate": "High-end barbershop with a WebGL water-reveal hero — drag the cursor to swap the before/after cut. Online booking built in.",
-      "bmwm3": "Interactive 3D scroll experience — a BMW E30 M3 in WebGL that turns and reveals as you scroll. A cinematic product showcase.",
-      "lara": "Luxury digital archive for a private Mercedes, Porsche & Ferrari collection — rotating studio videos, a timeline and a curator dashboard.",
-      "rentalmiami": "Luxury Miami rental with a video hero, rotating cinematic copy, private pool, outdoor kitchen and villa-style reservation flow.",
-      "insurance": "AI insurance assistant for EZ Insurance — answers policy questions, quotes coverage and guides customers 24/7 with no waiting.",
+      "vals": "Current VALS BASL website for premium vehicles and imports. Visual design, video hero and an online presence focused on trust.",
+      "solmorena": "Current Sol Morena Car Collection website — automotive collection, premium presence and clean visual presentation.",
+      "megasur": "Preview website for an electrician and renovations brand in Tenerife — dark design, video hero, centered logo and expandable services.",
+      "onfleek": "Website preview for a modern brand with a video hero, strong visuals and service sections ready to sell.",
+      "suehtam": "Visual website preview for a brand or local business, focused on fast impact and simple navigation.",
+      "urban": "Urban barbershop preview with strong imagery, services and a structure ready for bookings.",
+      "burgur": "Burger restaurant preview with a visual menu, product sections and a clear booking/order call to action.",
+      "sakana": "Sushi/Japanese restaurant preview with video, menu and premium styling.",
+      "tours": "Tenerife tours preview focused on experiences, photos, bookings and trust.",
+      "elevate": "Premium barbershop preview with visual hero, services, brand style and contact.",
+      "bmwm3": "Interactive 3D product preview showing how a website can present an object in a memorable way.",
+      "rentalmiami": "Luxury rental preview with gallery, video hero and an experience focused on premium properties.",
+      "insurance": "AI insurance assistant for Easy Insurance — will answer policy questions, guide customers and collect useful details before an agent steps in.",
       "elecsafety": "Electrical safety chatbot — answers regulations, flags hazards and guides users before they touch a wire.",
       "resume": "AI resume analyzer — scores the CV, spots weak points and suggests improvements instantly.",
       "autodash": "Business automation dashboard — leads, bookings and repetitive tasks handled by AI from one place."
@@ -173,8 +174,8 @@
     "stat1Label": "SantiPulse",
     "stat2Num": "USA",
     "stat2Label": "Origin",
-    "stat3Num": "AI",
-    "stat3Label": "Focus",
+    "stat3Num": "10+",
+    "stat3Label": "Certificates",
     "missionEyebrow": "My Mission",
     "missionTitleA": "Build online presence,",
     "missionTitleB": "without wasting time",
@@ -214,8 +215,8 @@
     "profileTitleA": "Studies,",
     "profileTitleB": "certificates and links",
     "profileIntro": "A quick view of my technical training, practical experience and certificates so companies or clients can understand me faster.",
-    "profileLinkedInLabel": "LinkedIn",
-    "profileLinkedInBody": "Professional profile for connecting, background and opportunities.",
+    "profileLinkedInLabel": "Here's my LinkedIn profile",
+    "profileLinkedInBody": "Connect with me, see my professional path, certificates and work opportunities.",
     "profileGitHubLabel": "GitHub",
     "profileGitHubBody": "Code, projects and technical growth.",
     "studyTitle": "Studies",
@@ -223,7 +224,7 @@
     "experienceTitle": "Experience",
     "experienceBody": "MEGASUR Tenerife 2006 SL — Dual VET electrical technician intern, May to July 2025. Residential and commercial installations, panels, diagnostics and safety.",
     "certTitle": "Certificates",
-    "certBody": "AWS Foundations: Machine Learning Basics · AWS Generative AI · HP LIFE AI for Business Professionals & AI for Beginners · OSHA 30 & OSHA 10 General Industry · Solar PV Maintenance MF0837_2 · Working at Heights & Confined Spaces · Electrician Apprentice + NEC · Teenpreneur AI Development."
+    "certBody": "10+ certificates across AI, machine learning, cybersecurity, workplace safety and electrical training. Main visible credentials here: AWS Foundations: Machine Learning Basics, LinkedIn Learning Generative AI, HP LIFE AI for Business Professionals, HP LIFE AI for Beginners and Cisco Introduction to Cybersecurity."
   },
   "precios": {
     "title": "Santipulse · Plans & pricing",
@@ -266,14 +267,14 @@
     "label": "Built with trusted technology"
   },
   "footer": {
-    "tagline": "AI automation agency. Websites that sell and AI employees that answer, post and optimize your ads 24/7.",
+    "tagline": "Santi's portfolio: real websites, AI projects and automations for businesses that want to look sharper and save time.",
     "servicesH": "Services",
-    "companyH": "Company",
+    "companyH": "Santi",
     "legalH": "Legal",
     "website": "Website",
     "aiauto": "AI Automation",
-    "demos": "Demos",
-    "about": "About",
+    "demos": "Portfolio",
+    "about": "About Me",
     "pricing": "Pricing",
     "privacy": "Privacy"
   }

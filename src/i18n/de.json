@@ -16,18 +16,18 @@
     "status": "Verfügbar",
     "omas": "Santipulse · Und Mehr",
     "panel1": {
-      "eyebrow": "Für Unternehmen",
+      "eyebrow": "Mit mir arbeiten",
       "titleA": "Ich will",
-      "titleB": "Website oder KI",
-      "desc": "Professionelle Websites, Chatbots und KI-Automationen, die Unternehmen beim Verkaufen und Zeitsparen helfen.",
-      "meta": "Websites · KI · Automatisierung"
+      "titleB": "eine Website",
+      "desc": "Erzähl mir, was du brauchst: Website, Portfolio, Chatbot oder KI-Idee. Zuerst sprechen wir über das Projekt.",
+      "meta": "Websites · Portfolio · KI"
     },
     "panel2": {
       "eyebrow": "Meine Arbeiten",
       "titleA": "Mein",
       "titleB": "Portfolio",
       "desc": "Echte Kunden, KI-Systeme und Apps — sieh live, was ich baue.",
-      "meta": "Kunden · KI · Apps · Demos"
+      "meta": "Kunden · KI · Projekte"
     },
     "panel3": {
       "eyebrow": "Wer Ich Bin",
@@ -38,27 +38,27 @@
     }
   },
   "servicios": {
-    "title": "Santipulse · Was brauchst du?",
-    "metaDescription": "Wähle, was du brauchst: eine maßgeschneiderte Website oder KI-Automatisierungen, die dir jede Woche Stunden sparen.",
-    "eyebrow": "Für Unternehmen",
-    "titleA": "Was",
-    "titleB": "brauchst du?",
-    "intro": "Zwei Wege. Wähle den passenden — oder frag nach beiden.",
+    "title": "Santipulse · Mit mir arbeiten",
+    "metaDescription": "Sag Santi, welche Website, welches Portfolio oder KI-Projekt du bauen willst.",
+    "eyebrow": "Projekt · Kontakt",
+    "titleA": "Ich will",
+    "titleB": "eine Website",
+    "intro": "Frag nach Website, Portfolio oder KI-Idee. Keine automatische Zahlung: Ich prüfe das Projekt zuerst.",
     "web": {
       "eyebrow": "Design & Entwicklung",
       "titleA": "Eine",
       "titleB": "Website",
-      "desc": "Professionelle Website nach Maß, in 7 Tagen online. Ab 49€/Monat ohne Anzahlung — oder 400€ Einmalzahlung.",
-      "meta": "7 Tage · Ab 49€/Monat",
+      "desc": "Eine individuelle Website, die dein Business erklärt, deine Arbeit zeigt und Kontakte sammelt.",
+      "meta": "Design · Mobil · Kontakt",
       "cta": "Ich will meine Website"
     },
     "ai": {
-      "eyebrow": "KI-Automatisierung",
+      "eyebrow": "KI-Idee",
       "titleA": "KI, die",
-      "titleB": "für dich arbeitet",
-      "desc": "KI-Assistenten, spezialisierte Chatbots, Analysen und Dashboards, die Kunden beantworten, Leads ordnen und manuelle Arbeit reduzieren.",
-      "meta": "Chatbots · Dashboards · Automatisierung",
-      "cta": "Tarife & Preise ansehen"
+      "titleB": "für dein Projekt",
+      "desc": "Chatbots, Assistenten, Analysen oder einfache Dashboards, um Informationen zu ordnen und Arbeit zu sparen.",
+      "meta": "Chatbots · Formulare · Dashboards",
+      "cta": "Idee erklären"
     }
   },
   "contratar": {
@@ -114,19 +114,20 @@
     "cta": "Ich will so etwas",
     "live": "Live ansehen",
     "items": {
-      "onfleek": "Premium-Friseursalon und Produktshop. Schnitte, Bart und Haarpflege.",
-      "suehtam": "Exklusive Modemarke — Luxus-Streetwear in limitierten Drops.",
       "estimado": "Live-Site in Produktion mit eigener Domain. Schnitte mit Charakter, Rasiermesser-Bart und Online-Buchungen.",
-      "urban": "Urban-Variante des Salons: Schnitte, Rasiermesser-Bart und Online-Buchungen.",
-      "burgur": "Der ultimative Burger-Club. Smash Burgers und Video beim Scrollen.",
-      "sakana": "Sushi-Bar und japanische Küche. Die Kunst des Sushi, frischer Fisch.",
-      "tours": "Touren-Site in 4 Sprachen mit cinematischem Video-Hero und einer Galerie, die sich beim Scrollen enthüllt.",
-      "megasur": "Elektriker & Sanierungen auf Teneriffa — dunkle Website mit Hero-Video, zentriertem Logo und aufklappbaren Leistungen.",
-      "elevate": "Hochwertiger Barbershop mit WebGL-Wasser-Reveal-Hero — bewege den Cursor, um den Vorher/Nachher-Schnitt zu zeigen. Online-Buchung integriert.",
-      "bmwm3": "Interaktives 3D-Scroll-Erlebnis — ein BMW E30 M3 in WebGL, der sich beim Scrollen dreht und enthüllt. Eine cinematische Produktbühne.",
-      "lara": "Luxuriöses digitales Archiv für eine private Sammlung von Mercedes, Porsche und Ferrari — rotierende Studiovideos, eine Zeitleiste und ein Kuratoren-Dashboard.",
-      "rentalmiami": "Luxus-Ferienhaus in Miami mit Video-Hero, wechselnden filmischen Texten, privatem Pool, Außenküche und Villa-Reservierung.",
-      "insurance": "KI-Versicherungsassistent für EZ Insurance — beantwortet Policenfragen, erstellt Angebote und begleitet Kunden rund um die Uhr ohne Wartezeit.",
+      "vals": "Aktuelle VALS BASL Website für Premiumfahrzeuge und Import. Visuelles Design, Video-Hero und Online-Präsenz mit Fokus auf Vertrauen.",
+      "solmorena": "Aktuelle Sol Morena Car Collection Website — Autosammlung, Premium-Auftritt und saubere visuelle Präsentation.",
+      "megasur": "Website-Preview für Elektriker und Sanierungen auf Teneriffa — dunkles Design, Hero-Video, zentriertes Logo und aufklappbare Leistungen.",
+      "onfleek": "Website-Preview für eine moderne Marke mit Video-Hero, starken Bildern und Service-Sektionen.",
+      "suehtam": "Visuelle Website-Preview für Marke oder lokales Business mit schnellem Eindruck und einfacher Navigation.",
+      "urban": "Urban-Barbershop-Preview mit starker Bildsprache, Services und Struktur für Buchungen.",
+      "burgur": "Burger-Restaurant-Preview mit visuellem Menü, Produktbereichen und klarem Buchungs-/Bestellaufruf.",
+      "sakana": "Sushi/Japan-Restaurant-Preview mit Video, Menü und Premium-Stil.",
+      "tours": "Teneriffa-Touren-Preview mit Fokus auf Erlebnisse, Fotos, Buchungen und Vertrauen.",
+      "elevate": "Premium-Barbershop-Preview mit visuellem Hero, Services, Markenstil und Kontakt.",
+      "bmwm3": "Interaktive 3D-Produkt-Preview, die zeigt, wie eine Website ein Objekt besonders präsentieren kann.",
+      "rentalmiami": "Luxus-Mietobjekt-Preview mit Galerie, Video-Hero und Premium-Erlebnis.",
+      "insurance": "KI-Versicherungsassistent für Easy Insurance — beantwortet künftig Policenfragen, führt Kunden und sammelt nützliche Details vor dem Gespräch mit einem Agenten.",
       "elecsafety": "Chatbot für Elektrosicherheit — beantwortet Vorschriften, erkennt Risiken und leitet Nutzer an, bevor sie ein Kabel anfassen.",
       "resume": "KI-Lebenslauf-Analyse — bewertet den Lebenslauf, findet Schwachstellen und schlägt sofort Verbesserungen vor.",
       "autodash": "Automatisierungs-Dashboard für Unternehmen — Leads, Buchungen und Routineaufgaben von KI an einem Ort erledigt."
@@ -173,8 +174,8 @@
     "stat1Label": "SantiPulse",
     "stat2Num": "USA",
     "stat2Label": "Ursprung",
-    "stat3Num": "KI",
-    "stat3Label": "Fokus",
+    "stat3Num": "10+",
+    "stat3Label": "Zertifikate",
     "missionEyebrow": "Meine Mission",
     "missionTitleA": "Online-Präsenz bauen,",
     "missionTitleB": "ohne Zeit zu verlieren",
@@ -214,8 +215,8 @@
     "profileTitleA": "Ausbildung,",
     "profileTitleB": "Zertifikate und Links",
     "profileIntro": "Ein schneller Überblick über meine technische Ausbildung, praktische Erfahrung und Zertifikate, damit Unternehmen und Kunden mich besser einschätzen können.",
-    "profileLinkedInLabel": "LinkedIn",
-    "profileLinkedInBody": "Berufsprofil für Kontakt, Werdegang und Chancen.",
+    "profileLinkedInLabel": "Hier ist mein LinkedIn-Profil",
+    "profileLinkedInBody": "Vernetze dich mit mir und sieh meinen beruflichen Weg, Zertifikate und Arbeitsmöglichkeiten.",
     "profileGitHubLabel": "GitHub",
     "profileGitHubBody": "Code, Projekte und technische Entwicklung.",
     "studyTitle": "Ausbildung",
@@ -266,14 +267,14 @@
     "label": "Mit bewährter Technologie gebaut"
   },
   "footer": {
-    "tagline": "KI-Automatisierungsagentur. Websites, die verkaufen, und KI-Mitarbeiter, die rund um die Uhr antworten, posten und Anzeigen optimieren.",
+    "tagline": "Santis Portfolio: echte Websites, KI-Projekte und Automationen für Unternehmen, die besser wirken und Zeit sparen wollen.",
     "servicesH": "Leistungen",
-    "companyH": "Unternehmen",
+    "companyH": "Santi",
     "legalH": "Rechtliches",
     "website": "Webseite",
     "aiauto": "KI-Automation",
-    "demos": "Demos",
-    "about": "Über uns",
+    "demos": "Portfolio",
+    "about": "Über mich",
     "pricing": "Preise",
     "privacy": "Datenschutz"
   }

@@ -8,24 +8,23 @@
   var D = I18N.items || {};
 
   var WEBSITES = [
-    { key: 'estimado', name: 'Barberia El Estimado', type: 'video', media: 'demo-media/estimado-web.mp4', url: 'https://www.barberiaelestimado.com/', cat: 'client' },
-    { key: 'vals', name: 'VALS', type: 'video', media: 'demo-media/vals.mp4', url: 'https://vals-xi.vercel.app/', cat: 'client' },
-    { key: 'megasur', name: 'MEGASUR Tenerife', type: 'video', media: 'demo-media/megasur.mp4', url: 'https://megasur-tenerife-demo.vercel.app/', cat: 'client' },
-    { key: 'insurance', name: 'AI Insurance Assistant', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true },
+    { key: 'estimado', name: 'Barberia El Estimado', type: 'image', media: 'demo-media/barberia.jpg', url: 'https://www.barberiaelestimado.com', cat: 'client' },
+    { key: 'vals', name: 'VALS BASL', type: 'image', media: 'demo-media/project-posters/vals.jpg', url: 'https://www.valsbasl.com', cat: 'client' },
+    { key: 'solmorena', name: 'Sol Morena Car Collection', type: 'image', media: 'demo-media/project-posters/lara.jpg', url: 'https://solmorenacarcollection.com', cat: 'client' },
+    { key: 'megasur', name: 'MEGASUR Tenerife', type: 'image', media: 'demo-media/project-posters/megasur.jpg', url: 'https://megasur-tenerife-demo.vercel.app/', cat: 'preview' },
+    { key: 'onfleek', name: 'On Fleek', type: 'video', media: 'demo-media/onfleek.mp4', url: 'https://on-fleek-ten.vercel.app/', cat: 'preview' },
+    { key: 'suehtam', name: 'SUEHTAM', type: 'video', media: 'demo-media/suehtam.mp4', url: 'https://suehtam.vercel.app/', cat: 'preview' },
+    { key: 'urban', name: 'El Estimado Urban', type: 'image', media: 'demo-media/elestimado.jpg', url: 'https://barber-templates.vercel.app/urban', cat: 'preview' },
+    { key: 'burgur', name: 'BURGUR', type: 'video', media: 'demo-media/burgur.mp4', url: 'https://restaurant-templates-rosy.vercel.app/burger.html', cat: 'preview' },
+    { key: 'sakana', name: 'SAKANA', type: 'video', media: 'demo-media/sakana.mp4', url: 'https://restaurant-templates-rosy.vercel.app/sushi.html', cat: 'preview' },
+    { key: 'tours', name: 'Tenerife Tours', type: 'video', media: 'demo-media/tenerife-tours.mp4', url: 'https://tenerife-tours.vercel.app/', cat: 'preview' },
+    { key: 'elevate', name: 'ELEVATE Barber', type: 'video', media: 'demo-media/elevate-barber.mp4', url: 'https://elevate-barbershop-cyan.vercel.app/', cat: 'preview' },
+    { key: 'bmwm3', name: 'BMW E30 M3', type: 'video', media: 'demo-media/bmw-e30.mp4', url: 'https://bmw-clone-eosin.vercel.app/', cat: 'preview' },
+    { key: 'rentalmiami', name: 'Mirador Miami Estate', type: 'video', media: 'demo-media/rental-miami/rental place hero.mp4', url: '/demo-media/rental-miami/', cat: 'preview' },
+    { key: 'insurance', name: 'Easy Insurance AI Assistant', type: 'image', media: 'demo-media/chatbot-es.png', url: '', cat: 'coming', soon: true },
     { key: 'elecsafety', name: 'Electrical Safety Chatbot', type: 'image', media: 'demo-media/chatbot-es.png', url: '', cat: 'coming', soon: true },
     { key: 'resume', name: 'Resume Analyzer AI', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true },
-    { key: 'autodash', name: 'Business Automation Dashboard', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true },
-    { key: 'onfleek', name: 'On Fleek', type: 'video', media: 'demo-media/onfleek.mp4', url: 'https://on-fleek-ten.vercel.app/' },
-    { key: 'suehtam', name: 'SUEHTAM', type: 'video', media: 'demo-media/suehtam.mp4', url: 'https://suehtam.vercel.app/' },
-    { key: 'urban', name: 'El Estimado Urban', type: 'image', media: 'demo-media/elestimado.jpg', url: 'https://barber-templates.vercel.app/urban' },
-    { key: 'burgur', name: 'BURGUR', type: 'video', media: 'demo-media/burgur.mp4', url: 'https://restaurant-templates-rosy.vercel.app/burger.html' },
-    { key: 'sakana', name: 'SAKANA', type: 'video', media: 'demo-media/sakana.mp4', url: 'https://restaurant-templates-rosy.vercel.app/sushi.html' },
-    { key: 'tours', name: 'Tenerife Tours', type: 'video', media: 'demo-media/tenerife-tours.mp4', url: 'https://tenerife-tours.vercel.app/' },
-    // ── NEW (2026-06-13) — live on Vercel.
-    { key: 'elevate', name: 'ELEVATE Barber', type: 'video', media: 'demo-media/elevate-barber.mp4', url: 'https://elevate-barbershop-cyan.vercel.app/' },
-    { key: 'bmwm3', name: 'BMW E30 M3', type: 'video', media: 'demo-media/bmw-e30.mp4', url: 'https://bmw-clone-eosin.vercel.app/', cat: '3d' },
-    { key: 'lara', name: 'The Lara Collection', type: 'video', media: 'demo-media/lara-collection.mp4', url: 'https://lara-collection.vercel.app/' },
-    { key: 'rentalmiami', name: 'Mirador Miami Estate', type: 'video', media: 'demo-media/rental-miami/rental place hero.mp4', url: '/demo-media/rental-miami/' },
+    { key: 'autodash', name: 'Business Automation Dashboard', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true }
   ];
   var DISPLAY_WEBSITES = WEBSITES;
 
@@ -50,11 +49,11 @@
   // Category labels per language (short titles; card descriptions come from #i18n-data)
   var LANG = (document.documentElement.lang || 'es').slice(0, 2);
   var LABELS = {
-    es: { threed: 'Sitios Web 3D', threedSub: 'Experiencias WebGL interactivas', web: 'Webs & Plantillas', webSub: 'Sitios reales y plantillas en vivo' },
-    en: { threed: '3D Websites', threedSub: 'Interactive WebGL experiences', web: 'Websites & Templates', webSub: 'Real sites and live templates' },
-    de: { threed: '3D-Websites', threedSub: 'Interaktive WebGL-Erlebnisse', web: 'Websites & Vorlagen', webSub: 'Echte Seiten und Live-Vorlagen' },
-    fr: { threed: 'Sites Web 3D', threedSub: 'Expériences WebGL interactives', web: 'Sites & Modèles', webSub: 'Sites réels et modèles en direct' },
-    it: { threed: 'Siti Web 3D', threedSub: 'Esperienze WebGL interattive', web: 'Siti & Template', webSub: 'Siti reali e template dal vivo' }
+    es: { web: 'Más proyectos', webSub: 'Trabajos que iré sumando poco a poco' },
+    en: { web: 'More Projects', webSub: 'Work I will keep adding over time' },
+    de: { web: 'Weitere Projekte', webSub: 'Arbeiten, die ich nach und nach ergänze' },
+    fr: { web: 'Plus de projets', webSub: 'Travaux que j ajouterai progressivement' },
+    it: { web: 'Altri progetti', webSub: 'Lavori che aggiungero poco a poco' }
   };
   var L = LABELS[LANG] || LABELS.es;
 
@@ -68,28 +67,28 @@
       aboutTitle: 'Sobre mi',
       about: 'Soy Santi, creador de SantiPulse. Este portfolio enseña webs reales para clientes, proyectos de IA que estoy preparando y demos que muestran mi forma de construir. Busco convertir esta experiencia en oportunidades de trabajo, colaboraciones y nuevos clientes.',
       projectsTitle: 'Proyectos',
-      projectsIntro: 'Primero, tres webs reales de clientes. Después, proyectos que iré añadiendo poco a poco.',
+      projectsIntro: 'Primero, tres webs reales de clientes. Después, previews de webs y proyectos que iré añadiendo poco a poco.',
       contact: 'Trabajar conmigo',
       finalTitle: 'Trabajemos juntos',
       preview: 'Vista rapida',
       open: 'Ver proyecto',
-      count: 'demos en vivo',
-      normalTitle: 'Webs normales',
-      threeDTitle: 'Webs 3D',
+      count: 'proyectos visibles',
+      normalTitle: 'Más proyectos',
+      threeDTitle: '',
       sectionCount: 'proyectos',
-      category3d: 'Web 3D',
+      category3d: '',
       categoryRental: 'Alquiler de lujo',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Web real',
-      clientsTitle: 'Webs de clientes',
+      categoryWeb: 'Preview web',
+      clientsTitle: 'Clientes reales',
       comingTitle: 'Próximos proyectos',
-      websitesTitle: 'Webs & Plantillas',
+      websitesTitle: 'Previews de webs',
       categoryClient: 'Cliente real',
       categoryComing: 'En desarrollo',
       soon: 'Próximamente'
     },
     en: {
-      navAbout: 'About',
+      navAbout: 'About me',
       navProjects: 'Projects',
       navContact: 'Contact',
       hero: "Hi, i'm Santi",
@@ -97,22 +96,22 @@
       aboutTitle: 'About me',
       about: "I'm Santi, the creator behind SantiPulse. This portfolio shows real client websites, AI projects I am preparing and demos that show how I build. I want this site to open doors to work, collaborations and new clients.",
       projectsTitle: 'Projects',
-      projectsIntro: 'First, three real client websites. Then, projects I will keep adding over time.',
+      projectsIntro: 'First, three real client websites. Then, website previews and projects I will keep adding over time.',
       contact: 'Work with me',
       finalTitle: 'Work with me',
       preview: 'Quick view',
       open: 'Live project',
-      count: 'live demos',
-      normalTitle: 'Normal websites',
-      threeDTitle: '3D websites',
+      count: 'visible projects',
+      normalTitle: 'More projects',
+      threeDTitle: '',
       sectionCount: 'projects',
-      category3d: '3D Web',
+      category3d: '',
       categoryRental: 'Luxury rental',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Real website',
-      clientsTitle: 'Client Websites',
+      categoryWeb: 'Website preview',
+      clientsTitle: 'Real Clients',
       comingTitle: 'Coming Next',
-      websitesTitle: 'Websites & Templates',
+      websitesTitle: 'Website Previews',
       categoryClient: 'Real client',
       categoryComing: 'In development',
       soon: 'Coming soon'
@@ -126,22 +125,22 @@
       aboutTitle: 'A propos',
       about: 'Je suis Santi, le createur de SantiPulse. Ce portfolio presente des sites reels pour clients, des projets IA en preparation et des demos qui montrent ma facon de construire.',
       projectsTitle: 'Projets',
-      projectsIntro: 'D abord, trois vrais sites clients. Ensuite, les projets que j ajouterai petit a petit.',
+      projectsIntro: 'D abord, trois vrais sites clients. Ensuite, des previews de sites et des projets que j ajouterai petit a petit.',
       contact: 'Travailler avec moi',
       finalTitle: 'Travaillons ensemble',
       preview: 'Apercu',
       open: 'Voir le projet',
-      count: 'demos en direct',
-      normalTitle: 'Sites classiques',
-      threeDTitle: 'Sites 3D',
+      count: 'projets visibles',
+      normalTitle: 'Plus de projets',
+      threeDTitle: '',
       sectionCount: 'projets',
-      category3d: 'Web 3D',
+      category3d: '',
       categoryRental: 'Location luxe',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Site reel',
-      clientsTitle: 'Sites clients',
+      categoryWeb: 'Preview site',
+      clientsTitle: 'Clients reels',
       comingTitle: 'Prochains projets',
-      websitesTitle: 'Sites & Modeles',
+      websitesTitle: 'Previews de sites',
       categoryClient: 'Client reel',
       categoryComing: 'En developpement',
       soon: 'Bientot'
@@ -155,22 +154,22 @@
       aboutTitle: 'Uber mich',
       about: 'Ich bin Santi, der Creator hinter SantiPulse. Dieses Portfolio zeigt echte Kunden-Websites, KI-Projekte in Vorbereitung und Demos, die zeigen, wie ich baue.',
       projectsTitle: 'Projekte',
-      projectsIntro: 'Zuerst drei echte Kunden-Websites. Danach Projekte, die ich Schritt fuer Schritt ergaenze.',
+      projectsIntro: 'Zuerst drei echte Kunden-Websites. Danach Website-Previews und Projekte, die ich Schritt fuer Schritt ergaenze.',
       contact: 'Mit mir arbeiten',
       finalTitle: 'Lass uns arbeiten',
       preview: 'Vorschau',
       open: 'Projekt ansehen',
-      count: 'Live-Demos',
-      normalTitle: 'Normale Websites',
-      threeDTitle: '3D-Websites',
+      count: 'sichtbare Projekte',
+      normalTitle: 'Weitere Projekte',
+      threeDTitle: '',
       sectionCount: 'Projekte',
-      category3d: '3D Web',
+      category3d: '',
       categoryRental: 'Luxus-Miete',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Echte Website',
-      clientsTitle: 'Kunden-Websites',
+      categoryWeb: 'Website-Preview',
+      clientsTitle: 'Echte Kunden',
       comingTitle: 'Als Naechstes',
-      websitesTitle: 'Websites & Vorlagen',
+      websitesTitle: 'Website-Previews',
       categoryClient: 'Echter Kunde',
       categoryComing: 'In Entwicklung',
       soon: 'Demnaechst'
@@ -184,22 +183,22 @@
       aboutTitle: 'Chi sono',
       about: 'Sono Santi, il creator dietro SantiPulse. Questo portfolio mostra siti reali per clienti, progetti IA in preparazione e demo che raccontano come costruisco.',
       projectsTitle: 'Progetti',
-      projectsIntro: 'Prima, tre siti reali per clienti. Poi, progetti che aggiungero poco a poco.',
+      projectsIntro: 'Prima, tre siti reali per clienti. Poi, preview di siti e progetti che aggiungero poco a poco.',
       contact: 'Lavora con me',
       finalTitle: 'Lavoriamo insieme',
       preview: 'Anteprima',
       open: 'Vedi progetto',
-      count: 'demo live',
-      normalTitle: 'Siti normali',
-      threeDTitle: 'Siti 3D',
+      count: 'progetti visibili',
+      normalTitle: 'Altri progetti',
+      threeDTitle: '',
       sectionCount: 'progetti',
-      category3d: 'Web 3D',
+      category3d: '',
       categoryRental: 'Affitto luxury',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Sito reale',
-      clientsTitle: 'Siti clienti',
+      categoryWeb: 'Preview sito',
+      clientsTitle: 'Clienti reali',
       comingTitle: 'Prossimi progetti',
-      websitesTitle: 'Siti & Template',
+      websitesTitle: 'Preview di siti',
       categoryClient: 'Cliente reale',
       categoryComing: 'In sviluppo',
       soon: 'Prossimamente'
@@ -215,10 +214,8 @@
   }
 
   function categoryFor(w) {
-    if (w.key === 'rentalmiami') return P.categoryRental;
     if (w.cat === 'client') return P.categoryClient;
     if (w.cat === 'coming') return P.categoryComing;
-    if (w.cat === '3d') return P.category3d;
     return P.categoryWeb;
   }
 
@@ -262,8 +259,7 @@
     var indexed = DISPLAY_WEBSITES.map(function (w, i) { return { w: w, i: i }; });
     var clients = indexed.filter(function (item) { return item.w.cat === 'client'; });
     var coming = indexed.filter(function (item) { return item.w.cat === 'coming'; });
-    var normal = indexed.filter(function (item) { return item.w.cat !== '3d' && item.w.cat !== 'client' && item.w.cat !== 'coming'; });
-    var threeD = indexed.filter(function (item) { return item.w.cat === '3d'; });
+    var normal = indexed.filter(function (item) { return item.w.cat !== 'client' && item.w.cat !== 'coming'; });
 
     function card(item, cardIndex) {
       var w = item.w;
@@ -305,9 +301,8 @@
 
     target.innerHTML =
       section(P.clientsTitle, clients, 0, 'client') +
-      section(P.comingTitle, coming, clients.length, 'coming') +
-      section(P.websitesTitle, normal, clients.length + coming.length, 'normal') +
-      section(P.threeDTitle, threeD, clients.length + coming.length + normal.length, '3d');
+      section(P.websitesTitle, normal, clients.length, 'normal') +
+      section(P.comingTitle, coming, clients.length + normal.length, 'coming');
 
     target.addEventListener('click', function (e) {
       var preview = e.target.closest('[data-preview]');
@@ -377,17 +372,10 @@
     return url;
   }
 
-  // ── List (grouped: 3D websites first, then the rest) ──
+  // ── Legacy list support: group the same portfolio data as website previews. ──
   var gallery = document.getElementById('gallery');
   if (gallery) {
-    var g3d = [], gWeb = [];
-    DISPLAY_WEBSITES.forEach(function (w, i) {
-      (w.cat === '3d' ? g3d : gWeb).push(cardHtml(w, i));
-    });
-    var html = '';
-    if (g3d.length) html += groupHead(L.threed, L.threedSub) + g3d.join('');
-    if (gWeb.length) html += groupHead(L.web, L.webSub) + gWeb.join('');
-    gallery.innerHTML = html;
+    gallery.innerHTML = groupHead(L.web, L.webSub) + DISPLAY_WEBSITES.map(cardHtml).join('');
   }
 
   // ── Modal ──

@@ -16,18 +16,18 @@
     "status": "Disponibile",
     "omas": "Santipulse · E Altro",
     "panel1": {
-      "eyebrow": "Per le Aziende",
+      "eyebrow": "Lavora con me",
       "titleA": "Voglio",
-      "titleB": "sito o IA",
-      "desc": "Siti professionali, chatbot e automazioni IA per vendere meglio e risparmiare tempo.",
-      "meta": "Siti · IA · Automazione"
+      "titleB": "un sito",
+      "desc": "Raccontami cosa ti serve: sito, portfolio, chatbot o idea IA. Prima parliamo del progetto.",
+      "meta": "Siti · Portfolio · IA"
     },
     "panel2": {
       "eyebrow": "I Miei Lavori",
       "titleA": "Il mio",
       "titleB": "portfolio",
       "desc": "Clienti reali, sistemi IA e app — guarda cosa costruisco, dal vivo.",
-      "meta": "Clienti · IA · App · Demo"
+      "meta": "Clienti · IA · Progetti"
     },
     "panel3": {
       "eyebrow": "Chi Sono",
@@ -38,27 +38,27 @@
     }
   },
   "servicios": {
-    "title": "Santipulse · Di cosa hai bisogno?",
-    "metaDescription": "Scegli ciò che ti serve: un sito web su misura o automazioni IA che ti fanno risparmiare ore ogni settimana.",
-    "eyebrow": "Per le Aziende",
-    "titleA": "Di cosa hai",
-    "titleB": "bisogno?",
-    "intro": "Due strade. Scegli quella giusta per te — o chiedimele entrambe.",
+    "title": "Santipulse · Lavora con me",
+    "metaDescription": "Racconta a Santi quale sito, portfolio o progetto IA vuoi costruire.",
+    "eyebrow": "Progetto · Contatto",
+    "titleA": "Voglio",
+    "titleB": "un sito",
+    "intro": "Chiedi un sito, un portfolio o un'idea IA. Nessun pagamento automatico: prima valuto il progetto.",
     "web": {
       "eyebrow": "Design e Sviluppo",
       "titleA": "Un",
       "titleB": "sito web",
-      "desc": "Sito professionale su misura, online in 7 giorni. Da 49€/mese senza pagamento iniziale — o 400€ una tantum.",
-      "meta": "7 giorni · Da 49€/mese",
+      "desc": "Un sito professionale su misura per spiegare l'attività, mostrare il lavoro e ricevere contatti.",
+      "meta": "Design · Mobile · Contatto",
       "cta": "Voglio il mio sito"
     },
     "ai": {
-      "eyebrow": "Automazione IA",
+      "eyebrow": "Idea IA",
       "titleA": "IA che",
-      "titleB": "lavora per te",
-      "desc": "Assistenti IA, chatbot specializzati, analizzatori e dashboard che rispondono ai clienti, organizzano i lead e riducono il lavoro manuale.",
-      "meta": "Chatbot · Dashboard · Automazione",
-      "cta": "Vedi piani e prezzi"
+      "titleB": "per il progetto",
+      "desc": "Chatbot, assistenti, analizzatori o dashboard semplici per organizzare informazioni e ridurre lavoro manuale.",
+      "meta": "Chatbot · Moduli · Dashboard",
+      "cta": "Racconta l'idea"
     }
   },
   "contratar": {
@@ -114,19 +114,20 @@
     "cta": "Voglio qualcosa di simile",
     "live": "Guarda dal vivo",
     "items": {
-      "onfleek": "Barberia premium e negozio di prodotti. Tagli, barba e cura dei capelli.",
-      "suehtam": "Marchio di moda esclusivo — streetwear di lusso in drop limitati.",
       "estimado": "Sito in produzione con dominio proprio. Tagli con carattere, barba a rasoio e prenotazioni online.",
-      "urban": "Variante urban della barberia: tagli, barba a rasoio e prenotazioni online.",
-      "burgur": "Il club definitivo dell'hamburger. Smash burger e video allo scroll.",
-      "sakana": "Sushi bar e cucina giapponese. L'arte del sushi, pesce fresco.",
-      "tours": "Sito di tour in 4 lingue con hero video cinematografico e una galleria che si svela allo scroll.",
-      "megasur": "Elettricista e ristrutturazioni a Tenerife — sito scuro con video hero, logo centrale e servizi espandibili.",
-      "elevate": "Barbiere di alta gamma con hero WebGL a rivelazione d'acqua — muovi il cursore per svelare il taglio prima/dopo. Prenotazione online integrata.",
-      "bmwm3": "Esperienza 3D interattiva allo scroll — una BMW E30 M3 in WebGL che ruota e si rivela. Una vetrina di prodotto cinematografica.",
-      "lara": "Archivio digitale di lusso per una collezione privata di Mercedes, Porsche e Ferrari — video di studio rotanti, una timeline e una dashboard del curatore.",
-      "rentalmiami": "Affitto di lusso a Miami con hero video, testi cinematografici a rotazione, piscina privata, cucina esterna e prenotazione stile villa.",
-      "insurance": "Assistente assicurativo IA per EZ Insurance — risponde a domande sulle polizze, calcola preventivi e guida il cliente 24/7 senza attese.",
+      "vals": "Sito attuale di VALS BASL per veicoli premium e importazione. Design visuale, hero video e presenza online orientata alla fiducia.",
+      "solmorena": "Sito attuale di Sol Morena Car Collection — collezione auto, presenza premium e presentazione visiva pulita.",
+      "megasur": "Preview di sito per elettricista e ristrutturazioni a Tenerife — design scuro, hero video, logo centrale e servizi espandibili.",
+      "onfleek": "Preview di sito per brand moderno con hero video, visual forti e sezioni servizi.",
+      "suehtam": "Preview visuale per brand o attività locale, con impatto rapido e navigazione semplice.",
+      "urban": "Preview barberia urbana con immagini forti, servizi e struttura pronta per prenotazioni.",
+      "burgur": "Preview ristorante burger con menu visuale, sezioni prodotto e call to action per prenotare o ordinare.",
+      "sakana": "Preview sushi/ristorante giapponese con video, menu e stile premium.",
+      "tours": "Preview tour Tenerife focalizzata su esperienze, foto, prenotazioni e fiducia.",
+      "elevate": "Preview barberia premium con hero visuale, servizi, stile di brand e contatto.",
+      "bmwm3": "Preview prodotto 3D interattiva che mostra come una web può presentare un oggetto in modo memorabile.",
+      "rentalmiami": "Preview affitto luxury con galleria, hero video ed esperienza premium.",
+      "insurance": "Assistente assicurativo IA per Easy Insurance — risponderà alle domande sulle polizze, guiderà i clienti e raccoglierà dati utili prima del contatto umano.",
       "elecsafety": "Chatbot di sicurezza elettrica — risponde alle normative, segnala i rischi e guida l’utente prima di toccare un cavo.",
       "resume": "Analizzatore di curriculum IA — valuta il CV, individua i punti deboli e suggerisce miglioramenti all’istante.",
       "autodash": "Dashboard di automazione per le aziende — lead, prenotazioni e attività ripetitive gestite dall’IA da un unico posto."
@@ -173,8 +174,8 @@
     "stat1Label": "SantiPulse",
     "stat2Num": "USA",
     "stat2Label": "Origine",
-    "stat3Num": "IA",
-    "stat3Label": "Focus",
+    "stat3Num": "10+",
+    "stat3Label": "Certificati",
     "missionEyebrow": "La Mia Missione",
     "missionTitleA": "Creare presenza online,",
     "missionTitleB": "senza perdere tempo",
@@ -214,8 +215,8 @@
     "profileTitleA": "Studi,",
     "profileTitleB": "certificati e link",
     "profileIntro": "Una vista rapida della mia formazione tecnica, esperienza pratica e certificati per aiutare aziende e clienti a conoscermi meglio.",
-    "profileLinkedInLabel": "LinkedIn",
-    "profileLinkedInBody": "Profilo professionale per contatti, percorso e opportunità.",
+    "profileLinkedInLabel": "Ecco il mio profilo LinkedIn",
+    "profileLinkedInBody": "Connettiti con me e guarda il mio percorso professionale, certificati e opportunità di lavoro.",
     "profileGitHubLabel": "GitHub",
     "profileGitHubBody": "Codice, progetti e crescita tecnica.",
     "studyTitle": "Studi",
@@ -266,14 +267,14 @@
     "label": "Costruito con tecnologia affidabile"
   },
   "footer": {
-    "tagline": "Agenzia di automazione IA. Siti che vendono e dipendenti IA che rispondono, pubblicano e ottimizzano le tue ads 24/7.",
+    "tagline": "Portfolio di Santi: siti reali, progetti IA e automazioni per aziende che vogliono presentarsi meglio e risparmiare tempo.",
     "servicesH": "Servizi",
-    "companyH": "Azienda",
+    "companyH": "Santi",
     "legalH": "Legale",
     "website": "Sito web",
     "aiauto": "Automazione IA",
-    "demos": "Demo",
-    "about": "Chi siamo",
+    "demos": "Portfolio",
+    "about": "Chi sono",
     "pricing": "Prezzi",
     "privacy": "Privacy"
   }

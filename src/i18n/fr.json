@@ -16,18 +16,18 @@
     "status": "Disponible",
     "omas": "Santipulse · Et Plus",
     "panel1": {
-      "eyebrow": "Pour les Entreprises",
+      "eyebrow": "Travailler avec moi",
       "titleA": "Je veux",
-      "titleB": "site ou IA",
-      "desc": "Sites professionnels, chatbots et automatisations IA pour mieux vendre et gagner du temps.",
-      "meta": "Sites · IA · Automatisation"
+      "titleB": "un site",
+      "desc": "Expliquez-moi ce dont vous avez besoin : site, portfolio, chatbot ou idée IA. Nous parlons d'abord du projet.",
+      "meta": "Sites · Portfolio · IA"
     },
     "panel2": {
       "eyebrow": "Mes Travaux",
       "titleA": "Mon",
       "titleB": "portfolio",
       "desc": "Clients réels, systèmes IA et apps — découvrez ce que je construis, en direct.",
-      "meta": "Clients · IA · Apps · Démos"
+      "meta": "Clients · IA · Projets"
     },
     "panel3": {
       "eyebrow": "Qui Je Suis",
@@ -38,27 +38,27 @@
     }
   },
   "servicios": {
-    "title": "Santipulse · De quoi avez-vous besoin ?",
-    "metaDescription": "Choisissez ce qu’il vous faut : un site web sur mesure ou des automatisations IA qui vous font gagner des heures chaque semaine.",
-    "eyebrow": "Pour les Entreprises",
-    "titleA": "De quoi avez-",
-    "titleB": "vous besoin ?",
-    "intro": "Deux voies. Choisissez celle qui vous convient — ou demandez les deux.",
+    "title": "Santipulse · Travailler avec moi",
+    "metaDescription": "Dites à Santi quel site, portfolio ou projet IA vous voulez construire.",
+    "eyebrow": "Projet · Contact",
+    "titleA": "Je veux",
+    "titleB": "un site",
+    "intro": "Demandez un site, un portfolio ou une idée IA. Pas de paiement automatique : je révise d'abord le projet.",
     "web": {
       "eyebrow": "Design & Développement",
       "titleA": "Un",
       "titleB": "site web",
-      "desc": "Site professionnel sur mesure, en ligne en 7 jours. Dès 49€/mois sans paiement initial — ou 400€ paiement unique.",
-      "meta": "7 jours · Dès 49€/mois",
+      "desc": "Un site professionnel sur mesure pour expliquer votre activité, montrer votre travail et recevoir des contacts.",
+      "meta": "Design · Mobile · Contact",
       "cta": "Je veux mon site"
     },
     "ai": {
-      "eyebrow": "Automatisation IA",
+      "eyebrow": "Idée IA",
       "titleA": "Une IA qui",
-      "titleB": "travaille pour vous",
-      "desc": "Assistants IA, chatbots spécialisés, analyseurs et tableaux de bord qui répondent aux clients, organisent les leads et réduisent le travail manuel.",
-      "meta": "Chatbots · Tableaux · Automatisation",
-      "cta": "Voir les forfaits et tarifs"
+      "titleB": "pour votre projet",
+      "desc": "Chatbots, assistants, analyseurs ou tableaux simples pour organiser l'information et réduire le travail manuel.",
+      "meta": "Chatbots · Formulaires · Dashboards",
+      "cta": "Expliquer mon idée"
     }
   },
   "contratar": {
@@ -114,19 +114,20 @@
     "cta": "Je veux quelque chose comme ça",
     "live": "Voir en direct",
     "items": {
-      "onfleek": "Salon de coiffure premium et boutique de produits. Coupes, barbe et soins capillaires.",
-      "suehtam": "Marque de mode exclusive — streetwear de luxe en éditions limitées.",
       "estimado": "Site en production avec son propre domaine. Coupes de caractère, barbe au rasoir et réservations en ligne.",
-      "urban": "Variante urban du salon : coupes, barbe au rasoir et réservations en ligne.",
-      "burgur": "Le club ultime du burger. Smash burgers et vidéo au défilement.",
-      "sakana": "Bar à sushis et cuisine japonaise. L'art du sushi, poisson frais.",
-      "tours": "Site de tours en 4 langues avec un hero vidéo cinématique et une galerie qui se révèle au défilement.",
-      "megasur": "Électricien et rénovations à Tenerife — site sombre avec vidéo hero, logo centré et services dépliables.",
-      "elevate": "Barbier haut de gamme avec un hero WebGL à révélation d'eau — déplacez le curseur pour révéler la coupe avant/après. Réservation en ligne intégrée.",
-      "bmwm3": "Expérience 3D interactive au défilement — une BMW E30 M3 en WebGL qui pivote et se révèle. Une vitrine produit cinématique.",
-      "lara": "Archive numérique de luxe pour une collection privée de Mercedes, Porsche et Ferrari — vidéos de studio rotatives, une frise chronologique et un tableau de bord de curateur.",
-      "rentalmiami": "Location de luxe à Miami avec hero vidéo, textes cinématographiques rotatifs, piscine privée, cuisine extérieure et réservation façon villa.",
-      "insurance": "Assistant d’assurance IA pour EZ Insurance — répond aux questions de police, établit des devis et guide le client 24/7 sans attente.",
+      "vals": "Site actuel de VALS BASL pour véhicules premium et importation. Design visuel, hero vidéo et présence en ligne axée sur la confiance.",
+      "solmorena": "Site actuel de Sol Morena Car Collection — collection automobile, présence premium et présentation visuelle propre.",
+      "megasur": "Preview de site pour électricien et rénovations à Tenerife — design sombre, vidéo hero, logo centré et services dépliables.",
+      "onfleek": "Preview de site pour marque moderne avec hero vidéo, visuels forts et sections de services.",
+      "suehtam": "Preview visuelle pour marque ou commerce local, avec impact rapide et navigation simple.",
+      "urban": "Preview de barberie urbaine avec image forte, services et structure prête pour réservations.",
+      "burgur": "Preview de restaurant burger avec menu visuel, sections produit et appel à réserver ou commander.",
+      "sakana": "Preview sushi/restaurant japonais avec vidéo, menu et style premium.",
+      "tours": "Preview de tours à Tenerife axée sur expériences, photos, réservations et confiance.",
+      "elevate": "Preview de barberie premium avec hero visuel, services, style de marque et contact.",
+      "bmwm3": "Preview produit 3D interactive pour montrer comment une web peut présenter un objet de façon mémorable.",
+      "rentalmiami": "Preview de location de luxe avec galerie, hero vidéo et expérience premium.",
+      "insurance": "Assistant d’assurance IA pour Easy Insurance — il répondra aux questions de police, guidera les clients et collectera les données utiles avant le contact humain.",
       "elecsafety": "Chatbot de sécurité électrique — répond à la réglementation, repère les risques et guide l’utilisateur avant de toucher un fil.",
       "resume": "Analyseur de CV par IA — note le CV, repère les points faibles et propose des améliorations à l’instant.",
       "autodash": "Tableau de bord d’automatisation — leads, réservations et tâches répétitives gérés par l’IA depuis un seul endroit."
@@ -173,8 +174,8 @@
     "stat1Label": "SantiPulse",
     "stat2Num": "É.-U.",
     "stat2Label": "Origine",
-    "stat3Num": "IA",
-    "stat3Label": "Focus",
+    "stat3Num": "10+",
+    "stat3Label": "Certificats",
     "missionEyebrow": "Ma Mission",
     "missionTitleA": "Créer une présence en ligne,",
     "missionTitleB": "sans perdre de temps",
@@ -214,8 +215,8 @@
     "profileTitleA": "Études,",
     "profileTitleB": "certificats et liens",
     "profileIntro": "Un aperçu rapide de ma formation technique, de mon expérience pratique et de mes certificats pour aider entreprises et clients à mieux me connaître.",
-    "profileLinkedInLabel": "LinkedIn",
-    "profileLinkedInBody": "Profil professionnel pour échanger, voir le parcours et les opportunités.",
+    "profileLinkedInLabel": "Voici mon profil LinkedIn",
+    "profileLinkedInBody": "Connecte-toi avec moi, vois mon parcours professionnel, mes certificats et mes opportunités.",
     "profileGitHubLabel": "GitHub",
     "profileGitHubBody": "Code, projets et progression technique.",
     "studyTitle": "Études",
@@ -266,13 +267,13 @@
     "label": "Conçu avec une technologie de confiance"
   },
   "footer": {
-    "tagline": "Agence d’automatisation IA. Des sites qui vendent et des employés IA qui répondent, publient et optimisent tes pubs 24/7.",
+    "tagline": "Portfolio de Santi : sites réels, projets IA et automatisations pour les entreprises qui veulent gagner du temps.",
     "servicesH": "Services",
-    "companyH": "Entreprise",
+    "companyH": "Santi",
     "legalH": "Légal",
     "website": "Site web",
     "aiauto": "Automatisation IA",
-    "demos": "Démos",
+    "demos": "Portfolio",
     "about": "À propos",
     "pricing": "Tarifs",
     "privacy": "Confidentialité"

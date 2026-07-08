@@ -86,7 +86,6 @@
   .portfolio-section-title{ color:#d7e2ea; font-family:'Archivo',sans-serif; font-size:clamp(28px,4vw,56px); font-weight:900; line-height:.95; text-transform:uppercase; }
   .portfolio-section-count{ color:rgba(215,226,234,.58); font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase; }
   .portfolio-grid{ max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:start; }
-  .portfolio-section-3d .portfolio-grid{ grid-template-columns:minmax(280px,420px); justify-content:start; }
   .portfolio-card{ position:relative; display:flex; min-height:0; flex-direction:column; padding:10px; border:1px solid rgba(215,226,234,.28); background:#0c0c0c; box-shadow:0 22px 55px rgba(0,0,0,.34); }
   .portfolio-card.is-in{ animation:project-pop .7s cubic-bezier(.22,.7,.18,1) both; animation-delay:var(--pop-delay,0ms); }
   @keyframes project-pop{ from{ opacity:0; transform:translateY(34px) scale(.98); } to{ opacity:1; transform:translateY(0) scale(1); } }
@@ -159,7 +158,7 @@
     <div class="about-icon four" data-reveal><img src="{{asset.prefix}}demo-media/jack-creator/icon-4.png" alt="" /></div>
     <div class="about-inner">
       <h2 class="section-title hero-heading" data-copy="aboutTitle" data-split>Sobre mi</h2>
-      <p class="about-copy" data-copy="about" data-reveal>Soy Santi, creador de SantiPulse. Construyo webs reales para negocios, experiencias 3D y automatizaciones con IA que convierten una pagina normal en algo que se recuerda.</p>
+      <p class="about-copy" data-copy="about" data-reveal>Soy Santi, creador de SantiPulse. Este portfolio enseña webs reales para clientes, proyectos de IA que estoy preparando y trabajos que iré sumando poco a poco.</p>
       <a class="pill-btn" href="{{nav.contratar}}" data-copy="contact">Contactar</a>
     </div>
   </section>
@@ -168,7 +167,7 @@
     <header class="projects-head">
       <div>
         <h2 class="section-title hero-heading" data-copy="projectsTitle" data-split>Proyectos</h2>
-        <p class="projects-kicker" data-copy="projectsIntro" data-reveal>Todas las demos reales de SantiPulse en una sola experiencia.</p>
+        <p class="projects-kicker" data-copy="projectsIntro" data-reveal>Clientes reales primero. Después, proyectos que iré añadiendo poco a poco.</p>
       </div>
       <p class="projects-count" id="portfolio-count"></p>
     </header>
@@ -177,8 +176,8 @@
 
   <section id="contact" class="contact">
     <div class="contact-inner">
-      <h2 class="section-title hero-heading" data-copy="finalTitle" data-split>Creamos tu web</h2>
-      <a class="pill-btn" href="{{nav.contratar}}" data-copy="contact">Contactar</a>
+      <h2 class="section-title hero-heading" data-copy="finalTitle" data-split>Trabajemos juntos</h2>
+      <a class="pill-btn" href="{{nav.contratar}}" data-copy="contact">Trabajar conmigo</a>
     </div>
   </section>
 </main>

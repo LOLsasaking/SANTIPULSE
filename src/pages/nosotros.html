@@ -65,13 +65,48 @@
   .svc-hero-cta .fill{ background:#fff; color:#050505; } .svc-hero-cta .fill:hover{ transform:translateY(-2px); background:rgba(255,255,255,.88); }
   .svc-hero-cta .outline{ border:1px solid rgba(255,255,255,.2); color:#fff; } .svc-hero-cta .outline:hover{ transform:translateY(-2px); border-color:rgba(255,255,255,.5); }
 
-  /* ===== 3D globe ===== */
-  .globe-sec{ position:relative; padding:30px 24px 50px; text-align:center; }
-  .globe-sec h2{ font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-.02em; margin:14px 0 8px; }
-  .globe-sec .gsub{ color:rgba(255,255,255,.6); max-width:40rem; margin:0 auto; font-size:15px; line-height:1.6; }
-  #globe3d{ width:100%; max-width:640px; height:480px; margin:18px auto 0; cursor:grab; }
-  #globe3d canvas{ display:block; outline:none; }
-  @media (max-width:600px){ #globe3d{ height:360px; } }
+  .about-hero-grid{ width:min(1180px,100%); margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) minmax(320px,460px); gap:42px; align-items:center; text-align:left; }
+  .about-copy-stack{ display:flex; flex-direction:column; align-items:flex-start; gap:24px; }
+  .about-copy-stack .svc-hero-title{ max-width:11ch; }
+  .about-copy-stack .svc-hero-rotate .w{ left:0; transform:translateY(120%); }
+  .about-copy-stack .svc-hero-rotate .w.is-active{ transform:translateY(0); }
+  .about-copy-stack .svc-hero-rotate .w.is-prev{ transform:translateY(-120%); }
+  .about-copy-stack .svc-hero-cta{ justify-content:flex-start; }
+  .lanyard-stage{ --card-x:0; --card-y:0; --tilt-x:0; --tilt-y:0; position:relative; height:590px; min-height:590px; width:100%; touch-action:none; perspective:1100px; user-select:none; }
+  .lanyard-cord{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+  .lanyard-cord path{ fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .lanyard-shadow{ stroke:rgba(0,0,0,.38); stroke-width:14; filter:blur(10px); }
+  .lanyard-line{ stroke:#d7e2ea; stroke-width:8; }
+  .lanyard-line.alt{ stroke:#E23B4E; stroke-width:3; transform:translateX(9px); opacity:.9; }
+  .lanyard-anchor{ position:absolute; top:28px; left:50%; width:62px; height:28px; border-radius:999px; transform:translateX(-50%); background:linear-gradient(180deg,#f3f6f8,#aeb9c2); box-shadow:0 14px 44px rgba(0,0,0,.45), inset 0 -8px 12px rgba(0,0,0,.18); }
+  .lanyard-card{ position:absolute; left:50%; top:162px; width:min(310px,76vw); aspect-ratio:0.72; transform:translate3d(calc(-50% + (var(--card-x) * 1px)), calc(var(--card-y) * 1px), 0) rotateX(calc(var(--tilt-x) * 1deg)) rotateY(calc(var(--tilt-y) * 1deg)) rotateZ(calc(var(--card-x) * .025deg)); transform-style:preserve-3d; cursor:grab; border:1px solid rgba(255,255,255,.22); border-radius:22px; background:linear-gradient(160deg,rgba(255,255,255,.98),rgba(215,226,234,.93)); color:#0b0c0f; box-shadow:0 46px 90px rgba(0,0,0,.62); overflow:hidden; }
+  .lanyard-card:active{ cursor:grabbing; }
+  .lanyard-clip{ position:absolute; top:12px; left:50%; width:76px; height:22px; border-radius:999px; transform:translateX(-50%); background:#111317; box-shadow:inset 0 0 0 5px rgba(255,255,255,.12); z-index:3; }
+  .lanyard-photo{ width:100%; aspect-ratio:1; object-fit:cover; object-position:50% 26%; display:block; }
+  .lanyard-info{ padding:20px; display:flex; flex-direction:column; gap:13px; }
+  .lanyard-kicker{ font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#E23B4E; }
+  .lanyard-name{ font-family:'Archivo',sans-serif; font-size:33px; line-height:.9; font-weight:900; text-transform:uppercase; color:#08090b; }
+  .lanyard-role{ color:rgba(8,9,11,.66); font-size:13px; line-height:1.45; }
+  .lanyard-tags{ display:flex; flex-wrap:wrap; gap:7px; }
+  .lanyard-tags span{ font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; border:1px solid rgba(8,9,11,.18); border-radius:999px; padding:6px 8px; }
+  .cert-gallery{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:18px; }
+  .cert-shot{ border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.035); overflow:hidden; }
+  .cert-shot img{ width:100%; aspect-ratio:1.36; object-fit:cover; object-position:center; display:block; background:#fff; }
+  .cert-shot figcaption{ padding:12px 14px; color:rgba(255,255,255,.72); font-size:12px; line-height:1.45; }
+  .profile-link-card{ display:flex; align-items:flex-start; gap:14px; border:1px solid rgba(255,255,255,.1); padding:20px; color:inherit; text-decoration:none; transition:border-color .25s, transform .25s, background .25s; }
+  .profile-link-card:hover{ border-color:rgba(255,255,255,.35); background:rgba(255,255,255,.035); transform:translateY(-2px); }
+  .profile-link-icon{ flex:none; width:42px; height:42px; display:grid; place-items:center; border-radius:10px; background:#0A66C2; color:#fff; font-family:Arial,sans-serif; font-size:19px; font-weight:800; letter-spacing:-.04em; }
+
+  @media (max-width:900px){
+    .about-hero-grid{ grid-template-columns:1fr; text-align:center; }
+    .about-copy-stack{ align-items:center; text-align:center; }
+    .about-copy-stack .svc-hero-cta{ justify-content:center; }
+    .about-copy-stack .svc-hero-rotate .w{ left:50%; transform:translate(-50%,120%); }
+    .about-copy-stack .svc-hero-rotate .w.is-active{ transform:translate(-50%,0); }
+    .about-copy-stack .svc-hero-rotate .w.is-prev{ transform:translate(-50%,-120%); }
+    .lanyard-stage{ height:530px; min-height:530px; max-width:430px; margin:0 auto; }
+    .cert-gallery{ grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
@@ -85,29 +120,44 @@
 </div>
 
 <section class="svc-hero">
-  <span class="svc-hero-badge">{{nosotros.heroBadge}} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-  <h1 class="svc-hero-title">
-    <span class="lead">{{nosotros.heroLead}}</span>
-    <span class="svc-hero-rotate" data-rotate>
-      <span class="w">{{nosotros.heroW1}}</span>
-      <span class="w">{{nosotros.heroW2}}</span>
-      <span class="w">{{nosotros.heroW3}}</span>
-      <span class="w">{{nosotros.heroW4}}</span>
-      <span class="w">{{nosotros.heroW5}}</span>
-    </span>
-  </h1>
-  <p class="svc-hero-sub">{{nosotros.heroSub}}</p>
-  <div class="svc-hero-cta">
-    <a class="outline" href="{{nav.contratar}}">{{footer.website}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-    <a class="fill" href="{{nav.precios}}">{{footer.aiauto}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  <div class="about-hero-grid">
+    <div class="about-copy-stack">
+      <span class="svc-hero-badge">{{nosotros.heroBadge}} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      <h1 class="svc-hero-title">
+        <span class="lead">{{nosotros.heroLead}}</span>
+        <span class="svc-hero-rotate" data-rotate>
+          <span class="w">{{nosotros.heroW1}}</span>
+          <span class="w">{{nosotros.heroW2}}</span>
+          <span class="w">{{nosotros.heroW3}}</span>
+          <span class="w">{{nosotros.heroW4}}</span>
+          <span class="w">{{nosotros.heroW5}}</span>
+        </span>
+      </h1>
+      <p class="svc-hero-sub">{{nosotros.heroSub}}</p>
+      <div class="svc-hero-cta">
+        <a class="fill" href="{{nav.contratar}}">{{nosotros.ctaPrimary}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a class="outline" href="{{nav.demos}}">{{nosotros.ctaSecondary}}</a>
+      </div>
+    </div>
+    <div class="lanyard-stage" data-lanyard aria-label="Interactive Santi profile badge">
+      <svg class="lanyard-cord" viewBox="0 0 420 590" aria-hidden="true">
+        <path class="lanyard-shadow" data-lanyard-path d="M210 44 C205 118 198 142 190 184 C182 231 189 254 210 276" />
+        <path class="lanyard-line" data-lanyard-path d="M210 44 C205 118 198 142 190 184 C182 231 189 254 210 276" />
+        <path class="lanyard-line alt" data-lanyard-path d="M210 44 C205 118 198 142 190 184 C182 231 189 254 210 276" />
+      </svg>
+      <div class="lanyard-anchor"></div>
+      <article class="lanyard-card" data-lanyard-card>
+        <div class="lanyard-clip"></div>
+        <img class="lanyard-photo" src="{{asset.prefix}}demo-media/profile/santi-profile.png" alt="Santi portrait" />
+        <div class="lanyard-info">
+          <span class="lanyard-kicker">SantiPulse</span>
+          <h2 class="lanyard-name">Santiago<br>Goncalves</h2>
+          <p class="lanyard-role">Web developer, AI builder and electrical student creating practical digital tools for real businesses.</p>
+          <div class="lanyard-tags"><span>Web</span><span>AI</span><span>Portfolio</span></div>
+        </div>
+      </article>
+    </div>
   </div>
-</section>
-
-<section class="globe-sec">
-  <p class="eyebrow" style="justify-content:center">{{nosotros.globeEyebrow}}</p>
-  <h2>{{nosotros.globeTitle}}</h2>
-  <p class="gsub">{{nosotros.globeSub}}</p>
-  <div id="globe3d"></div>
 </section>
 
 <main class="pt-20 pb-28 px-6 md:px-10 max-w-3xl mx-auto">
@@ -139,9 +189,12 @@
     <h2 class="headline text-3xl md:text-5xl mb-8" data-split>{{nosotros.profileTitleA}}<br>{{nosotros.profileTitleB}}</h2>
     <p class="text-white/70 leading-relaxed font-light text-lg max-w-2xl mb-10">{{nosotros.profileIntro}}</p>
     <div class="grid md:grid-cols-2 gap-4">
-      <a href="{{nosotros.profileLinkedInUrl}}" target="_blank" rel="noopener" class="block border border-white/10 p-5 hover:border-white/35 transition">
-        <p class="meta mb-3">{{nosotros.profileLinkedInLabel}}</p>
-        <p class="text-white/75 leading-relaxed font-light">{{nosotros.profileLinkedInBody}}</p>
+      <a href="{{nosotros.profileLinkedInUrl}}" target="_blank" rel="noopener" class="profile-link-card">
+        <span class="profile-link-icon" aria-hidden="true">in</span>
+        <span>
+          <p class="meta mb-3">{{nosotros.profileLinkedInLabel}}</p>
+          <p class="text-white/75 leading-relaxed font-light">{{nosotros.profileLinkedInBody}}</p>
+        </span>
       </a>
       <a href="{{nosotros.profileGitHubUrl}}" target="_blank" rel="noopener" class="block border border-white/10 p-5 hover:border-white/35 transition">
         <p class="meta mb-3">{{nosotros.profileGitHubLabel}}</p>
@@ -158,6 +211,12 @@
       <div class="md:col-span-2 border border-white/10 p-5">
         <p class="meta mb-3">{{nosotros.certTitle}}</p>
         <p class="text-white/75 leading-relaxed font-light">{{nosotros.certBody}}</p>
+        <div class="cert-gallery">
+          <figure class="cert-shot"><img src="{{asset.prefix}}demo-media/certificates/certificate.png" alt="AWS Machine Learning Basics certificate" /><figcaption>AWS Foundations: Machine Learning Basics</figcaption></figure>
+          <figure class="cert-shot"><img src="{{asset.prefix}}demo-media/certificates/generative-ai.png" alt="Generative AI certificate" /><figcaption>LinkedIn Learning: What Is Generative AI?</figcaption></figure>
+          <figure class="cert-shot"><img src="{{asset.prefix}}demo-media/certificates/ai-business-professionals.png" alt="AI for Business Professionals certificate" /><figcaption>HP LIFE: AI for Business Professionals</figcaption></figure>
+          <figure class="cert-shot"><img src="{{asset.prefix}}demo-media/certificates/i2cs.png" alt="Cisco cybersecurity certificate" /><figcaption>Cisco Networking Academy: Introduction to Cybersecurity</figcaption></figure>
+        </div>
       </div>
     </div>
   </section>
@@ -240,8 +299,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="{{asset.prefix}}anim.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/globe.gl" defer></script>
-<script src="{{asset.prefix}}globe.js" defer></script>
+<script src="{{asset.prefix}}lanyard.js" defer></script>
   <script src="{{asset.prefix}}flags.js" defer></script>
   <script src="{{asset.prefix}}site-chrome.js" defer></script>
 </body>

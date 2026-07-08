@@ -73,25 +73,6 @@
 
   .step-num{ width:46px; height:46px; border-radius:50%; background:#E23B4E; color:#fff; font-family:'Space Mono',monospace; font-weight:700; display:grid; place-items:center; font-size:14px; }
 
-  /* ── pricing (Aeline; featured filled) — keep checkout ── */
-  .plan{ border:1px solid rgba(255,255,255,.1); border-radius:26px; padding:34px 30px; display:flex; flex-direction:column; background:rgba(255,255,255,.02); }
-  .plan-featured{ background:#E23B4E; border-color:#E23B4E; color:#fff; }
-  .plan-name{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; }
-  .plan-old{ text-decoration:line-through; opacity:.55; font-weight:700; font-size:1.4rem; margin-right:10px; }
-  .plan-price{ font-family:'Inter',sans-serif; font-weight:800; font-size:3rem; line-height:1; letter-spacing:-.03em; }
-  .plan-per{ font-family:'Space Mono',monospace; font-size:13px; opacity:.6; margin-left:4px; }
-  .plan-tag{ font-size:13px; opacity:.7; margin-top:14px; line-height:1.5; }
-  .plan-feat{ display:flex; gap:11px; align-items:flex-start; padding:8px 0; color:rgba(255,255,255,.78); font-size:14px; }
-  .plan-feat svg{ flex:none; margin-top:3px; }
-  .plan:not(.plan-featured) .plan-feat svg{ color:#E23B4E; }
-  .plan-featured .plan-feat{ color:rgba(255,255,255,.92); } .plan-featured .plan-feat svg{ color:#fff; }
-  .pay-btn{ display:block; text-align:center; width:100%; padding:14px; border-radius:9999px; font-family:'Space Mono',monospace; font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:12px; cursor:pointer; border:1px solid rgba(255,255,255,.25); background:transparent; color:#fff; text-decoration:none; transition:all .2s; }
-  .pay-btn:hover{ border-color:#fff; }
-  .pay-btn.primary{ background:#fff; color:#08080a; border:0; }
-  .plan-featured .pay-btn.primary{ background:#fff; color:#08080a; }
-  .pay-btn.ghost{ background:transparent; margin-top:10px; font-weight:600; opacity:.8; }
-  .pay-btn:disabled{ opacity:.6; cursor:wait; }
-
   /* ── form ── */
   .form-card{ background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.1); border-radius:26px; padding:34px 30px; }
   .field{ width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:13px 15px; color:#fff; transition:border-color .25s; font-size:14px; }
@@ -164,10 +145,10 @@
     .foot-grid{ grid-template-columns:1fr 1fr; }
   }
 
-  /* ── Interactive FX: count-up · 3D tilt · CTA shine · scroll progress ── */
-  .card, .plan{ transition:transform .15s ease, border-color .35s ease, box-shadow .4s ease; transform-style:preserve-3d; }
-  .pill-cta, .pay-btn.primary, .submit-btn, .plan-btn.primary{ position:relative; overflow:hidden; }
-  .pill-cta::after, .pay-btn.primary::after, .submit-btn::after, .plan-btn.primary::after{
+  /* ── Interactive FX: count-up · card tilt · CTA shine · scroll progress ── */
+  .card{ transition:transform .15s ease, border-color .35s ease, box-shadow .4s ease; transform-style:preserve-3d; }
+  .pill-cta, .submit-btn{ position:relative; overflow:hidden; }
+  .pill-cta::after, .submit-btn::after{
     content:''; position:absolute; top:0; left:-150%; width:55%; height:100%; pointer-events:none;
     background:linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent); transform:skewX(-18deg);
     animation:shine 5s ease-in-out infinite; }
@@ -175,8 +156,8 @@
   .scroll-progress{ position:fixed; top:0; left:0; height:3px; width:0; z-index:80;
     background:linear-gradient(90deg,#E23B4E,#ff8a98); box-shadow:0 0 12px rgba(226,59,78,.6); transition:width .1s linear; }
   @media (prefers-reduced-motion:reduce){
-    .pill-cta::after, .pay-btn.primary::after, .submit-btn::after, .plan-btn.primary::after{ display:none; }
-    .card, .plan{ transition:none; }
+    .pill-cta::after, .submit-btn::after{ display:none; }
+    .card{ transition:none; }
   }
 </style>
 </head>
@@ -194,7 +175,7 @@
     <a href="#por-que">{{contratar.landing.nav.porque}}</a>
     <a href="#incluye">{{contratar.landing.nav.incluye}}</a>
     <a href="#proceso">{{contratar.landing.nav.proceso}}</a>
-    <a href="#precio">{{contratar.landing.nav.precio}}</a>
+    <a href="#ideas">Ideas</a>
     <a href="#faq">{{contratar.landing.nav.faq}}</a>
   </nav>
   <div style="display:flex; align-items:center; gap:14px;">
@@ -313,54 +294,36 @@
   </div>
 </section>
 
-<!-- PRECIO -->
-<section id="precio" class="sec" style="padding-top:0; max-width:980px;">
+<!-- IDEAS -->
+<section id="ideas" class="sec" style="padding-top:0; max-width:980px;">
   <div class="head-c" data-reveal>
-    <span class="eyebrow">{{contratar.landing.precio.eyebrow}}</span>
-    <h2 class="h-aeline" data-split>{{contratar.landing.precio.title}}</h2>
-    <p>{{contratar.landing.precio.sub}}</p>
+    <span class="eyebrow">Ideas que puedo construir</span>
+    <h2 class="h-aeline" data-split>Web, portfolio o IA. Primero lo hablamos.</h2>
+    <p>Sin precios públicos ni checkout por ahora. Me cuentas qué quieres, reviso el alcance y te respondo con una propuesta clara.</p>
   </div>
-  <div data-stagger class="grid md:grid-cols-2 gap-6 items-stretch">
-
-    <article class="plan plan-featured">
-      <span class="plan-name">{{contratar.landing.precio.badge}} · {{contratar.landing.precio.mName}}</span>
-      <div style="margin:14px 0 4px;"><span class="plan-old">{{contratar.landing.precio.mOld}}</span><span class="plan-price">{{contratar.landing.precio.mPrice}}</span><span class="plan-per">{{contratar.landing.precio.mPer}}</span></div>
-      <ul class="flex-1 my-6" style="list-style:none;">
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f1}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f2}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f3}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f4}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f6}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f7}}</li>
-      </ul>
-      <button type="button" class="pay-btn primary" data-checkout="web_monthly">{{contratar.landing.precio.payNow}}</button>
-      <a class="pay-btn ghost" href="#contacto">{{contratar.landing.precio.askInfo}}</a>
-      <p class="meta" style="margin-top:14px; text-align:center; opacity:.8;">{{contratar.landing.precio.mNote}}</p>
+  <div data-stagger class="grid md:grid-cols-3 gap-4 items-stretch">
+    <article class="card svc">
+      <span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
+      <h3>Web para negocio</h3>
+      <p>Una página clara con servicios, fotos, contacto, WhatsApp, móvil y SEO básico para que la gente entienda qué haces y te escriba.</p>
     </article>
-
-    <article class="plan">
-      <span class="plan-name">{{contratar.landing.precio.oName}}</span>
-      <div style="margin:14px 0 4px;"><span class="plan-price">{{contratar.landing.precio.oPrice}}</span><span class="plan-per">{{contratar.landing.precio.oPer}}</span></div>
-      <ul class="flex-1 my-6" style="list-style:none;">
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f1}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f2}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f3}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f5}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f6}}</li>
-        <li class="plan-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>{{contratar.landing.precio.f8}}</li>
-      </ul>
-      <button type="button" class="pay-btn primary" data-checkout="web_onetime">{{contratar.landing.precio.payNow}}</button>
-      <a class="pay-btn ghost" href="#contacto">{{contratar.landing.precio.askInfo}}</a>
-      <p class="meta" style="margin-top:14px; text-align:center; opacity:.8;">{{contratar.landing.precio.oNote}}</p>
+    <article class="card svc">
+      <span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21c1.3-3.2 3.3-5 6-5s4.7 1.8 6 5"/></svg></span>
+      <h3>Portfolio personal</h3>
+      <p>Una web para enseñar quién eres, tus trabajos, certificados, enlaces y una forma profesional de que te contacten.</p>
     </article>
-
+    <article class="card svc">
+      <span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></span>
+      <h3>IA o chatbot</h3>
+      <p>Un asistente para responder preguntas, ordenar leads, explicar servicios, analizar datos o ayudar al cliente antes de hablar contigo.</p>
+    </article>
   </div>
 
   <div data-reveal style="margin-top:28px; max-width:680px; margin-left:auto; margin-right:auto; background:rgba(226,59,78,.07); border:1px solid rgba(226,59,78,.28); border-radius:18px; padding:18px 22px; display:flex; gap:15px; align-items:center;">
-    <span class="icon-chip" style="flex:none; width:44px; height:44px; border-radius:13px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></span>
+    <span class="icon-chip" style="flex:none; width:44px; height:44px; border-radius:13px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></span>
     <div>
-      <p style="font-weight:700; font-size:15px; margin-bottom:3px;">{{contratar.landing.precio.addon3dTitle}}</p>
-      <p style="color:rgba(255,255,255,.66); font-size:13.5px; line-height:1.5;">{{contratar.landing.precio.addon3dDesc}}</p>
+      <p style="font-weight:700; font-size:15px; margin-bottom:3px;">No hace falta tener todo claro.</p>
+      <p style="color:rgba(255,255,255,.66); font-size:13.5px; line-height:1.5;">Puedes mandar una idea incompleta. Yo te respondo con preguntas, opciones y el camino más simple para construirla.</p>
     </div>
   </div>
 </section>
@@ -396,9 +359,9 @@
       <a href="#proceso">{{contratar.landing.nav.proceso}}</a>
     </div>
     <div>
-      <h4>{{contratar.landing.nav.precio}}</h4>
-      <a href="#precio">{{contratar.landing.precio.title}}</a>
-      <a href="{{nav.precios}}">{{contratar.landing.ctaband.servicesBtn}}</a>
+      <h4>Proyecto</h4>
+      <a href="#ideas">Ideas</a>
+      <a href="#contacto">Formulario</a>
       <a href="{{nav.demos}}">Webs Reales</a>
     </div>
     <div>
@@ -414,7 +377,7 @@
   </div>
 </footer>
 
-<div class="sticky-bar"><a href="#precio">{{contratar.landing.sticky}}</a></div>
+<div class="sticky-bar"><a href="#contacto">{{contratar.landing.sticky}}</a></div>
 
 <script id="i18n-data" type="application/json">{{i18n.formJson}}</script>
 <script src="{{asset.prefix}}lang.js" defer></script>
