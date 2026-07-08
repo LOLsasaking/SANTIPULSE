@@ -19,7 +19,6 @@
     { key: 'sakana', name: 'SAKANA', type: 'video', media: 'demo-media/sakana.mp4', url: 'https://restaurant-templates-rosy.vercel.app/sushi.html', cat: 'preview' },
     { key: 'tours', name: 'Tenerife Tours', type: 'video', media: 'demo-media/tenerife-tours.mp4', url: 'https://tenerife-tours.vercel.app/', cat: 'preview' },
     { key: 'elevate', name: 'ELEVATE Barber', type: 'video', media: 'demo-media/elevate-barber.mp4', url: 'https://elevate-barbershop-cyan.vercel.app/', cat: 'preview' },
-    { key: 'bmwm3', name: 'BMW E30 M3', type: 'video', media: 'demo-media/bmw-e30.mp4', url: 'https://bmw-clone-eosin.vercel.app/', cat: 'preview' },
     { key: 'rentalmiami', name: 'Mirador Miami Estate', type: 'video', media: 'demo-media/rental-miami/rental place hero.mp4', url: '/demo-media/rental-miami/', cat: 'preview' },
     { key: 'insurance', name: 'Easy Insurance AI Assistant', type: 'image', media: 'demo-media/chatbot-es.png', url: '', cat: 'coming', soon: true },
     { key: 'elecsafety', name: 'Electrical Safety Chatbot', type: 'image', media: 'demo-media/chatbot-es.png', url: '', cat: 'coming', soon: true },

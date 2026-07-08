@@ -48,9 +48,21 @@
   .nav-links a{ color:rgba(255,255,255,.72); text-decoration:none; font-size:14px; font-weight:500; transition:color .2s; }
   .nav-links a:hover{ color:#fff; }
 
-  /* hero — looping video only, full screen, no text */
-  .hero{ position:relative; height:100vh; min-height:100svh; overflow:hidden; background:#000; }
-  .hero-vid{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+  .work-hero{ position:relative; overflow:hidden; background:linear-gradient(135deg, rgba(226,59,78,.14), rgba(255,255,255,.02) 42%, transparent 72%), #08080a; border-bottom:1px solid rgba(255,255,255,.08); }
+  .work-hero::after{ content:''; position:absolute; inset:auto 0 0; height:1px; background:linear-gradient(90deg, transparent, rgba(226,59,78,.75), transparent); }
+  .work-hero-inner{ max-width:1180px; margin:0 auto; min-height:calc(100svh - 118px); padding:92px 26px 72px; display:grid; grid-template-columns:minmax(0,1.04fr) minmax(320px,.76fr); gap:44px; align-items:center; }
+  .work-copy h1{ font-size:clamp(2.7rem,7vw,6.8rem); max-width:10ch; margin:22px 0 20px; }
+  .work-copy p{ max-width:39rem; color:rgba(255,255,255,.66); font-size:1.08rem; line-height:1.7; }
+  .work-actions{ margin-top:30px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  .ghost-cta{ display:inline-flex; align-items:center; justify-content:center; min-height:56px; border:1px solid rgba(255,255,255,.18); color:#fff; border-radius:9999px; padding:0 22px; text-decoration:none; font-family:'Space Mono',monospace; font-size:12px; font-weight:700; letter-spacing:0; text-transform:uppercase; transition:border-color .2s, background .2s; }
+  .ghost-cta:hover{ border-color:rgba(255,255,255,.45); background:rgba(255,255,255,.05); }
+  .work-aside{ border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.035); border-radius:26px; padding:26px; box-shadow:0 30px 80px rgba(0,0,0,.36); }
+  .work-aside .meta{ margin-bottom:16px; }
+  .work-types{ display:grid; gap:12px; }
+  .work-type{ display:grid; grid-template-columns:46px minmax(0,1fr); gap:14px; align-items:start; padding:16px; border-radius:18px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.08); }
+  .work-type h3{ font-size:1rem; font-weight:800; margin-bottom:6px; letter-spacing:0; }
+  .work-type p{ color:rgba(255,255,255,.62); font-size:13.5px; line-height:1.55; }
+  .work-note{ margin-top:14px; color:rgba(255,255,255,.55); font-size:13px; line-height:1.55; }
 
   .sec{ max-width:1180px; margin:0 auto; padding:96px 26px; }
   .head-c{ text-align:center; max-width:50rem; margin:0 auto 54px; }
@@ -141,6 +153,8 @@
 
   @media (max-width:900px){
     .nav-links{ display:none; }
+    .work-hero-inner{ min-height:auto; grid-template-columns:1fr; padding:68px 22px 56px; gap:28px; }
+    .work-copy h1{ max-width:11ch; }
     .sec{ padding:64px 22px; }
     .foot-grid{ grid-template-columns:1fr 1fr; }
   }
@@ -172,10 +186,12 @@
 <header class="nav">
   <a class="wordmark" href="{{nav.home}}" aria-label="SantiPulse" style="display:inline-flex;align-items:center;gap:9px;text-decoration:none;"><img src="{{asset.prefix}}mascot-favicon.png" alt="" style="height:32px;width:32px;border-radius:8px;display:block;flex:none;"/><span style="font-family:Archivo,sans-serif;font-weight:900;font-size:19px;letter-spacing:-.02em;color:#fff;line-height:1;">SantiPulse<span style="color:#E23B4E;">.</span></span></a>
   <nav class="nav-links">
+    <a href="#contacto">Contacto</a>
     <a href="#por-que">{{contratar.landing.nav.porque}}</a>
     <a href="#incluye">{{contratar.landing.nav.incluye}}</a>
     <a href="#proceso">{{contratar.landing.nav.proceso}}</a>
     <a href="#ideas">Ideas</a>
+    <a href="{{nav.demos}}">Portfolio</a>
     <a href="#faq">{{contratar.landing.nav.faq}}</a>
   </nav>
   <div style="display:flex; align-items:center; gap:14px;">
@@ -184,12 +200,39 @@
   </div>
 </header>
 
-<!-- HERO — looping video only, no text -->
-<section id="top" class="hero">
-  <video class="hero-vid" src="{{asset.prefix}}demo-media/hero.mp4" autoplay loop muted playsinline preload="metadata" aria-label="Santipulse"></video>
+<section id="top" class="work-hero">
+  <div class="work-hero-inner">
+    <div class="work-copy" data-reveal>
+      <span class="eyebrow">{{contratar.landing.hero.badge}}</span>
+      <h1 class="h-aeline" data-split>{{contratar.landing.hero.titleA}} {{contratar.landing.hero.titleB}} {{contratar.landing.hero.titleC}}</h1>
+      <p>{{contratar.landing.hero.sub}}</p>
+      <div class="work-actions">
+        <a class="pill-cta" href="#contacto">Get in contact with me <span class="circ">→</span></a>
+        <a class="ghost-cta" href="{{nav.demos}}">Ver portfolio</a>
+      </div>
+    </div>
+    <aside class="work-aside" data-reveal>
+      <p class="meta">Puedes pedir</p>
+      <div class="work-types">
+        <div class="work-type">
+          <span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
+          <div><h3>Una web como mis clientes</h3><p>Si te gustó Sol Morena, VALS BASL o Barbería El Estimado, dime qué estilo quieres y para qué negocio.</p></div>
+        </div>
+        <div class="work-type">
+          <span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 21c1.3-3.2 3.3-5 6-5s4.7 1.8 6 5"/></svg></span>
+          <div><h3>Portfolio personal</h3><p>Una página para enseñar tu historia, trabajos, certificados, enlaces y una forma profesional de contactarte.</p></div>
+        </div>
+        <div class="work-type">
+          <span class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></span>
+          <div><h3>IA, chatbot o proyecto</h3><p>Describe la idea, qué debería responder o automatizar, y qué datos necesita recoger de tus clientes.</p></div>
+        </div>
+      </div>
+      <p class="work-note">No necesitas tener todo cerrado. Con una idea, referencias y tu objetivo puedo responderte con el siguiente paso.</p>
+    </aside>
+  </div>
 </section>
 
-<!-- CONTACTO / FORM (right under the hero) -->
+<!-- CONTACTO / FORM -->
 <section id="contacto" class="sec" style="max-width:680px;">
   <div class="head-c" data-reveal>
     <span class="eyebrow">{{contratar.eyebrow}}</span>
