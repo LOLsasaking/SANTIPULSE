@@ -8,15 +8,19 @@
   var D = I18N.items || {};
 
   var WEBSITES = [
+    { key: 'estimado', name: 'Barberia El Estimado', type: 'video', media: 'demo-media/estimado-web.mp4', url: 'https://www.barberiaelestimado.com/', cat: 'client' },
+    { key: 'vals', name: 'VALS', type: 'video', media: 'demo-media/vals.mp4', url: 'https://vals-xi.vercel.app/', cat: 'client' },
+    { key: 'megasur', name: 'MEGASUR Tenerife', type: 'video', media: 'demo-media/megasur.mp4', url: 'https://megasur-tenerife-demo.vercel.app/', cat: 'client' },
+    { key: 'insurance', name: 'AI Insurance Assistant', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true },
+    { key: 'elecsafety', name: 'Electrical Safety Chatbot', type: 'image', media: 'demo-media/chatbot-es.png', url: '', cat: 'coming', soon: true },
+    { key: 'resume', name: 'Resume Analyzer AI', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true },
+    { key: 'autodash', name: 'Business Automation Dashboard', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true },
     { key: 'onfleek', name: 'On Fleek', type: 'video', media: 'demo-media/onfleek.mp4', url: 'https://on-fleek-ten.vercel.app/' },
     { key: 'suehtam', name: 'SUEHTAM', type: 'video', media: 'demo-media/suehtam.mp4', url: 'https://suehtam.vercel.app/' },
-    { key: 'estimado', name: 'Barberia El Estimado', type: 'video', media: 'demo-media/estimado-web.mp4', url: 'https://www.barberiaelestimado.com/' },
     { key: 'urban', name: 'El Estimado Urban', type: 'image', media: 'demo-media/elestimado.jpg', url: 'https://barber-templates.vercel.app/urban' },
     { key: 'burgur', name: 'BURGUR', type: 'video', media: 'demo-media/burgur.mp4', url: 'https://restaurant-templates-rosy.vercel.app/burger.html' },
     { key: 'sakana', name: 'SAKANA', type: 'video', media: 'demo-media/sakana.mp4', url: 'https://restaurant-templates-rosy.vercel.app/sushi.html' },
     { key: 'tours', name: 'Tenerife Tours', type: 'video', media: 'demo-media/tenerife-tours.mp4', url: 'https://tenerife-tours.vercel.app/' },
-    { key: 'vals', name: 'VALS', type: 'video', media: 'demo-media/vals.mp4', url: 'https://vals-xi.vercel.app/' },
-    { key: 'megasur', name: 'MEGASUR Tenerife', type: 'video', media: 'demo-media/megasur.mp4', url: 'https://megasur-tenerife-demo.vercel.app/' },
     // ── NEW (2026-06-13) — live on Vercel.
     { key: 'elevate', name: 'ELEVATE Barber', type: 'video', media: 'demo-media/elevate-barber.mp4', url: 'https://elevate-barbershop-cyan.vercel.app/' },
     { key: 'bmwm3', name: 'BMW E30 M3', type: 'video', media: 'demo-media/bmw-e30.mp4', url: 'https://bmw-clone-eosin.vercel.app/', cat: '3d' },
@@ -60,13 +64,13 @@
       navProjects: 'Proyectos',
       navContact: 'Contacto',
       hero: 'Hola, soy Santi',
-      role: 'creo webs con personalidad, movimiento y sistemas que ayudan a vender mas',
+      role: 'creo webs, herramientas de IA y automatizaciones que puedo llevar a proyectos reales',
       aboutTitle: 'Sobre mi',
-      about: 'Soy Santi, creador de SantiPulse. Construyo webs reales para negocios, experiencias 3D y automatizaciones con IA que convierten una pagina normal en algo que se recuerda. Cada proyecto esta pensado para que el cliente vea valor rapido, confie y de el siguiente paso.',
+      about: 'Soy Santi, creador de SantiPulse. Este portfolio enseña webs reales para clientes, proyectos de IA que estoy preparando y demos que muestran mi forma de construir. Busco convertir esta experiencia en oportunidades de trabajo, colaboraciones y nuevos clientes.',
       projectsTitle: 'Proyectos',
-      projectsIntro: 'Todas las demos reales de SantiPulse en una sola experiencia.',
-      contact: 'Contactar',
-      finalTitle: 'Creamos tu web',
+      projectsIntro: 'Primero, tres webs reales de clientes. Después, proyectos que iré añadiendo poco a poco.',
+      contact: 'Trabajar conmigo',
+      finalTitle: 'Trabajemos juntos',
       preview: 'Vista rapida',
       open: 'Ver proyecto',
       count: 'demos en vivo',
@@ -76,20 +80,26 @@
       category3d: 'Web 3D',
       categoryRental: 'Alquiler de lujo',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Web real'
+      categoryWeb: 'Web real',
+      clientsTitle: 'Webs de clientes',
+      comingTitle: 'Próximos proyectos',
+      websitesTitle: 'Webs & Plantillas',
+      categoryClient: 'Cliente real',
+      categoryComing: 'En desarrollo',
+      soon: 'Próximamente'
     },
     en: {
       navAbout: 'About',
       navProjects: 'Projects',
       navContact: 'Contact',
       hero: "Hi, i'm Santi",
-      role: 'i create websites with personality, motion and systems that help businesses sell',
+      role: 'i build websites, AI tools and automation projects that can ship into real work',
       aboutTitle: 'About me',
-      about: "I'm Santi, the creator behind SantiPulse. I build real websites for businesses, 3D web experiences and AI automations that turn a normal page into something people remember. Every project is shaped so a visitor sees value fast, trusts the brand and takes the next step.",
+      about: "I'm Santi, the creator behind SantiPulse. This portfolio shows real client websites, AI projects I am preparing and demos that show how I build. I want this site to open doors to work, collaborations and new clients.",
       projectsTitle: 'Projects',
-      projectsIntro: 'Every live SantiPulse demo in one portfolio experience.',
-      contact: 'Contact me',
-      finalTitle: "Let's build",
+      projectsIntro: 'First, three real client websites. Then, projects I will keep adding over time.',
+      contact: 'Work with me',
+      finalTitle: 'Work with me',
       preview: 'Quick view',
       open: 'Live project',
       count: 'live demos',
@@ -99,20 +109,26 @@
       category3d: '3D Web',
       categoryRental: 'Luxury rental',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Real website'
+      categoryWeb: 'Real website',
+      clientsTitle: 'Client Websites',
+      comingTitle: 'Coming Next',
+      websitesTitle: 'Websites & Templates',
+      categoryClient: 'Real client',
+      categoryComing: 'In development',
+      soon: 'Coming soon'
     },
     fr: {
       navAbout: 'A propos',
       navProjects: 'Projets',
       navContact: 'Contact',
       hero: 'Salut, je suis Santi',
-      role: 'je cree des sites avec du caractere, du mouvement et des systemes qui vendent',
+      role: 'je cree des sites, outils IA et automatisations prets pour de vrais projets',
       aboutTitle: 'A propos',
-      about: 'Je suis Santi, le createur de SantiPulse. Je construis des sites reels pour les entreprises, des experiences web 3D et des automatisations IA qui transforment une page normale en experience memorable.',
+      about: 'Je suis Santi, le createur de SantiPulse. Ce portfolio presente des sites reels pour clients, des projets IA en preparation et des demos qui montrent ma facon de construire.',
       projectsTitle: 'Projets',
-      projectsIntro: 'Toutes les demos SantiPulse dans une seule experience portfolio.',
-      contact: 'Me contacter',
-      finalTitle: 'Creons votre site',
+      projectsIntro: 'D abord, trois vrais sites clients. Ensuite, les projets que j ajouterai petit a petit.',
+      contact: 'Travailler avec moi',
+      finalTitle: 'Travaillons ensemble',
       preview: 'Apercu',
       open: 'Voir le projet',
       count: 'demos en direct',
@@ -122,20 +138,26 @@
       category3d: 'Web 3D',
       categoryRental: 'Location luxe',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Site reel'
+      categoryWeb: 'Site reel',
+      clientsTitle: 'Sites clients',
+      comingTitle: 'Prochains projets',
+      websitesTitle: 'Sites & Modeles',
+      categoryClient: 'Client reel',
+      categoryComing: 'En developpement',
+      soon: 'Bientot'
     },
     de: {
       navAbout: 'Uber mich',
       navProjects: 'Projekte',
       navContact: 'Kontakt',
       hero: 'Hi, ich bin Santi',
-      role: 'ich baue Websites mit Charakter, Bewegung und Systemen, die verkaufen helfen',
+      role: 'ich baue Websites, KI-Tools und Automationen fuer echte Projekte',
       aboutTitle: 'Uber mich',
-      about: 'Ich bin Santi, der Creator hinter SantiPulse. Ich baue echte Websites fur Unternehmen, 3D-Web-Erlebnisse und KI-Automationen, die aus einer normalen Seite etwas machen, das man im Kopf behalt.',
+      about: 'Ich bin Santi, der Creator hinter SantiPulse. Dieses Portfolio zeigt echte Kunden-Websites, KI-Projekte in Vorbereitung und Demos, die zeigen, wie ich baue.',
       projectsTitle: 'Projekte',
-      projectsIntro: 'Alle Live-Demos von SantiPulse in einer Portfolio-Erfahrung.',
-      contact: 'Kontakt',
-      finalTitle: 'Lass uns bauen',
+      projectsIntro: 'Zuerst drei echte Kunden-Websites. Danach Projekte, die ich Schritt fuer Schritt ergaenze.',
+      contact: 'Mit mir arbeiten',
+      finalTitle: 'Lass uns arbeiten',
       preview: 'Vorschau',
       open: 'Projekt ansehen',
       count: 'Live-Demos',
@@ -145,20 +167,26 @@
       category3d: '3D Web',
       categoryRental: 'Luxus-Miete',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Echte Website'
+      categoryWeb: 'Echte Website',
+      clientsTitle: 'Kunden-Websites',
+      comingTitle: 'Als Naechstes',
+      websitesTitle: 'Websites & Vorlagen',
+      categoryClient: 'Echter Kunde',
+      categoryComing: 'In Entwicklung',
+      soon: 'Demnaechst'
     },
     it: {
       navAbout: 'Chi sono',
       navProjects: 'Progetti',
       navContact: 'Contatto',
       hero: 'Ciao, sono Santi',
-      role: 'creo siti con personalita, movimento e sistemi che aiutano a vendere',
+      role: 'creo siti, strumenti IA e automazioni pronti per progetti reali',
       aboutTitle: 'Chi sono',
-      about: 'Sono Santi, il creator dietro SantiPulse. Costruisco siti reali per aziende, esperienze web 3D e automazioni IA che trasformano una pagina normale in qualcosa che resta impresso.',
+      about: 'Sono Santi, il creator dietro SantiPulse. Questo portfolio mostra siti reali per clienti, progetti IA in preparazione e demo che raccontano come costruisco.',
       projectsTitle: 'Progetti',
-      projectsIntro: 'Tutte le demo SantiPulse in una sola esperienza portfolio.',
-      contact: 'Contattami',
-      finalTitle: 'Costruiamo',
+      projectsIntro: 'Prima, tre siti reali per clienti. Poi, progetti che aggiungero poco a poco.',
+      contact: 'Lavora con me',
+      finalTitle: 'Lavoriamo insieme',
       preview: 'Anteprima',
       open: 'Vedi progetto',
       count: 'demo live',
@@ -168,7 +196,13 @@
       category3d: 'Web 3D',
       categoryRental: 'Affitto luxury',
       categoryPortfolio: 'Portfolio',
-      categoryWeb: 'Sito reale'
+      categoryWeb: 'Sito reale',
+      clientsTitle: 'Siti clienti',
+      comingTitle: 'Prossimi progetti',
+      websitesTitle: 'Siti & Template',
+      categoryClient: 'Cliente reale',
+      categoryComing: 'In sviluppo',
+      soon: 'Prossimamente'
     }
   };
   var P = PORTFOLIO_COPY[LANG] || PORTFOLIO_COPY.es;
@@ -182,13 +216,20 @@
 
   function categoryFor(w) {
     if (w.key === 'rentalmiami') return P.categoryRental;
+    if (w.cat === 'client') return P.categoryClient;
+    if (w.cat === 'coming') return P.categoryComing;
     if (w.cat === '3d') return P.category3d;
     return P.categoryWeb;
+  }
+
+  function placeholderTile(w, className) {
+    return '<div class="ai-tile ' + className + '"><span class="ai-tile-name">' + esc(w.name) + '</span></div>';
   }
 
   function mediaHtml(w, className, extra) {
     className = className || '';
     extra = extra || '';
+    if (w.type === 'placeholder' || !w.media) return placeholderTile(w, className);
     if (w.type === 'image') return '<img class="' + className + '" src="' + prefix + w.media + '" alt="" loading="lazy" ' + extra + '/>';
     return '<video class="' + className + '" src="' + prefix + w.media + '#t=0.5" muted loop playsinline preload="metadata" ' + extra + '></video>';
   }
@@ -197,8 +238,9 @@
     var a = document.getElementById('portfolio-marquee-a');
     var b = document.getElementById('portfolio-marquee-b');
     if (!a || !b) return;
-    var first = DISPLAY_WEBSITES.slice(0, Math.ceil(DISPLAY_WEBSITES.length / 2));
-    var second = DISPLAY_WEBSITES.slice(Math.ceil(DISPLAY_WEBSITES.length / 2));
+    var withMedia = DISPLAY_WEBSITES.filter(function (w) { return w.type !== 'placeholder' && w.media; });
+    var first = withMedia.slice(0, Math.ceil(withMedia.length / 2));
+    var second = withMedia.slice(Math.ceil(withMedia.length / 2));
     function row(items) {
       return items.concat(items).map(function (w) {
         return '<div class="marquee-tile">' + mediaHtml(w, '', 'autoplay') + '</div>';
@@ -212,19 +254,29 @@
     var target = document.getElementById('portfolio-projects');
     if (!target) return;
     var count = document.getElementById('portfolio-count');
-    if (count) count.textContent = DISPLAY_WEBSITES.length + ' ' + P.count;
+    if (count) {
+      var live = DISPLAY_WEBSITES.filter(function (w) { return !w.soon; }).length;
+      count.textContent = live + ' ' + P.count;
+    }
 
     var indexed = DISPLAY_WEBSITES.map(function (w, i) { return { w: w, i: i }; });
-    var normal = indexed.filter(function (item) { return item.w.cat !== '3d'; });
+    var clients = indexed.filter(function (item) { return item.w.cat === 'client'; });
+    var coming = indexed.filter(function (item) { return item.w.cat === 'coming'; });
+    var normal = indexed.filter(function (item) { return item.w.cat !== '3d' && item.w.cat !== 'client' && item.w.cat !== 'coming'; });
     var threeD = indexed.filter(function (item) { return item.w.cat === '3d'; });
 
     function card(item, cardIndex) {
       var w = item.w;
       var i = item.i;
-      var n = String(i + 1).padStart(2, '0');
+      var n = String(cardIndex + 1).padStart(2, '0');
       var desc = D[w.key] || '';
+      var url = w.url ? demoUrl(w) : '';
+      var external = /^(https?:)?\/\//.test(url);
+      var open = url
+        ? '<a class="outline-btn" href="' + esc(url) + '"' + (external ? ' target="_blank" rel="noopener"' : '') + '>' + esc(P.open) + '</a>'
+        : '<span class="outline-btn is-disabled">' + esc(P.soon) + '</span>';
       return '<article class="portfolio-card is-in" data-demo-card="' + i + '" style="z-index:' + (cardIndex + 1) + ';--pop-delay:' + Math.min(cardIndex * 55, 700) + 'ms">' +
-        '<div class="portfolio-media">' + mediaHtml(w, '', 'autoplay') + '</div>' +
+        '<div class="portfolio-media">' + mediaHtml(w, '', 'autoplay') + (w.soon ? '<span class="soon-badge">' + esc(P.soon) + '</span>' : '') + '</div>' +
         '<div class="portfolio-info">' +
           '<div>' +
             '<div class="portfolio-num">' + n + '</div>' +
@@ -234,7 +286,7 @@
           '</div>' +
           '<div class="portfolio-actions">' +
             '<button class="outline-btn" type="button" data-preview="' + i + '">' + esc(P.preview) + '</button>' +
-            '<a class="outline-btn" href="' + esc(demoUrl(w)) + '"' + (/^(https?:)?\/\//.test(demoUrl(w)) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(P.open) + '</a>' +
+            open +
           '</div>' +
         '</div>' +
       '</article>';
@@ -251,7 +303,11 @@
       '</section>';
     }
 
-    target.innerHTML = section(P.normalTitle, normal, 0, 'normal') + section(P.threeDTitle, threeD, normal.length, '3d');
+    target.innerHTML =
+      section(P.clientsTitle, clients, 0, 'client') +
+      section(P.comingTitle, coming, clients.length, 'coming') +
+      section(P.websitesTitle, normal, clients.length + coming.length, 'normal') +
+      section(P.threeDTitle, threeD, clients.length + coming.length + normal.length, '3d');
 
     target.addEventListener('click', function (e) {
       var preview = e.target.closest('[data-preview]');
@@ -356,12 +412,19 @@
     modal.querySelector('.dom').hidden = true;
     modal.querySelector('.exp-bodytext').textContent = D[w.key] || '';
     var play = modal.querySelector('a.outline-btn');
-    play.href = demoUrl(w);
-    play.textContent = P.open;
+    if (w.url) {
+      play.href = demoUrl(w);
+      play.textContent = P.open;
+      play.hidden = false;
+    } else {
+      play.hidden = true;
+    }
     var mw = modal.querySelector('.exp-media-wrap');
-    mw.innerHTML = w.type === 'video'
-      ? '<video class="exp-media" src="' + prefix + w.media + '#t=0.5" autoplay loop muted playsinline></video>'
-      : '<img class="exp-media" src="' + prefix + w.media + '" alt="" />';
+    mw.innerHTML = (w.type === 'placeholder' || !w.media)
+      ? '<div class="ai-tile exp-media"><span class="ai-tile-name">' + esc(w.name) + '</span></div>'
+      : (w.type === 'video'
+        ? '<video class="exp-media" src="' + prefix + w.media + '#t=0.5" autoplay loop muted playsinline></video>'
+        : '<img class="exp-media" src="' + prefix + w.media + '" alt="" />');
     overlay.classList.add('open');
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';

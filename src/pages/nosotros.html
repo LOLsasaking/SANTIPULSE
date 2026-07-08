@@ -135,6 +135,34 @@
   </section>
 
   <section class="mb-24" data-reveal>
+    <p class="eyebrow mb-8">{{nosotros.profileEyebrow}}</p>
+    <h2 class="headline text-3xl md:text-5xl mb-8" data-split>{{nosotros.profileTitleA}}<br>{{nosotros.profileTitleB}}</h2>
+    <p class="text-white/70 leading-relaxed font-light text-lg max-w-2xl mb-10">{{nosotros.profileIntro}}</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <a href="{{nosotros.profileLinkedInUrl}}" target="_blank" rel="noopener" class="block border border-white/10 p-5 hover:border-white/35 transition">
+        <p class="meta mb-3">{{nosotros.profileLinkedInLabel}}</p>
+        <p class="text-white/75 leading-relaxed font-light">{{nosotros.profileLinkedInBody}}</p>
+      </a>
+      <a href="{{nosotros.profileGitHubUrl}}" target="_blank" rel="noopener" class="block border border-white/10 p-5 hover:border-white/35 transition">
+        <p class="meta mb-3">{{nosotros.profileGitHubLabel}}</p>
+        <p class="text-white/75 leading-relaxed font-light">{{nosotros.profileGitHubBody}}</p>
+      </a>
+      <div class="border border-white/10 p-5">
+        <p class="meta mb-3">{{nosotros.studyTitle}}</p>
+        <p class="text-white/75 leading-relaxed font-light">{{nosotros.studyBody}}</p>
+      </div>
+      <div class="border border-white/10 p-5">
+        <p class="meta mb-3">{{nosotros.experienceTitle}}</p>
+        <p class="text-white/75 leading-relaxed font-light">{{nosotros.experienceBody}}</p>
+      </div>
+      <div class="md:col-span-2 border border-white/10 p-5">
+        <p class="meta mb-3">{{nosotros.certTitle}}</p>
+        <p class="text-white/75 leading-relaxed font-light">{{nosotros.certBody}}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-24" data-reveal>
     <p class="eyebrow mb-8">{{nosotros.missionEyebrow}}</p>
     <h2 class="headline text-3xl md:text-5xl mb-10" data-split>{{nosotros.missionTitleA}}<br>{{nosotros.missionTitleB}}</h2>
     <div class="space-y-6 max-w-2xl">
@@ -192,7 +220,7 @@
     <a href="{{nav.contratar}}" class="inline-flex items-center gap-3 font-mono font-bold tracking-[0.2em] uppercase text-sm bg-white text-ink px-6 py-3.5 rounded-full hover:bg-white/90 transition">
       {{nosotros.ctaPrimary}} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
     </a>
-    <a href="{{nav.precios}}" class="inline-flex items-center gap-3 font-mono font-bold tracking-[0.2em] uppercase text-sm border border-white/25 px-6 py-3.5 rounded-full hover:border-white transition">
+    <a href="{{nav.demos}}" class="inline-flex items-center gap-3 font-mono font-bold tracking-[0.2em] uppercase text-sm border border-white/25 px-6 py-3.5 rounded-full hover:border-white transition">
       {{nosotros.ctaSecondary}}
     </a>
   </section>
