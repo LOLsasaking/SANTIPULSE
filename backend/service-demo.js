@@ -1,10 +1,10 @@
 /* ============================================================
    POST /api/service-demo
    ------------------------------------------------------------
-   Portfolio product-demo backend for the public service section.
+   Portfolio product-demo service for the public service section.
    These demos are intentionally dependency-free and safe to run without
    private API keys. They behave like small apps: a frontend sends config,
-   the backend returns status, records, logs, metrics, and exportable files.
+   the service returns status, records, logs, metrics, and project outputs.
    ============================================================ */
 import crypto from 'node:crypto';
 import { getIp, parseBody } from './lib/http.js';
@@ -70,8 +70,8 @@ function responseBase(tool, action, config, lang, req) {
     lang,
     sessionId,
     runId,
-    mode: 'demo-backend',
-    backend: {
+    mode: 'interactive-demo',
+    service: {
       endpoint: '/api/service-demo',
       runtime: 'Vercel Serverless / local Node preview',
       storage: 'demo memory',
@@ -123,17 +123,17 @@ function buildAi({ action, config, input, lang, req }) {
     `Detected intent: ${intent}`,
     `Matched business knowledge for ${industry}`,
     `Calculated lead score: ${leadScore}`,
-    'Prepared handoff fields for contact form and CRM',
+    'Prepared follow-up fields for the contact form',
   ];
   const metrics = [
     { label: 'Lead score', value: `${leadScore}%` },
     { label: 'Intent', value: intent.replace(/_/g, ' ') },
     { label: 'Questions', value: String(questions.length) },
-    { label: 'Backend', value: 'online' },
+    { label: 'Service', value: 'ready' },
   ];
   const widget = `export function AssistantWidget(){\n  return <div className="assistant-widget">\n    <strong>${business} Assistant</strong>\n    <p>${reply}</p>\n  </div>;\n}\n`;
   const api = `export default async function handler(req,res){\n  const body = req.body || {};\n  return res.json({ reply: ${JSON.stringify(reply)}, nextFields: ['name','email','phone','service','date'] });\n}\n`;
-  const readme = `# ${business} AI Assistant\n\nA production-style assistant for ${industry}.\n\n## Backend\nPOST /api/assistant/message classifies intent, scores leads, and prepares CRM handoff.\n\n## Frontend\nAssistantWidget renders suggested questions and a visitor chat surface.\n\n## Current demo run\n- Intent: ${intent}\n- Lead score: ${leadScore}%\n- Tone: ${tone}\n- Goal: ${goal}\n`;
+  const readme = `# ${business} AI Assistant\n\nA production-style assistant for ${industry}.\n\n## Service flow\nThe assistant classifies intent, scores leads, and prepares customer follow-up.\n\n## Visitor experience\nAssistantWidget renders suggested questions and a visitor chat surface.\n\n## Current demo run\n- Intent: ${intent}\n- Lead score: ${leadScore}%\n- Tone: ${tone}\n- Goal: ${goal}\n`;
   const bundle = artifactBundle(`${business} AI Assistant App`, [
     file('README.md', readme),
     file('frontend/AssistantWidget.jsx', widget),
@@ -169,18 +169,18 @@ function buildAutomation({ action, config, input, lang, req }) {
     'Webhook payload accepted',
     `Trigger matched: ${trigger}`,
     `Rules evaluated: ${urgent ? 'urgent route' : 'standard route'}`,
-    `Generated task and destination handoff for ${destination}`,
+    `Prepared task and follow-up for ${destination}`,
   ];
   const metrics = [
     { label: 'Run status', value: urgent ? 'attention' : 'processed' },
     { label: 'Steps', value: `${steps.length}/4` },
     { label: 'Priority', value: urgent ? 'high' : 'normal' },
-    { label: 'Backend', value: 'online' },
+    { label: 'Service', value: 'ready' },
   ];
   const workflowJson = { name, trigger, action: mainAction, destination, rules, steps };
   const dashboard = `export function WorkflowDashboard(){\n  const steps = ${JSON.stringify(steps, null, 2)};\n  return <section>{steps.map(step => <p key={step.id}>{step.name}: {step.status}</p>)}</section>;\n}\n`;
   const api = `export default async function handler(req,res){\n  const payload = req.body || {};\n  return res.json({ ok: true, workflow: ${JSON.stringify(name)}, status: ${JSON.stringify(urgent ? 'needs_attention' : 'processed')} });\n}\n`;
-  const readme = `# ${name}\n\nBackend-backed automation demo.\n\n## Flow\n${steps.map((step) => `- ${step.name}: ${step.status}`).join('\n')}\n\n## Rules\n${rules}\n`;
+  const readme = `# ${name}\n\nInteractive automation demo.\n\n## Flow\n${steps.map((step) => `- ${step.name}: ${step.status}`).join('\n')}\n\n## Rules\n${rules}\n`;
   const bundle = artifactBundle(`${name} Automation App`, [
     file('README.md', readme),
     file('frontend/WorkflowDashboard.jsx', dashboard),
@@ -369,17 +369,17 @@ async function buildBrand({ action, config, input, lang, req }) {
     { type: 'usage', rule: 'Use primary color for CTAs and key UI states' },
   ];
   const logs = [
-    imageMode.startsWith('openai') ? 'Generated AI logo concept through backend' : 'Generated local logo concept set without API key',
+    imageMode.startsWith('openai') ? 'Generated AI logo concept for preview' : 'Generated instant logo concept set',
     imageError ? `AI image fallback reason: ${imageError}` : 'Image pipeline completed',
     'Built accessible color palette',
     'Created CSS tokens',
-    'Packaged assets for repo handoff',
+    'Prepared brand assets for review',
   ];
   const metrics = [
-    { label: 'Assets', value: '6 files' },
+    { label: 'Assets', value: '6 items' },
     { label: 'Colors', value: String(palette.length) },
     { label: 'Logo', value: imageMode.startsWith('openai') ? 'AI' : 'Local' },
-    { label: 'Backend', value: 'online' },
+    { label: 'Service', value: 'ready' },
   ];
   const css = `:root{\n  --brand-primary:${palette[0]};\n  --brand-ink:${palette[1]};\n  --brand-soft:${palette[2]};\n  --brand-paper:${palette[3]};\n}\n.button-primary{background:var(--brand-primary);color:#fff;border-radius:999px;padding:12px 18px;font-weight:800;}\n`;
   const readme = `# ${brand} Brand System\n\n## Direction\n${style} identity for ${sector}.\n\n## Promise\n${tagline}\n\n## Palette\n${palette.map((item) => `- ${item}`).join('\n')}\n`;
@@ -434,7 +434,7 @@ function buildElectrical({ action, config, input, lang, req }) {
     { label: 'Circuits', value: String(circuits.length) },
     { label: 'Zones', value: String(rooms) },
     { label: 'Area', value: `${area} m2` },
-    { label: 'Backend', value: 'online' },
+    { label: 'Service', value: 'ready' },
   ];
   const readme = `# Electrical Planning Demo\n\nConcept package for a ${projectType} project.\n\n## Important\nThis is a planning aid only. Final installation, sizing, protections and code compliance must be reviewed by a qualified electrician.\n\n## Circuits\n${circuits.map((item) => `- ${item.id}: ${item.name} (${item.protection})`).join('\n')}\n\n## Materials\n${materials.map((item) => `- ${item}`).join('\n')}\n`;
   const bundle = artifactBundle('Electrical Planning App', [
