@@ -90,34 +90,4 @@
       });
   });
 
-  // ── Web-design pricing: "Pagar ahora" -> Stripe Checkout (guest, no login).
-  //    Trailing slash matches the site's trailingSlash:true so the POST body
-  //    survives (a 308 redirect can drop it). source:'web' lets the server send
-  //    cancellations back to /contratar/.
-  var payButtons = document.querySelectorAll('[data-checkout]');
-  payButtons.forEach(function (b) {
-    b.addEventListener('click', function () {
-      var plan = b.getAttribute('data-checkout');
-      if (!plan) return;
-      var orig = b.textContent;
-      payButtons.forEach(function (x) { x.disabled = true; });
-      b.textContent = '…';
-
-      fetch('/api/stripe/checkout/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: plan, source: 'web' }),
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          if (d && d.url) { window.location.href = d.url; return; }
-          throw new Error((d && d.error) || 'checkout_failed');
-        })
-        .catch(function () {
-          payButtons.forEach(function (x) { x.disabled = false; });
-          b.textContent = orig;
-          alert('No se pudo iniciar el pago. Inténtalo de nuevo o escríbenos por WhatsApp.');
-        });
-    });
-  });
 })();

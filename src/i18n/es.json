@@ -317,7 +317,7 @@
       "insurance": "Asistente de seguros con IA para Easy Insurance — responderá dudas de pólizas, guiará al cliente y ayudará a recoger datos antes de hablar con un agente.",
       "elecsafety": "Chatbot de seguridad eléctrica — responde normativa, detecta riesgos y orienta al usuario antes de tocar un cable.",
       "resume": "Analizador de currículums con IA — puntúa el CV, detecta puntos débiles y sugiere mejoras al instante.",
-      "autodash": "Panel de automatización para negocios — leads, reservas y tareas repetitivas gestionadas por IA desde un solo lugar."
+      "autodash": "Organizador de leads con IA — contactos, solicitudes y próximos pasos reunidos en un solo lugar."
     }
   },
   "nosotros": {
@@ -326,7 +326,7 @@
     "eyebrow": "Quién Soy",
     "titleA": "Sobre",
     "titleB": "mí",
-    "intro": "Soy Santi, el creador de SantiPulse. Construyo páginas web, asistentes de IA y automatizaciones para ayudar a empresas a verse mejor, responder más rápido y ahorrar tiempo.",
+    "intro": "Soy Santi, el creador de SantiPulse. Construyo páginas web, portfolios y asistentes de IA para ayudar a empresas y personas a verse mejor, responder más rápido y recibir contactos.",
     "badges": "Santi · Portfolio · Webs · IA",
     "stat1Num": "2026",
     "stat1Label": "SantiPulse",
@@ -338,7 +338,7 @@
     "missionTitleA": "Crear presencia online,",
     "missionTitleB": "sin perder tiempo",
     "missionP1": "Me gusta construir herramientas que se sienten claras, modernas y útiles: una web que da confianza, un chatbot que responde de verdad o un dashboard que ordena el trabajo diario.",
-    "missionP2": "SantiPulse es mi forma de unir diseño, automatización e inteligencia artificial para convertir ideas en productos que las personas puedan usar y enseñar con orgullo.",
+    "missionP2": "SantiPulse es mi forma de unir diseño, desarrollo web e inteligencia artificial para convertir ideas en productos que las personas puedan usar y enseñar con orgullo.",
     "believeEyebrow": "En qué creo",
     "believe1Title": "Trabajo visible",
     "believe1Body": "Un portfolio debe enseñar proyectos reales, no solo promesas. Por eso muestro webs, demos y sistemas en vivo.",
@@ -351,8 +351,8 @@
     "do1Body": "Asistentes para seguros, seguridad, atención al cliente y soporte 24/7.",
     "do2Title": "Webs y portfolio",
     "do2Body": "Páginas modernas para negocios, marcas personales y servicios.",
-    "do3Title": "Dashboards y automatización",
-    "do3Body": "Paneles para leads, reservas, análisis y tareas repetitivas.",
+    "do3Title": "IA y chatbots",
+    "do3Body": "Asistentes para responder preguntas, ordenar contactos y explicar servicios.",
     "ctaPrimary": "Quiero trabajar contigo",
     "ctaSecondary": "Ver mi portfolio",
     "footer": "© 2026 SantiPulse · Portfolio de Santi",
@@ -360,8 +360,8 @@
     "heroLead": "Soy Santi y construyo",
     "heroW1": "webs modernas",
     "heroW2": "chatbots IA",
-    "heroW3": "dashboards",
-    "heroW4": "automatización",
+    "heroW3": "certificados",
+    "heroW4": "estudios",
     "heroW5": "productos digitales",
     "heroSub": "Portfolio, servicios y sistemas de IA para empresas que quieren una presencia online más clara y más útil.",
     "globeEyebrow": "Desde Florida y Tenerife",
@@ -587,12 +587,12 @@
     "label": "Construido con tecnología de confianza"
   },
   "footer": {
-    "tagline": "Portfolio de Santi: webs reales, proyectos de IA y automatizaciones para empresas que quieren verse mejor y ahorrar tiempo.",
+    "tagline": "Portfolio de Santi: webs reales, proyectos de IA y servicios para empresas que quieren verse mejor y recibir contactos.",
     "servicesH": "Servicios",
     "companyH": "Santi",
     "legalH": "Legal",
     "website": "Sitio Web",
-    "aiauto": "Automatización IA",
+    "aiauto": "Proyectos IA",
     "demos": "Portfolio",
     "about": "Sobre mí",
     "pricing": "Precios",

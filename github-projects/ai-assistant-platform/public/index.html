@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Assistant Platform</title>
+  <style>
+    :root{color-scheme:dark;--blue:#0b3d91;--ink:#07111f;--panel:#0c1525;--line:#1d3358;--muted:#8fa8cf}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#030712;color:#fff}
+    main{min-height:100vh;display:grid;grid-template-columns:.86fr 1.14fr}
+    aside{padding:32px;border-right:1px solid var(--line);background:linear-gradient(180deg,#08162a,#030712)}
+    h1{font-size:44px;line-height:.95;margin:0 0 12px;letter-spacing:0}p{color:var(--muted);line-height:1.55}
+    .metric{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}.metric div{border:1px solid var(--line);border-radius:10px;padding:14px;background:#07111f}.metric strong{display:block;font-size:24px}.metric span{color:var(--muted);font-size:12px}
+    .app{display:grid;grid-template-columns:1fr .9fr;gap:18px;padding:32px}.card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:18px;min-width:0}.chat{display:grid;gap:12px}.msg{padding:12px 14px;border-radius:14px;background:#10213c;color:#dbeafe}.user{background:#fff;color:#07111f;margin-left:42px}
+    textarea,input{width:100%;border:1px solid var(--line);border-radius:12px;background:#07111f;color:#fff;padding:12px;font:inherit;outline:none}button{margin-top:10px;border:0;border-radius:999px;background:var(--blue);color:#fff;padding:12px 16px;font-weight:800;cursor:pointer}
+    .runs{display:grid;gap:10px}.run{border:1px solid var(--line);border-radius:10px;padding:10px;background:#07111f;color:#b9d8ff;font-size:13px}
+    @media(max-width:900px){main,.app{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line)}}
+  </style>
+</head>
+<body>
+  <main>
+    <aside>
+      <p>Frontend + backend product demo</p>
+      <h1>AI Assistant Platform</h1>
+      <p>Use this as a starter for business assistants, lead intake, FAQs and human handoff.</p>
+      <div class="metric"><div><strong id="score">--</strong><span>Lead score</span></div><div><strong id="intent">--</strong><span>Intent</span></div><div><strong id="status">Live</strong><span>API</span></div></div>
+    </aside>
+    <section class="app">
+      <div class="card">
+        <div class="chat" id="chat"><div class="msg">Ask me a real client question.</div></div>
+        <textarea id="message" rows="4" placeholder="Example: I need a quote and appointment this week"></textarea>
+        <button id="send">Send message</button>
+      </div>
+      <div class="card">
+        <h2>Run History</h2>
+        <div class="runs" id="runs"></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const chat=document.getElementById('chat'), runs=document.getElementById('runs');
+    document.getElementById('send').onclick=async()=>{
+      const message=document.getElementById('message').value.trim();
+      if(!message)return;
+      chat.insertAdjacentHTML('beforeend',`<div class="msg user">${message}</div>`);
+      const res=await fetch('/api/message',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,business:'Easy Insurance'})});
+      const data=await res.json();
+      chat.insertAdjacentHTML('beforeend',`<div class="msg">${data.run.reply}</div>`);
+      document.getElementById('score').textContent=data.run.score+'%';
+      document.getElementById('intent').textContent=data.run.intent.replace('_',' ');
+      runs.innerHTML=data.runs.map(run=>`<div class="run">${run.intent} · ${run.score}% · ${new Date(run.at).toLocaleTimeString()}</div>`).join('');
+    };
+  </script>
+</body>
+</html>
+

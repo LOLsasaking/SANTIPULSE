@@ -54,8 +54,11 @@ const DEFAULT_LANG = 'es';
 const LANG_NAMES = { es: 'Español', en: 'English', fr: 'Français', de: 'Deutsch', it: 'Italiano' };
 const LANG_FLAGS = { es: '🇪🇸', en: '🇬🇧', fr: '🇫🇷', de: '🇩🇪', it: '🇮🇹' };
 
+const EXTERNAL_CLONE_HOME = existsSync(join(SRC, 'pages', 'home.html')) &&
+  /\bdata-clone-source=/.test(readFileSync(join(SRC, 'pages', 'home.html'), 'utf8'));
+
 // Page map: template file -> { ns: i18n namespace, path: site path segment ('' = home) }
-const PAGES = [
+let PAGES = [
   { tpl: 'home.html',      ns: 'home',      path: '' },
   { tpl: 'servicios.html', ns: 'servicios', path: 'servicios' },
   { tpl: 'contratar.html', ns: 'contratar', path: 'contratar' },
@@ -64,11 +67,12 @@ const PAGES = [
   { tpl: 'bienvenida.html', ns: 'bienvenida', path: 'bienvenida' },
   { tpl: 'privacidad.html', ns: 'privacidad', path: 'privacidad' },
 ];
+if (EXTERNAL_CLONE_HOME) PAGES = PAGES.slice(0, 1);
 
 // Single-file JS + static assets copied verbatim into dist root
-const JS_FILES = ['tw-config.js', 'lang.js', 'home.js', 'anim.js', 'contratar.js', 'demos.js', 'auth.js', 'login.js', 'dashboard.js', 'dashboard-nav.js', 'pulse-modules.js', 'precios.js', 'site-chrome.js', 'globe.js', 'lanyard.js', 'login-i18n.js', 'dashboard-i18n.js', 'flags.js'];
-const ROOT_ASSETS = ['santilogo.png', 'santipulse-logo.webm', 'mascot-favicon.png', 'mascot-icon.png'];
-const ASSET_DIRS = ['demo-media'];
+const JS_FILES = EXTERNAL_CLONE_HOME ? [] : ['tw-config.js', 'lang.js', 'home.js', 'anim.js', 'contratar.js', 'demos.js', 'auth.js', 'login.js', 'dashboard.js', 'dashboard-nav.js', 'pulse-modules.js', 'precios.js', 'site-chrome.js', 'globe.js', 'lanyard.js', 'login-i18n.js', 'dashboard-i18n.js', 'flags.js'];
+const ROOT_ASSETS = EXTERNAL_CLONE_HOME ? [] : ['santilogo.png', 'santipulse-logo.webm', 'mascot-favicon.png', 'mascot-icon.png'];
+const ASSET_DIRS = EXTERNAL_CLONE_HOME ? ['clone-assets', 'demo-media/rental-miami'] : ['demo-media'];
 
 // Public (browser-safe) Supabase config — injected into app pages at build time.
 // The anon key is DESIGNED to be public; RLS protects the data. Never inject the
@@ -270,8 +274,9 @@ for (const lang of LANGS) {
       data['sb.config'] = `<script src="${data['asset.prefix']}sb-config.js"></script>`;
     }
 
+    const isExternalClone = /\bdata-clone-source=/.test(tpl);
     let html = fill(tpl, data, `${lang}/${page.tpl}`);
-    html = ensureSocialPreviewMeta(html, dotGet(s, page.ns));
+    if (!isExternalClone) html = ensureSocialPreviewMeta(html, dotGet(s, page.ns));
     html = bustJsCache(html);
     assertNoTemplateTokens(html, `${lang}/${page.tpl}`);
 
@@ -283,21 +288,25 @@ for (const lang of LANGS) {
 }
 
 // ---- /aprender redirect (kept for back-compat, per lang) ----
-for (const lang of LANGS) {
-  const prefix = assetPrefix(lang, 'aprender');
-  const langSeg = lang === DEFAULT_LANG ? '' : `${lang}/`;
-  const target = `${prefix}${langSeg}nosotros/`;
-  const redirect =
-    `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8">` +
-    `<link rel="canonical" href="${urlFor(lang, 'nosotros')}" />` +
-    `<meta http-equiv="refresh" content="0; url=${target}" />` +
-    `<title>Santipulse</title></head><body>` +
-    `<p>→ <a href="${target}">/nosotros/</a></p></body></html>\n`;
-  const outDir = join(DIST, lang === DEFAULT_LANG ? '' : lang, 'aprender');
-  mkdirSync(outDir, { recursive: true });
-  writeFileSync(join(outDir, 'index.html'), redirect, 'utf8');
+if (!EXTERNAL_CLONE_HOME) {
+  for (const lang of LANGS) {
+    const prefix = assetPrefix(lang, 'aprender');
+    const langSeg = lang === DEFAULT_LANG ? '' : `${lang}/`;
+    const target = `${prefix}${langSeg}nosotros/`;
+    const redirect =
+      `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8">` +
+      `<link rel="canonical" href="${urlFor(lang, 'nosotros')}" />` +
+      `<meta http-equiv="refresh" content="0; url=${target}" />` +
+      `<title>Santipulse</title></head><body>` +
+      `<p>→ <a href="${target}">/nosotros/</a></p></body></html>\n`;
+    const outDir = join(DIST, lang === DEFAULT_LANG ? '' : lang, 'aprender');
+    mkdirSync(outDir, { recursive: true });
+    writeFileSync(join(outDir, 'index.html'), redirect, 'utf8');
+  }
+  console.log('  ✓ aprender redirects');
+} else {
+  console.log('  ✓ skipped aprender redirects for external clone');
 }
-console.log('  ✓ aprender redirects');
 
 // ---- Copy JS + assets ----
 for (const f of JS_FILES) {
@@ -317,17 +326,19 @@ for (const d of ASSET_DIRS) {
 }
 
 // ---- Self-host the Supabase browser bundle (keeps script-src 'self') ----
-{
+if (!EXTERNAL_CLONE_HOME) {
   const sbBundle = join(ROOT, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js');
   if (existsSync(sbBundle)) { copyFileSync(sbBundle, join(DIST, 'supabase.js')); console.log('  ✓ supabase.js (vendored)'); }
   else console.warn('  ! supabase UMD bundle not found — run npm install');
+} else {
+  console.log('  ✓ skipped supabase bundle for external clone');
 }
 
 // ---- App pages (login / dashboard): single-language, no SEO/i18n ----
 // Config is written to a SEPARATE /sb-config.js file (not an inline <script>),
 // because the production CSP is script-src 'self' with no 'unsafe-inline' —
 // an inline config script would be blocked. A same-origin .js file is allowed.
-{
+if (!EXTERNAL_CLONE_HOME) {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     console.warn('  ! SUPABASE_URL / SUPABASE_ANON_KEY not set — app pages will have empty config');
   }
@@ -348,11 +359,13 @@ for (const d of ASSET_DIRS) {
     writeFileSync(join(outDir, 'index.html'), html, 'utf8');
   }
   console.log('  ✓ app pages + /sb-config.js:', APP_PAGES.map((p) => '/' + p.path + '/').join(', '));
+} else {
+  console.log('  ✓ skipped app pages for external clone');
 }
 
 // ---- Compile Tailwind to a static stylesheet (replaces the runtime CDN) ----
 // Scans the dist HTML just written, so tw.css contains only the classes used.
-{
+if (!EXTERNAL_CLONE_HOME) {
   try {
     execSync('npx tailwindcss -c tailwind.config.cjs -i src/tw-input.css -o dist/tw.css --minify', {
       cwd: ROOT, stdio: 'inherit',
@@ -361,6 +374,8 @@ for (const d of ASSET_DIRS) {
   } catch (err) {
     console.warn('  ! tailwind compile failed:', err.message);
   }
+} else {
+  console.log('  ✓ skipped Tailwind build for external clone');
 }
 
 // ---- sitemap.xml (all langs × pages) ----

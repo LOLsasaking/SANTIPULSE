@@ -129,7 +129,7 @@
       "insurance": "KI-Versicherungsassistent für Easy Insurance — beantwortet künftig Policenfragen, führt Kunden und sammelt nützliche Details vor dem Gespräch mit einem Agenten.",
       "elecsafety": "Chatbot für Elektrosicherheit — beantwortet Vorschriften, erkennt Risiken und leitet Nutzer an, bevor sie ein Kabel anfassen.",
       "resume": "KI-Lebenslauf-Analyse — bewertet den Lebenslauf, findet Schwachstellen und schlägt sofort Verbesserungen vor.",
-      "autodash": "Automatisierungs-Dashboard für Unternehmen — Leads, Buchungen und Routineaufgaben von KI an einem Ort erledigt."
+      "autodash": "KI-Lead-Organizer — Kontakte, Anfragen und nächste Schritte an einem klaren Ort."
     },
     "videos": {
       "eyebrow": "Estrategia de v?deo ? The Pulse System",
@@ -167,7 +167,7 @@
     "eyebrow": "Wer Ich Bin",
     "titleA": "Über",
     "titleB": "mich",
-    "intro": "Ich bin Santi, der Creator von SantiPulse. Ich baue Websites, KI-Assistenten und Automationen, die Unternehmen professioneller wirken lassen, schneller antworten und Zeit sparen.",
+    "intro": "Ich bin Santi, der Creator von SantiPulse. Ich baue Websites, Portfolios und KI-Assistenten, die Unternehmen professioneller wirken lassen, schneller antworten und Leads sammeln.",
     "badges": "Santi · Portfolio · Websites · KI",
     "stat1Num": "2026",
     "stat1Label": "SantiPulse",
@@ -193,7 +193,7 @@
     "do2Title": "Websites und Portfolios",
     "do2Body": "Moderne Seiten für Unternehmen, Personal Brands und Services.",
     "do3Title": "Dashboards und Automatisierung",
-    "do3Body": "Panels für Leads, Buchungen, Analysen und repetitive Aufgaben.",
+    "do3Body": "Assistenten, die Fragen beantworten, Kontakte ordnen und Services erklären.",
     "ctaPrimary": "Ich will mit dir arbeiten",
     "ctaSecondary": "Mein Portfolio ansehen",
     "footer": "© 2026 SantiPulse · Santi Portfolio",
@@ -201,8 +201,8 @@
     "heroLead": "Ich bin Santi und baue",
     "heroW1": "moderne Websites",
     "heroW2": "KI-Chatbots",
-    "heroW3": "Dashboards",
-    "heroW4": "Automatisierung",
+    "heroW3": "Zertifikate",
+    "heroW4": "Studium",
     "heroW5": "digitale Produkte",
     "heroSub": "Portfolio, Services und KI-Systeme für Unternehmen, die eine klarere und nützlichere Online-Präsenz wollen.",
     "globeEyebrow": "Aus Florida und Teneriffa",
@@ -266,12 +266,12 @@
     "label": "Mit bewährter Technologie gebaut"
   },
   "footer": {
-    "tagline": "Santis Portfolio: echte Websites, KI-Projekte und Automationen für Unternehmen, die besser wirken und Zeit sparen wollen.",
+    "tagline": "Santis Portfolio: echte Websites, KI-Projekte und Services für Unternehmen, die besser wirken und Leads sammeln wollen.",
     "servicesH": "Leistungen",
     "companyH": "Santi",
     "legalH": "Rechtliches",
     "website": "Webseite",
-    "aiauto": "KI-Automation",
+    "aiauto": "KI-Projekte",
     "demos": "Portfolio",
     "about": "Über mich",
     "pricing": "Preise",

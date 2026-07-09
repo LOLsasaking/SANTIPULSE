@@ -129,7 +129,7 @@
       "insurance": "Assistant d’assurance IA pour Easy Insurance — il répondra aux questions de police, guidera les clients et collectera les données utiles avant le contact humain.",
       "elecsafety": "Chatbot de sécurité électrique — répond à la réglementation, repère les risques et guide l’utilisateur avant de toucher un fil.",
       "resume": "Analyseur de CV par IA — note le CV, repère les points faibles et propose des améliorations à l’instant.",
-      "autodash": "Tableau de bord d’automatisation — leads, réservations et tâches répétitives gérés par l’IA depuis un seul endroit."
+      "autodash": "Organisateur de leads IA — contacts, demandes et prochaines étapes réunis au même endroit."
     },
     "videos": {
       "eyebrow": "Estrategia de v?deo ? The Pulse System",
@@ -192,8 +192,8 @@
     "do1Body": "Assistants pour assurance, sécurité, support client et service 24/7.",
     "do2Title": "Sites et portfolios",
     "do2Body": "Pages modernes pour entreprises, marques personnelles et services.",
-    "do3Title": "Tableaux et automatisation",
-    "do3Body": "Panels pour leads, réservations, analyse et tâches répétitives.",
+    "do3Title": "IA et chatbots",
+    "do3Body": "Assistants pour répondre aux questions, organiser les contacts et expliquer les services.",
     "ctaPrimary": "Je veux travailler avec toi",
     "ctaSecondary": "Voir mon portfolio",
     "footer": "© 2026 SantiPulse · Portfolio de Santi",
@@ -201,8 +201,8 @@
     "heroLead": "Je suis Santi et je construis",
     "heroW1": "sites modernes",
     "heroW2": "chatbots IA",
-    "heroW3": "tableaux de bord",
-    "heroW4": "automatisation",
+    "heroW3": "certificats",
+    "heroW4": "études",
     "heroW5": "produits digitaux",
     "heroSub": "Portfolio, services et systèmes IA pour les entreprises qui veulent une présence en ligne plus claire et plus utile.",
     "globeEyebrow": "Depuis la Floride et Tenerife",

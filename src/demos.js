@@ -20,10 +20,10 @@
     { key: 'tours', name: 'Tenerife Tours', type: 'video', media: 'demo-media/tenerife-tours.mp4', url: 'https://tenerife-tours.vercel.app/', cat: 'preview' },
     { key: 'elevate', name: 'ELEVATE Barber', type: 'video', media: 'demo-media/elevate-barber.mp4', url: 'https://elevate-barbershop-cyan.vercel.app/', cat: 'preview' },
     { key: 'rentalmiami', name: 'Mirador Miami Estate', type: 'video', media: 'demo-media/rental-miami/rental place hero.mp4', url: '/demo-media/rental-miami/', cat: 'preview' },
-    { key: 'insurance', name: 'Easy Insurance AI Assistant', type: 'image', media: 'demo-media/chatbot-es.png', url: '', cat: 'coming', soon: true },
+    { key: 'insurance', name: 'Easy Insurance AI Assistant', type: 'image', media: 'demo-media/chatbot-es.png', url: 'https://easy-insurance-tax.vercel.app', cat: 'preview' },
     { key: 'elecsafety', name: 'Electrical Safety Chatbot', type: 'image', media: 'demo-media/chatbot-es.png', url: '', cat: 'coming', soon: true },
     { key: 'resume', name: 'Resume Analyzer AI', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true },
-    { key: 'autodash', name: 'Business Automation Dashboard', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true }
+    { key: 'autodash', name: 'Lead Organizer AI', type: 'placeholder', media: '', url: '', cat: 'coming', soon: true }
   ];
   var DISPLAY_WEBSITES = WEBSITES;
 
@@ -62,7 +62,7 @@
       navProjects: 'Proyectos',
       navContact: 'Contacto',
       hero: 'Hola, soy Santi',
-      role: 'creo webs, herramientas de IA y automatizaciones que puedo llevar a proyectos reales',
+      role: 'creo webs, herramientas de IA y chatbots que puedo llevar a proyectos reales',
       aboutTitle: 'Sobre mi',
       about: 'Soy Santi, creador de SantiPulse. Este portfolio enseña webs reales para clientes, proyectos de IA que estoy preparando y demos que muestran mi forma de construir. Busco convertir esta experiencia en oportunidades de trabajo, colaboraciones y nuevos clientes.',
       projectsTitle: 'Proyectos',
@@ -91,7 +91,7 @@
       navProjects: 'Projects',
       navContact: 'Contact',
       hero: "Hi, i'm Santi",
-      role: 'i build websites, AI tools and automation projects that can ship into real work',
+      role: 'i build websites, AI tools and chatbots that can ship into real work',
       aboutTitle: 'About me',
       about: "I'm Santi, the creator behind SantiPulse. This portfolio shows real client websites, AI projects I am preparing and demos that show how I build. I want this site to open doors to work, collaborations and new clients.",
       projectsTitle: 'Projects',
@@ -149,7 +149,7 @@
       navProjects: 'Projekte',
       navContact: 'Kontakt',
       hero: 'Hi, ich bin Santi',
-      role: 'ich baue Websites, KI-Tools und Automationen fuer echte Projekte',
+      role: 'ich baue Websites, KI-Tools und Chatbots fuer echte Projekte',
       aboutTitle: 'Uber mich',
       about: 'Ich bin Santi, der Creator hinter SantiPulse. Dieses Portfolio zeigt echte Kunden-Websites, KI-Projekte in Vorbereitung und Demos, die zeigen, wie ich baue.',
       projectsTitle: 'Projekte',
@@ -355,10 +355,13 @@
   }
 
   function cardHtml(w, i) {
+    var action = w.url
+      ? '<a class="exp-play" href="' + esc(demoUrl(w)) + '" target="_blank" rel="noopener" data-play="' + i + '">Play</a>'
+      : '<button class="exp-play" type="button" data-preview="' + i + '" aria-disabled="true">' + esc(P.soon || 'Coming soon') + '</button>';
     return '<div class="exp-card" data-i="' + i + '">' +
       '<div class="exp-thumb">' + thumb(w) + '</div>' +
       '<div class="exp-meta"><h3>' + esc(w.name) + '</h3></div>' +
-      '<button class="exp-play" type="button" data-play="' + i + '">Play</button>' +
+      action +
       '</div>';
   }
   function groupHead(title, sub) {

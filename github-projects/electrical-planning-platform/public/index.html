@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Electrical Planning Platform</title>
+  <style>
+    :root{color-scheme:dark;--blue:#0b3d91;--line:#1d3358;--panel:#0c1525;--muted:#8fa8cf}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#030712;color:#fff}.wrap{max-width:1180px;margin:auto;padding:32px}
+    header{margin-bottom:22px}h1{font-size:52px;line-height:.95;margin:0}p{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}.card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:18px}
+    label{display:grid;gap:7px;margin-bottom:12px;color:#b9d8ff;font-size:12px;font-weight:900}input,textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:#07111f;color:#fff;padding:12px;font:inherit}button{border:0;border-radius:999px;background:var(--blue);color:white;padding:12px 16px;font-weight:800;cursor:pointer}
+    .diagram{border:1px solid var(--line);border-radius:14px;background:#f8fbff;color:#061226;padding:16px;margin-bottom:14px}.bus{height:4px;background:#061226;margin:18px 0}.branch{display:flex;align-items:center;gap:10px;margin:10px 0}.branch span{background:#0b3d91;color:#fff;border-radius:999px;padding:6px 10px;font-weight:900}
+    .list{display:grid;grid-template-columns:1fr 1fr;gap:12px}.item{border:1px solid var(--line);border-radius:10px;padding:10px;background:#07111f;color:#b9d8ff}
+    @media(max-width:900px){.grid,.list{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><p>Professional planning aid</p><h1>Electrical Planning Platform</h1><p>Concept only. Final compliance must be reviewed by a qualified electrician.</p></header>
+    <div class="grid">
+      <section class="card"><label>Rooms<input id="rooms" type="number" value="6"></label><label>Area m2<input id="area" type="number" value="110"></label><label>Loads<textarea id="loads">kitchen, ev charger reserve</textarea></label><button id="plan">Generate plan</button></section>
+      <section class="card"><div class="diagram" id="diagram"></div><div class="list" id="list"></div></section>
+    </div>
+  </div>
+  <script>
+    async function run(){
+      const res=await fetch('/api/plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({rooms:rooms.value,area:area.value,loads:loads.value})});
+      const data=await res.json();
+      diagram.innerHTML='<strong>Unifilar concept</strong><div class="bus"></div>'+data.circuits.map(c=>`<div class="branch"><span>${c[0]}</span>${c[1]} · ${c[2]}</div>`).join('');
+      list.innerHTML=data.materials.map(m=>`<div class="item">${m}</div>`).join('');
+    }
+    plan.onclick=run; run();
+  </script>
+</body>
+</html>

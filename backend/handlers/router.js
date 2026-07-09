@@ -5,6 +5,7 @@ import dashboardRun from '../dashboard/run.js';
 import dashboardRuns from '../dashboard/runs.js';
 import dashboardServiceStatus from '../dashboard/service-status.js';
 import lead from '../lead.js';
+import serviceDemo from '../service-demo.js';
 import receptionistDashboard from '../receptionist/dashboard.js';
 import receptionistSos from '../receptionist/sos.js';
 import receptionistVapiWebhook from '../receptionist/vapi-webhook.js';
@@ -31,6 +32,7 @@ import stripeWebhook from '../stripe/webhook.js';
 
 const ROUTES = new Map([
   ['lead', lead],
+  ['service-demo', serviceDemo],
   ['receptionist/dashboard', receptionistDashboard],
   ['receptionist/sos', receptionistSos],
   ['receptionist/vapi-webhook', receptionistVapiWebhook],
