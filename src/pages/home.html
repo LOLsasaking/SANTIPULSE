@@ -508,9 +508,32 @@ stop.bred{stop-color:#0b3d91!important}
 .electro-planner .planner-diagram{min-height:390px;background:linear-gradient(90deg,rgba(11,61,145,.075) 1px,transparent 1px),linear-gradient(0deg,rgba(11,61,145,.075) 1px,transparent 1px),#fbfdff;background-size:22px 22px}
 .electro-planner .planner-summary{background:#071426}
 .product-app{display:none!important}
-@media (max-width:991px){#service .repo-tool-head{grid-template-columns:1fr}.lab-console,.lab-brand-board{grid-template-columns:1fr}.lab-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-flow-step::after{display:none}#service .repo-output{border-left:0}}
+#service .ai-intake-layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:12px;margin-top:14px}
+#service .ai-conversation{display:grid;gap:10px;align-content:start}
+#service .ai-message{border:1px solid rgba(255,255,255,.1);border-radius:8px;background:rgba(255,255,255,.045);padding:11px 12px;color:#fff;font-size:13px;line-height:1.45}
+#service .ai-message.visitor{background:#fff;color:#061226}
+#service .ai-message strong{display:block;margin-bottom:4px;font-size:11px;text-transform:uppercase;letter-spacing:.09em;opacity:.72}
+#service .ai-message p{margin:0}
+#service .ai-message ul{margin:8px 0 0;padding-left:18px;display:grid;gap:4px}
+#service .ai-lead-summary{border:1px solid rgba(185,216,255,.24);border-radius:8px;background:#071426;padding:12px;color:#fff;display:grid;gap:8px;align-content:start}
+#service .ai-lead-summary:empty{display:none}
+#service .ai-lead-summary span{color:#b9d8ff;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.12em}
+#service .ai-lead-summary h6{margin:0;font-size:16px;color:#fff}
+#service .ai-lead-summary dl{margin:0;display:grid;gap:8px}
+#service .ai-lead-summary dt{color:rgba(255,255,255,.58);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+#service .ai-lead-summary dd{margin:2px 0 0;font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.82)}
+#service .auto-request-card{border:1px solid rgba(255,255,255,.1);border-radius:8px;background:rgba(255,255,255,.045);padding:12px;margin-top:14px;color:#fff;font-size:13px;line-height:1.5}
+#service .auto-request-card strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#b9d8ff;margin-bottom:4px}
+#service .auto-request-card small{display:block;margin-top:6px;color:rgba(255,255,255,.6)}
+#service .auto-pipeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:12px}
+#service .auto-pipeline:empty{display:none}
+#service .auto-stage{border:1px solid rgba(255,255,255,.1);border-radius:8px;background:rgba(255,255,255,.045);padding:11px;color:#fff;min-height:112px}
+#service .auto-stage span{display:block;color:#b9d8ff;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.12em}
+#service .auto-stage strong{display:block;margin-top:8px;font-size:13.5px;line-height:1.2}
+#service .auto-stage em{display:inline-block;margin-top:8px;border:1px solid rgba(185,216,255,.28);border-radius:999px;padding:3px 8px;color:#d9eaff;font-size:10px;font-style:normal;font-weight:800}
+@media (max-width:991px){#service .repo-tool-head{grid-template-columns:1fr}.lab-console,.lab-brand-board{grid-template-columns:1fr}.lab-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-flow-step::after{display:none}#service .repo-output{border-left:0}#service .ai-intake-layout{grid-template-columns:1fr}#service .auto-pipeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:767px){#service .project-intro,#service .project-facts,#service .project-feature-grid,#service .project-deliverables,#service .project-workflow{grid-template-columns:1fr}#service .project-actions{display:grid;grid-template-columns:1fr}#service .project-actions button{width:100%}}
-@media (max-width:575px){#service .repo-tool-head::after{display:none}.lab-flow,.lab-usage{grid-template-columns:1fr}.lab-console aside,.lab-console main,.lab-card,.lab-brand-board{padding:10px}.electro-planner .planner-diagram{min-height:330px}}
+@media (max-width:575px){#service .repo-tool-head::after{display:none}.lab-flow,.lab-usage{grid-template-columns:1fr}.lab-console aside,.lab-console main,.lab-card,.lab-brand-board{padding:10px}.electro-planner .planner-diagram{min-height:330px}#service .auto-pipeline{grid-template-columns:1fr}}
 </style></head><body class="body-default dark-mode counter-scroll"><div hidden=""><!--$--><!--/$--></div><div class="body-background"><div class="bg-item"><img loading="lazy" width="1440" height="900" src="https://tfisak.vercel.app/assets/images/item/cloud-bg.png" alt="background"></div></div><div class="tf-left-bar"><button type="button" class="btn-setting-color tf-btn-icon style-2" aria-label="Open color settings"><i class="icon-gear"></i></button></div><div class="offcanvas offcanvas-end offcanvas-color" id="settingColorMenu" style="visibility:hidden"><div class="offcanvas-content"><div class="canvas-header"><h5 class="letter-space--2">Configuration</h5><span class="icon-close-popup" role="button" tabindex="0"><i class="icon-close"></i></span></div><div class="canvas-body"><h6 class="title">Color</h6><div class="settings-color list-choose"><button type="button" class="btn-color theme-light choose-item"><span class="color type-body-default"></span><span class="text">Default</span></button><button type="button" class="btn-color theme-light choose-item"><span class="color type-body-v1"></span><span class="text">Silver Dawn</span></button><button type="button" class="btn-color theme-light choose-item"><span class="color type-body-v2"></span><span class="text">Lavender Stone</span></button><button type="button" class="btn-color theme-light choose-item"><span class="color type-body-v3"></span><span class="text">Ocean Breeze</span></button><button type="button" class="btn-color theme-dark choose-item"><span class="color type-dark-v1"></span><span class="text">Midnight Fade</span></button><button type="button" class="btn-color theme-dark choose-item"><span class="color type-dark-v2"></span><span class="text">Charcoal Mist</span></button><button type="button" class="btn-color theme-dark choose-item"><span class="color type-dark-v3"></span><span class="text">Forest Shadow</span></button></div></div></div></div><div class="action-open-mobile d-lg-none"><div class="tf-btn-icon style-2"><div class="btn-mobile-menu"><span></span></div></div><div class="nav-mobile-list"><ul class="nav-mobile-item"><div><li class="nav-item"><a href="#home" class="item-link scroll-link"><i class="icon icon-home"></i><p class="tool-tip text-caption" data-i18n="nav.home">Home</p></a></li><li class="br-line"></li></div><div><li class="nav-item"><a href="#about" class="item-link scroll-link"><i class="icon icon-user-circle"></i><p class="tool-tip text-caption" data-i18n="nav.about">About</p></a></li></div><div><li class="nav-item"><a href="#education" class="item-link scroll-link"><i class="icon icon-edu"></i><p class="tool-tip text-caption" data-i18n="nav.education">Education</p></a></li></div><div><li class="nav-item"><a href="#work" class="item-link scroll-link"><i class="icon icon-high-light"></i><p class="tool-tip text-caption" data-i18n="nav.work">Work</p></a></li></div><div><li class="nav-item"><a href="#service" class="item-link scroll-link"><i class="icon icon-service"></i><p class="tool-tip text-caption" data-i18n="nav.services">Services</p></a></li></div><div><li class="nav-item"><a href="#tech" class="item-link scroll-link"><i class="icon icon-tech-stack"></i><p class="tool-tip text-caption" data-i18n="nav.tech">Tools</p></a></li></div><div><li class="nav-item"><a href="#testimonial" class="item-link scroll-link"><i class="icon icon-tes"></i><p class="tool-tip text-caption" data-i18n="nav.testimonials">Testimonials</p></a></li><li class="br-line"></li></div><div><li class="nav-item"><a href="#contact" class="item-link scroll-link"><i class="icon icon-send"></i><p class="tool-tip text-caption" data-i18n="nav.contact">Contact</p></a></li></div></ul></div></div><div class="overlay-pop"></div><div class="sidebar-tools pst-v1"><div class="nav-top"><div class="tf-btn-icon toggle-switch-mode"><i class="icon icon-light"></i></div></div><ul class="nav-list"><div><li class="nav-item"><a href="#home" class="item-link scroll-link"><i class="icon icon-home"></i><p class="tool-tip text-caption" data-i18n="nav.home">Home</p></a></li><li class="br-line"></li></div><div><li class="nav-item"><a href="#about" class="item-link scroll-link"><i class="icon icon-user-circle"></i><p class="tool-tip text-caption" data-i18n="nav.about">About</p></a></li></div><div><li class="nav-item"><a href="#education" class="item-link scroll-link"><i class="icon icon-edu"></i><p class="tool-tip text-caption" data-i18n="nav.education">Education</p></a></li></div><div><li class="nav-item"><a href="#work" class="item-link scroll-link"><i class="icon icon-high-light"></i><p class="tool-tip text-caption" data-i18n="nav.work">Work</p></a></li></div><div><li class="nav-item"><a href="#service" class="item-link scroll-link"><i class="icon icon-service"></i><p class="tool-tip text-caption" data-i18n="nav.services">Services</p></a></li></div><div><li class="nav-item"><a href="#tech" class="item-link scroll-link"><i class="icon icon-tech-stack"></i><p class="tool-tip text-caption" data-i18n="nav.tech">Tools</p></a></li></div><div><li class="nav-item"><a href="#testimonial" class="item-link scroll-link"><i class="icon icon-tes"></i><p class="tool-tip text-caption" data-i18n="nav.testimonials">Testimonials</p></a></li><li class="br-line"></li></div><div><li class="nav-item"><a href="#contact" class="item-link scroll-link"><i class="icon icon-send"></i><p class="tool-tip text-caption" data-i18n="nav.contact">Contact</p></a></li></div></ul><div class="nav-bottom"><a href="#" class="tf-btn-icon go-top"><i class="icon icon-arrow-top"></i></a></div></div><main id="wrapper"><div class="tf-header-wrap"><a href="/" class="logo-site d-lg-none" aria-hidden="true"><img class="image-switch" data-light="/clone-assets/logos/santipulse.png" data-dark="/clone-assets/logos/santipulse.png" loading="lazy" width="40" height="40" src="/clone-assets/logos/santipulse.png" alt="Santiago Alexander logo" style="color: transparent;"></a><div class="left"><div class="time-local text-body-3"><p class="date">Wed, Jul 8</p><p class="clock">14:06</p></div><div class="language-toggle" aria-label="Language selector"><button type="button" data-lang="en" class="active" aria-pressed="true">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button></div></div></div><div class="sidebar-user"><div class="wrap"><div class="user-image"><div class="image"><img width="1122" height="1402" src="/clone-assets/profile/santiago-bw.png" alt="Santiago Alexander" style="color: transparent;"></div><div class="meta-left d-none d-sm-block"><div class="bg-item-svg"><img class="image-switch" data-light="https://tfisak.vercel.app/assets/images/item/vector-user.svg" data-dark="https://tfisak.vercel.app/assets/images/item/vector-user_dark.svg" loading="lazy" width="32" height="227" src="https://tfisak.vercel.app/assets/images/item/vector-user_dark.svg" alt="Image"></div><p class="avaiable-dot vertical text-body-3 text-black-72 fw-medium"><span class="text-vertical">Available for Work</span><span class="dot"></span></p></div></div><div class="user-logo d-none d-lg-block" aria-hidden="true"><img class="image-switch" data-light="/clone-assets/logos/santipulse.png" data-dark="/clone-assets/logos/santipulse.png" loading="lazy" width="40" height="40" src="/clone-assets/logos/santipulse.png" alt="Santiago Alexander logo" style="color: transparent;"></div><ul class="tf-social-icon-2 user-social d-grid">
 <li><a href="" target="_blank" rel="noopener" aria-label="GitHub" data-github-link="true" aria-disabled="true" title="GitHub" class="github-disabled"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M12 .5A11.5 11.5 0 0 0 8.36 22.9c.58.11.79-.25.79-.56v-2.02c-3.22.7-3.9-1.38-3.9-1.38-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.41-1.27.74-1.56-2.57-.29-5.27-1.29-5.27-5.73 0-1.27.45-2.3 1.2-3.11-.12-.29-.52-1.47.11-3.07 0 0 .98-.31 3.2 1.19A11.1 11.1 0 0 1 12 6.02c.99 0 1.99.13 2.92.4 2.22-1.5 3.19-1.19 3.19-1.19.64 1.6.24 2.78.12 3.07.75.81 1.2 1.84 1.2 3.11 0 4.45-2.71 5.43-5.29 5.72.42.36.79 1.08.79 2.18v3.23c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .5Z"></path></svg></a></li>
 <li><a href="https://www.linkedin.com/in/santiago-goncalves-285699388" target="_blank" rel="noopener" aria-label="LinkedIn" title="Here is my LinkedIn profile"><i class="icon icon-linkin"></i></a></li>
@@ -687,9 +710,11 @@ stop.bred{stop-color:#0b3d91!important}
 <label class="repo-field"><span data-tool-copy="field.industry">Business type</span><input name="industry" value="insurance and tax office"></label>
 <label class="repo-field"><span data-tool-copy="field.goal">Main goal</span><select name="goal"><option value="qualify" data-tool-copy="goal.qualify">Qualify leads</option><option value="faq" data-tool-copy="goal.faq">Answer FAQs</option><option value="quote" data-tool-copy="goal.quote">Prepare quotes</option></select></label>
 <label class="repo-field"><span data-tool-copy="field.tone">Tone</span><select name="tone"><option value="professional" data-tool-copy="tone.professional">Professional</option><option value="friendly" data-tool-copy="tone.friendly">Friendly</option><option value="premium" data-tool-copy="tone.premium">Premium</option></select></label>
+<label class="repo-field"><span data-tool-copy="field.handoff">Handoff</span><select name="handoff"><option value="email" data-tool-copy="handoff.email">Email summary</option><option value="crm" data-tool-copy="handoff.crm">CRM lead</option><option value="sheet" data-tool-copy="handoff.sheet">Spreadsheet row</option></select></label>
 <label class="repo-field repo-field-full"><span data-tool-copy="field.question">Knowledge and answers</span><textarea name="question">Insurance cards, tag renewals, tax help, appointments, business hours, required documents, and contact details.</textarea></label>
+<label class="repo-field repo-field-full"><span data-tool-copy="field.fallback">Safe fallback response</span><textarea name="fallback">I do not have enough verified information to answer that. I can collect your details so the team can follow up.</textarea></label>
 </form>
-<div class="repo-output"><div data-tool-preview></div><pre data-tool-spec></pre></div>
+<div class="repo-output"><div data-tool-preview><aside class="ai-lead-summary" data-ai-lead-summary></aside></div><pre data-tool-spec></pre></div>
 </div>
 <div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast></span></div>
 </div>
@@ -718,9 +743,10 @@ stop.bred{stop-color:#0b3d91!important}
 <label class="repo-field"><span data-tool-copy="field.trigger">Trigger</span><select name="trigger"><option value="form" data-tool-copy="trigger.form">Website form</option><option value="email" data-tool-copy="trigger.email">Email received</option><option value="whatsapp" data-tool-copy="trigger.whatsapp">WhatsApp message</option><option value="schedule" data-tool-copy="trigger.schedule">Scheduled check</option></select></label>
 <label class="repo-field"><span data-tool-copy="field.action">Main action</span><select name="action"><option value="organize" data-tool-copy="action.organize">Organize request</option><option value="remind" data-tool-copy="action.remind">Create reminder</option><option value="route" data-tool-copy="action.route">Route by service</option><option value="report" data-tool-copy="action.report">Build report</option></select></label>
 <label class="repo-field"><span data-tool-copy="field.destination">Destination</span><select name="destination"><option value="email" data-tool-copy="dest.email">Email summary</option><option value="sheet" data-tool-copy="dest.sheet">Spreadsheet</option><option value="dashboard" data-tool-copy="dest.dashboard">Dashboard</option><option value="calendar" data-tool-copy="dest.calendar">Calendar</option></select></label>
+<label class="repo-field"><span data-tool-copy="field.followUp">Follow-up timing</span><select name="followUp"><option value="15m" data-tool-copy="follow.15m">15 minutes</option><option value="1h" data-tool-copy="follow.1h">1 hour</option><option value="nextday" data-tool-copy="follow.nextday">Next business day</option></select></label>
 <label class="repo-field repo-field-full"><span data-tool-copy="field.rules">Rules and details</span><textarea name="rules">Collect name, email, phone, service type, urgency, budget, preferred date, and the message. If urgent, mark high priority.</textarea></label>
 </form>
-<div class="repo-output"><div data-tool-preview></div><pre data-tool-spec></pre></div>
+<div class="repo-output"><div data-tool-preview><div class="auto-pipeline" data-automation-pipeline></div></div><pre data-tool-spec></pre></div>
 </div>
 <div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast></span></div>
 </div>
@@ -1272,6 +1298,15 @@ stop.bred{stop-color:#0b3d91!important}
       'field.template': 'Design template',
       'field.color': 'Main color',
       'field.tagline': 'Tagline or promise',
+      'field.handoff': 'Handoff',
+      'field.fallback': 'Safe fallback response',
+      'field.followUp': 'Follow-up timing',
+      'handoff.email': 'Email summary',
+      'handoff.crm': 'CRM lead',
+      'handoff.sheet': 'Spreadsheet row',
+      'follow.15m': '15 minutes',
+      'follow.1h': '1 hour',
+      'follow.nextday': 'Next business day',
       'goal.qualify': 'Qualify leads',
       'goal.faq': 'Answer FAQs',
       'goal.quote': 'Prepare quotes',
@@ -1340,6 +1375,15 @@ stop.bred{stop-color:#0b3d91!important}
       'field.template': 'Plantilla visual',
       'field.color': 'Color principal',
       'field.tagline': 'Frase o promesa',
+      'field.handoff': 'Entrega',
+      'field.fallback': 'Respuesta segura de reserva',
+      'field.followUp': 'Tiempo de seguimiento',
+      'handoff.email': 'Resumen por email',
+      'handoff.crm': 'Lead en CRM',
+      'handoff.sheet': 'Fila en hoja de calculo',
+      'follow.15m': '15 minutos',
+      'follow.1h': '1 hora',
+      'follow.nextday': 'Siguiente dia laborable',
       'goal.qualify': 'Calificar leads',
       'goal.faq': 'Responder FAQs',
       'goal.quote': 'Preparar presupuestos',
@@ -1475,13 +1519,18 @@ stop.bred{stop-color:#0b3d91!important}
       + '## Suggested questions\n' + questions.map((q) => '- ' + q).join('\n') + '\n\n'
       + '## Intake fields\n- Name\n- Email\n- Phone\n- Service needed\n- Timeline\n- Message\n\n'
       + '## Build scope\n- Branded assistant embedded on the website\n- Lead summary that is easy for the business owner to read\n- Suggested follow-up questions for better quotes\n- Optional CRM, email, or dashboard handoff when the client is ready\n';
+    const handoff = labelFor(root, 'handoff') || data.handoff || 'Email summary';
+    const fallback = data.fallback || (isEs ? 'No tengo informacion verificada suficiente. Puedo recoger tus datos para que el equipo responda.' : 'I do not have enough verified information. I can collect your details so the team can respond.');
     const publicBrief = '# ' + business + ' AI Assistant Studio\n\n'
       + (isEs ? 'Que puede probar un visitante\n' : 'What a visitor can try\n')
       + '- ' + (isEs ? 'Escribir una pregunta real del cliente.' : 'Write a real customer question.') + '\n'
       + '- ' + (isEs ? 'Ver como el asistente responde con el tono del negocio.' : 'See how the assistant answers in the business tone.') + '\n'
       + '- ' + (isEs ? 'Revisar preguntas sugeridas y datos que se deben recoger.' : 'Review suggested questions and details to collect.') + '\n\n'
       + (isEs ? 'Objetivo: ' : 'Goal: ') + goal + '\n'
-      + (isEs ? 'Tono: ' : 'Tone: ') + tone + '\n\n'
+      + (isEs ? 'Tono: ' : 'Tone: ') + tone + '\n'
+      + (isEs ? 'Entrega del lead: ' : 'Lead handoff: ') + handoff + '\n'
+      + (isEs ? 'Respuesta segura: ' : 'Safe fallback: ') + fallback + '\n'
+      + (isEs ? 'Incluye resumen de conversacion y respuestas editables por el negocio.' : 'Includes a conversation summary and business-editable responses.') + '\n\n'
       + (isEs ? 'Resumen del negocio\n' : 'Business summary\n') + knowledge + '\n\n'
       + (isEs ? 'Siguiente paso: envia este brief para convertirlo en un asistente real para tu web.' : 'Next step: send this brief to turn it into a real assistant for your website.');
     const config = {
@@ -1491,6 +1540,10 @@ stop.bred{stop-color:#0b3d91!important}
       tone,
       knowledge,
       greeting,
+      handoff,
+      fallback,
+      conversationSummary: true,
+      adminEditableResponses: true,
       suggestedQuestions: questions,
       intakeFields: ['name', 'email', 'phone', 'service', 'timeline', 'message']
     };
@@ -1500,22 +1553,12 @@ stop.bred{stop-color:#0b3d91!important}
       { path: 'assistant-config.json', content: JSON.stringify(config, null, 2) },
       { path: 'assistant-widget.html', content: widget }
     ]);
-    const confidence = Math.min(96, Math.max(64, 70 + (knowledge.length > 40 ? 12 : 0) + (business.length > 6 ? 6 : 0) + (industry.length > 5 ? 4 : 0)));
-    const preview = '<div class="repo-preview">'
+    const preview = '<div class="repo-preview ai-intake-preview">'
       + '<div class="repo-preview-title">' + escapeHtml(t('assistantPreview')) + '</div>'
-      + '<div class="repo-preview-main">' + escapeHtml(business) + ' Assistant</div>'
-      + '<p class="repo-preview-note">' + escapeHtml(greeting) + '</p>'
-      + '<div class="lab-console">'
-      + '<aside>'
-      + '<div><div class="lab-stat"><span>' + (isEs ? 'Lead score' : 'Lead score') + '</span><strong>' + confidence + '%</strong><div class="lab-score"><span style="width:' + confidence + '%"></span></div></div>'
-      + '<div class="lab-stat"><span>' + (isEs ? 'Campos' : 'Fields') + '</span><strong>6</strong></div></div>'
-      + '<div class="lab-meter-row"><div class="lab-meter-label"><span>' + escapeHtml(goal) + '</span><strong>' + escapeHtml(tone) + '</strong></div><div class="lab-score"><span style="width:82%"></span></div></div>'
-      + '</aside>'
-      + '<main>'
-      + '<div class="lab-message"><strong>' + (isEs ? 'Visitante' : 'Visitor') + '</strong>' + escapeHtml(questions[0]) + '</div>'
-      + '<div class="lab-message ai"><strong>' + escapeHtml(business) + '</strong>' + escapeHtml(knowledge || (isEs ? 'Puedo responder dudas, recoger datos y preparar el siguiente paso para el negocio.' : 'I can answer questions, collect details and prepare the next step for the business.')) + '</div>'
-      + '<div class="lab-quick">' + questions.map((q) => '<span>' + escapeHtml(q) + '</span>').join('') + '</div>'
-      + '</main>'
+      + '<div class="ai-intake-layout">'
+      + '<div class="ai-conversation"><div class="ai-message visitor"><strong>' + (isEs ? 'Visitante' : 'Visitor') + '</strong><p>' + escapeHtml(isEs ? 'Necesito un presupuesto y saber que documentos tengo que traer.' : 'I need a quote and want to know which documents to bring.') + '</p></div>'
+      + '<div class="ai-message assistant"><strong>' + escapeHtml(business) + '</strong><p>' + escapeHtml(greeting) + '</p><ul><li>' + escapeHtml(isEs ? 'Servicio solicitado' : 'Requested service') + '</li><li>' + escapeHtml(isEs ? 'Fecha preferida' : 'Preferred date') + '</li><li>' + escapeHtml(isEs ? 'Nombre y contacto' : 'Name and contact') + '</li></ul></div></div>'
+      + '<aside class="ai-lead-summary" data-ai-lead-summary><span>' + (isEs ? 'Solicitud detectada' : 'Detected request') + '</span><h6>' + escapeHtml(goal) + '</h6><dl><div><dt>' + (isEs ? 'Estado' : 'Status') + '</dt><dd>' + (isEs ? 'Lista para revision' : 'Ready for review') + '</dd></div><div><dt>' + (isEs ? 'Entrega' : 'Handoff') + '</dt><dd>' + escapeHtml(handoff) + '</dd></div><div><dt>' + (isEs ? 'Respuesta segura' : 'Safe fallback') + '</dt><dd>' + escapeHtml(fallback) + '</dd></div></dl></aside>'
       + '</div></div>';
     return { title: business + ' AI Assistant Studio', readme, publicBrief, bundle, preview, filename: slug(business) + '-ai-assistant-project-brief.txt' };
   }
@@ -1526,36 +1569,33 @@ stop.bred{stop-color:#0b3d91!important}
     const trigger = labelFor(root, 'trigger') || data.trigger;
     const action = labelFor(root, 'action') || data.action;
     const destination = labelFor(root, 'destination') || data.destination;
+    const followUp = labelFor(root, 'followUp') || data.followUp || '15 minutes';
     const rules = data.rules || '';
-    const steps = isEs
-      ? [
-          ['01', 'Entrada', trigger],
-          ['02', 'Procesar', action],
-          ['03', 'Reglas', 'Prioridad, campos y seguimiento'],
-          ['04', 'Salida', destination]
-        ]
-      : [
-          ['01', 'Input', trigger],
-          ['02', 'Process', action],
-          ['03', 'Rules', 'Priority, fields and follow-up'],
-          ['04', 'Output', destination]
-        ];
+    const stages = [
+      { id: '01', label: isEs ? 'Entrada' : 'Intake', value: trigger, state: isEs ? 'Recibida' : 'Received' },
+      { id: '02', label: isEs ? 'Clasificar' : 'Classify', value: action, state: isEs ? 'Prioridad alta' : 'High priority' },
+      { id: '03', label: isEs ? 'Enrutar' : 'Route', value: destination, state: isEs ? 'Asignada' : 'Assigned' },
+      { id: '04', label: isEs ? 'Avisar' : 'Notify', value: isEs ? 'Responsable y cliente' : 'Owner and customer', state: isEs ? 'En cola' : 'Queued' },
+      { id: '05', label: isEs ? 'Seguimiento' : 'Follow-up', value: followUp, state: isEs ? 'Programado' : 'Scheduled' }
+    ];
     const workflow = {
       name,
       trigger: data.trigger,
-      action: data.action,
+      classification: data.action,
       destination: data.destination,
+      followUp: data.followUp,
       rules,
-      steps: steps.map((step) => ({ id: step[0], title: step[1], description: step[2] }))
+      steps: stages.map((stage) => ({ id: stage.id, title: stage.label, description: stage.value, state: stage.state }))
     };
     const readme = '# ' + name + '\n\n'
       + '## What it does\n' + (isEs ? 'Automatizacion para convertir solicitudes repetidas en un flujo ordenado.' : 'Automation for turning repeated requests into an organized workflow.') + '\n\n'
-      + '## Workflow\n' + steps.map((step) => '- ' + step[0] + ' ' + step[1] + ': ' + step[2]).join('\n') + '\n\n'
+      + '## Workflow\n' + stages.map((stage) => '- ' + stage.id + ' ' + stage.label + ': ' + stage.value + ' (' + stage.state + ')').join('\n') + '\n\n'
       + '## Rules\n' + rules + '\n\n'
       + '## Build scope\n- Capture every request with consistent fields\n- Show priority and status clearly\n- Prepare the next action for the business owner\n- Send a clean summary to email, spreadsheet, calendar, or dashboard\n';
     const publicBrief = '# ' + name + '\n\n'
       + (isEs ? 'Que puede probar un visitante\n' : 'What a visitor can try\n')
-      + steps.map((step) => '- ' + step[0] + ' ' + step[1] + ': ' + step[2]).join('\n')
+      + stages.map((stage) => '- ' + stage.id + ' ' + stage.label + ': ' + stage.value + ' (' + stage.state + ')').join('\n')
+      + '\n\n' + (isEs ? 'Seguimiento programado: ' : 'Scheduled follow-up: ') + followUp
       + '\n\n' + (isEs ? 'Reglas principales\n' : 'Main rules\n') + rules + '\n\n'
       + (isEs ? 'Siguiente paso: envia este brief para crear un flujo que organice solicitudes reales del negocio.' : 'Next step: send this brief to create a workflow that organizes real business requests.');
     const bundle = bundleFile('automation-workflow-builder', name, [
@@ -1566,8 +1606,10 @@ stop.bred{stop-color:#0b3d91!important}
     const preview = '<div class="repo-preview">'
       + '<div class="repo-preview-title">' + escapeHtml(t('workflowPreview')) + '</div>'
       + '<div class="repo-preview-main">' + escapeHtml(name) + '</div>'
-      + '<p class="repo-preview-note">' + escapeHtml(isEs ? 'Un flujo visible para convertir mensajes sueltos en trabajo ordenado.' : 'A visible workflow for turning scattered messages into organized work.') + '</p>'
-      + '<div class="lab-flow">' + steps.map((step, index) => '<div class="lab-flow-step"><span>' + escapeHtml(step[0]) + '</span><strong>' + escapeHtml(step[1]) + '</strong><small>' + escapeHtml(step[2]) + '</small><em>' + (index === 0 ? 'IN' : index === steps.length - 1 ? 'OUT' : 'SLA') + '</em></div>').join('') + '</div>'
+      + '<div class="auto-request-card"><strong>' + (isEs ? 'Solicitud de ejemplo' : 'Sample request') + '</strong>'
+      + escapeHtml(isEs ? 'Nueva solicitud de presupuesto recibida via ' + trigger.toLowerCase() + '.' : 'New quote request received via ' + trigger.toLowerCase() + '.')
+      + '<small>' + escapeHtml((isEs ? 'Estado: En cola > Asignada > Seguimiento programado en ' : 'Status: Queued > Assigned > Follow-up scheduled in ') + followUp) + '</small></div>'
+      + '<div class="auto-pipeline" data-automation-pipeline>' + stages.map((stage) => '<div class="auto-stage"><span>' + escapeHtml(stage.id + ' ' + stage.label) + '</span><strong>' + escapeHtml(stage.value) + '</strong><em>' + escapeHtml(stage.state) + '</em></div>').join('') + '</div>'
       + '<p class="repo-preview-note">' + escapeHtml(rules || (isEs ? 'Anade reglas reales del negocio para ver como se organiza.' : 'Add real business rules to see how the workflow is organized.')) + '</p>'
       + '</div>';
     return { title: name, readme, publicBrief, bundle, preview, filename: slug(name) + '-workflow-project-brief.txt' };
