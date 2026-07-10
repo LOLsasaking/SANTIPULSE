@@ -84,7 +84,7 @@ stop.bred{stop-color:var(--santiago-accent)!important}
 .image-brand img,.w-logo img{object-fit:contain}
 .image-brand img{max-height:72px}
 .w-logo img{max-height:48px;width:auto!important}
-.language-toggle{display:inline-flex;align-items:center;gap:4px;margin-left:14px;padding:4px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
+.language-toggle{position:relative;z-index:10;display:inline-flex;align-items:center;gap:4px;margin-left:14px;padding:4px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
 .language-toggle button{border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,.62);font-size:12px;line-height:1;padding:7px 10px;letter-spacing:0;cursor:pointer}
 .language-toggle button.active{color:#fff}
 .github-disabled{opacity:.42;cursor:not-allowed}
@@ -520,7 +520,9 @@ stop.bred{stop-color:#0b3d91!important}
 #service .brand-horizontal-lockup strong{display:block;font-size:22px;line-height:1.05}
 #service .brand-horizontal-lockup small{display:block;margin-top:4px;color:rgba(6,18,38,.55);font-size:12px;line-height:1.35}
 #service .brand-color-spec{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#service .brand-color-spec>div{display:grid;gap:3px;min-width:0}
 #service .brand-color-spec span{display:block;height:34px;border-radius:7px;border:1px solid rgba(6,18,38,.12)}
+#service .brand-color-spec strong{font-size:11px;line-height:1.2;color:#061226}
 #service .brand-color-spec code{display:block;margin-top:4px;font-size:10.5px;color:rgba(6,18,38,.62)}
 #service .brand-type-spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 #service .brand-type-spec div,#service .brand-applications>div{border:1px solid rgba(6,18,38,.12);border-radius:8px;background:#fff;padding:10px}
@@ -757,7 +759,7 @@ stop.bred{stop-color:#0b3d91!important}
 </form>
 <div class="repo-output"><div data-tool-preview><aside class="ai-lead-summary" data-ai-lead-summary></aside></div><pre data-tool-spec></pre></div>
 </div>
-<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast role="status" aria-live="polite"></span></div>
+<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download project bundle</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast role="status" aria-live="polite"></span></div>
 </div>
 <div class="service-tag"><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.ai.tag1">AI Assistants</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.ai.tag2">Business Tools</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.ai.tag3">Smart Workflows</a></div>
 <p class="service-desc text-black-56" data-i18n="#service-2.desc">Try a practical AI assistant demo for business questions, lead qualification, and client intake.</p></div>
@@ -789,7 +791,7 @@ stop.bred{stop-color:#0b3d91!important}
 </form>
 <div class="repo-output"><div data-tool-preview><div class="auto-pipeline" data-automation-pipeline></div></div><pre data-tool-spec></pre></div>
 </div>
-<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast role="status" aria-live="polite"></span></div>
+<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download project bundle</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast role="status" aria-live="polite"></span></div>
 </div>
 <div class="service-tag"><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.auto.tag1">Lead Flow</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.auto.tag2">Task Systems</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.auto.tag3">Process Design</a></div>
 <p class="service-desc text-black-56" data-i18n="#service-3.desc">Try a workflow demo for forms, client requests, dashboards, and repetitive tasks.</p></div>
@@ -913,7 +915,7 @@ stop.bred{stop-color:#0b3d91!important}
 </form>
 <div class="repo-output"><div data-tool-preview><div class="brand-system-board" data-brand-board></div></div><pre data-tool-spec></pre></div>
 </div>
-<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast role="status" aria-live="polite"></span></div>
+<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download project bundle</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast role="status" aria-live="polite"></span></div>
 </div>
 <div class="service-tag"><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.brand.tag1">Logo Design</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.brand.tag2">Brand Guidelines</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.brand.tag3">Visual Systems</a></div>
 <p class="service-desc text-black-56" data-i18n="#service-5.desc">Try a brand direction demo for logo ideas, palettes, and simple usage rules.</p></div>
@@ -977,6 +979,9 @@ stop.bred{stop-color:#0b3d91!important}
   });
   const langButtons = () => Array.from(document.querySelectorAll('.language-toggle [data-lang]'));
   const currentLanguage = () => document.documentElement.dataset.langCurrent || 'en';
+  const languageListeners = window.santiPulseLanguageListeners = window.santiPulseLanguageListeners || [];
+  window.santiPulseOnLanguageChange = (listener) => { languageListeners.push(listener); };
+  const notifyLanguageChange = (language) => languageListeners.slice().forEach((listener) => listener(language));
   const setText = (selector, value) => {
     document.querySelectorAll(selector).forEach((el) => { el.textContent = value; });
   };
@@ -1014,6 +1019,7 @@ stop.bred{stop-color:#0b3d91!important}
     });
     try { localStorage.setItem('santiago-lang', safeLang); } catch {}
     updateWebToggle();
+    notifyLanguageChange(safeLang);
   };
   const updateGithubState = () => {
     document.querySelectorAll('[data-github-link]').forEach((link) => {
@@ -1205,7 +1211,7 @@ stop.bred{stop-color:#0b3d91!important}
   }
 
   decorate();
-  document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => button.addEventListener('click', () => setTimeout(updateCopy, 0)));
+  window.santiPulseOnLanguageChange(updateCopy);
 })();
 </script><script id="service-detail-script">
 (() => {
@@ -1349,9 +1355,7 @@ stop.bred{stop-color:#0b3d91!important}
     section.querySelector('[data-project-example-button]')?.addEventListener('click', () => focusProjectExample(section));
     section.querySelector('[data-project-contact]')?.addEventListener('click', () => projectContactHandoff(section));
   });
-  document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => button.addEventListener('click', () => {
-    window.setTimeout(() => document.querySelectorAll('[data-project]').forEach(renderProjectNarrative), 0);
-  }));
+  window.santiPulseOnLanguageChange(() => document.querySelectorAll('[data-project]').forEach(renderProjectNarrative));
   function repairFileAssetPaths() {
     if (window.location.protocol !== 'file:') return;
     const base = /\/src\/pages\//.test(window.location.pathname) ? '../../' : '';
@@ -1442,10 +1446,10 @@ stop.bred{stop-color:#0b3d91!important}
       'app.all': 'All',
       'button.generate': 'Update demo',
       'button.save': 'Save in browser',
-      'button.export': 'Download brief',
+      'button.export': 'Download project bundle',
       'button.send': 'Send to contact form',
       saved: 'Saved locally',
-      exported: 'Project brief downloaded',
+      exported: 'Project bundle downloaded',
       sent: 'Added to the contact form',
       exportTitle: 'Project brief',
       assistantPreview: 'Live assistant preview',
@@ -1529,10 +1533,10 @@ stop.bred{stop-color:#0b3d91!important}
       'app.all': 'Todas',
       'button.generate': 'Actualizar demo',
       'button.save': 'Guardar en navegador',
-      'button.export': 'Descargar brief',
+      'button.export': 'Descargar paquete del proyecto',
       'button.send': 'Enviar al formulario',
       saved: 'Guardado localmente',
-      exported: 'Brief del proyecto descargado',
+      exported: 'Paquete del proyecto descargado',
       sent: 'Agregado al formulario',
       exportTitle: 'Brief del proyecto',
       assistantPreview: 'Vista previa del asistente',
@@ -1600,7 +1604,7 @@ stop.bred{stop-color:#0b3d91!important}
     return '#' + [r, g, b].map((v) => v.toString(16).padStart(2, '0')).join('');
   }
 
-  function bundleFile(tool, title, files) {
+  function bundleFile(tool, title, publicBrief, files) {
     return JSON.stringify({
       title,
       tool,
@@ -1608,7 +1612,7 @@ stop.bred{stop-color:#0b3d91!important}
       note: lang() === 'es'
         ? 'Resumen generado desde la demo publica para explicar la idea del proyecto.'
         : 'Summary generated from the public demo to explain the project idea.',
-      files
+      files: [{ path: 'PROJECT-BRIEF.md', content: publicBrief }, ...files]
     }, null, 2);
   }
 
@@ -1667,7 +1671,7 @@ stop.bred{stop-color:#0b3d91!important}
       intakeFields: ['name', 'email', 'phone', 'service', 'timeline', 'message']
     };
     const widget = buildAssistantWidget(data, questions, greeting);
-    const bundle = bundleFile('ai-assistant-studio', business + ' AI Assistant Studio', [
+    const bundle = bundleFile('ai-assistant-studio', business + ' AI Assistant Studio', publicBrief, [
       { path: 'README.md', content: readme },
       { path: 'assistant-config.json', content: JSON.stringify(config, null, 2) },
       { path: 'assistant-widget.html', content: widget }
@@ -1679,7 +1683,7 @@ stop.bred{stop-color:#0b3d91!important}
       + '<div class="ai-message assistant"><strong>' + escapeHtml(business) + '</strong><p>' + escapeHtml(greeting) + '</p><ul><li>' + escapeHtml(isEs ? 'Servicio solicitado' : 'Requested service') + '</li><li>' + escapeHtml(isEs ? 'Fecha preferida' : 'Preferred date') + '</li><li>' + escapeHtml(isEs ? 'Nombre y contacto' : 'Name and contact') + '</li></ul></div></div>'
       + '<aside class="ai-lead-summary" data-ai-lead-summary><span>' + (isEs ? 'Solicitud detectada' : 'Detected request') + '</span><h6>' + escapeHtml(goal) + '</h6><dl><div><dt>' + (isEs ? 'Estado' : 'Status') + '</dt><dd>' + (isEs ? 'Lista para revision' : 'Ready for review') + '</dd></div><div><dt>' + (isEs ? 'Entrega' : 'Handoff') + '</dt><dd>' + escapeHtml(handoff) + '</dd></div><div><dt>' + (isEs ? 'Respuesta segura' : 'Safe fallback') + '</dt><dd>' + escapeHtml(fallback) + '</dd></div></dl></aside>'
       + '</div></div>';
-    return { title: business + ' AI Assistant Studio', readme, publicBrief, bundle, preview, filename: slug(business) + '-ai-assistant-project-brief.txt' };
+    return { title: business + ' AI Assistant Studio', readme, publicBrief, bundle, preview, filename: slug(business) + '-ai-assistant-project-bundle.json' };
   }
 
   function buildAutomation(root, data) {
@@ -1717,7 +1721,7 @@ stop.bred{stop-color:#0b3d91!important}
       + '\n\n' + (isEs ? 'Seguimiento programado: ' : 'Scheduled follow-up: ') + followUp
       + '\n\n' + (isEs ? 'Reglas principales\n' : 'Main rules\n') + rules + '\n\n'
       + (isEs ? 'Siguiente paso: envia este brief para crear un flujo que organice solicitudes reales del negocio.' : 'Next step: send this brief to create a workflow that organizes real business requests.');
-    const bundle = bundleFile('automation-workflow-builder', name, [
+    const bundle = bundleFile('automation-workflow-builder', name, publicBrief, [
       { path: 'README.md', content: readme },
       { path: 'workflow.json', content: JSON.stringify(workflow, null, 2) },
       { path: 'workflow-notes.md', content: '## Rules\n' + rules + '\n' }
@@ -1731,7 +1735,7 @@ stop.bred{stop-color:#0b3d91!important}
       + '<div class="auto-pipeline" data-automation-pipeline>' + stages.map((stage) => '<div class="auto-stage"><span>' + escapeHtml(stage.id + ' ' + stage.label) + '</span><strong>' + escapeHtml(stage.value) + '</strong><em>' + escapeHtml(stage.state) + '</em></div>').join('') + '</div>'
       + '<p class="repo-preview-note">' + escapeHtml(rules || (isEs ? 'Anade reglas reales del negocio para ver como se organiza.' : 'Add real business rules to see how the workflow is organized.')) + '</p>'
       + '</div>';
-    return { title: name, readme, publicBrief, bundle, preview, filename: slug(name) + '-workflow-project-brief.txt' };
+    return { title: name, readme, publicBrief, bundle, preview, filename: slug(name) + '-workflow-project-bundle.json' };
   }
 
   function buildBrand(root, data) {
@@ -1771,7 +1775,7 @@ stop.bred{stop-color:#0b3d91!important}
       + (isEs ? 'Aplicacion principal: ' : 'Primary application: ') + application + '\n\n'
       + (isEs ? 'Los assets finales editables para Canva o Figma se entregan como parte del proyecto; esta demo del navegador no los genera.' : 'Final editable Canva or Figma assets are a client deliverable; this browser demo does not generate them.') + '\n\n'
       + (isEs ? 'Siguiente paso: envia este brief para preparar logo, colores y usos de marca.' : 'Next step: send this brief to prepare the logo, colors and brand usage.');
-    const bundle = bundleFile('brand-kit-generator', brand + ' Brand Kit', [
+    const bundle = bundleFile('brand-kit-generator', brand + ' Brand Kit', publicBrief, [
       { path: 'logo-directions.svg', content: svg },
       { path: 'palette.json', content: JSON.stringify({ primary: palette[0], ink: palette[1], soft: palette[2], paper: palette[3] }, null, 2) },
       { path: 'typography.md', content: '# Typography\n\n- Pairing: ' + typography + '\n- Display: ' + typePair.display + '\n- Body: ' + typePair.body + '\n' },
@@ -1782,17 +1786,18 @@ stop.bred{stop-color:#0b3d91!important}
       { path: 'favicon.svg', content: favicon },
       { path: 'usage-guidelines.md', content: '# Usage guidelines\n\n- ' + misuse + '\n- Keep clear space around the mark\n- Use the primary color for key actions only\n' }
     ]);
+    const paletteRoles = isEs ? ['Primario', 'Tinta', 'Suave', 'Papel'] : ['Primary', 'Ink', 'Soft', 'Paper'];
     const preview = '<div class="repo-preview">'
       + '<div class="repo-preview-title">' + escapeHtml(t('brandPreview')) + '</div>'
       + '<div class="brand-system-board" data-brand-board style="--brand-color:' + escapeHtml(color) + ';--brand-ink:' + escapeHtml(palette[1]) + '">'
       + '<section class="brand-lockups"><div class="brand-primary-mark" data-brand-primary-mark>' + escapeHtml(mark) + '</div>'
       + '<div class="brand-horizontal-lockup" data-brand-horizontal-lockup><span class="brand-mini-mark">' + escapeHtml(mark) + '</span><span><strong>' + escapeHtml(brand) + '</strong><small>' + escapeHtml(tagline || sector || (isEs ? 'Direccion de marca clara y usable.' : 'A clear, usable brand direction.')) + '</small></span></div></section>'
-      + '<section class="brand-color-spec" data-brand-palette>' + palette.map((item) => '<div><span style="background:' + escapeHtml(item) + '"></span><code>' + escapeHtml(item) + '</code></div>').join('') + '</section>'
+      + '<section class="brand-color-spec" data-brand-palette>' + palette.map((item, index) => '<div><span aria-label="' + escapeHtml(paletteRoles[index] + ' ' + item) + '" style="background:' + escapeHtml(item) + '"></span><strong data-brand-role>' + escapeHtml(paletteRoles[index]) + '</strong><code>' + escapeHtml(item) + '</code></div>').join('') + '</section>'
       + '<section class="brand-type-spec" data-brand-typography><div><span>' + (isEs ? 'Titulares' : 'Display') + '</span><strong>' + escapeHtml(typePair.display) + '</strong></div><div><span>' + (isEs ? 'Texto' : 'Body') + '</span><strong>' + escapeHtml(typePair.body) + '</strong></div><div><span>' + (isEs ? 'Voz' : 'Voice') + '</span><strong>' + escapeHtml(voice) + '</strong></div></section>'
       + '<section class="brand-applications"><div data-brand-favicon><span class="brand-favicon">' + escapeHtml(mark) + '</span><small>Favicon</small></div><div data-brand-social><span class="brand-social-tile">' + escapeHtml(brand) + '</span><small>' + (isEs ? 'Plantilla social' : 'Social template') + '</small></div><div data-brand-card><span class="brand-card-tile"><strong>' + escapeHtml(brand) + '</strong>' + escapeHtml(sector || application) + '</span><small>' + (isEs ? 'Tarjeta de visita' : 'Business card') + '</small></div></section>'
       + '<aside class="brand-rule"><strong>' + (isEs ? 'Regla de uso' : 'Usage rule') + '</strong><p data-brand-rule>' + escapeHtml(misuse) + '</p></aside>'
       + '</div></div>';
-    return { title: brand + ' Brand Kit', readme, publicBrief, bundle, preview, filename: slug(brand) + '-brand-kit-project-brief.txt' };
+    return { title: brand + ' Brand Kit', readme, publicBrief, bundle, preview, filename: slug(brand) + '-brand-kit-project-bundle.json' };
   }
 
   const builders = { ai: buildAi, automation: buildAutomation, brand: buildBrand };
@@ -1856,10 +1861,10 @@ stop.bred{stop-color:#0b3d91!important}
   function exportFiles(root) {
     try {
       build(root);
-      const blob = new Blob([root.dataset.toolPublicBrief || ''], { type: 'text/plain;charset=utf-8' });
+      const blob = new Blob([root.dataset.toolBundle || ''], { type: 'application/json;charset=utf-8' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = root.dataset.toolFilename || 'santiago-project-brief.txt';
+      link.download = root.dataset.toolFilename || 'santiago-project-bundle.json';
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -1902,7 +1907,7 @@ stop.bred{stop-color:#0b3d91!important}
   });
 
   applyToolCopy();
-  document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => button.addEventListener('click', () => setTimeout(applyToolCopy, 0)));
+  window.santiPulseOnLanguageChange(applyToolCopy);
 })();
 </script><script id="electrical-planner-script">
 (() => {
@@ -2536,9 +2541,7 @@ stop.bred{stop-color:#0b3d91!important}
   root.querySelector('[data-planner-copy-plan]')?.addEventListener('click', copySummary);
   root.querySelector('[data-planner-send]')?.addEventListener('click', sendToContact);
   form?.addEventListener('input', renderPlan);
-  document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => {
-    button.addEventListener('click', () => setTimeout(renderPlan, 0));
-  });
+  window.santiPulseOnLanguageChange(renderPlan);
   renderPlan();
 })();
 </script></body></html>

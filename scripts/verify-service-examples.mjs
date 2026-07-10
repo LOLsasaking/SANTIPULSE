@@ -9,6 +9,40 @@ const $ = load(source);
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 
+const exportFunction = source.match(/function exportFiles\(root\) \{([\s\S]*?)\n  \}/)?.[1] || '';
+check(exportFunction.includes('root.dataset.toolBundle'), 'exports must download the generated bundle, not only the public brief');
+check(exportFunction.includes('application/json'), 'bundle exports must use a JSON content type');
+check(/toolFilename[^\n]*\.json/.test(exportFunction), 'bundle export filename must use the JSON extension');
+check(source.includes("{ path: 'PROJECT-BRIEF.md', content: publicBrief }"), 'generated bundles must include the public brief as a named file');
+
+for (const filename of [
+  'assistant-config.json',
+  'workflow.json',
+  'logo-directions.svg',
+  'palette.json',
+  'typography.md',
+  'brand-voice.md',
+  'social-template-notes.md',
+  'website-hero-direction.md',
+  'business-card-spec.md',
+  'favicon.svg',
+  'usage-guidelines.md',
+]) {
+  check(source.includes(`path: '${filename}'`), `bundle is missing named file: ${filename}`);
+}
+check(source.includes('handoff,') && source.includes('fallback,'), 'AI bundle config must preserve handoff and fallback settings');
+check(source.includes('classification: data.action'), 'automation bundle must preserve the workflow JSON contract');
+
+const languageSubscribers = source.match(/santiPulseOnLanguageChange\(/g) || [];
+check(source.includes('notifyLanguageChange'), 'language changes must publish one shared state update');
+check(languageSubscribers.length >= 4, 'service previews must subscribe to the shared language state update');
+for (const staleListener of ['setTimeout(updateCopy', 'setTimeout(applyToolCopy', 'setTimeout(renderPlan', 'setTimeout(() => document.querySelectorAll(\'[data-project]\')']) {
+  check(!source.includes(staleListener), `language switching still has a deferred listener race: ${staleListener}`);
+}
+check(source.includes('data-brand-role'), 'brand swatches must expose named roles alongside hex values');
+check(source.includes('Primary') && source.includes('Primario'), 'brand swatch roles must be translated in English and Spanish');
+check(source.includes('.language-toggle{position:relative;z-index:10;'), 'language toggle must remain above the intro content for pointer and keyboard input');
+
 const projects = [
   { id: 'service-2', key: 'ai', title: 'AI Business Assistant System', minFeatures: 10, preview: '[data-ai-lead-summary]' },
   { id: 'service-3', key: 'automation', title: 'Business Workflow Automation', minFeatures: 10, preview: '[data-automation-pipeline]' },
