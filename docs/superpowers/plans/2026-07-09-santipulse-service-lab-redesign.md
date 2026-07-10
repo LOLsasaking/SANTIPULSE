@@ -754,3 +754,9 @@ Confirm the dashboard links resolve, both source documents exist, the four appro
 git add scripts/sync-obsidian.mjs docs/superpowers/plans/2026-07-09-santipulse-service-lab-redesign.md
 git commit -m "docs: sync service redesign with Obsidian"
 ```
+
+---
+
+## Post-Implementation Visibility Decision
+
+On 2026-07-10, Santiago asked to keep projects 2-5 fully implemented but hide them from the public Services accordion until he provides the next direction. The public site shows Web Design only. The hidden project rows use `hidden`, `aria-hidden="true"`, and `data-portfolio-hidden="pending-direction"` so the tools remain recoverable in source without appearing in layout or keyboard navigation.

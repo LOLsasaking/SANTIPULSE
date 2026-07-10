@@ -87,6 +87,10 @@ stop.bred{stop-color:var(--santiago-accent)!important}
 .language-toggle{position:relative;z-index:10;display:inline-flex;align-items:center;gap:4px;margin-left:14px;padding:4px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
 .language-toggle button{border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,.62);font-size:12px;line-height:1;padding:7px 10px;letter-spacing:0;cursor:pointer}
 .language-toggle button.active{color:#fff}
+.service-project-hidden{display:none!important}
+.santiago-outline{max-width:100%;font-size:110px!important;line-height:.88!important;overflow-wrap:anywhere}
+@media (max-width:991px){.santiago-outline{font-size:84px!important}}
+@media (max-width:575px){.santiago-outline{font-size:56px!important;line-height:.92!important}}
 .github-disabled{opacity:.42;cursor:not-allowed}
 .timeline-content .icon{display:none!important}
 .service-placeholder{min-height:206px;border:1px dashed rgba(255,255,255,.18);border-radius:8px;display:grid;place-items:center;text-align:center;padding:24px;color:rgba(255,255,255,.48);background:rgba(255,255,255,.035)}
@@ -732,7 +736,7 @@ stop.bred{stop-color:#0b3d91!important}
 <button type="button" class="tf-btn-action web-gallery-toggle website-button-large" data-web-gallery-toggle=""><span class="ic-wrap"><i class="icon icon-arrow-right-top"></i></span><span class="text text-body-3 letter-space--05 fw-medium" data-i18n="services.web.more">See all websites</span></button></div>
 </div>
 </div>
-<div class="service-accordion_item scrolling-effect effectBottom" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
+<div class="service-accordion_item service-project-hidden scrolling-effect effectBottom" hidden aria-hidden="true" data-portfolio-hidden="pending-direction" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
 <a href="#service-2" class="accordion-action collapsed" data-bs-toggle="collapse" data-bs-target="#service-2" aria-expanded="false" aria-controls="service-2">
 <h4 class="text letter-space--2 text-black-72" data-i18n="services.ai.title" data-project-heading="ai">AI Business Assistant System</h4><p class="service-row-subtitle" data-project-subtitle="ai">Custom business assistants that answer questions, qualify leads, collect quote requests, and organize customer information.</p>
 <div class="ic-wrap"><span class="ic-accordion-custom"></span></div>
@@ -765,7 +769,7 @@ stop.bred{stop-color:#0b3d91!important}
 <p class="service-desc text-black-56" data-i18n="#service-2.desc">Try a practical AI assistant demo for business questions, lead qualification, and client intake.</p></div>
 </div>
 </div>
-<div class="service-accordion_item scrolling-effect effectBottom" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
+<div class="service-accordion_item service-project-hidden scrolling-effect effectBottom" hidden aria-hidden="true" data-portfolio-hidden="pending-direction" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
 <a href="#service-3" class="accordion-action collapsed" data-bs-toggle="collapse" data-bs-target="#service-3" aria-expanded="false" aria-controls="service-3">
 <h4 class="text letter-space--2 text-black-72" data-i18n="services.automation.title" data-project-heading="automation">Business Workflow Automation</h4><p class="service-row-subtitle" data-project-subtitle="automation">Automation systems that connect forms, emails, spreadsheets, CRMs, calendars, and notifications so repetitive work stays organized.</p>
 <div class="ic-wrap"><span class="ic-accordion-custom"></span></div>
@@ -797,7 +801,7 @@ stop.bred{stop-color:#0b3d91!important}
 <p class="service-desc text-black-56" data-i18n="#service-3.desc">Try a workflow demo for forms, client requests, dashboards, and repetitive tasks.</p></div>
 </div>
 </div>
-<div class="service-accordion_item scrolling-effect effectBottom" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
+<div class="service-accordion_item service-project-hidden scrolling-effect effectBottom" hidden aria-hidden="true" data-portfolio-hidden="pending-direction" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
 <a href="#service-4" class="accordion-action collapsed" data-bs-toggle="collapse" data-bs-target="#service-4" aria-expanded="false" aria-controls="service-4">
 <h4 class="text letter-space--2 text-black-72" data-i18n="services.electric.title" data-project-heading="electrical">Electrical Planning &amp; Material Estimator</h4><p class="service-row-subtitle" data-project-subtitle="electrical">A planning and estimating aid for organizing rooms, electrical points, project notes, circuit concepts, and preliminary material quantities.</p>
 <div class="ic-wrap"><span class="ic-accordion-custom"></span></div>
@@ -887,7 +891,7 @@ stop.bred{stop-color:#0b3d91!important}
 <p class="service-desc text-black-56" data-i18n="#service-4.desc">Plan rooms and electrical points, review preliminary material quantities and prepare a summary for a licensed professional review.</p></div>
 </div>
 </div>
-<div class="service-accordion_item scrolling-effect effectBottom" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
+<div class="service-accordion_item service-project-hidden scrolling-effect effectBottom" hidden aria-hidden="true" data-portfolio-hidden="pending-direction" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
 <a href="#service-5" class="accordion-action collapsed" data-bs-toggle="collapse" data-bs-target="#service-5" aria-expanded="false" aria-controls="service-5">
 <h4 class="text letter-space--2 text-black-72" data-i18n="services.brand.title" data-project-heading="brand">Brand Identity System</h4><p class="service-row-subtitle" data-project-subtitle="brand">Complete brand kits with logo systems, colors, typography, social assets, website direction, and practical usage guidance.</p>
 <div class="ic-wrap"><span class="ic-accordion-custom"></span></div>

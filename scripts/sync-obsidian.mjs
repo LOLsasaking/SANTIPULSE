@@ -279,11 +279,11 @@ Turn the old SantiPulse service website into a professional portfolio where Sant
 
 ## Current Services
 
-- Web Design
-- AI Business Assistant System
-- Business Workflow Automation
-- Electrical Planning & Material Estimator
-- Brand Identity System
+- Web Design - visible on the public portfolio.
+- AI Business Assistant System - implemented, temporarily hidden pending Santiago's next direction.
+- Business Workflow Automation - implemented, temporarily hidden pending Santiago's next direction.
+- Electrical Planning & Material Estimator - implemented, temporarily hidden pending Santiago's next direction.
+- Brand Identity System - implemented, temporarily hidden pending Santiago's next direction.
 
 ## Notes
 
@@ -774,6 +774,10 @@ updated: ${today}
 
 The four portfolio service examples were rebuilt as practical, bilingual, client-ready project modules inside the existing accordion.
 
+## Current Public Visibility
+
+Only Web Design is currently visible in the public Services accordion. Projects 2-5 remain fully implemented in the source and are hidden with explicit data-portfolio-hidden="pending-direction" markers until Santiago decides their next presentation.
+
 ## Source Documents
 
 - Specification: [[Planning/Source Documents/Spec - Client-Ready Service Examples]]
@@ -799,7 +803,8 @@ npm run verify:services
 - \`npm run verify:services\` passes against source and built output.
 - \`npm run build\` passes; inline scripts parse cleanly.
 - DOM QA at 1440px and 375px: all four previews render, add/remove room, version history, print, copy, contact handoff, and EN/ES switching work with user values preserved; no service-section overflow; no console errors.
-- Work is local on branch \`feat/client-ready-services\`; not pushed or deployed until Santiago approves the localhost result.
+- Public visibility QA confirms only Web Design is exposed; projects 2-5 remain hidden without removing their code.
+- Santiago approved deploying this visibility state to \`santipulse.com\` on ${today}.
 
 `);
 
