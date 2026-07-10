@@ -444,6 +444,73 @@ stop.bred{stop-color:#0b3d91!important}
 .electro-planner .planner-list li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--planner-blue)}
 @media (max-width: 991px){.electro-planner .planner-shell{grid-template-columns:1fr}.electro-planner .planner-list-grid{grid-template-columns:1fr}.electro-planner .planner-output-head{flex-direction:column}.electro-planner .planner-status{justify-content:flex-start}}
 @media (max-width: 575px){.electro-planner .planner-shell{padding:12px}.electro-planner .planner-form,.electro-planner .planner-loads{grid-template-columns:1fr}.electro-planner .planner-actions{flex-direction:column;align-items:stretch}.electro-planner .planner-button{width:100%}.electro-planner .planner-diagram-toolbar{align-items:flex-start;flex-direction:column}.electro-planner .planner-diagram{min-height:300px}}
+</style><style id="santiago-service-lab-v2">
+#service .accordion-content{position:relative}
+#service .repo-tool{border-color:rgba(185,216,255,.24)!important;background:#05070c!important}
+#service .repo-tool::before{background:linear-gradient(90deg,rgba(11,61,145,.2),transparent 38%),repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 44px)!important}
+#service .repo-tool-head{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end}
+#service .repo-kicker,#service .service-kicker,.electro-planner .planner-kicker{letter-spacing:.16em}
+#service .repo-tool-head::after{content:"";width:72px;height:72px;border:1px solid rgba(185,216,255,.28);border-radius:50%;background:linear-gradient(135deg,transparent 48%,#0b3d91 48% 62%,transparent 62%);box-shadow:inset 0 0 0 14px rgba(255,255,255,.03)}
+#service .repo-output{min-height:520px;background:#080b10!important;border-left:1px solid rgba(255,255,255,.08)}
+#service .service-row-subtitle{display:block;margin:0;color:rgba(255,255,255,.56);font-size:13px;line-height:1.45;max-width:620px}
+#service .project-narrative{display:grid;gap:24px;margin:0 0 24px;color:#f8fbff}
+#service .project-intro{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:end;border-bottom:1px solid rgba(255,255,255,.1);padding:0 0 20px}
+#service .project-value{margin:0;max-width:760px;color:rgba(255,255,255,.7);font-size:16px;line-height:1.55}
+#service .project-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#service .project-actions button{min-height:42px;border:1px solid transparent;border-radius:6px;padding:10px 14px;font:inherit;font-size:12px;font-weight:900;line-height:1.2;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease}
+#service .project-actions button:hover{transform:translateY(-1px)}
+#service .project-primary{background:#0b3d91;color:#fff}
+#service .project-primary:hover{background:#062a66}
+#service .project-secondary{background:transparent;border-color:rgba(185,216,255,.3)!important;color:#b9d8ff}
+#service .project-secondary:hover{border-color:#5b8dd7!important;color:#fff}
+#service .project-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#service .project-facts section,#service .project-block{min-width:0;border:1px solid rgba(185,216,255,.16);border-radius:6px;background:rgba(255,255,255,.035);padding:16px}
+#service .project-facts span,#service .project-block h5{display:block;margin:0 0 8px;color:#b9d8ff;font-size:11px;font-weight:900;line-height:1.2;letter-spacing:.12em;text-transform:uppercase}
+#service .project-facts p{margin:0;color:rgba(255,255,255,.68);font-size:13px;line-height:1.5}
+#service .project-block{display:grid;gap:12px}
+#service .project-block h5{margin:0}
+#service .project-feature-grid,#service .project-deliverables{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;margin:0;padding:0;list-style:none}
+#service .project-feature-grid li,#service .project-deliverables li{min-width:0;border-left:2px solid #0b3d91;padding:2px 0 2px 10px;color:rgba(255,255,255,.72);font-size:13px;line-height:1.4}
+#service .project-workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
+#service .project-workflow li{min-width:0;display:grid;gap:12px;align-content:space-between;min-height:98px;border:1px solid rgba(185,216,255,.14);border-radius:6px;background:#071426;padding:12px;color:#fff}
+#service .project-workflow li>span{color:#b9d8ff;font-size:11px;font-weight:900;letter-spacing:.1em}
+#service .project-workflow p{margin:0;color:rgba(255,255,255,.75);font-size:13px;line-height:1.35}
+#service .repo-output pre{max-height:280px;background:#030509;border:1px solid rgba(255,255,255,.08);border-radius:6px;color:rgba(255,255,255,.7)}
+#service .repo-preview{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1);border-radius:8px;background:#02040a;padding:18px;min-height:270px}
+#service .repo-preview::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,61,145,.16),transparent 48%);pointer-events:none}
+#service .repo-preview>*{position:relative}
+#service .repo-preview-title{display:flex;align-items:center;justify-content:space-between;color:#b9d8ff;font-size:11px;line-height:1.2;text-transform:uppercase;letter-spacing:.14em;font-weight:900}
+#service .repo-preview-title::after{content:"Live";border:1px solid rgba(185,216,255,.24);border-radius:999px;padding:5px 8px;color:#fff;letter-spacing:0;text-transform:none}
+#service .repo-preview-main{margin-top:14px;color:#fff;font-size:clamp(28px,4vw,46px);line-height:.95;font-weight:500;letter-spacing:0}
+#service .repo-preview-note{color:rgba(255,255,255,.64);font-size:13px;line-height:1.55}
+.lab-console{display:grid;grid-template-columns:190px minmax(0,1fr);gap:12px;margin-top:14px}
+.lab-console aside,.lab-console main,.lab-card,.lab-brand-board{border:1px solid rgba(255,255,255,.1);border-radius:8px;background:rgba(255,255,255,.045);padding:12px}
+.lab-stat{display:grid;gap:4px;margin-bottom:10px;color:rgba(255,255,255,.58);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.lab-stat strong{color:#fff;font-size:24px;letter-spacing:0}
+.lab-score{height:7px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+.lab-score span{display:block;height:100%;background:#0b3d91}
+.lab-message{border-radius:8px;background:#fff;color:#061226;padding:11px 12px;margin-bottom:10px;font-size:13px;line-height:1.45}
+.lab-message.ai{background:#0b3d91;color:#fff}
+.lab-message strong{display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:inherit;opacity:.72}
+.lab-quick{display:flex;flex-wrap:wrap;gap:7px}.lab-quick span{border:1px solid rgba(185,216,255,.24);border-radius:999px;padding:7px 9px;color:#d9eaff;font-size:11px;font-weight:800}
+.lab-console main{min-height:238px}.lab-console aside{display:flex;flex-direction:column;justify-content:space-between}.lab-meter-row{display:grid;gap:8px}.lab-meter-label{display:flex;justify-content:space-between;gap:12px;color:rgba(255,255,255,.62);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.lab-meter-label strong{color:#fff;letter-spacing:0;text-transform:none}
+.lab-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}
+.lab-flow-step{position:relative;min-height:118px;border:1px solid rgba(255,255,255,.1);border-radius:8px;background:rgba(255,255,255,.045);padding:12px;color:#fff}
+.lab-flow-step:not(:last-child)::after{content:"";position:absolute;right:-11px;top:50%;width:12px;height:1px;background:#0b3d91}
+.lab-flow-step span{display:block;color:#b9d8ff;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.12em}.lab-flow-step strong{display:block;margin-top:12px;font-size:20px;line-height:1.05}.lab-flow-step small{display:block;margin-top:10px;color:rgba(255,255,255,.58);line-height:1.35}.lab-flow-step em{position:absolute;right:10px;bottom:9px;color:rgba(185,216,255,.54);font-size:10px;font-style:normal;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.lab-brand-board{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;margin-top:16px;background:#f8fbff;color:#061226}
+.lab-brand-mark{aspect-ratio:1;border-radius:18px;display:grid;place-items:center;background:var(--brand-color,#0b3d91);color:#fff;font-size:42px;font-weight:900}
+.lab-brand-lockup{font-size:30px;line-height:1;font-weight:800}.lab-brand-lockup small{display:block;margin-top:8px;color:rgba(6,18,38,.55);font-size:12px;line-height:1.35;font-weight:700}.lab-palette{display:flex;gap:8px;margin:14px 0}.lab-palette span{width:38px;height:38px;border-radius:50%;border:1px solid rgba(6,18,38,.12)}
+.lab-usage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.lab-usage div{border:1px solid rgba(6,18,38,.12);border-radius:8px;padding:10px;background:#fff;color:rgba(6,18,38,.68);font-size:11px;line-height:1.35}.lab-usage strong{display:block;color:#061226;margin-bottom:4px}
+.electro-planner .planner-shell{background:linear-gradient(135deg,#f8fbff,#eef4ff 62%,#dceaff)!important;border-color:rgba(11,61,145,.34)!important}
+.electro-planner .planner-panel{box-shadow:0 24px 70px rgba(6,18,38,.08)}
+.electro-planner .planner-output{background:#fbfdff}
+.electro-planner .planner-diagram{min-height:390px;background:linear-gradient(90deg,rgba(11,61,145,.075) 1px,transparent 1px),linear-gradient(0deg,rgba(11,61,145,.075) 1px,transparent 1px),#fbfdff;background-size:22px 22px}
+.electro-planner .planner-summary{background:#071426}
+.product-app{display:none!important}
+@media (max-width:991px){#service .repo-tool-head{grid-template-columns:1fr}.lab-console,.lab-brand-board{grid-template-columns:1fr}.lab-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-flow-step::after{display:none}#service .repo-output{border-left:0}}
+@media (max-width:767px){#service .project-intro,#service .project-facts,#service .project-feature-grid,#service .project-deliverables,#service .project-workflow{grid-template-columns:1fr}#service .project-actions{display:grid;grid-template-columns:1fr}#service .project-actions button{width:100%}}
+@media (max-width:575px){#service .repo-tool-head::after{display:none}.lab-flow,.lab-usage{grid-template-columns:1fr}.lab-console aside,.lab-console main,.lab-card,.lab-brand-board{padding:10px}.electro-planner .planner-diagram{min-height:330px}}
 </style></head><body class="body-default dark-mode counter-scroll"><div hidden=""><!--$--><!--/$--></div><div class="body-background"><div class="bg-item"><img loading="lazy" width="1440" height="900" src="https://tfisak.vercel.app/assets/images/item/cloud-bg.png" alt="background"></div></div><div class="tf-left-bar"><button type="button" class="btn-setting-color tf-btn-icon style-2" aria-label="Open color settings"><i class="icon-gear"></i></button></div><div class="offcanvas offcanvas-end offcanvas-color" id="settingColorMenu" style="visibility:hidden"><div class="offcanvas-content"><div class="canvas-header"><h5 class="letter-space--2">Configuration</h5><span class="icon-close-popup" role="button" tabindex="0"><i class="icon-close"></i></span></div><div class="canvas-body"><h6 class="title">Color</h6><div class="settings-color list-choose"><button type="button" class="btn-color theme-light choose-item"><span class="color type-body-default"></span><span class="text">Default</span></button><button type="button" class="btn-color theme-light choose-item"><span class="color type-body-v1"></span><span class="text">Silver Dawn</span></button><button type="button" class="btn-color theme-light choose-item"><span class="color type-body-v2"></span><span class="text">Lavender Stone</span></button><button type="button" class="btn-color theme-light choose-item"><span class="color type-body-v3"></span><span class="text">Ocean Breeze</span></button><button type="button" class="btn-color theme-dark choose-item"><span class="color type-dark-v1"></span><span class="text">Midnight Fade</span></button><button type="button" class="btn-color theme-dark choose-item"><span class="color type-dark-v2"></span><span class="text">Charcoal Mist</span></button><button type="button" class="btn-color theme-dark choose-item"><span class="color type-dark-v3"></span><span class="text">Forest Shadow</span></button></div></div></div></div><div class="action-open-mobile d-lg-none"><div class="tf-btn-icon style-2"><div class="btn-mobile-menu"><span></span></div></div><div class="nav-mobile-list"><ul class="nav-mobile-item"><div><li class="nav-item"><a href="#home" class="item-link scroll-link"><i class="icon icon-home"></i><p class="tool-tip text-caption" data-i18n="nav.home">Home</p></a></li><li class="br-line"></li></div><div><li class="nav-item"><a href="#about" class="item-link scroll-link"><i class="icon icon-user-circle"></i><p class="tool-tip text-caption" data-i18n="nav.about">About</p></a></li></div><div><li class="nav-item"><a href="#education" class="item-link scroll-link"><i class="icon icon-edu"></i><p class="tool-tip text-caption" data-i18n="nav.education">Education</p></a></li></div><div><li class="nav-item"><a href="#work" class="item-link scroll-link"><i class="icon icon-high-light"></i><p class="tool-tip text-caption" data-i18n="nav.work">Work</p></a></li></div><div><li class="nav-item"><a href="#service" class="item-link scroll-link"><i class="icon icon-service"></i><p class="tool-tip text-caption" data-i18n="nav.services">Services</p></a></li></div><div><li class="nav-item"><a href="#tech" class="item-link scroll-link"><i class="icon icon-tech-stack"></i><p class="tool-tip text-caption" data-i18n="nav.tech">Tools</p></a></li></div><div><li class="nav-item"><a href="#testimonial" class="item-link scroll-link"><i class="icon icon-tes"></i><p class="tool-tip text-caption" data-i18n="nav.testimonials">Testimonials</p></a></li><li class="br-line"></li></div><div><li class="nav-item"><a href="#contact" class="item-link scroll-link"><i class="icon icon-send"></i><p class="tool-tip text-caption" data-i18n="nav.contact">Contact</p></a></li></div></ul></div></div><div class="overlay-pop"></div><div class="sidebar-tools pst-v1"><div class="nav-top"><div class="tf-btn-icon toggle-switch-mode"><i class="icon icon-light"></i></div></div><ul class="nav-list"><div><li class="nav-item"><a href="#home" class="item-link scroll-link"><i class="icon icon-home"></i><p class="tool-tip text-caption" data-i18n="nav.home">Home</p></a></li><li class="br-line"></li></div><div><li class="nav-item"><a href="#about" class="item-link scroll-link"><i class="icon icon-user-circle"></i><p class="tool-tip text-caption" data-i18n="nav.about">About</p></a></li></div><div><li class="nav-item"><a href="#education" class="item-link scroll-link"><i class="icon icon-edu"></i><p class="tool-tip text-caption" data-i18n="nav.education">Education</p></a></li></div><div><li class="nav-item"><a href="#work" class="item-link scroll-link"><i class="icon icon-high-light"></i><p class="tool-tip text-caption" data-i18n="nav.work">Work</p></a></li></div><div><li class="nav-item"><a href="#service" class="item-link scroll-link"><i class="icon icon-service"></i><p class="tool-tip text-caption" data-i18n="nav.services">Services</p></a></li></div><div><li class="nav-item"><a href="#tech" class="item-link scroll-link"><i class="icon icon-tech-stack"></i><p class="tool-tip text-caption" data-i18n="nav.tech">Tools</p></a></li></div><div><li class="nav-item"><a href="#testimonial" class="item-link scroll-link"><i class="icon icon-tes"></i><p class="tool-tip text-caption" data-i18n="nav.testimonials">Testimonials</p></a></li><li class="br-line"></li></div><div><li class="nav-item"><a href="#contact" class="item-link scroll-link"><i class="icon icon-send"></i><p class="tool-tip text-caption" data-i18n="nav.contact">Contact</p></a></li></div></ul><div class="nav-bottom"><a href="#" class="tf-btn-icon go-top"><i class="icon icon-arrow-top"></i></a></div></div><main id="wrapper"><div class="tf-header-wrap"><a href="/" class="logo-site d-lg-none" aria-hidden="true"><img class="image-switch" data-light="/clone-assets/logos/santipulse.png" data-dark="/clone-assets/logos/santipulse.png" loading="lazy" width="40" height="40" src="/clone-assets/logos/santipulse.png" alt="Santiago Alexander logo" style="color: transparent;"></a><div class="left"><div class="time-local text-body-3"><p class="date">Wed, Jul 8</p><p class="clock">14:06</p></div><div class="language-toggle" aria-label="Language selector"><button type="button" data-lang="en" class="active" aria-pressed="true">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button></div></div></div><div class="sidebar-user"><div class="wrap"><div class="user-image"><div class="image"><img width="1122" height="1402" src="/clone-assets/profile/santiago-bw.png" alt="Santiago Alexander" style="color: transparent;"></div><div class="meta-left d-none d-sm-block"><div class="bg-item-svg"><img class="image-switch" data-light="https://tfisak.vercel.app/assets/images/item/vector-user.svg" data-dark="https://tfisak.vercel.app/assets/images/item/vector-user_dark.svg" loading="lazy" width="32" height="227" src="https://tfisak.vercel.app/assets/images/item/vector-user_dark.svg" alt="Image"></div><p class="avaiable-dot vertical text-body-3 text-black-72 fw-medium"><span class="text-vertical">Available for Work</span><span class="dot"></span></p></div></div><div class="user-logo d-none d-lg-block" aria-hidden="true"><img class="image-switch" data-light="/clone-assets/logos/santipulse.png" data-dark="/clone-assets/logos/santipulse.png" loading="lazy" width="40" height="40" src="/clone-assets/logos/santipulse.png" alt="Santiago Alexander logo" style="color: transparent;"></div><ul class="tf-social-icon-2 user-social d-grid">
 <li><a href="" target="_blank" rel="noopener" aria-label="GitHub" data-github-link="true" aria-disabled="true" title="GitHub" class="github-disabled"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M12 .5A11.5 11.5 0 0 0 8.36 22.9c.58.11.79-.25.79-.56v-2.02c-3.22.7-3.9-1.38-3.9-1.38-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.41-1.27.74-1.56-2.57-.29-5.27-1.29-5.27-5.73 0-1.27.45-2.3 1.2-3.11-.12-.29-.52-1.47.11-3.07 0 0 .98-.31 3.2 1.19A11.1 11.1 0 0 1 12 6.02c.99 0 1.99.13 2.92.4 2.22-1.5 3.19-1.19 3.19-1.19.64 1.6.24 2.78.12 3.07.75.81 1.2 1.84 1.2 3.11 0 4.45-2.71 5.43-5.29 5.72.42.36.79 1.08.79 2.18v3.23c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .5Z"></path></svg></a></li>
 <li><a href="https://www.linkedin.com/in/santiago-goncalves-285699388" target="_blank" rel="noopener" aria-label="LinkedIn" title="Here is my LinkedIn profile"><i class="icon icon-linkin"></i></a></li>
@@ -601,15 +668,18 @@ stop.bred{stop-color:#0b3d91!important}
 </div>
 <div class="service-accordion_item scrolling-effect effectBottom" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
 <a href="#service-2" class="accordion-action collapsed" data-bs-toggle="collapse" data-bs-target="#service-2" aria-expanded="false" aria-controls="service-2">
-<h4 class="text letter-space--2 text-black-72" data-i18n="services.ai.title">AI Solutions</h4>
+<h4 class="text letter-space--2 text-black-72" data-i18n="services.ai.title" data-project-heading="ai">AI Business Assistant System</h4><p class="service-row-subtitle" data-project-subtitle="ai">Custom business assistants that answer questions, qualify leads, collect quote requests, and organize customer information.</p>
 <div class="ic-wrap"><span class="ic-accordion-custom"></span></div>
 </a>
-<div id="service-2" class="collapse" data-bs-parent="#accordion-service">
-<div class="accordion-content"><div class="service-detail-grid">
-<section class="service-detail-card"><span class="service-kicker" data-service-copy="ai.kicker1">Assistant systems</span><h5 data-service-copy="ai.title1">AI that answers and collects details</h5><p data-service-copy="ai.desc1">For businesses that need a first response, client intake, FAQs, quotes, or service explanations before a human takes over.</p><ul class="service-detail-list"><li data-service-copy="ai.point1">Website chat assistants</li><li data-service-copy="ai.point2">Insurance, service, and support intake</li><li data-service-copy="ai.point3">Answers trained around your business</li></ul></section>
-<section class="service-detail-card"><span class="service-kicker" data-service-copy="ai.kicker2">Dashboard ready</span><h5 data-service-copy="ai.title2">AI tools connected to real work</h5><p data-service-copy="ai.desc2">I can prepare tools that organize requests, summarize client needs, and help you decide the next step faster.</p><div class="service-mini-ui"><div class="service-mini-row"><span data-service-copy="ai.row1">New lead</span><span>AI</span></div><div class="service-mini-row"><span data-service-copy="ai.row2">Summary</span><span>Ready</span></div><div class="service-mini-row"><span data-service-copy="ai.row3">Next action</span><span>Contact</span></div></div></section>
+<div id="service-2" class="collapse" data-bs-parent="#accordion-service" data-project="ai">
+<div class="accordion-content"><div class="project-narrative" data-project-narrative>
+<div class="project-intro"><p class="project-value" data-project-value></p><div class="project-actions"><button type="button" class="project-primary" data-project-example-button></button><button type="button" class="project-secondary" data-project-contact></button></div></div>
+<div class="project-facts"><section data-project-problem><span data-project-label="problem">Problem solved</span><p>Avoid missed questions and incomplete quote requests when staff cannot respond immediately.</p></section><section data-project-audience><span data-project-label="audience">Best for</span><p>Insurance agencies, transportation businesses, local services, real estate agents, and small businesses.</p></section></div>
+<section class="project-block"><h5 data-project-label="features">Included capabilities</h5><ul class="project-feature-grid" data-project-features><li>Website AI assistant</li><li>Lead qualification</li><li>Quote request detection</li><li>Customer intake</li><li>FAQ answers</li><li>Business-specific knowledge base</li><li>Email or CRM handoff</li><li>Conversation summaries</li><li>Admin-editable responses</li><li>Safe fallback responses</li></ul></section>
+<section class="project-block"><h5 data-project-label="workflow">Example workflow</h5><ol class="project-workflow" data-project-workflow><li><span>01</span><p>Visitor asks for a quote</p></li><li><span>02</span><p>Assistant asks service-specific questions</p></li><li><span>03</span><p>Contact details are collected</p></li><li><span>04</span><p>Business receives a structured lead</p></li></ol></section>
+<section class="project-block"><h5 data-project-label="deliverables">Client deliverables</h5><ul class="project-deliverables" data-project-deliverables><li>Branded website assistant</li><li>Business knowledge setup</li><li>Intake fields and suggested questions</li><li>Fallback and handoff rules</li><li>Lead-summary format</li></ul></section>
 </div>
-<div class="repo-tool" data-repo-tool="ai">
+<div class="repo-tool" data-repo-tool="ai" data-project-example>
 <div class="repo-tool-head"><span class="repo-kicker" data-tool-copy="ai.toolKicker">Usable client tool</span><h5 data-tool-copy="ai.toolTitle">AI Assistant Studio</h5><p data-tool-copy="ai.toolLead">Try a website assistant with business knowledge, suggested questions, a live preview, saved preferences, and a clean project summary.</p></div>
 <div class="repo-tool-grid">
 <form class="repo-tool-form" data-tool-form>
@@ -629,15 +699,18 @@ stop.bred{stop-color:#0b3d91!important}
 </div>
 <div class="service-accordion_item scrolling-effect effectBottom" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
 <a href="#service-3" class="accordion-action collapsed" data-bs-toggle="collapse" data-bs-target="#service-3" aria-expanded="false" aria-controls="service-3">
-<h4 class="text letter-space--2 text-black-72" data-i18n="services.automation.title">Automation</h4>
+<h4 class="text letter-space--2 text-black-72" data-i18n="services.automation.title" data-project-heading="automation">Business Workflow Automation</h4><p class="service-row-subtitle" data-project-subtitle="automation">Automation systems that connect forms, emails, spreadsheets, CRMs, calendars, and notifications so repetitive work stays organized.</p>
 <div class="ic-wrap"><span class="ic-accordion-custom"></span></div>
 </a>
-<div id="service-3" class="collapse" data-bs-parent="#accordion-service">
-<div class="accordion-content"><div class="service-detail-grid">
-<section class="service-detail-card"><span class="service-kicker" data-service-copy="auto.kicker1">Lead flow</span><h5 data-service-copy="auto.title1">From form to organized request</h5><p data-service-copy="auto.desc1">Instead of losing messages in WhatsApp or email, the request can be grouped, tagged, and prepared for follow-up.</p><ul class="service-detail-list"><li data-service-copy="auto.point1">Contact forms and quote requests</li><li data-service-copy="auto.point2">Automatic routing by service type</li><li data-service-copy="auto.point3">Simple dashboard or email summary</li></ul></section>
-<section class="service-detail-card"><span class="service-kicker" data-service-copy="auto.kicker2">Operations</span><h5 data-service-copy="auto.title2">Small systems for repeated tasks</h5><p data-service-copy="auto.desc2">Useful for reminders, booking requests, client follow-ups, content checks, and team task lists.</p><div class="service-mini-ui"><div class="service-mini-row"><span data-service-copy="auto.row1">Request received</span><span>01</span></div><div class="service-mini-row"><span data-service-copy="auto.row2">Sorted by service</span><span>02</span></div><div class="service-mini-row"><span data-service-copy="auto.row3">Follow-up prepared</span><span>03</span></div></div></section>
+<div id="service-3" class="collapse" data-bs-parent="#accordion-service" data-project="automation">
+<div class="accordion-content"><div class="project-narrative" data-project-narrative>
+<div class="project-intro"><p class="project-value" data-project-value></p><div class="project-actions"><button type="button" class="project-primary" data-project-example-button></button><button type="button" class="project-secondary" data-project-contact></button></div></div>
+<div class="project-facts"><section data-project-problem><span data-project-label="problem">Problem solved</span><p>Prevent requests from being lost across inboxes, messages, spreadsheets, and manual follow-up lists.</p></section><section data-project-audience><span data-project-label="audience">Best for</span><p>Small businesses, agencies, service companies, consultants, and local operations.</p></section></div>
+<section class="project-block"><h5 data-project-label="features">Included capabilities</h5><ul class="project-feature-grid" data-project-features><li>Lead intake automation</li><li>Automatic follow-ups</li><li>Email parsing</li><li>CRM updates</li><li>Google Sheets or Airtable dashboards</li><li>Appointment reminders</li><li>Task creation</li><li>Status tracking</li><li>Customer notifications</li><li>Daily business summaries</li></ul></section>
+<section class="project-block"><h5 data-project-label="workflow">Example workflow</h5><ol class="project-workflow" data-project-workflow><li><span>01</span><p>Quote form is submitted</p></li><li><span>02</span><p>Lead is classified</p></li><li><span>03</span><p>CRM is updated</p></li><li><span>04</span><p>Owner is notified</p></li><li><span>05</span><p>Follow-up is scheduled</p></li><li><span>06</span><p>Status is tracked</p></li></ol></section>
+<section class="project-block"><h5 data-project-label="deliverables">Client deliverables</h5><ul class="project-deliverables" data-project-deliverables><li>Workflow map</li><li>Trigger and routing rules</li><li>Required data fields</li><li>Status and notification model</li><li>Integration and exception plan</li></ul></section>
 </div>
-<div class="repo-tool" data-repo-tool="automation">
+<div class="repo-tool" data-repo-tool="automation" data-project-example>
 <div class="repo-tool-head"><span class="repo-kicker" data-tool-copy="auto.toolKicker">Usable ops tool</span><h5 data-tool-copy="auto.toolTitle">Automation Workflow Builder</h5><p data-tool-copy="auto.toolLead">Design a repeatable workflow, turn it into clear steps, preview the result, and send me the brief for a real business system.</p></div>
 <div class="repo-tool-grid">
 <form class="repo-tool-form" data-tool-form>
@@ -657,32 +730,43 @@ stop.bred{stop-color:#0b3d91!important}
 </div>
 <div class="service-accordion_item scrolling-effect effectBottom" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
 <a href="#service-4" class="accordion-action collapsed" data-bs-toggle="collapse" data-bs-target="#service-4" aria-expanded="false" aria-controls="service-4">
-<h4 class="text letter-space--2 text-black-72" data-i18n="services.electric.title">Electrical Planning</h4>
+<h4 class="text letter-space--2 text-black-72" data-i18n="services.electric.title" data-project-heading="electrical">Electrical Planning &amp; Material Estimator</h4><p class="service-row-subtitle" data-project-subtitle="electrical">A planning and estimating aid for organizing rooms, electrical points, project notes, circuit concepts, and preliminary material quantities.</p>
 <div class="ic-wrap"><span class="ic-accordion-custom"></span></div>
 </a>
-<div id="service-4" class="collapse" data-bs-parent="#accordion-service">
-<div class="accordion-content electro-planner" data-electric-planner>
+<div id="service-4" class="collapse" data-bs-parent="#accordion-service" data-project="electrical">
+<div class="accordion-content"><div class="project-narrative" data-project-narrative>
+<div class="project-intro"><p class="project-value" data-project-value></p><div class="project-actions"><button type="button" class="project-primary" data-project-example-button></button><button type="button" class="project-secondary" data-project-contact></button></div></div>
+<div class="project-facts"><section data-project-problem><span data-project-label="problem">Problem solved</span><p>Prepare a clearer project brief and reduce missing information before a site visit, estimate, or qualified review.</p></section><section data-project-audience><span data-project-label="audience">Best for</span><p>Electricians, contractors, homeowners, apprentices, and small renovation teams.</p></section></div>
+<section class="project-block"><h5 data-project-label="features">Included capabilities</h5><ul class="project-feature-grid" data-project-features><li>Room-by-room planning</li><li>Outlet, switch, and lighting notes</li><li>Circuit and load planning assistant</li><li>Material list generator</li><li>Basic diagram preview</li><li>Contractor notes</li><li>PDF project summary</li><li>Client approval checklist</li><li>Version history</li><li>Material quantity estimates</li></ul></section>
+<section class="project-block"><h5 data-project-label="workflow">Example workflow</h5><ol class="project-workflow" data-project-workflow><li><span>01</span><p>Enter project rooms</p></li><li><span>02</span><p>Add outlets, lights, switches, and panel notes</p></li><li><span>03</span><p>Review preliminary quantities</p></li><li><span>04</span><p>Generate the material list and project summary</p></li></ol></section>
+<section class="project-block"><h5 data-project-label="deliverables">Client deliverables</h5><ul class="project-deliverables" data-project-deliverables><li>Room schedule</li><li>Point and quantity summary</li><li>Preliminary material estimate</li><li>Project and contractor notes</li><li>Diagram concept and client checklist</li></ul></section>
+</div>
+<div class="accordion-content electro-planner" data-electric-planner data-project-example>
 <div class="planner-shell">
 <div class="planner-panel">
-<div class="planner-kicker" data-planner-copy="kicker">AI electrical planning tool</div>
-<h5 class="planner-title" data-planner-copy="title">Prepare a project before a site visit</h5>
-<p class="planner-lead" data-planner-copy="lead">Turn a rough idea into a concept diagram, material list, circuit organization and preparation notes.</p>
+<div class="planner-kicker" data-planner-copy="kicker">Electrical pre-visit dossier</div>
+<h5 class="planner-title" data-planner-copy="title">Prepare a technical brief before the visit</h5>
+<p class="planner-lead" data-planner-copy="lead">Build a client-friendly dossier with REBT-style residential circuits, unifilar and multifilar previews, material notes and review questions.</p>
 <form class="planner-form" data-planner-form>
-<label class="planner-field"><span data-planner-copy="projectType">Project type</span><select name="projectType"><option value="residential" data-planner-copy="typeResidential">Residential</option><option value="commercial" data-planner-copy="typeCommercial">Commercial</option><option value="renovation" data-planner-copy="typeRenovation">Renovation</option><option value="workshop" data-planner-copy="typeWorkshop">Workshop</option></select></label>
+<label class="planner-field"><span data-planner-copy="projectType">Project type</span><select name="projectType"><option value="residential" data-planner-copy="typeResidential">Residential home</option><option value="renovation" data-planner-copy="typeRenovation">Home renovation</option><option value="commercial" data-planner-copy="typeCommercial">Small commercial</option><option value="workshop" data-planner-copy="typeWorkshop">Workshop / technical room</option></select></label>
+<label class="planner-field"><span data-planner-copy="level">Electrification level</span><select name="level"><option value="basic" data-planner-copy="levelBasic">Basic residential</option><option value="elevated" data-planner-copy="levelElevated">Elevated / high demand</option></select></label>
 <label class="planner-field"><span data-planner-copy="rooms">Rooms or zones</span><input type="number" name="rooms" min="1" max="24" value="5"></label>
 <label class="planner-field"><span data-planner-copy="area">Approx. area</span><input type="number" name="area" min="10" max="1200" value="90"></label>
 <label class="planner-field"><span data-planner-copy="phase">Supply</span><select name="phase"><option value="single" data-planner-copy="phaseSingle">Single-phase</option><option value="three" data-planner-copy="phaseThree">Three-phase</option></select></label>
+<label class="planner-field"><span data-planner-copy="board">Board status</span><select name="board"><option value="unknown" data-planner-copy="boardUnknown">Unknown / check on visit</option><option value="existing" data-planner-copy="boardExisting">Existing board</option><option value="new" data-planner-copy="boardNew">New board planned</option></select></label>
 <div class="planner-loads" aria-label="Planning priorities">
-<label class="planner-check"><input type="checkbox" name="load" value="kitchen" checked><span data-planner-copy="loadKitchen">Kitchen / appliances</span></label>
-<label class="planner-check"><input type="checkbox" name="load" value="hvac"><span data-planner-copy="loadHvac">HVAC / climate</span></label>
-<label class="planner-check"><input type="checkbox" name="load" value="exterior"><span data-planner-copy="loadExterior">Exterior lighting</span></label>
-<label class="planner-check"><input type="checkbox" name="load" value="data"><span data-planner-copy="loadData">Data / low voltage</span></label>
-<label class="planner-check"><input type="checkbox" name="load" value="ev"><span data-planner-copy="loadEv">EV ready</span></label>
-<label class="planner-check"><input type="checkbox" name="load" value="solar"><span data-planner-copy="loadSolar">Solar / battery ready</span></label>
+<label class="planner-check"><input type="checkbox" name="load" value="kitchen" checked><span data-planner-copy="loadKitchen">Kitchen and wet-area focus</span></label>
+<label class="planner-check"><input type="checkbox" name="load" value="hvac"><span data-planner-copy="loadHvac">C9 air conditioning reserve</span></label>
+<label class="planner-check"><input type="checkbox" name="load" value="heating"><span data-planner-copy="loadHeating">C8 electric heating reserve</span></label>
+<label class="planner-check"><input type="checkbox" name="load" value="automation"><span data-planner-copy="loadAutomation">C11 automation / security</span></label>
+<label class="planner-check"><input type="checkbox" name="load" value="ev"><span data-planner-copy="loadEv">C13 EV charger reserve</span></label>
+<label class="planner-check"><input type="checkbox" name="load" value="data"><span data-planner-copy="loadData">Data / telecom pathways</span></label>
+<label class="planner-check"><input type="checkbox" name="load" value="exterior"><span data-planner-copy="loadExterior">Exterior or terrace points</span></label>
+<label class="planner-check"><input type="checkbox" name="load" value="solar"><span data-planner-copy="loadSolar">Solar / battery pathway</span></label>
 </div>
-<label class="planner-field planner-field-full"><span data-planner-copy="brief">Project notes</span><textarea name="brief" data-planner-placeholder="briefPlaceholder" placeholder="Example: apartment renovation, new kitchen, more sockets in bedrooms, smart lighting in living room."></textarea></label>
-<div class="planner-actions"><button type="button" class="planner-button" data-planner-generate data-planner-copy="generate">Generate concept plan</button><button type="button" class="planner-button secondary" data-planner-send data-planner-copy="send">Send to contact form</button><button type="button" class="planner-button ghost" data-planner-copy-plan data-planner-copy="copyPlan">Copy plan</button><span class="planner-toast" data-planner-toast></span></div>
-<p class="planner-note" data-planner-copy="safety">Concept only. Final sizing, protections, cable routes and code compliance must be checked by a qualified electrician before installation.</p>
+<label class="planner-field planner-field-full"><span data-planner-copy="brief">Site notes for the visit</span><textarea name="brief" data-planner-placeholder="briefPlaceholder" placeholder="Example: apartment renovation, new kitchen, more sockets in bedrooms, smart lighting in living room."></textarea></label>
+<div class="planner-actions"><button type="button" class="planner-button" data-planner-generate data-planner-copy="generate">Generate dossier</button><button type="button" class="planner-button secondary" data-planner-send data-planner-copy="send">Send to contact form</button><button type="button" class="planner-button ghost" data-planner-copy-plan data-planner-copy="copyPlan">Copy dossier</button><span class="planner-toast" data-planner-toast></span></div>
+<p class="planner-note" data-planner-copy="safety">Pre-visit concept only. Final sizing, protections, sections, routes and legalization must be checked by a qualified electrician under the applicable regulations before installation.</p>
 </form>
 </div>
 <div class="planner-panel planner-output" aria-live="polite">
@@ -698,21 +782,24 @@ stop.bred{stop-color:#0b3d91!important}
 </div>
 </div>
 </div>
-<div class="service-tag"><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.electric.tag1">Concept Diagrams</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.electric.tag2">Material Lists</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.electric.tag3">Circuit Prep</a></div>
-<p class="service-desc text-black-56" data-i18n="#service-4.desc">AI-assisted planning for electrical projects: conceptual diagrams, material lists, circuit organization and preparation notes for a professional review.</p></div>
+<div class="service-tag"><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.electric.tag1">Unifilar / Multifilar</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.electric.tag2">Circuit Dossier</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.electric.tag3">Visit Prep</a></div>
+<p class="service-desc text-black-56" data-i18n="#service-4.desc">Pre-visit electrical dossier with REBT-style circuit organization, conceptual unifilar/multifilar previews and questions for a qualified review.</p></div>
 </div>
 </div>
 <div class="service-accordion_item scrolling-effect effectBottom" style="translate: none; rotate: none; scale: none; transform: none; opacity: 1; visibility: visible;">
 <a href="#service-5" class="accordion-action collapsed" data-bs-toggle="collapse" data-bs-target="#service-5" aria-expanded="false" aria-controls="service-5">
-<h4 class="text letter-space--2 text-black-72" data-i18n="services.brand.title">Brand Identity</h4>
+<h4 class="text letter-space--2 text-black-72" data-i18n="services.brand.title" data-project-heading="brand">Brand Identity System</h4><p class="service-row-subtitle" data-project-subtitle="brand">Complete brand kits with logo systems, colors, typography, social assets, website direction, and practical usage guidance.</p>
 <div class="ic-wrap"><span class="ic-accordion-custom"></span></div>
 </a>
-<div id="service-5" class="collapse" data-bs-parent="#accordion-service">
-<div class="accordion-content"><div class="service-detail-grid">
-<section class="service-detail-card"><span class="service-kicker" data-service-copy="brand.kicker1">Logo and direction</span><h5 data-service-copy="brand.title1">A visual identity that fits the business</h5><p data-service-copy="brand.desc1">I can prepare logo concepts, colors, simple rules, and visuals that make the website and brand feel consistent.</p><ul class="service-detail-list"><li data-service-copy="brand.point1">Logo concepts and cleanup</li><li data-service-copy="brand.point2">Color and type direction</li><li data-service-copy="brand.point3">Social and website usage</li></ul></section>
-<section class="service-detail-card"><span class="service-kicker" data-service-copy="brand.kicker2">Brand pack</span><h5 data-service-copy="brand.title2">Ready-to-use assets</h5><p data-service-copy="brand.desc2">For new businesses or refreshes: a clean starter pack that can be used across the website, cards, and social media.</p><div class="brand-swatch-row"><span class="brand-swatch" style="background:#0b3d91"></span><span class="brand-swatch" style="background:#061226"></span><span class="brand-swatch" style="background:#f8fbff"></span><span class="brand-swatch" style="background:#b9d8ff"></span></div><div class="service-mini-ui"><div class="service-mini-row"><span data-service-copy="brand.row1">Logo files</span><span>SVG</span></div><div class="service-mini-row"><span data-service-copy="brand.row2">Brand guide</span><span>PDF</span></div></div></section>
+<div id="service-5" class="collapse" data-bs-parent="#accordion-service" data-project="brand">
+<div class="accordion-content"><div class="project-narrative" data-project-narrative>
+<div class="project-intro"><p class="project-value" data-project-value></p><div class="project-actions"><button type="button" class="project-primary" data-project-example-button></button><button type="button" class="project-secondary" data-project-contact></button></div></div>
+<div class="project-facts"><section data-project-problem><span data-project-label="problem">Problem solved</span><p>Give new or inconsistent businesses one usable visual direction across web, social media, and print.</p></section><section data-project-audience><span data-project-label="audience">Best for</span><p>New businesses, rebrands, portfolio sites, insurance, transportation, real estate, contractors, and creators.</p></section></div>
+<section class="project-block"><h5 data-project-label="features">Included capabilities</h5><ul class="project-feature-grid" data-project-features><li>Logo system</li><li>Color palette</li><li>Typography</li><li>Brand usage rules</li><li>Social media templates</li><li>Website hero direction</li><li>Business card mockups</li><li>Flyer mockups</li><li>Favicon and app icon</li><li>Brand voice notes</li><li>Canva or Figma-ready assets</li><li>Downloadable brand kit</li></ul></section>
+<section class="project-block"><h5 data-project-label="workflow">Example workflow</h5><ol class="project-workflow" data-project-workflow><li><span>01</span><p>Share the business name, industry, and style</p></li><li><span>02</span><p>Establish the brand direction</p></li><li><span>03</span><p>Build the logo system, colors, and type</p></li><li><span>04</span><p>Prepare assets for web, social, and print</p></li></ol></section>
+<section class="project-block"><h5 data-project-label="deliverables">Client deliverables</h5><ul class="project-deliverables" data-project-deliverables><li>Primary and alternate logo directions</li><li>Color and typography specifications</li><li>Usage examples and social templates</li><li>Web direction and icon files</li><li>Organized brand-kit package</li></ul></section>
 </div>
-<div class="repo-tool" data-repo-tool="brand">
+<div class="repo-tool" data-repo-tool="brand" data-project-example>
 <div class="repo-tool-head"><span class="repo-kicker" data-tool-copy="brand.toolKicker">Usable brand tool</span><h5 data-tool-copy="brand.toolTitle">Brand Kit Generator</h5><p data-tool-copy="brand.toolLead">Create a starter logo mark, palette, tagline, usage notes, and a clean brand direction you can send me for a project.</p></div>
 <div class="repo-tool-grid">
 <form class="repo-tool-form" data-tool-form>
@@ -763,7 +850,7 @@ stop.bred{stop-color:#0b3d91!important}
 <div class="split-line" aria-hidden="true" style="position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;">please drop me an email or fill the form,</div>
 <div class="split-line" aria-hidden="true" style="position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;">available now</div></h4><form class="form-contact" id="contactform" novalidate="" action="mailto:santiagogoncalves07@gmail.com" method="post" enctype="text/plain"><div class="form-content effectFade fadeUp no-div" style="translate: none; rotate: none; scale: none; transform: translate(0px, 50px); opacity: 0; visibility: hidden;"><fieldset class="field-ip"><input type="text" id="name" placeholder="Your Name *" required="" name="name" data-i18n-placeholder="contact.name"></fieldset><fieldset class="field-ip"><input type="email" id="email" placeholder="Email Address *" required="" name="email" data-i18n-placeholder="contact.email"></fieldset><fieldset class="field-ip"><input type="text" id="message" placeholder="Project Description / Electrical Work" name="message" data-i18n-placeholder="contact.message"></fieldset></div><div class="form-action effectFade fadeUp no-div" style="translate: none; rotate: none; scale: none; transform: translate(0px, 50px); opacity: 0; visibility: hidden;"><div class="send-wrap"><button type="submit" class="tf-btn animate-btn animate-dark"><span class="text-body-3" data-i18n="contact.send">Send Message</span></button></div><a href="mailto:santiagogoncalves07@gmail.com" class="text-body-1 link letter-space--2 text-black-72">santiagogoncalves07@gmail.com</a></div></form></div><div id="footer" class="tf-footer flat-spacing"><div class="block-quote effectFade fadeUp no-div" style="translate: none; rotate: none; scale: none; transform: translate(0px, 50px); opacity: 0; visibility: hidden;"><h5 class="quote-text font-3 fw-normal text-black-72" data-i18n-html="footer.quote"><span class="text-black-56">“</span>Design is not just what it looks like and feels like. Design is how it works.<span class="text-black-56">“</span></h5><p class="quote-author font-3 text-black-56 h6 text-end">Steve Jobs</p></div><div class="br-line"></div><div class="foot-inner"><div class="santiago-wordmark effectFade fadeUp no-div">Santiago</div><a href="#" class="f-logo effectFade fadeZoom" style="translate: none; rotate: none; scale: none; transform: scale(0.8, 0.8); opacity: 0; visibility: hidden;" aria-hidden="true"><div class="logo"><img class="image-switch" data-light="/clone-assets/logos/santipulse.png" data-dark="/clone-assets/logos/santipulse.png" loading="lazy" width="32" height="32" src="/clone-assets/logos/santipulse.png" alt="Santiago Alexander logo" style="color: transparent;"></div></a></div><div class="foot-bottom"><p class="text-nocopy text-black-56 effectFade fadeUp no-div" style="translate: none; rotate: none; scale: none; transform: translate(0px, 50px); opacity: 0; visibility: hidden;" data-i18n="footer.rights">All rights reserved
 © 2026 Santiago Portfolio</p><div class="santiago-outline effectFade fadeUp no-div">Goncalves</div></div></div></div></div></div></div></div></main><!--$--><!--/$--><next-route-announcer style="position: absolute;"></next-route-announcer><script id="clone-static-helper">(() => {
-  const translations = {"en":{"nav.home":"Home","nav.about":"About","nav.education":"Education","nav.work":"Work","nav.services":"Services","nav.tech":"Tools","nav.testimonials":"Testimonials","nav.contact":"Contact","about.tag":"About Me","education.tag":"Education & Experience","work.tag":"Work Highlights","services.tag":"Services","tech.tag":"Tools","testimonial.tag":"Testimonials","contact.tag":"Contact","hero.name":"Santiago Alexander","hero.duty":"Programmer and Electrician","hero.title":"I build <span class=\"is-bg\">websites &amp; AI solutions</span> <br><span class=\"type-2 is-bg\">for businesses people remember</span>, plus professional electrical installations","hero.greeting":"Hey, I am Santiago.","hero.intro":"I help businesses grow with AI, programming, code and no-code development, and I also do electrician work. I am based in Tenerife, Spain.","hero.cta":"Let’s talk","hero.cv":"Download CV","hero.counter.experience":"Years of experience","hero.counter.certificates":"Certificates","about.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">AI, automation, web development,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">and electrical installation work</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">from Tenerife</div>","about.desc":"I am based in Santa Cruz de Tenerife and trained in Electrical and Automatic Installations at CIFP IES La Laboral de La Laguna. My profile includes AI, automation, Python, GitHub, cybersecurity, prompt engineering, web development, and hands-on electrical installation work.<br class=\"d-none d-lg-block\"><br>I completed dual-VET practice at MEGASUR Tenerife, supporting residential and commercial installations, panel assembly, fault diagnosis, maintenance, and safety procedures while continuing to build websites, AI tools, dashboards, and automations for businesses.","cert.linkedinGenerativeAi.title":"What Is Generative AI","cert.linkedinGenerativeAi.desc":"LinkedIn Learning","cert.hpBusinessAi.title":"AI for Business Professionals","cert.hpBusinessAi.desc":"HP LIFE","cert.hpBeginnersAi.title":"AI for Beginners","cert.hpBeginnersAi.desc":"HP LIFE","cert.ciscoCybersecurity.title":"Introduction to Cybersecurity","cert.ciscoCybersecurity.desc":"Cisco Networking Academy","cert.awsMachineLearning.title":"AWS Foundations: Machine Learning Basics","cert.awsMachineLearning.desc":"AWS Training & Certification","cert.awsGenerativeAi.title":"Introduction to Generative AI - Art of the Possible","cert.awsGenerativeAi.desc":"AWS Training & Certification","cert.teenpreneurAi.title":"Teenpreneur Program - AI for Business","cert.teenpreneurAi.desc":"San Ignacio University Miami","cert.oshaTen.title":"OSHA 10-Hour General Industry Outreach","cert.oshaTen.desc":"360training / OSHA Outreach","cert.oshaThirty.title":"OSHA 30-Hour General Industry Outreach","cert.oshaThirty.desc":"360training / OSHA Outreach","cert.confinedSpaces.title":"Confined Spaces Safety","cert.confinedSpaces.desc":"FEMETE / PRL","cert.workingHeights.title":"Working at Heights Safety","cert.workingHeights.desc":"Cámara Santa Cruz de Tenerife","cert.nationalElectricalCode.title":"National Electrical Code","cert.nationalElectricalCode.desc":"Electrical training","cert.electricianApprentice.title":"Introduction to being an Electrician Apprentice","cert.electricianApprentice.desc":"Electrical training","cert.solarPhotovoltaic.title":"Solar Photovoltaic Maintenance","cert.solarPhotovoltaic.desc":"FOCAN - 60 hours","cert.electricalStudies.title":"Electrical Studies","cert.electricalStudies.desc":"CFGM 2025-2026","education.role.school":"CFGM Electrical & Automatic Installations","education.desc.school":"CIFP IES La Laboral de La Laguna. Training in electrical installations, industrial automation, electronics, domotics, and solar photovoltaics.","education.role.megasur":"MEGASUR Tenerife - Electrical Internship","education.desc.megasur":"Dual-VET practice supporting residential and commercial wiring, panel assembly, fault diagnosis, preventive maintenance, safety procedures, and teamwork with qualified electricians.","education.role.certifications":"AI, Cybersecurity & Safety Certifications","education.desc.certifications":"Training across AWS Machine Learning Basics, Generative AI, HP LIFE AI courses, Cisco cybersecurity, OSHA safety, electrical apprentice fundamentals, working at heights, confined spaces, and solar photovoltaic maintenance.","work.0.desc":"Private car collection website with a premium visual direction and clear showcase structure.","work.0.yearLabel":"Year","work.0.roleLabel":"Role","work.0.role":"Website Design & Development","work.0.button":"View site","work.sol.tag1":"Web Design","work.sol.tag2":"Collection","work.sol.tag3":"Client Work","work.1.desc":"Premium US auto imports website for Tenerife, designed to present inventory, trust, and service clearly.","work.1.yearLabel":"Year","work.1.roleLabel":"Role","work.1.role":"Website Design & Development","work.1.button":"View site","work.vals.tag1":"Web Design","work.vals.tag2":"Cars","work.vals.tag3":"Tenerife","work.2.desc":"Client website for a Tenerife barber shop with a direct brand presence and booking-focused structure.","work.2.yearLabel":"Year","work.2.roleLabel":"Role","work.2.role":"Website Design & Development","work.2.button":"View site","work.estimado.tag1":"Web Design","work.estimado.tag2":"Brand","work.estimado.tag3":"Local Business","services.web.tag1":"Responsive Websites","services.web.tag2":"Client Pages","services.web.tag3":"Portfolio Sites","services.web.desc":"Modern, responsive websites that look professional, load clearly, and help visitors understand what a business offers.","services.web.more":"See all websites","services.web.less":"Show fewer websites","web.open":"View website","services.web.title":"Web Design","services.ai.title":"AI Solutions","services.automation.title":"Automation","services.electric.title":"Electrical Planning","services.brand.title":"Brand Identity","services.ai.tag1":"AI Assistants","services.ai.tag2":"Business Tools","services.ai.tag3":"Smart Workflows","#service-2.desc":"Try a practical AI assistant demo for business questions, lead scoring, and client intake.","services.ai.placeholder":"Try the assistant demo and send me the result.","services.auto.tag1":"Lead Flow","services.auto.tag2":"Task Systems","services.auto.tag3":"Process Design","#service-3.desc":"Try a workflow demo for forms, client requests, dashboards, and repetitive tasks.","services.auto.placeholder":"Try the automation demo and send me the result.","services.electric.tag1":"Concept Diagrams","services.electric.tag2":"Material Lists","services.electric.tag3":"Circuit Prep","#service-4.desc":"AI-assisted planning for electrical projects: conceptual diagrams, material lists, circuit organization and preparation notes for a professional review.","services.electric.placeholder":"Try the electrical planner and send me the concept.","services.brand.tag1":"Logo Design","services.brand.tag2":"Brand Guidelines","services.brand.tag3":"Visual Systems","#service-5.desc":"Try a brand direction demo for logo ideas, palettes, and simple usage rules.","services.brand.placeholder":"Try the brand demo and send me the result.","tech.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Tools I use to design, edit,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">and build professional projects</div>","tech.0.name":"Figma","tech.0.duty":"Design and interface planning","tech.1.name":"VS Code","tech.1.duty":"Programming workspace","tech.2.name":"Adobe Photoshop","tech.2.duty":"Image editing and graphics","tech.3.name":"Adobe Video Editor","tech.3.duty":"Video editing and presentation","testimonial.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Client brands and</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">project feedback</div>","testimonial.projects":"Projects and builds","testimonial.satisfaction":"Client satisfaction","testimonial.0.text":"A premium car collection website built to feel elegant, visual, and simple to explore.","testimonial.1.text":"A professional client website for a Tenerife auto import business, focused on trust and clear presentation.","testimonial.2.text":"A barber shop website built for a strong first impression and easy customer action.","testimonial.sol.role":"Private Collection Website","testimonial.vals.role":"Premium US Auto Imports","testimonial.estimado.role":"Local Business Website","contact.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">If you have a general or project enquiry,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">please drop me an email or fill the form,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">available now</div>","contact.name":"Your Name *","contact.email":"Email Address *","contact.message":"Project Description / Electrical Work","contact.send":"Send Message","footer.quote":"<span class=\"text-black-56\">“</span>Design is not just what it looks like and feels like. Design is how it works.<span class=\"text-black-56\">“</span>","footer.rights":"All rights reserved \n© 2026 Santiago Portfolio"},"es":{"nav.home":"Inicio","nav.about":"Sobre mí","nav.education":"Formación","nav.work":"Trabajos","nav.services":"Servicios","nav.tech":"Herramientas","nav.testimonials":"Opiniones","nav.contact":"Contacto","about.tag":"Sobre mí","education.tag":"Formación y experiencia","work.tag":"Trabajos destacados","services.tag":"Servicios","tech.tag":"Herramientas","testimonial.tag":"Opiniones","contact.tag":"Contacto","hero.name":"Santiago Alexander","hero.duty":"Programador y electricista","hero.title":"Creo <span class=\"is-bg\">webs y soluciones de IA</span> <br><span class=\"type-2 is-bg\">para negocios que la gente recuerda</span>, e instalaciones eléctricas profesionales","hero.greeting":"Hola, soy Santiago.","hero.intro":"Ayudo a negocios a crecer con IA, programación, código y desarrollo no-code. Tambien hago trabajos de electricidad. Estoy en Tenerife, España.","hero.cta":"Hablemos","hero.cv":"Descargar CV","hero.counter.experience":"Años de experiencia","hero.counter.certificates":"Certificados","about.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">IA, automatización, desarrollo web</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">e instalaciones eléctricas</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">desde Tenerife</div>","about.desc":"Estoy en Santa Cruz de Tenerife y me forme en Instalaciones Eléctricas y Automaticas en CIFP IES La Laboral de La Laguna. Mi perfil combina IA, automatización, Python, GitHub, ciberseguridad, prompt engineering, desarrollo web y trabajo practico de electricidad.<br class=\"d-none d-lg-block\"><br>Realice prácticas de FP Dual en MEGASUR Tenerife, ayudando en instalaciones residenciales y comerciales, montaje de cuadros, diagnóstico de averias, mantenimiento y seguridad mientras sigo creando webs, herramientas de IA, dashboards y automatizaciónes para negocios.","cert.linkedinGenerativeAi.title":"Qué es la IA generativa","cert.linkedinGenerativeAi.desc":"LinkedIn Learning","cert.hpBusinessAi.title":"IA para profesionales de negocio","cert.hpBusinessAi.desc":"HP LIFE","cert.hpBeginnersAi.title":"IA para principiantes","cert.hpBeginnersAi.desc":"HP LIFE","cert.ciscoCybersecurity.title":"Introducción a la ciberseguridad","cert.ciscoCybersecurity.desc":"Cisco Networking Academy","cert.awsMachineLearning.title":"AWS Foundations: bases de machine learning","cert.awsMachineLearning.desc":"AWS Training & Certification","cert.awsGenerativeAi.title":"Introducción a IA generativa - Art of the Possible","cert.awsGenerativeAi.desc":"AWS Training & Certification","cert.teenpreneurAi.title":"Teenpreneur Program - IA para negocios","cert.teenpreneurAi.desc":"San Ignacio University Miami","cert.oshaTen.title":"OSHA 10 horas - industria general","cert.oshaTen.desc":"360training / OSHA Outreach","cert.oshaThirty.title":"OSHA 30 horas - industria general","cert.oshaThirty.desc":"360training / OSHA Outreach","cert.confinedSpaces.title":"Prevención en espacios confinados","cert.confinedSpaces.desc":"FEMETE / PRL","cert.workingHeights.title":"Prevención en trabajos en altura","cert.workingHeights.desc":"Cámara Santa Cruz de Tenerife","cert.nationalElectricalCode.title":"National Electrical Code","cert.nationalElectricalCode.desc":"Formación electrica","cert.electricianApprentice.title":"Introducción al aprendizaje de electricista","cert.electricianApprentice.desc":"Formación electrica","cert.solarPhotovoltaic.title":"Mantenimiento de instalaciones solares fotovoltaicas","cert.solarPhotovoltaic.desc":"FOCAN - 60 horas","cert.electricalStudies.title":"Estudios de electricidad","cert.electricalStudies.desc":"CFGM 2025-2026","education.role.school":"CFGM Instalaciones Eléctricas y Automaticas","education.desc.school":"CIFP IES La Laboral de La Laguna. Formación en instalaciones eléctricas, automatización industrial, electrónica, domótica y energia solar fotovoltaica.","education.role.megasur":"MEGASUR Tenerife - Prácticas de electricidad","education.desc.megasur":"Prácticas de FP Dual ayudando en cableado residencial y comercial, montaje de cuadros, diagnóstico de averias, mantenimiento preventivo, seguridad y trabajo con electricistas cualificados.","education.role.certifications":"Certificados de IA, ciberseguridad y seguridad","education.desc.certifications":"Formación en AWS Machine Learning Basics, IA generativa, cursos de IA de HP LIFE, ciberseguridad de Cisco, seguridad OSHA, fundamentos de aprendiz de electricista, trabajos en altura, espacios confinados y mantenimiento solar fotovoltaico.","work.0.desc":"Web para una colección privada de coches, con dirección visual premium y una estructura clara para mostrar los vehículos.","work.0.yearLabel":"Año","work.0.roleLabel":"Rol","work.0.role":"Diseño y desarrollo web","work.0.button":"Ver web","work.sol.tag1":"Diseño web","work.sol.tag2":"Coleccion","work.sol.tag3":"Cliente real","work.1.desc":"Web para importacion premium de coches americanos en Tenerife, enfocada en inventario, confianza y servicio claro.","work.1.yearLabel":"Año","work.1.roleLabel":"Rol","work.1.role":"Diseño y desarrollo web","work.1.button":"Ver web","work.vals.tag1":"Diseño web","work.vals.tag2":"Coches","work.vals.tag3":"Tenerife","work.2.desc":"Web para una barberia en Tenerife con presencia de marca directa y estructura enfocada en reservas.","work.2.yearLabel":"Año","work.2.roleLabel":"Rol","work.2.role":"Diseño y desarrollo web","work.2.button":"Ver web","work.estimado.tag1":"Diseño web","work.estimado.tag2":"Marca","work.estimado.tag3":"Negocio local","services.web.tag1":"Webs responsive","services.web.tag2":"Páginas para clientes","services.web.tag3":"Portfolios","services.web.desc":"Webs modernas y responsive que se ven profesionales, cargan claro y ayudan a entender lo que ofrece cada negocio.","services.web.more":"Ver todas las webs","services.web.less":"Ver menos webs","web.open":"Ver web","services.web.title":"Diseño web","services.ai.title":"Soluciones de IA","services.automation.title":"Automatización","services.electric.title":"Planificacion electrica","services.brand.title":"Identidad de marca","services.ai.tag1":"Asistentes de IA","services.ai.tag2":"Herramientas de negocio","services.ai.tag3":"Flujos inteligentes","#service-2.desc":"Prueba una demo de asistente IA para preguntas del negocio, lead scoring y toma de datos.","services.ai.placeholder":"Prueba la demo del asistente y enviame el resultado.","services.auto.tag1":"Flujo de leads","services.auto.tag2":"Sistemas de tareas","services.auto.tag3":"Diseño de procesos","#service-3.desc":"Prueba una demo de flujo para formularios, solicitudes, dashboards y tareas repetitivas.","services.auto.placeholder":"Prueba la demo de automatizacion y enviame el resultado.","services.electric.tag1":"Diagramas conceptuales","services.electric.tag2":"Listas de materiales","services.electric.tag3":"Preparacion de circuitos","#service-4.desc":"Planificacion asistida para proyectos electricos: diagramas conceptuales, listas de materiales, organizacion de circuitos y notas para revisar profesionalmente.","services.electric.placeholder":"Prueba el planificador electrico y enviame el concepto.","services.brand.tag1":"Diseño de logos","services.brand.tag2":"Guías de marca","services.brand.tag3":"Sistemas visuales","#service-5.desc":"Prueba una demo de direccion de marca para logos, paletas y reglas simples de uso.","services.brand.placeholder":"Prueba la demo de marca y enviame el resultado.","tech.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Herramientas que uso para disenar, editar</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">y construir proyectos profesionales</div>","tech.0.name":"Figma","tech.0.duty":"Diseño y planificacion de interfaces","tech.1.name":"VS Code","tech.1.duty":"Espacio de programación","tech.2.name":"Adobe Photoshop","tech.2.duty":"Edición de imágenes y gráficos","tech.3.name":"Adobe Video Editor","tech.3.duty":"Edición de video y presentacion","testimonial.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Marcas de clientes</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">y feedback de proyectos</div>","testimonial.projects":"Proyectos y builds","testimonial.satisfaction":"Satisfacción de clientes","testimonial.0.text":"Una web de colección de coches creada para sentirse elegante, visual y fácil de explorar.","testimonial.1.text":"Una web profesional para un negocio de importacion de coches en Tenerife, enfocada en confianza y presentacion clara.","testimonial.2.text":"Una web de barberia pensada para una primera impresion fuerte y una acción fácil del cliente.","testimonial.sol.role":"Web de colección privada","testimonial.vals.role":"Importacion premium de coches USA","testimonial.estimado.role":"Web para negocio local","contact.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Si tienes una consulta general o un proyecto,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">escríbeme por email o completa el formulario,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">disponible ahora</div>","contact.name":"Tu nombre *","contact.email":"Correo electronico *","contact.message":"Descripcion del proyecto / trabajo electrico","contact.send":"Enviar mensaje","footer.quote":"<span class=\"text-black-56\">“</span>El diseño no es solo como se ve y se siente. El diseño es como funciona.<span class=\"text-black-56\">“</span>","footer.rights":"Todos los derechos reservados \n© 2026 Santiago Portfolio"}};
+  const translations = {"en":{"nav.home":"Home","nav.about":"About","nav.education":"Education","nav.work":"Work","nav.services":"Services","nav.tech":"Tools","nav.testimonials":"Testimonials","nav.contact":"Contact","about.tag":"About Me","education.tag":"Education & Experience","work.tag":"Work Highlights","services.tag":"Services","tech.tag":"Tools","testimonial.tag":"Testimonials","contact.tag":"Contact","hero.name":"Santiago Alexander","hero.duty":"Programmer and Electrician","hero.title":"I build <span class=\"is-bg\">websites &amp; AI solutions</span> <br><span class=\"type-2 is-bg\">for businesses people remember</span>, plus professional electrical installations","hero.greeting":"Hey, I am Santiago.","hero.intro":"I help businesses grow with AI, programming, code and no-code development, and I also do electrician work. I am based in Tenerife, Spain.","hero.cta":"Let’s talk","hero.cv":"Download CV","hero.counter.experience":"Years of experience","hero.counter.certificates":"Certificates","about.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">AI, automation, web development,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">and electrical installation work</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">from Tenerife</div>","about.desc":"I am based in Santa Cruz de Tenerife and trained in Electrical and Automatic Installations at CIFP IES La Laboral de La Laguna. My profile includes AI, automation, Python, GitHub, cybersecurity, prompt engineering, web development, and hands-on electrical installation work.<br class=\"d-none d-lg-block\"><br>I completed dual-VET practice at MEGASUR Tenerife, supporting residential and commercial installations, panel assembly, fault diagnosis, maintenance, and safety procedures while continuing to build websites, AI tools, dashboards, and automations for businesses.","cert.linkedinGenerativeAi.title":"What Is Generative AI","cert.linkedinGenerativeAi.desc":"LinkedIn Learning","cert.hpBusinessAi.title":"AI for Business Professionals","cert.hpBusinessAi.desc":"HP LIFE","cert.hpBeginnersAi.title":"AI for Beginners","cert.hpBeginnersAi.desc":"HP LIFE","cert.ciscoCybersecurity.title":"Introduction to Cybersecurity","cert.ciscoCybersecurity.desc":"Cisco Networking Academy","cert.awsMachineLearning.title":"AWS Foundations: Machine Learning Basics","cert.awsMachineLearning.desc":"AWS Training & Certification","cert.awsGenerativeAi.title":"Introduction to Generative AI - Art of the Possible","cert.awsGenerativeAi.desc":"AWS Training & Certification","cert.teenpreneurAi.title":"Teenpreneur Program - AI for Business","cert.teenpreneurAi.desc":"San Ignacio University Miami","cert.oshaTen.title":"OSHA 10-Hour General Industry Outreach","cert.oshaTen.desc":"360training / OSHA Outreach","cert.oshaThirty.title":"OSHA 30-Hour General Industry Outreach","cert.oshaThirty.desc":"360training / OSHA Outreach","cert.confinedSpaces.title":"Confined Spaces Safety","cert.confinedSpaces.desc":"FEMETE / PRL","cert.workingHeights.title":"Working at Heights Safety","cert.workingHeights.desc":"Cámara Santa Cruz de Tenerife","cert.nationalElectricalCode.title":"National Electrical Code","cert.nationalElectricalCode.desc":"Electrical training","cert.electricianApprentice.title":"Introduction to being an Electrician Apprentice","cert.electricianApprentice.desc":"Electrical training","cert.solarPhotovoltaic.title":"Solar Photovoltaic Maintenance","cert.solarPhotovoltaic.desc":"FOCAN - 60 hours","cert.electricalStudies.title":"Electrical Studies","cert.electricalStudies.desc":"CFGM 2025-2026","education.role.school":"CFGM Electrical & Automatic Installations","education.desc.school":"CIFP IES La Laboral de La Laguna. Training in electrical installations, industrial automation, electronics, domotics, and solar photovoltaics.","education.role.megasur":"MEGASUR Tenerife - Electrical Internship","education.desc.megasur":"Dual-VET practice supporting residential and commercial wiring, panel assembly, fault diagnosis, preventive maintenance, safety procedures, and teamwork with qualified electricians.","education.role.certifications":"AI, Cybersecurity & Safety Certifications","education.desc.certifications":"Training across AWS Machine Learning Basics, Generative AI, HP LIFE AI courses, Cisco cybersecurity, OSHA safety, electrical apprentice fundamentals, working at heights, confined spaces, and solar photovoltaic maintenance.","work.0.desc":"Private car collection website with a premium visual direction and clear showcase structure.","work.0.yearLabel":"Year","work.0.roleLabel":"Role","work.0.role":"Website Design & Development","work.0.button":"View site","work.sol.tag1":"Web Design","work.sol.tag2":"Collection","work.sol.tag3":"Client Work","work.1.desc":"Premium US auto imports website for Tenerife, designed to present inventory, trust, and service clearly.","work.1.yearLabel":"Year","work.1.roleLabel":"Role","work.1.role":"Website Design & Development","work.1.button":"View site","work.vals.tag1":"Web Design","work.vals.tag2":"Cars","work.vals.tag3":"Tenerife","work.2.desc":"Client website for a Tenerife barber shop with a direct brand presence and booking-focused structure.","work.2.yearLabel":"Year","work.2.roleLabel":"Role","work.2.role":"Website Design & Development","work.2.button":"View site","work.estimado.tag1":"Web Design","work.estimado.tag2":"Brand","work.estimado.tag3":"Local Business","services.web.tag1":"Responsive Websites","services.web.tag2":"Client Pages","services.web.tag3":"Portfolio Sites","services.web.desc":"Modern, responsive websites that look professional, load clearly, and help visitors understand what a business offers.","services.web.more":"See all websites","services.web.less":"Show fewer websites","web.open":"View website","services.web.title":"Web Design","services.ai.title":"AI Solutions","services.automation.title":"Automation","services.electric.title":"Electrical Planning","services.brand.title":"Brand Identity","services.ai.tag1":"AI Assistants","services.ai.tag2":"Business Tools","services.ai.tag3":"Smart Workflows","#service-2.desc":"Try a practical AI assistant demo for business questions, lead scoring, and client intake.","services.ai.placeholder":"Try the assistant demo and send me the result.","services.auto.tag1":"Lead Flow","services.auto.tag2":"Task Systems","services.auto.tag3":"Process Design","#service-3.desc":"Try a workflow demo for forms, client requests, dashboards, and repetitive tasks.","services.auto.placeholder":"Try the automation demo and send me the result.","services.electric.tag1":"Unifilar / Multifilar","services.electric.tag2":"Circuit Dossier","services.electric.tag3":"Visit Prep","#service-4.desc":"Pre-visit electrical dossier with REBT-style circuit organization, conceptual unifilar/multifilar previews and questions for a qualified review.","services.electric.placeholder":"Try the electrical planner and send me the concept.","services.brand.tag1":"Logo Design","services.brand.tag2":"Brand Guidelines","services.brand.tag3":"Visual Systems","#service-5.desc":"Try a brand direction demo for logo ideas, palettes, and simple usage rules.","services.brand.placeholder":"Try the brand demo and send me the result.","tech.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Tools I use to design, edit,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">and build professional projects</div>","tech.0.name":"Figma","tech.0.duty":"Design and interface planning","tech.1.name":"VS Code","tech.1.duty":"Programming workspace","tech.2.name":"Adobe Photoshop","tech.2.duty":"Image editing and graphics","tech.3.name":"Adobe Video Editor","tech.3.duty":"Video editing and presentation","testimonial.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Client brands and</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">project feedback</div>","testimonial.projects":"Projects and builds","testimonial.satisfaction":"Client satisfaction","testimonial.0.text":"A premium car collection website built to feel elegant, visual, and simple to explore.","testimonial.1.text":"A professional client website for a Tenerife auto import business, focused on trust and clear presentation.","testimonial.2.text":"A barber shop website built for a strong first impression and easy customer action.","testimonial.sol.role":"Private Collection Website","testimonial.vals.role":"Premium US Auto Imports","testimonial.estimado.role":"Local Business Website","contact.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">If you have a general or project enquiry,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">please drop me an email or fill the form,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">available now</div>","contact.name":"Your Name *","contact.email":"Email Address *","contact.message":"Project Description / Electrical Work","contact.send":"Send Message","footer.quote":"<span class=\"text-black-56\">“</span>Design is not just what it looks like and feels like. Design is how it works.<span class=\"text-black-56\">“</span>","footer.rights":"All rights reserved \n© 2026 Santiago Portfolio"},"es":{"nav.home":"Inicio","nav.about":"Sobre mí","nav.education":"Formación","nav.work":"Trabajos","nav.services":"Servicios","nav.tech":"Herramientas","nav.testimonials":"Opiniones","nav.contact":"Contacto","about.tag":"Sobre mí","education.tag":"Formación y experiencia","work.tag":"Trabajos destacados","services.tag":"Servicios","tech.tag":"Herramientas","testimonial.tag":"Opiniones","contact.tag":"Contacto","hero.name":"Santiago Alexander","hero.duty":"Programador y electricista","hero.title":"Creo <span class=\"is-bg\">webs y soluciones de IA</span> <br><span class=\"type-2 is-bg\">para negocios que la gente recuerda</span>, e instalaciones eléctricas profesionales","hero.greeting":"Hola, soy Santiago.","hero.intro":"Ayudo a negocios a crecer con IA, programación, código y desarrollo no-code. Tambien hago trabajos de electricidad. Estoy en Tenerife, España.","hero.cta":"Hablemos","hero.cv":"Descargar CV","hero.counter.experience":"Años de experiencia","hero.counter.certificates":"Certificados","about.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">IA, automatización, desarrollo web</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">e instalaciones eléctricas</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">desde Tenerife</div>","about.desc":"Estoy en Santa Cruz de Tenerife y me forme en Instalaciones Eléctricas y Automaticas en CIFP IES La Laboral de La Laguna. Mi perfil combina IA, automatización, Python, GitHub, ciberseguridad, prompt engineering, desarrollo web y trabajo practico de electricidad.<br class=\"d-none d-lg-block\"><br>Realice prácticas de FP Dual en MEGASUR Tenerife, ayudando en instalaciones residenciales y comerciales, montaje de cuadros, diagnóstico de averias, mantenimiento y seguridad mientras sigo creando webs, herramientas de IA, dashboards y automatizaciónes para negocios.","cert.linkedinGenerativeAi.title":"Qué es la IA generativa","cert.linkedinGenerativeAi.desc":"LinkedIn Learning","cert.hpBusinessAi.title":"IA para profesionales de negocio","cert.hpBusinessAi.desc":"HP LIFE","cert.hpBeginnersAi.title":"IA para principiantes","cert.hpBeginnersAi.desc":"HP LIFE","cert.ciscoCybersecurity.title":"Introducción a la ciberseguridad","cert.ciscoCybersecurity.desc":"Cisco Networking Academy","cert.awsMachineLearning.title":"AWS Foundations: bases de machine learning","cert.awsMachineLearning.desc":"AWS Training & Certification","cert.awsGenerativeAi.title":"Introducción a IA generativa - Art of the Possible","cert.awsGenerativeAi.desc":"AWS Training & Certification","cert.teenpreneurAi.title":"Teenpreneur Program - IA para negocios","cert.teenpreneurAi.desc":"San Ignacio University Miami","cert.oshaTen.title":"OSHA 10 horas - industria general","cert.oshaTen.desc":"360training / OSHA Outreach","cert.oshaThirty.title":"OSHA 30 horas - industria general","cert.oshaThirty.desc":"360training / OSHA Outreach","cert.confinedSpaces.title":"Prevención en espacios confinados","cert.confinedSpaces.desc":"FEMETE / PRL","cert.workingHeights.title":"Prevención en trabajos en altura","cert.workingHeights.desc":"Cámara Santa Cruz de Tenerife","cert.nationalElectricalCode.title":"National Electrical Code","cert.nationalElectricalCode.desc":"Formación electrica","cert.electricianApprentice.title":"Introducción al aprendizaje de electricista","cert.electricianApprentice.desc":"Formación electrica","cert.solarPhotovoltaic.title":"Mantenimiento de instalaciones solares fotovoltaicas","cert.solarPhotovoltaic.desc":"FOCAN - 60 horas","cert.electricalStudies.title":"Estudios de electricidad","cert.electricalStudies.desc":"CFGM 2025-2026","education.role.school":"CFGM Instalaciones Eléctricas y Automaticas","education.desc.school":"CIFP IES La Laboral de La Laguna. Formación en instalaciones eléctricas, automatización industrial, electrónica, domótica y energia solar fotovoltaica.","education.role.megasur":"MEGASUR Tenerife - Prácticas de electricidad","education.desc.megasur":"Prácticas de FP Dual ayudando en cableado residencial y comercial, montaje de cuadros, diagnóstico de averias, mantenimiento preventivo, seguridad y trabajo con electricistas cualificados.","education.role.certifications":"Certificados de IA, ciberseguridad y seguridad","education.desc.certifications":"Formación en AWS Machine Learning Basics, IA generativa, cursos de IA de HP LIFE, ciberseguridad de Cisco, seguridad OSHA, fundamentos de aprendiz de electricista, trabajos en altura, espacios confinados y mantenimiento solar fotovoltaico.","work.0.desc":"Web para una colección privada de coches, con dirección visual premium y una estructura clara para mostrar los vehículos.","work.0.yearLabel":"Año","work.0.roleLabel":"Rol","work.0.role":"Diseño y desarrollo web","work.0.button":"Ver web","work.sol.tag1":"Diseño web","work.sol.tag2":"Coleccion","work.sol.tag3":"Cliente real","work.1.desc":"Web para importacion premium de coches americanos en Tenerife, enfocada en inventario, confianza y servicio claro.","work.1.yearLabel":"Año","work.1.roleLabel":"Rol","work.1.role":"Diseño y desarrollo web","work.1.button":"Ver web","work.vals.tag1":"Diseño web","work.vals.tag2":"Coches","work.vals.tag3":"Tenerife","work.2.desc":"Web para una barberia en Tenerife con presencia de marca directa y estructura enfocada en reservas.","work.2.yearLabel":"Año","work.2.roleLabel":"Rol","work.2.role":"Diseño y desarrollo web","work.2.button":"Ver web","work.estimado.tag1":"Diseño web","work.estimado.tag2":"Marca","work.estimado.tag3":"Negocio local","services.web.tag1":"Webs responsive","services.web.tag2":"Páginas para clientes","services.web.tag3":"Portfolios","services.web.desc":"Webs modernas y responsive que se ven profesionales, cargan claro y ayudan a entender lo que ofrece cada negocio.","services.web.more":"Ver todas las webs","services.web.less":"Ver menos webs","web.open":"Ver web","services.web.title":"Diseño web","services.ai.title":"Soluciones de IA","services.automation.title":"Automatización","services.electric.title":"Planificacion electrica","services.brand.title":"Identidad de marca","services.ai.tag1":"Asistentes de IA","services.ai.tag2":"Herramientas de negocio","services.ai.tag3":"Flujos inteligentes","#service-2.desc":"Prueba una demo de asistente IA para preguntas del negocio, lead scoring y toma de datos.","services.ai.placeholder":"Prueba la demo del asistente y enviame el resultado.","services.auto.tag1":"Flujo de leads","services.auto.tag2":"Sistemas de tareas","services.auto.tag3":"Diseño de procesos","#service-3.desc":"Prueba una demo de flujo para formularios, solicitudes, dashboards y tareas repetitivas.","services.auto.placeholder":"Prueba la demo de automatizacion y enviame el resultado.","services.electric.tag1":"Unifilar / Multifilar","services.electric.tag2":"Dossier de circuitos","services.electric.tag3":"Preparacion de visita","#service-4.desc":"Dossier previo de electricidad con organizacion de circuitos tipo REBT, vistas unifilar/multifilar conceptuales y preguntas para revisar con un profesional.","services.electric.placeholder":"Prueba el planificador electrico y enviame el concepto.","services.brand.tag1":"Diseño de logos","services.brand.tag2":"Guías de marca","services.brand.tag3":"Sistemas visuales","#service-5.desc":"Prueba una demo de direccion de marca para logos, paletas y reglas simples de uso.","services.brand.placeholder":"Prueba la demo de marca y enviame el resultado.","tech.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Herramientas que uso para disenar, editar</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">y construir proyectos profesionales</div>","tech.0.name":"Figma","tech.0.duty":"Diseño y planificacion de interfaces","tech.1.name":"VS Code","tech.1.duty":"Espacio de programación","tech.2.name":"Adobe Photoshop","tech.2.duty":"Edición de imágenes y gráficos","tech.3.name":"Adobe Video Editor","tech.3.duty":"Edición de video y presentacion","testimonial.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Marcas de clientes</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">y feedback de proyectos</div>","testimonial.projects":"Proyectos y builds","testimonial.satisfaction":"Satisfacción de clientes","testimonial.0.text":"Una web de colección de coches creada para sentirse elegante, visual y fácil de explorar.","testimonial.1.text":"Una web profesional para un negocio de importacion de coches en Tenerife, enfocada en confianza y presentacion clara.","testimonial.2.text":"Una web de barberia pensada para una primera impresion fuerte y una acción fácil del cliente.","testimonial.sol.role":"Web de colección privada","testimonial.vals.role":"Importacion premium de coches USA","testimonial.estimado.role":"Web para negocio local","contact.title":"<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">Si tienes una consulta general o un proyecto,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">escríbeme por email o completa el formulario,</div>\n<div class=\"split-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; transform: none; filter: none; opacity: 1; visibility: visible;\">disponible ahora</div>","contact.name":"Tu nombre *","contact.email":"Correo electronico *","contact.message":"Descripcion del proyecto / trabajo electrico","contact.send":"Enviar mensaje","footer.quote":"<span class=\"text-black-56\">“</span>El diseño no es solo como se ve y se siente. El diseño es como funciona.<span class=\"text-black-56\">“</span>","footer.rights":"Todos los derechos reservados \n© 2026 Santiago Portfolio"}};
   const publicTranslationOverrides = {
     en: {
       '#service-2.desc': 'Try a practical AI assistant demo for business questions, lead scoring, and client intake.',
@@ -976,10 +1063,12 @@ stop.bred{stop-color:#0b3d91!important}
       const action = document.querySelector('a[aria-controls="' + row.id + '"]');
       if (!action || action.dataset.previewReady === 'true') return;
       const title = action.querySelector('h4');
+      const subtitle = action.querySelector('[data-project-subtitle]');
       const icon = action.querySelector('.ic-wrap');
       const titleWrap = document.createElement('div');
       titleWrap.className = 'service-row-title';
       if (title) titleWrap.appendChild(title);
+      if (subtitle) titleWrap.appendChild(subtitle);
       const meta = document.createElement('div');
       meta.className = 'service-row-meta';
       meta.dataset.serviceRowMeta = row.id;
@@ -1013,31 +1102,132 @@ stop.bred{stop-color:#0b3d91!important}
 })();
 </script><script id="service-detail-script">
 (() => {
-  const copy = {
+  const PROJECT_CATALOG = {
     en: {
-      'ai.kicker1':'Assistant systems','ai.title1':'AI that answers and collects details','ai.desc1':'For businesses that need a first response, client intake, FAQs, quotes, or service explanations before a human takes over.','ai.point1':'Website chat assistants','ai.point2':'Insurance, service, and support intake','ai.point3':'Answers trained around your business','ai.kicker2':'Dashboard ready','ai.title2':'AI tools connected to real work','ai.desc2':'I can prepare tools that organize requests, summarize client needs, and help you decide the next step faster.','ai.row1':'New lead','ai.row2':'Summary','ai.row3':'Next action',
-      'auto.kicker1':'Lead flow','auto.title1':'From form to organized request','auto.desc1':'Instead of losing messages in WhatsApp or email, the request can be grouped, tagged, and prepared for follow-up.','auto.point1':'Contact forms and quote requests','auto.point2':'Automatic routing by service type','auto.point3':'Simple dashboard or email summary','auto.kicker2':'Operations','auto.title2':'Small systems for repeated tasks','auto.desc2':'Useful for reminders, booking requests, client follow-ups, content checks, and team task lists.','auto.row1':'Request received','auto.row2':'Sorted by service','auto.row3':'Follow-up prepared',
-      'brand.kicker1':'Logo and direction','brand.title1':'A visual identity that fits the business','brand.desc1':'I can prepare logo concepts, colors, simple rules, and visuals that make the website and brand feel consistent.','brand.point1':'Logo concepts and cleanup','brand.point2':'Color and type direction','brand.point3':'Social and website usage','brand.kicker2':'Brand pack','brand.title2':'Ready-to-use assets','brand.desc2':'For new businesses or refreshes: a clean starter pack that can be used across the website, cards, and social media.','brand.row1':'Logo files','brand.row2':'Brand guide','web.contact':'Contact me','#service-2.desc':'Try a practical AI assistant demo for business questions, lead scoring, and client intake.','#service-3.desc':'Try a workflow demo for forms, client requests, dashboards, and repetitive tasks.','#service-5.desc':'Try a brand direction demo for logo ideas, palettes, and simple usage rules.'
+      labels: { problem: 'Problem solved', audience: 'Best for', features: 'Included capabilities', workflow: 'Example workflow', deliverables: 'Client deliverables', contact: 'Discuss this project' },
+      ai: {
+        title: 'AI Business Assistant System',
+        value: 'Custom business assistants that answer questions, qualify leads, collect quote requests, and organize customer information.',
+        problem: 'Avoid missed questions and incomplete quote requests when staff cannot respond immediately.',
+        audience: 'Insurance agencies, transportation businesses, local services, real estate agents, and small businesses.',
+        features: ['Website AI assistant', 'Lead qualification', 'Quote request detection', 'Customer intake', 'FAQ answers', 'Business-specific knowledge base', 'Email or CRM handoff', 'Conversation summaries', 'Admin-editable responses', 'Safe fallback responses'],
+        workflow: ['Visitor asks for a quote', 'Assistant asks service-specific questions', 'Contact details are collected', 'Business receives a structured lead'],
+        deliverables: ['Branded website assistant', 'Business knowledge setup', 'Intake fields and suggested questions', 'Fallback and handoff rules', 'Lead-summary format'],
+        cta: 'View AI Assistant Example'
+      },
+      automation: {
+        title: 'Business Workflow Automation',
+        value: 'Automation systems that connect forms, emails, spreadsheets, CRMs, calendars, and notifications so repetitive work stays organized.',
+        problem: 'Prevent requests from being lost across inboxes, messages, spreadsheets, and manual follow-up lists.',
+        audience: 'Small businesses, agencies, service companies, consultants, and local operations.',
+        features: ['Lead intake automation', 'Automatic follow-ups', 'Email parsing', 'CRM updates', 'Google Sheets or Airtable dashboards', 'Appointment reminders', 'Task creation', 'Status tracking', 'Customer notifications', 'Daily business summaries'],
+        workflow: ['Quote form is submitted', 'Lead is classified', 'CRM is updated', 'Owner is notified', 'Follow-up is scheduled', 'Status is tracked'],
+        deliverables: ['Workflow map', 'Trigger and routing rules', 'Required data fields', 'Status and notification model', 'Integration and exception plan'],
+        cta: 'View Automation Example'
+      },
+      electrical: {
+        title: 'Electrical Planning & Material Estimator',
+        value: 'A planning and estimating aid for organizing rooms, electrical points, project notes, circuit concepts, and preliminary material quantities.',
+        problem: 'Prepare a clearer project brief and reduce missing information before a site visit, estimate, or qualified review.',
+        audience: 'Electricians, contractors, homeowners, apprentices, and small renovation teams.',
+        features: ['Room-by-room planning', 'Outlet, switch, and lighting notes', 'Circuit and load planning assistant', 'Material list generator', 'Basic diagram preview', 'Contractor notes', 'PDF project summary', 'Client approval checklist', 'Version history', 'Material quantity estimates'],
+        workflow: ['Enter project rooms', 'Add outlets, lights, switches, and panel notes', 'Review preliminary quantities', 'Generate the material list and project summary'],
+        deliverables: ['Room schedule', 'Point and quantity summary', 'Preliminary material estimate', 'Project and contractor notes', 'Diagram concept and client checklist'],
+        cta: 'View Electrical Tool Example'
+      },
+      brand: {
+        title: 'Brand Identity System',
+        value: 'Complete brand kits with logo systems, colors, typography, social assets, website direction, and practical usage guidance.',
+        problem: 'Give new or inconsistent businesses one usable visual direction across web, social media, and print.',
+        audience: 'New businesses, rebrands, portfolio sites, insurance, transportation, real estate, contractors, and creators.',
+        features: ['Logo system', 'Color palette', 'Typography', 'Brand usage rules', 'Social media templates', 'Website hero direction', 'Business card mockups', 'Flyer mockups', 'Favicon and app icon', 'Brand voice notes', 'Canva or Figma-ready assets', 'Downloadable brand kit'],
+        workflow: ['Share the business name, industry, and style', 'Establish the brand direction', 'Build the logo system, colors, and type', 'Prepare assets for web, social, and print'],
+        deliverables: ['Primary and alternate logo directions', 'Color and typography specifications', 'Usage examples and social templates', 'Web direction and icon files', 'Organized brand-kit package'],
+        cta: 'View Brand Kit Example'
+      }
     },
     es: {
-      'ai.kicker1':'Sistemas de asistentes','ai.title1':'IA que responde y recoge datos','ai.desc1':'Para negocios que necesitan primera respuesta, toma de datos, FAQs, presupuestos o explicaciones antes de pasar a una persona.','ai.point1':'Chatbots para la web','ai.point2':'Toma de datos para seguros, servicios y soporte','ai.point3':'Respuestas entrenadas alrededor del negocio','ai.kicker2':'Listo para dashboard','ai.title2':'Herramientas de IA conectadas al trabajo real','ai.desc2':'Puedo preparar herramientas que ordenan solicitudes, resumen lo que necesita el cliente y ayudan a decidir el siguiente paso.','ai.row1':'Nuevo lead','ai.row2':'Resumen','ai.row3':'Siguiente accion',
-      'auto.kicker1':'Flujo de leads','auto.title1':'Del formulario a una solicitud organizada','auto.desc1':'En vez de perder mensajes en WhatsApp o email, la solicitud puede quedar agrupada, etiquetada y lista para seguimiento.','auto.point1':'Formularios y solicitudes de presupuesto','auto.point2':'Enrutado automatico por tipo de servicio','auto.point3':'Dashboard simple o resumen por email','auto.kicker2':'Operaciones','auto.title2':'Sistemas pequenos para tareas repetidas','auto.desc2':'Util para recordatorios, reservas, seguimientos, revisiones de contenido y listas de tareas del equipo.','auto.row1':'Solicitud recibida','auto.row2':'Ordenada por servicio','auto.row3':'Seguimiento preparado',
-      'brand.kicker1':'Logo y direccion','brand.title1':'Una identidad visual que encaja con el negocio','brand.desc1':'Puedo preparar conceptos de logo, colores, reglas simples y visuales para que la web y la marca se sientan coherentes.','brand.point1':'Conceptos y limpieza de logo','brand.point2':'Direccion de color y tipografia','brand.point3':'Uso en redes y web','brand.kicker2':'Pack de marca','brand.title2':'Assets listos para usar','brand.desc2':'Para negocios nuevos o renovaciones: un pack inicial limpio para usar en web, tarjetas y redes sociales.','brand.row1':'Archivos de logo','brand.row2':'Guia de marca','web.contact':'Contactar','#service-2.desc':'Prueba una demo de asistente IA para preguntas del negocio, lead scoring y toma de datos.','#service-3.desc':'Prueba una demo de flujo para formularios, solicitudes, dashboards y tareas repetitivas.','#service-5.desc':'Prueba una demo de direccion de marca para logos, paletas y reglas simples de uso.'
+      labels: { problem: 'Problema que resuelve', audience: 'Ideal para', features: 'Capacidades incluidas', workflow: 'Flujo de ejemplo', deliverables: 'Entregables para el cliente', contact: 'Hablar sobre este proyecto' },
+      ai: {
+        title: 'Sistema de Asistente de IA para Negocios',
+        value: 'Asistentes personalizados que responden preguntas, califican leads, recogen solicitudes de presupuesto y organizan informacion del cliente.',
+        problem: 'Evita perder preguntas y solicitudes incompletas cuando el equipo no puede responder al momento.',
+        audience: 'Agencias de seguros, transporte, servicios locales, inmobiliarias y pequenos negocios.',
+        features: ['Asistente IA para la web', 'Calificacion de leads', 'Deteccion de presupuestos', 'Toma de datos', 'Respuestas FAQ', 'Base de conocimiento del negocio', 'Entrega por email o CRM', 'Resumen de conversaciones', 'Respuestas editables', 'Respuestas seguras de reserva'],
+        workflow: ['El visitante pide presupuesto', 'El asistente hace preguntas del servicio', 'Recoge los datos de contacto', 'El negocio recibe un lead estructurado'],
+        deliverables: ['Asistente web con marca', 'Configuracion del conocimiento', 'Campos y preguntas sugeridas', 'Reglas de respuesta y entrega', 'Formato de resumen del lead'],
+        cta: 'Ver ejemplo del asistente IA'
+      },
+      automation: {
+        title: 'Automatizacion de Flujos de Negocio',
+        value: 'Sistemas que conectan formularios, emails, hojas de calculo, CRM, calendarios y avisos para ordenar el trabajo repetitivo.',
+        problem: 'Evita que las solicitudes se pierdan entre bandejas de entrada, mensajes, hojas y seguimientos manuales.',
+        audience: 'Pequenos negocios, agencias, empresas de servicios, consultores y operaciones locales.',
+        features: ['Automatizacion de leads', 'Seguimientos automaticos', 'Lectura de emails', 'Actualizaciones de CRM', 'Dashboards en Sheets o Airtable', 'Recordatorios de citas', 'Creacion de tareas', 'Seguimiento de estados', 'Avisos al cliente', 'Resumen diario del negocio'],
+        workflow: ['Se envia el formulario', 'Se clasifica el lead', 'Se actualiza el CRM', 'Se avisa al responsable', 'Se programa el seguimiento', 'Se controla el estado'],
+        deliverables: ['Mapa del flujo', 'Reglas de entrada y enrutado', 'Campos necesarios', 'Modelo de estados y avisos', 'Plan de integraciones y excepciones'],
+        cta: 'Ver ejemplo de automatizacion'
+      },
+      electrical: {
+        title: 'Planificador Electrico y Estimador de Materiales',
+        value: 'Herramienta de apoyo para organizar estancias, puntos electricos, notas, conceptos de circuitos y cantidades preliminares.',
+        problem: 'Prepara un brief mas claro y reduce informacion olvidada antes de una visita, presupuesto o revision cualificada.',
+        audience: 'Electricistas, contratistas, propietarios, aprendices y pequenos equipos de reforma.',
+        features: ['Planificacion por estancia', 'Notas de tomas, interruptores y luces', 'Asistente de circuitos y cargas', 'Generador de materiales', 'Vista basica del esquema', 'Notas del contratista', 'Resumen PDF del proyecto', 'Checklist de aprobacion', 'Historial de versiones', 'Estimacion de cantidades'],
+        workflow: ['Introduce las estancias', 'Anade tomas, luces, interruptores y notas del cuadro', 'Revisa cantidades preliminares', 'Genera materiales y resumen del proyecto'],
+        deliverables: ['Cuadro de estancias', 'Resumen de puntos y cantidades', 'Estimacion preliminar de materiales', 'Notas de proyecto y contratista', 'Concepto de esquema y checklist'],
+        cta: 'Ver ejemplo de herramienta electrica'
+      },
+      brand: {
+        title: 'Sistema de Identidad de Marca',
+        value: 'Kits completos con sistema de logos, colores, tipografia, recursos sociales, direccion web y reglas practicas de uso.',
+        problem: 'Da a negocios nuevos o inconsistentes una direccion visual util para web, redes e impresion.',
+        audience: 'Negocios nuevos, rebrandings, portfolios, seguros, transporte, inmobiliarias, contratistas y creadores.',
+        features: ['Sistema de logos', 'Paleta de color', 'Tipografia', 'Reglas de uso', 'Plantillas para redes', 'Direccion del hero web', 'Mockups de tarjetas', 'Mockups de flyers', 'Favicon e icono de app', 'Notas de voz de marca', 'Assets para Canva o Figma', 'Brand kit descargable'],
+        workflow: ['Comparte nombre, sector y estilo', 'Se define la direccion de marca', 'Se construyen logos, colores y tipografia', 'Se preparan assets para web, redes e impresion'],
+        deliverables: ['Direcciones de logo principal y alternativo', 'Especificaciones de color y tipografia', 'Ejemplos de uso y plantillas sociales', 'Direccion web e iconos', 'Paquete organizado de marca'],
+        cta: 'Ver ejemplo de brand kit'
+      }
     }
   };
-  const lang = () => document.documentElement.dataset.langCurrent === 'es' ? 'es' : 'en';
-  function applyServiceCopy() {
-    const dict = copy[lang()] || copy.en;
-    document.querySelectorAll('[data-service-copy]').forEach((node) => {
-      const value = dict[node.dataset.serviceCopy] || copy.en[node.dataset.serviceCopy];
-      if (value) node.textContent = value;
-    });
-    ['web.contact','#service-2.desc','#service-3.desc','#service-5.desc'].forEach((key) => {
-      document.querySelectorAll('[data-i18n="' + key + '"]').forEach((node) => {
-        node.textContent = dict[key] || copy.en[key];
-      });
-    });
+  const projectLang = () => document.documentElement.dataset.langCurrent === 'es' ? 'es' : 'en';
+  const projectEscape = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+
+  function renderProjectNarrative(section) {
+    const language = projectLang();
+    const key = section.dataset.project;
+    const catalog = PROJECT_CATALOG[language];
+    const project = catalog[key];
+    if (!project) return;
+    const heading = document.querySelector(`[data-project-heading="${key}"]`);
+    const subtitle = document.querySelector(`[data-project-subtitle="${key}"]`);
+    if (heading) heading.textContent = project.title;
+    if (subtitle) subtitle.textContent = project.value;
+    section.querySelector('[data-project-value]').textContent = project.value;
+    section.querySelector('[data-project-problem] p').textContent = project.problem;
+    section.querySelector('[data-project-audience] p').textContent = project.audience;
+    section.querySelector('[data-project-features]').innerHTML = project.features.map((item) => `<li>${projectEscape(item)}</li>`).join('');
+    section.querySelector('[data-project-workflow]').innerHTML = project.workflow.map((item, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><p>${projectEscape(item)}</p></li>`).join('');
+    section.querySelector('[data-project-deliverables]').innerHTML = project.deliverables.map((item) => `<li>${projectEscape(item)}</li>`).join('');
+    section.querySelectorAll('[data-project-label]').forEach((node) => { node.textContent = catalog.labels[node.dataset.projectLabel] || ''; });
+    section.querySelector('[data-project-example-button]').textContent = project.cta;
+    section.querySelector('[data-project-contact]').textContent = catalog.labels.contact;
   }
+
+  function focusProjectExample(section) {
+    const target = section.querySelector('[data-project-example]');
+    const firstControl = target?.querySelector('input, select, textarea, button');
+    target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => firstControl?.focus({ preventScroll: true }), 450);
+  }
+
+  document.querySelectorAll('[data-project]').forEach((section) => {
+    renderProjectNarrative(section);
+    section.querySelector('[data-project-example-button]')?.addEventListener('click', () => focusProjectExample(section));
+  });
+  document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => button.addEventListener('click', () => {
+    window.setTimeout(() => document.querySelectorAll('[data-project]').forEach(renderProjectNarrative), 0);
+  }));
   function repairFileAssetPaths() {
     if (window.location.protocol !== 'file:') return;
     const base = /\/src\/pages\//.test(window.location.pathname) ? '../../' : '';
@@ -1049,8 +1239,6 @@ stop.bred{stop-color:#0b3d91!important}
     });
   }
   repairFileAssetPaths();
-  applyServiceCopy();
-  document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => button.addEventListener('click', () => setTimeout(applyServiceCopy, 0)));
 })();
 </script><script id="service-tool-script">
 (() => {
@@ -1061,13 +1249,13 @@ stop.bred{stop-color:#0b3d91!important}
     en: {
       'ai.toolKicker': 'Usable client tool',
       'ai.toolTitle': 'AI Assistant Studio',
-      'ai.toolLead': 'Try a website assistant with business knowledge, suggested questions, a live preview, saved preferences, and a clean project summary.',
+      'ai.toolLead': 'Build a visitor-facing assistant brief: what it should answer, what it should ask, how leads are scored, and what gets sent to the business.',
       'auto.toolKicker': 'Usable ops tool',
       'auto.toolTitle': 'Automation Workflow Builder',
-      'auto.toolLead': 'Design a repeatable workflow, turn it into clear steps, preview the result, and send me the brief for a real business system.',
+      'auto.toolLead': 'Map a real client request flow with trigger, routing, priority rules, status and handoff, then send the brief for a custom build.',
       'brand.toolKicker': 'Usable brand tool',
       'brand.toolTitle': 'Brand Kit Generator',
-      'brand.toolLead': 'Create a starter logo mark, palette, tagline, usage notes, and a clean brand direction you can send me for a project.',
+      'brand.toolLead': 'Create a practical brand board with a mark direction, palette, usage notes and a brief that can become logo concepts, guidelines and assets.',
       'field.business': 'Business name',
       'field.industry': 'Business type',
       'field.goal': 'Main goal',
@@ -1129,13 +1317,13 @@ stop.bred{stop-color:#0b3d91!important}
     es: {
       'ai.toolKicker': 'Herramienta real para clientes',
       'ai.toolTitle': 'Estudio de asistente IA',
-      'ai.toolLead': 'Prueba un asistente web con conocimiento del negocio, preguntas sugeridas, vista previa, preferencias guardadas y resumen limpio del proyecto.',
+      'ai.toolLead': 'Crea un brief de asistente para visitantes: que responde, que pregunta, como califica leads y que se envia al negocio.',
       'auto.toolKicker': 'Herramienta de operaciones',
       'auto.toolTitle': 'Constructor de automatizaciones',
-      'auto.toolLead': 'Diseña un flujo repetible, conviertelo en pasos claros, previsualiza el resultado y enviame el brief para un sistema real.',
+      'auto.toolLead': 'Mapea un flujo real de solicitud con entrada, ruta, prioridad, estado y entrega, y envia el brief para construirlo a medida.',
       'brand.toolKicker': 'Herramienta de marca',
       'brand.toolTitle': 'Generador de brand kit',
-      'brand.toolLead': 'Crea una marca inicial con logo, paleta, promesa, notas de uso y una direccion clara para enviarme el proyecto.',
+      'brand.toolLead': 'Crea un brand board practico con direccion de marca, paleta, usos y un brief para convertirlo en logos, guia y assets.',
       'field.business': 'Nombre del negocio',
       'field.industry': 'Tipo de negocio',
       'field.goal': 'Objetivo principal',
@@ -1286,7 +1474,7 @@ stop.bred{stop-color:#0b3d91!important}
       + '## Knowledge base\n' + knowledge + '\n\n'
       + '## Suggested questions\n' + questions.map((q) => '- ' + q).join('\n') + '\n\n'
       + '## Intake fields\n- Name\n- Email\n- Phone\n- Service needed\n- Timeline\n- Message\n\n'
-      + '## Production upgrades\n- Connect OpenAI or another LLM through a server route\n- Save leads to a database or CRM\n- Email the business when a lead is ready\n- Add admin controls for FAQs and blocked topics\n';
+      + '## Build scope\n- Branded assistant embedded on the website\n- Lead summary that is easy for the business owner to read\n- Suggested follow-up questions for better quotes\n- Optional CRM, email, or dashboard handoff when the client is ready\n';
     const publicBrief = '# ' + business + ' AI Assistant Studio\n\n'
       + (isEs ? 'Que puede probar un visitante\n' : 'What a visitor can try\n')
       + '- ' + (isEs ? 'Escribir una pregunta real del cliente.' : 'Write a real customer question.') + '\n'
@@ -1312,7 +1500,23 @@ stop.bred{stop-color:#0b3d91!important}
       { path: 'assistant-config.json', content: JSON.stringify(config, null, 2) },
       { path: 'assistant-widget.html', content: widget }
     ]);
-    const preview = '<div class="repo-preview"><div class="repo-preview-title">' + escapeHtml(t('assistantPreview')) + '</div><div class="repo-preview-main">' + escapeHtml(business) + ' Assistant</div><p class="repo-preview-note">' + escapeHtml(greeting) + '</p><div class="repo-chip-row">' + questions.map((q) => '<span class="repo-chip">' + escapeHtml(q) + '</span>').join('') + '</div><p class="repo-preview-note"><strong>' + escapeHtml(t('reply')) + ':</strong> ' + escapeHtml(knowledge || (isEs ? 'Agrega la base de conocimiento del negocio.' : 'Add the business knowledge base.')) + '</p></div>';
+    const confidence = Math.min(96, Math.max(64, 70 + (knowledge.length > 40 ? 12 : 0) + (business.length > 6 ? 6 : 0) + (industry.length > 5 ? 4 : 0)));
+    const preview = '<div class="repo-preview">'
+      + '<div class="repo-preview-title">' + escapeHtml(t('assistantPreview')) + '</div>'
+      + '<div class="repo-preview-main">' + escapeHtml(business) + ' Assistant</div>'
+      + '<p class="repo-preview-note">' + escapeHtml(greeting) + '</p>'
+      + '<div class="lab-console">'
+      + '<aside>'
+      + '<div><div class="lab-stat"><span>' + (isEs ? 'Lead score' : 'Lead score') + '</span><strong>' + confidence + '%</strong><div class="lab-score"><span style="width:' + confidence + '%"></span></div></div>'
+      + '<div class="lab-stat"><span>' + (isEs ? 'Campos' : 'Fields') + '</span><strong>6</strong></div></div>'
+      + '<div class="lab-meter-row"><div class="lab-meter-label"><span>' + escapeHtml(goal) + '</span><strong>' + escapeHtml(tone) + '</strong></div><div class="lab-score"><span style="width:82%"></span></div></div>'
+      + '</aside>'
+      + '<main>'
+      + '<div class="lab-message"><strong>' + (isEs ? 'Visitante' : 'Visitor') + '</strong>' + escapeHtml(questions[0]) + '</div>'
+      + '<div class="lab-message ai"><strong>' + escapeHtml(business) + '</strong>' + escapeHtml(knowledge || (isEs ? 'Puedo responder dudas, recoger datos y preparar el siguiente paso para el negocio.' : 'I can answer questions, collect details and prepare the next step for the business.')) + '</div>'
+      + '<div class="lab-quick">' + questions.map((q) => '<span>' + escapeHtml(q) + '</span>').join('') + '</div>'
+      + '</main>'
+      + '</div></div>';
     return { title: business + ' AI Assistant Studio', readme, publicBrief, bundle, preview, filename: slug(business) + '-ai-assistant-project-brief.txt' };
   }
 
@@ -1348,7 +1552,7 @@ stop.bred{stop-color:#0b3d91!important}
       + '## What it does\n' + (isEs ? 'Automatizacion para convertir solicitudes repetidas en un flujo ordenado.' : 'Automation for turning repeated requests into an organized workflow.') + '\n\n'
       + '## Workflow\n' + steps.map((step) => '- ' + step[0] + ' ' + step[1] + ': ' + step[2]).join('\n') + '\n\n'
       + '## Rules\n' + rules + '\n\n'
-      + '## Useful next build\n- Store each request\n- Add status changes\n- Send email or dashboard notifications\n- Add role permissions when it becomes a client app\n';
+      + '## Build scope\n- Capture every request with consistent fields\n- Show priority and status clearly\n- Prepare the next action for the business owner\n- Send a clean summary to email, spreadsheet, calendar, or dashboard\n';
     const publicBrief = '# ' + name + '\n\n'
       + (isEs ? 'Que puede probar un visitante\n' : 'What a visitor can try\n')
       + steps.map((step) => '- ' + step[0] + ' ' + step[1] + ': ' + step[2]).join('\n')
@@ -1359,7 +1563,13 @@ stop.bred{stop-color:#0b3d91!important}
       { path: 'workflow.json', content: JSON.stringify(workflow, null, 2) },
       { path: 'workflow-notes.md', content: '## Rules\n' + rules + '\n' }
     ]);
-    const preview = '<div class="repo-preview"><div class="repo-preview-title">' + escapeHtml(t('workflowPreview')) + '</div><div class="repo-preview-main">' + escapeHtml(name) + '</div><div class="repo-flow">' + steps.map((step) => '<div class="repo-flow-step"><span>' + escapeHtml(step[0] + ' ' + step[1]) + '</span><span>' + escapeHtml(step[2]) + '</span></div>').join('') + '</div><p class="repo-preview-note">' + escapeHtml(rules) + '</p></div>';
+    const preview = '<div class="repo-preview">'
+      + '<div class="repo-preview-title">' + escapeHtml(t('workflowPreview')) + '</div>'
+      + '<div class="repo-preview-main">' + escapeHtml(name) + '</div>'
+      + '<p class="repo-preview-note">' + escapeHtml(isEs ? 'Un flujo visible para convertir mensajes sueltos en trabajo ordenado.' : 'A visible workflow for turning scattered messages into organized work.') + '</p>'
+      + '<div class="lab-flow">' + steps.map((step, index) => '<div class="lab-flow-step"><span>' + escapeHtml(step[0]) + '</span><strong>' + escapeHtml(step[1]) + '</strong><small>' + escapeHtml(step[2]) + '</small><em>' + (index === 0 ? 'IN' : index === steps.length - 1 ? 'OUT' : 'SLA') + '</em></div>').join('') + '</div>'
+      + '<p class="repo-preview-note">' + escapeHtml(rules || (isEs ? 'Anade reglas reales del negocio para ver como se organiza.' : 'Add real business rules to see how the workflow is organized.')) + '</p>'
+      + '</div>';
     return { title: name, readme, publicBrief, bundle, preview, filename: slug(name) + '-workflow-project-brief.txt' };
   }
 
@@ -1391,7 +1601,15 @@ stop.bred{stop-color:#0b3d91!important}
       { path: 'brand-style.css', content: css },
       { path: slug(brand) + '-logo.svg', content: svg }
     ]);
-    const preview = '<div class="repo-preview"><div class="repo-preview-title">' + escapeHtml(t('brandPreview')) + '</div><div class="repo-brand-preview" style="--brand-color:' + escapeHtml(color) + '"><div class="repo-brand-mark">' + escapeHtml(mark) + '</div><div><div class="repo-brand-name">' + escapeHtml(brand) + '</div><p class="repo-preview-note">' + escapeHtml(tagline || sector) + '</p><div class="repo-palette">' + palette.map((item) => '<span style="background:' + escapeHtml(item) + '"></span>').join('') + '</div></div></div></div>';
+    const preview = '<div class="repo-preview">'
+      + '<div class="repo-preview-title">' + escapeHtml(t('brandPreview')) + '</div>'
+      + '<div class="repo-preview-main">' + escapeHtml(isEs ? 'Sistema visual' : 'Visual system') + '</div>'
+      + '<div class="lab-brand-board" style="--brand-color:' + escapeHtml(color) + '">'
+      + '<div class="lab-brand-mark">' + escapeHtml(mark) + '</div>'
+      + '<div><div class="lab-brand-lockup">' + escapeHtml(brand) + '<small>' + escapeHtml(tagline || sector || (isEs ? 'Marca clara para web, redes y material comercial.' : 'A clear brand for web, social and business material.')) + '</small></div>'
+      + '<div class="lab-palette">' + palette.map((item) => '<span style="background:' + escapeHtml(item) + '" title="' + escapeHtml(item) + '"></span>').join('') + '</div>'
+      + '<div class="lab-usage"><div><strong>01</strong>' + escapeHtml(isEs ? 'Logo principal y versiones limpias' : 'Primary mark and clean versions') + '</div><div><strong>02</strong>' + escapeHtml(style) + '</div><div><strong>03</strong>' + escapeHtml(isEs ? 'Botones, web y redes' : 'Buttons, web and social') + '</div></div>'
+      + '</div></div></div>';
     return { title: brand + ' Brand Kit', readme, publicBrief, bundle, preview, filename: slug(brand) + '-brand-kit-project-brief.txt' };
   }
 
@@ -1487,481 +1705,186 @@ stop.bred{stop-color:#0b3d91!important}
   applyToolCopy();
   document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => button.addEventListener('click', () => setTimeout(applyToolCopy, 0)));
 })();
-</script><script id="product-demo-script">
-(() => {
-  const lang = () => document.documentElement.dataset.langCurrent === 'es' ? 'es' : 'en';
-  const apiUrl = () => window.location.protocol === 'file:' ? 'http://127.0.0.1:4620/api/service-demo' : '/api/service-demo';
-  const copy = {
-    en: {
-      cockpit: 'Product cockpit',
-      subtitle: 'Interactive service demo',
-      frontend: 'Demo live',
-      backend: 'Service ready',
-      data: 'Sample data',
-      run: 'Run demo',
-      test: 'Test app',
-      generateLogo: 'Generate AI logo',
-      uploadLogo: 'Upload existing logo for redesign',
-      export: 'Download summary',
-      loading: 'Running demo...',
-      offline: 'Demo unavailable',
-      ready: 'Ready',
-      logs: 'Activity',
-      records: 'Records and app state',
-      artifacts: 'Project outputs',
-      note: 'Use this demo with a real example, review the result, and send me the summary if you want a version built for your business.',
-      aiInput: 'Ask the assistant a real client question...',
-      automationInput: 'Paste a request payload or workflow event...',
-      brandInput: 'Describe a campaign, audience, or brand use case...',
-      electricalInput: 'Add site details, loads, or project changes...',
-    },
-    es: {
-      cockpit: 'Panel de producto',
-      subtitle: 'Demo interactiva del servicio',
-      frontend: 'Demo activa',
-      backend: 'Servicio listo',
-      data: 'Datos de ejemplo',
-      run: 'Ejecutar demo',
-      test: 'Probar app',
-      generateLogo: 'Generar logo IA',
-      uploadLogo: 'Sube logo actual para rediseñar',
-      export: 'Descargar resumen',
-      loading: 'Ejecutando demo...',
-      offline: 'Demo no disponible',
-      ready: 'Listo',
-      logs: 'Actividad',
-      records: 'Registros y estado',
-      artifacts: 'Resultados del proyecto',
-      note: 'Usa esta demo con un ejemplo real, revisa el resultado y enviame el resumen si quieres una version creada para tu negocio.',
-      aiInput: 'Pregunta algo como cliente real al asistente...',
-      automationInput: 'Pega una solicitud o evento del workflow...',
-      brandInput: 'Describe una campana, audiencia o uso de marca...',
-      electricalInput: 'Agrega detalles de obra, cargas o cambios...',
-    }
-  };
-  const t = (key) => (copy[lang()] && copy[lang()][key]) || copy.en[key] || key;
-  const toolNames = {
-    ai: 'AI Assistant Platform',
-    automation: 'Automation Ops Platform',
-    brand: 'Brand System Platform',
-    electrical: 'Electrical Planning Platform'
-  };
-
-  function escapeHtml(value) {
-    return String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
-  }
-
-  function readForm(form) {
-    const data = {};
-    if (!form) return data;
-    new FormData(form).forEach((value, key) => { data[key] = String(value).trim(); });
-    return data;
-  }
-
-  function configFor(root, tool) {
-    if (tool === 'electrical') return readForm(root.querySelector('[data-planner-form]'));
-    return readForm(root.querySelector('[data-tool-form]'));
-  }
-
-  function inputFor(root, tool) {
-    const message = root.querySelector('[data-product-input]')?.value || '';
-    const input = { message, payload: message, query: message };
-    if (tool === 'brand') {
-      input.logoDataUrl = root.dataset.logoDataUrl || '';
-      input.logoName = root.dataset.logoName || '';
-    }
-    if (tool === 'electrical') {
-      input.loads = Array.from(root.querySelectorAll('input[name="load"]:checked')).map((item) => item.value);
-    }
-    return input;
-  }
-
-  function placeholder(tool) {
-    if (tool === 'ai') return t('aiInput');
-    if (tool === 'automation') return t('automationInput');
-    if (tool === 'brand') return t('brandInput');
-    return t('electricalInput');
-  }
-
-  function mount(root, tool) {
-    if (!root || root.querySelector('[data-product-app]')) return;
-    const app = document.createElement('div');
-    app.className = 'product-app product-app-' + tool;
-    app.dataset.productApp = tool;
-    app.innerHTML =
-      '<div class="product-topbar">' +
-        '<div class="product-title"><strong>' + escapeHtml(toolNames[tool]) + '</strong><span>' + escapeHtml(t('subtitle')) + '</span></div>' +
-        '<div class="product-status-row">' +
-          '<span class="product-status-pill live">' + escapeHtml(t('frontend')) + '</span>' +
-          '<span class="product-status-pill" data-product-backend>' + escapeHtml(t('backend')) + '</span>' +
-          '<span class="product-status-pill">' + escapeHtml(t('data')) + '</span>' +
-        '</div>' +
-      '</div>' +
-      '<div class="product-body">' +
-        '<section class="product-panel">' +
-          '<h6>' + escapeHtml(t('cockpit')) + '</h6>' +
-          '<textarea class="product-input" data-product-input placeholder="' + escapeHtml(placeholder(tool)) + '"></textarea>' +
-          (tool === 'brand' ? '<label class="product-file">' + escapeHtml(t('uploadLogo')) + '<input type="file" accept="image/png,image/jpeg,image/webp" data-product-logo-upload></label>' : '') +
-          '<div class="product-actions">' +
-            '<button type="button" class="product-action" data-product-run>' + escapeHtml(t('run')) + '</button>' +
-            '<button type="button" class="product-action secondary" data-product-test>' + escapeHtml(tool === 'brand' ? t('generateLogo') : t('test')) + '</button>' +
-            '<button type="button" class="product-action ghost" data-product-export>' + escapeHtml(t('export')) + '</button>' +
-          '</div>' +
-          '<p class="product-note">' + escapeHtml(t('note')) + '</p>' +
-        '</section>' +
-        '<section class="product-panel">' +
-          '<h6>' + escapeHtml(t('records')) + '</h6>' +
-          '<div class="product-screen" data-product-screen><div class="product-record">' + escapeHtml(t('loading')) + '</div></div>' +
-        '</section>' +
-        '<section class="product-panel">' +
-          '<h6>' + escapeHtml(t('logs')) + '</h6>' +
-          '<ul class="product-log" data-product-log></ul>' +
-        '</section>' +
-        '<section class="product-panel">' +
-          '<h6>' + escapeHtml(t('artifacts')) + '</h6>' +
-          '<div class="product-artifacts" data-product-artifacts></div>' +
-        '</section>' +
-      '</div>';
-
-    if (tool === 'electrical') {
-      const shell = root.querySelector('.planner-shell');
-      if (shell) shell.insertAdjacentElement('afterend', app);
-      else root.appendChild(app);
-    } else {
-      root.appendChild(app);
-    }
-
-    app.querySelector('[data-product-run]')?.addEventListener('click', () => runProduct(root, tool, 'run'));
-    app.querySelector('[data-product-test]')?.addEventListener('click', () => runProduct(root, tool, tool === 'brand' ? 'generate-image' : 'message'));
-    app.querySelector('[data-product-export]')?.addEventListener('click', () => runProduct(root, tool, 'export', true));
-    app.querySelector('[data-product-logo-upload]')?.addEventListener('change', (event) => {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        root.dataset.logoDataUrl = String(reader.result || '');
-        root.dataset.logoName = file.name || 'uploaded-logo';
-      };
-      reader.readAsDataURL(file);
-    });
-    runProduct(root, tool, 'run');
-  }
-
-  async function runProduct(root, tool, action, downloadAfter = false) {
-    const app = root.querySelector('[data-product-app="' + tool + '"]') || root.querySelector('[data-product-app]');
-    if (!app) return;
-    const buttons = app.querySelectorAll('.product-action');
-    const backend = app.querySelector('[data-product-backend]');
-    const screen = app.querySelector('[data-product-screen]');
-    const log = app.querySelector('[data-product-log]');
-    const artifacts = app.querySelector('[data-product-artifacts]');
-    buttons.forEach((button) => { button.disabled = true; });
-    if (screen) screen.innerHTML = '<div class="product-record">' + escapeHtml(t('loading')) + '</div>';
-    try {
-      const res = await fetch(apiUrl(), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          tool,
-          action,
-          lang: lang(),
-          config: configFor(root, tool),
-          input: inputFor(root, tool)
-        })
-      });
-      const data = await res.json();
-      if (!res.ok || !data.ok) throw new Error(data.error || 'service');
-      root.dataset.productBundle = JSON.stringify(data.bundle || {});
-      root.dataset.productFilename = ((data.title || toolNames[tool] || tool) + '-project-summary').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '.json';
-      root.dataset.productPublicSummary = JSON.stringify({
-        title: data.title || toolNames[tool] || tool,
-        summary: lang() === 'es' ? 'Resumen generado desde la demo publica.' : 'Summary generated from the public demo.',
-        metrics: data.metrics || [],
-        records: (data.records || []).slice(0, 4),
-        nextStep: lang() === 'es' ? 'Contacta conmigo para convertirlo en un proyecto completo.' : 'Contact me to turn this into a full project.'
-      }, null, 2);
-      if (backend) {
-        backend.textContent = t('ready');
-        backend.classList.add('live');
-      }
-      renderProduct(screen, data);
-      renderLogs(log, data.logs || []);
-      renderArtifacts(artifacts, data.bundle?.files || []);
-      if (downloadAfter) downloadBundle(root);
-    } catch (error) {
-      if (backend) {
-        backend.textContent = t('offline');
-        backend.classList.remove('live');
-      }
-      if (screen) screen.innerHTML = '<div class="product-record"><strong>' + escapeHtml(t('offline')) + '</strong>' + escapeHtml(error.message || 'error') + '</div>';
-      if (log) log.innerHTML = '<li>' + escapeHtml(error.message || 'service unavailable') + '</li>';
-      if (artifacts) artifacts.innerHTML = '';
-    } finally {
-      buttons.forEach((button) => { button.disabled = false; });
-    }
-  }
-
-  function renderProduct(screen, data) {
-    if (!screen) return;
-    const metrics = (data.metrics || []).map((item) =>
-      '<div class="product-metric"><span>' + escapeHtml(item.label) + '</span><strong>' + escapeHtml(item.value) + '</strong></div>'
-    ).join('');
-    const records = (data.records || []).map((item) => {
-      const title = item.type || item.id || 'record';
-      const text = Object.entries(item).filter(([key]) => key !== 'type').map(([key, value]) => key + ': ' + value).join(' / ');
-      return '<div class="product-record"><strong>' + escapeHtml(title) + '</strong>' + escapeHtml(text) + '</div>';
-    }).join('');
-    screen.innerHTML =
-      renderVisual(data) +
-      '<div class="product-metrics">' + metrics + '</div>' +
-      '<div class="product-records">' + records + '</div>';
-  }
-
-  function renderVisual(data) {
-    if (data.tool === 'ai') {
-      const user = (data.records || []).find((item) => item.type === 'message' && item.role === 'visitor')?.text || 'Client message';
-      const assistant = data.reply || 'Assistant reply';
-      const leadScore = String((data.records || []).find((item) => item.type === 'lead')?.score || '72');
-      const intent = (data.records || []).find((item) => item.type === 'lead')?.intent || 'general_question';
-      const questions = data.questions || [];
-      return '<div class="product-visual"><div class="product-visual-head">Assistant command center<span>' + escapeHtml(data.records?.[0]?.status || 'ready') + '</span></div><div class="designer-ai-shell"><aside class="designer-ai-sidebar"><div class="designer-ai-thread"><strong>Lead score</strong>' + escapeHtml(leadScore) + '%<div class="designer-score"><span style="width:' + escapeHtml(leadScore) + '%"></span></div></div><div class="designer-ai-thread"><strong>Intent</strong>' + escapeHtml(String(intent).replace(/_/g, ' ')) + '</div><div class="designer-ai-thread"><strong>Next fields</strong>Name, email, phone, service</div></aside><div class="designer-ai-main"><div class="product-bubble user">' + escapeHtml(user) + '</div><div class="product-bubble">' + escapeHtml(assistant) + '</div><div class="product-template-row">' + questions.map((item) => '<div class="product-template"><span>' + escapeHtml(item) + '</span></div>').join('') + '</div></div></div></div>';
-    }
-    if (data.tool === 'automation') {
-      const steps = data.steps || [];
-      return '<div class="product-visual"><div class="product-visual-head">Operations console<span>' + escapeHtml(data.records?.[0]?.status || 'processed') + '</span></div><div class="designer-flow-map">' + steps.map((step, index) => '<div class="designer-flow-card"><span>Step ' + String(index + 1).padStart(2, '0') + ' / ' + escapeHtml(step.status) + '</span><strong>' + escapeHtml(step.name) + '</strong><small>' + escapeHtml(index === 0 ? 'Request received' : index === steps.length - 1 ? 'Client follow-up' : 'Decision rule') + '</small></div>').join('') + '</div></div>';
-    }
-    if (data.tool === 'brand') {
-      const palette = data.palette || [];
-      const templates = data.templates || [];
-      const concepts = data.concepts || [];
-      return '<div class="product-visual"><div class="product-visual-head">Brand identity studio<span>' + escapeHtml(data.imageMode || 'logo') + '</span></div><div class="designer-brand-hero"><div class="designer-brand-mark">' + (data.image ? '<img src="' + escapeHtml(data.image) + '" alt="Generated logo concept">' : '') + '</div><div class="designer-brand-system"><h6>' + escapeHtml(data.title || 'Brand system') + '</h6><div class="repo-palette">' + palette.map((item) => '<span style="background:' + escapeHtml(item) + '"></span>').join('') + '</div><div class="designer-usage-grid"><div class="designer-usage"><strong>Logo set</strong><br>Primary, signal, grid, crest</div><div class="designer-usage"><strong>Instant concepts</strong><br>Logo directions you can compare now</div><div class="designer-usage"><strong>Brand polish</strong><br>Ready for website and social usage</div></div><div class="product-concept-row">' + concepts.map((item) => '<div class="product-concept"><img src="' + escapeHtml(item.image) + '" alt=""><span>' + escapeHtml(item.name) + '</span></div>').join('') + '</div><div class="product-template-row">' + templates.map((item) => '<div class="product-template"><img src="' + escapeHtml(item.image) + '" alt=""><span>' + escapeHtml(item.name) + '</span></div>').join('') + '</div></div></div></div>';
-    }
-    if (data.tool === 'electrical') {
-      const circuits = data.circuits || [];
-      const rows = circuits.map((item, index) => {
-        const y = 92 + index * 48;
-        return '<line x1="210" y1="' + y + '" x2="460" y2="' + y + '" stroke="#0b3d91" stroke-width="4"/><rect x="460" y="' + (y - 16) + '" width="68" height="32" rx="6" fill="#061226"/><text x="494" y="' + (y + 5) + '" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">' + escapeHtml(item.id) + '</text><text x="550" y="' + (y + 5) + '" font-size="13" font-weight="700" fill="#061226">' + escapeHtml(item.name) + '</text><text x="550" y="' + (y + 23) + '" font-size="11" fill="#486078">' + escapeHtml(item.protection) + '</text>';
-      }).join('');
-      return '<div class="product-visual"><div class="product-visual-head">Electrical planning board<span>review package</span></div><svg class="designer-circuit-svg" viewBox="0 0 760 360" role="img" aria-label="Concept electrical single line diagram"><rect x="32" y="42" width="132" height="54" rx="8" fill="#061226"/><text x="98" y="74" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">Supply</text><line x1="164" y1="69" x2="210" y2="69" stroke="#061226" stroke-width="5"/><rect x="210" y="40" width="96" height="58" rx="8" fill="#fff" stroke="#061226" stroke-width="3"/><text x="258" y="74" text-anchor="middle" font-size="13" font-weight="800" fill="#061226">Main DB</text><line x1="210" y1="69" x2="210" y2="300" stroke="#061226" stroke-width="5"/>' + rows + '<text x="32" y="326" font-size="12" fill="#486078">Concept only. Final sizing and protections require qualified review.</text></svg></div>';
-    }
-    return '';
-  }
-
-  function renderLogs(node, logs) {
-    if (!node) return;
-    node.innerHTML = logs.map((item) => '<li>' + escapeHtml(String(item).replace(/backend/gi, 'service').replace(/handoff/gi, 'follow-up').replace(/repo/gi, 'project')) + '</li>').join('');
-  }
-
-  function renderArtifacts(node, files) {
-    if (!node) return;
-    const labels = lang() === 'es'
-      ? ['Resumen del proyecto', 'Vista previa usable', 'Siguiente paso claro']
-      : ['Project summary', 'Usable preview', 'Clear next step'];
-    node.innerHTML = labels.map((item) => '<span class="product-artifact">' + escapeHtml(item) + '</span>').join('');
-  }
-
-  function downloadBundle(root) {
-    const raw = root.dataset.productPublicSummary || '{}';
-    const blob = new Blob([raw], { type: 'application/json;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = root.dataset.productFilename || 'santiago-product-summary.json';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    setTimeout(() => URL.revokeObjectURL(link.href), 500);
-  }
-
-  function mountAll() {
-    document.querySelectorAll('[data-repo-tool]').forEach((root) => mount(root, root.dataset.repoTool));
-    const electrical = document.querySelector('[data-electric-planner]');
-    if (electrical) mount(electrical, 'electrical');
-  }
-
-  mountAll();
-  document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => {
-    button.addEventListener('click', () => setTimeout(() => {
-      document.querySelectorAll('[data-product-app]').forEach((app) => app.remove());
-      mountAll();
-    }, 0));
-  });
-})();
 </script><script id="electrical-planner-script">
 (() => {
   const root = document.querySelector('[data-electric-planner]');
   if (!root) return;
+  const form = root.querySelector('[data-planner-form]');
+  let lastPlanText = '';
+
   const copy = {
     en: {
-      kicker: 'AI electrical planning tool',
-      title: 'Prepare a project before a site visit',
-      lead: 'Turn a rough idea into a unifilar or multifilar concept schema, material list, circuit organization and preparation notes.',
+      kicker: 'Electrical pre-visit dossier',
+      title: 'Prepare a technical brief before the visit',
+      lead: 'Build a client-friendly dossier with REBT-style residential circuits, unifilar and multifilar previews, material notes and review questions.',
       projectType: 'Project type',
-      typeResidential: 'Residential',
-      typeCommercial: 'Commercial',
-      typeRenovation: 'Renovation',
-      typeWorkshop: 'Workshop',
+      typeResidential: 'Residential home',
+      typeCommercial: 'Small commercial',
+      typeRenovation: 'Home renovation',
+      typeWorkshop: 'Workshop / technical room',
+      level: 'Electrification level',
+      levelBasic: 'Basic residential',
+      levelElevated: 'Elevated / high demand',
       rooms: 'Rooms or zones',
       area: 'Approx. area',
       phase: 'Supply',
       phaseSingle: 'Single-phase',
       phaseThree: 'Three-phase',
-      loadKitchen: 'Kitchen / appliances',
-      loadHvac: 'HVAC / climate',
-      loadExterior: 'Exterior lighting',
-      loadData: 'Data / low voltage',
-      loadEv: 'EV ready',
-      loadSolar: 'Solar / battery ready',
-      brief: 'Project notes',
+      board: 'Board status',
+      boardUnknown: 'Unknown / check on visit',
+      boardExisting: 'Existing board',
+      boardNew: 'New board planned',
+      loadKitchen: 'Kitchen and wet-area focus',
+      loadHvac: 'C9 air conditioning reserve',
+      loadHeating: 'C8 electric heating reserve',
+      loadAutomation: 'C11 automation / security',
+      loadExterior: 'Exterior or terrace points',
+      loadData: 'Data / telecom pathways',
+      loadEv: 'C13 EV charger reserve',
+      loadSolar: 'Solar / battery pathway',
+      brief: 'Site notes for the visit',
       briefPlaceholder: 'Example: apartment renovation, new kitchen, more sockets in bedrooms, smart lighting in living room.',
-      generate: 'Generate concept plan',
+      generate: 'Generate dossier',
       send: 'Send to contact form',
-      copyPlan: 'Copy plan',
+      copyPlan: 'Copy dossier',
       copied: 'Copied',
       copyUnavailable: 'Copy unavailable',
-      safety: 'Concept only. Final sizing, protections, cable routes and code compliance must be checked by a qualified electrician before installation.',
-      outputKicker: 'Assistant draft',
-      outputTitle: 'Planning output',
+      safety: 'Pre-visit concept only. Final sizing, protections, sections, routes and legalization must be checked by a qualified electrician under the applicable regulations before installation.',
+      outputKicker: 'Dossier draft',
+      outputTitle: 'Electrical planning dossier',
       diagramLabel: 'Schema type',
       modeUnifilar: 'Unifilar',
       modeMultifilar: 'Multifilar',
-      schemaNote: 'Concept schema for electrician review',
+      schemaNote: 'Concept schema for qualified review',
       supplyLabel: 'Supply',
       meterLabel: 'Meter',
+      surgeLabel: 'SPD',
       mainLabel: 'IGA',
       rcdLabel: 'ID 30mA',
       breakerLabel: 'PIA',
       boardLabel: 'Distribution board',
-      materialsTitle: 'Material list',
-      circuitsTitle: 'Circuit organization',
-      prepTitle: 'Project prep',
-      questionsTitle: 'Review questions',
-      summary: 'For a {type} project with {rooms} zones and about {area} sq m, start with separated lighting and socket groups, then reserve dedicated lines for the selected high-demand areas. This prepares a cleaner site visit and a faster quote.',
-      sent: 'Electrical planning draft added to the contact form.',
+      materialsTitle: 'Site/material notes',
+      circuitsTitle: 'Circuit dossier',
+      prepTitle: 'Visit prep',
+      questionsTitle: 'Questions to confirm',
+      sent: 'Electrical dossier added to the contact form.',
       zones: 'zones',
-      analysisIdle: 'Add notes',
-      analysisFound: 'AI notes',
+      analysisIdle: 'Add site notes',
+      analysisFound: 'Detected',
       inferredPrefix: 'Detected from notes',
-      materialBase: ['LED lighting points grouped by zone', 'General socket points with room labels', 'Conduit routes grouped before wall work', 'Distribution board labels and spare ways', 'Junction boxes and pull points for inspection'],
-      prepBase: ['Take photos of the existing panel and main rooms', 'Mark furniture, appliances and wet areas on the plan', 'Confirm access hours and wall/ceiling constraints', 'Review protections and local code before installation', 'Prepare a quote scope with priorities and optional upgrades'],
-      circuitBase: ['Lighting separated from socket circuits', 'General sockets grouped by nearby rooms', 'Wet areas reviewed with appropriate protections', 'Dedicated lines reserved for high-demand appliances'],
-      questionBase: ['Which walls or ceilings can be opened for cable routes?', 'Where is the current distribution board and is there spare space?', 'Which areas are wet, exterior, or exposed to heat?', 'Which items are essential now and which can be prepared for later?']
+      basic: 'basic',
+      elevated: 'elevated',
+      concept: 'concept',
+      boardNote: 'board review'
     },
     es: {
-      kicker: 'Herramienta IA de planificacion electrica',
-      title: 'Prepara un proyecto antes de la visita',
-      lead: 'Convierte una idea inicial en un esquema unifilar o multifilar conceptual, lista de materiales, organizacion de circuitos y notas de preparacion.',
+      kicker: 'Dossier previo de electricidad',
+      title: 'Prepara un brief tecnico antes de la visita',
+      lead: 'Crea un dossier facil de entender con circuitos tipo REBT, vista unifilar y multifilar, notas de material y preguntas de revision.',
       projectType: 'Tipo de proyecto',
       typeResidential: 'Vivienda',
-      typeCommercial: 'Comercial',
-      typeRenovation: 'Reforma',
-      typeWorkshop: 'Taller',
+      typeCommercial: 'Local pequeno',
+      typeRenovation: 'Reforma de vivienda',
+      typeWorkshop: 'Taller / cuarto tecnico',
+      level: 'Nivel de electrificacion',
+      levelBasic: 'Basica vivienda',
+      levelElevated: 'Elevada / alta demanda',
       rooms: 'Habitaciones o zonas',
-      area: 'Area aprox.',
+      area: 'Superficie aprox.',
       phase: 'Suministro',
       phaseSingle: 'Monofasico',
       phaseThree: 'Trifasico',
-      loadKitchen: 'Cocina / aparatos',
-      loadHvac: 'Clima / HVAC',
-      loadExterior: 'Iluminacion exterior',
-      loadData: 'Datos / baja tension',
-      loadEv: 'Preparado para VE',
-      loadSolar: 'Preparado solar / bateria',
-      brief: 'Notas del proyecto',
+      board: 'Estado del cuadro',
+      boardUnknown: 'Desconocido / revisar en visita',
+      boardExisting: 'Cuadro existente',
+      boardNew: 'Cuadro nuevo previsto',
+      loadKitchen: 'Cocina y zonas humedas',
+      loadHvac: 'C9 reserva aire acondicionado',
+      loadHeating: 'C8 reserva calefaccion electrica',
+      loadAutomation: 'C11 automatizacion / seguridad',
+      loadExterior: 'Puntos exteriores o terraza',
+      loadData: 'Recorridos datos / telecom',
+      loadEv: 'C13 reserva cargador VE',
+      loadSolar: 'Recorrido solar / bateria',
+      brief: 'Notas de obra para la visita',
       briefPlaceholder: 'Ejemplo: reforma de piso, cocina nueva, mas enchufes en dormitorios, luces inteligentes en salon.',
-      generate: 'Generar plan conceptual',
+      generate: 'Generar dossier',
       send: 'Enviar al formulario',
-      copyPlan: 'Copiar plan',
+      copyPlan: 'Copiar dossier',
       copied: 'Copiado',
       copyUnavailable: 'Copia no disponible',
-      safety: 'Solo concepto. El dimensionado final, protecciones, recorridos de cable y normativa deben ser revisados por un electricista cualificado antes de instalar.',
-      outputKicker: 'Borrador asistido',
-      outputTitle: 'Resultado de planificacion',
+      safety: 'Solo concepto previo. El dimensionado final, protecciones, secciones, recorridos y legalizacion deben ser revisados por un electricista cualificado segun la normativa aplicable antes de instalar.',
+      outputKicker: 'Borrador de dossier',
+      outputTitle: 'Dossier de planificacion electrica',
       diagramLabel: 'Tipo de esquema',
       modeUnifilar: 'Unifilar',
       modeMultifilar: 'Multifilar',
-      schemaNote: 'Esquema conceptual para revisar con electricista',
+      schemaNote: 'Esquema conceptual para revision cualificada',
       supplyLabel: 'Suministro',
       meterLabel: 'Contador',
+      surgeLabel: 'Sobretensiones',
       mainLabel: 'IGA',
       rcdLabel: 'ID 30mA',
       breakerLabel: 'PIA',
       boardLabel: 'Cuadro electrico',
-      materialsTitle: 'Lista de materiales',
-      circuitsTitle: 'Organizacion de circuitos',
-      prepTitle: 'Preparacion',
-      questionsTitle: 'Preguntas para revisar',
-      summary: 'Para un proyecto de {type} con {rooms} zonas y unos {area} m2, empieza separando iluminacion y enchufes, y reserva lineas dedicadas para las zonas de mayor demanda seleccionadas. Esto prepara una visita mas clara y un presupuesto mas rapido.',
-      sent: 'Borrador de planificacion electrica agregado al formulario.',
+      materialsTitle: 'Notas de obra/material',
+      circuitsTitle: 'Dossier de circuitos',
+      prepTitle: 'Preparacion visita',
+      questionsTitle: 'Preguntas a confirmar',
+      sent: 'Dossier electrico agregado al formulario.',
       zones: 'zonas',
-      analysisIdle: 'Agrega notas',
-      analysisFound: 'Notas IA',
+      analysisIdle: 'Agrega notas de obra',
+      analysisFound: 'Detectado',
       inferredPrefix: 'Detectado en notas',
-      materialBase: ['Puntos de luz LED agrupados por zona', 'Puntos de enchufe general con etiquetas por estancia', 'Tubos y recorridos agrupados antes de abrir paredes', 'Etiquetas del cuadro electrico y espacios de reserva', 'Cajas de registro y puntos de paso para inspeccion'],
-      prepBase: ['Tomar fotos del cuadro existente y estancias principales', 'Marcar muebles, electrodomesticos y zonas humedas en el plano', 'Confirmar horarios de acceso y limites de pared/techo', 'Revisar protecciones y normativa local antes de instalar', 'Preparar alcance de presupuesto con prioridades y mejoras opcionales'],
-      circuitBase: ['Iluminacion separada de circuitos de enchufes', 'Enchufes generales agrupados por estancias cercanas', 'Zonas humedas revisadas con protecciones adecuadas', 'Lineas dedicadas reservadas para aparatos de alta demanda'],
-      questionBase: ['Que paredes o techos se pueden abrir para pasar cable?', 'Donde esta el cuadro actual y tiene espacio libre?', 'Que zonas son humedas, exteriores o expuestas a calor?', 'Que elementos son esenciales ahora y cuales se pueden preparar para despues?']
+      basic: 'basica',
+      elevated: 'elevada',
+      concept: 'concepto',
+      boardNote: 'revision de cuadro'
     }
   };
-  const typeLabels = {
-    en: { residential: 'residential', commercial: 'commercial', renovation: 'renovation', workshop: 'workshop', single: 'Single-phase', three: 'Three-phase' },
-    es: { residential: 'vivienda', commercial: 'comercial', renovation: 'reforma', workshop: 'taller', single: 'Monofasico', three: 'Trifasico' }
-  };
-  const loadText = {
-    en: {
-      kitchen: ['Kitchen appliance outlets', 'Dedicated kitchen/appliance circuit'],
-      hvac: ['HVAC control and isolator points', 'Dedicated climate equipment circuit'],
-      exterior: ['Exterior weather-rated lighting points', 'Outdoor lighting and exterior control circuit'],
-      data: ['Data points and low-voltage pathways', 'Low-voltage/data pathway separated from power'],
-      ev: ['EV charger-ready panel reserve', 'Reserved EV charger pathway for future review'],
-      solar: ['Solar/battery-ready conduit reserve', 'Solar/battery reserve path for future review']
-    },
-    es: {
-      kitchen: ['Enchufes para cocina y electrodomesticos', 'Circuito dedicado para cocina/aparatos'],
-      hvac: ['Puntos de control e isolador para climatizacion', 'Circuito dedicado para equipo de clima'],
-      exterior: ['Puntos exteriores protegidos para iluminacion', 'Circuito de iluminacion exterior y control'],
-      data: ['Puntos de datos y recorridos de baja tension', 'Recorrido de datos separado de potencia'],
-      ev: ['Reserva en cuadro para cargador VE', 'Recorrido reservado para futuro cargador VE'],
-      solar: ['Reserva de tubo para solar/bateria', 'Recorrido reservado para futura solar/bateria']
-    }
-  };
-  const loadLabels = {
-    en: { kitchen: 'Kitchen', hvac: 'HVAC', exterior: 'Exterior', data: 'Data', ev: 'EV', solar: 'Solar' },
-    es: { kitchen: 'Cocina', hvac: 'Clima', exterior: 'Exterior', data: 'Datos', ev: 'VE', solar: 'Solar' }
-  };
-  const keywordRules = {
-    kitchen: /\b(kitchen|cocina|oven|horno|vitro|placa|dishwasher|lavavajillas|appliance|electrodomest)/i,
-    hvac: /\b(hvac|clima|climatizacion|air\s?conditioning|aire|a\/c|heat pump|bomba de calor|calefaccion)/i,
-    exterior: /\b(exterior|outside|outdoor|terraza|jardin|garden|patio|balcon|balcony|pool|piscina|fachada)/i,
-    data: /\b(data|ethernet|internet|router|wifi|network|red|camera|camara|cctv|low voltage|baja tension)/i,
-    ev: /\b(ev|electric car|vehicle charger|cargador|coche electrico|vehiculo electrico|wallbox)/i,
-    solar: /\b(solar|photovoltaic|fotovoltaic|fotovoltaica|battery|bateria|inverter|inversor)/i
-  };
-  const questionByLoad = {
-    en: {
-      kitchen: 'Which appliances need dedicated positions and final power confirmation?',
-      hvac: 'Where will indoor and outdoor climate equipment sit, and who confirms load data?',
-      exterior: 'Which exterior points need weather exposure review and switching zones?',
-      data: 'Where should router, data points, cameras or low-voltage paths terminate?',
-      ev: 'Is the EV charger needed now or only conduit/panel reserve for later?',
-      solar: 'Should the project reserve roof-to-panel routes for future solar or battery equipment?'
-    },
-    es: {
-      kitchen: 'Que electrodomesticos necesitan posicion dedicada y confirmacion final de potencia?',
-      hvac: 'Donde ira el equipo interior/exterior de clima y quien confirma la carga?',
-      exterior: 'Que puntos exteriores necesitan revisar exposicion y zonas de encendido?',
-      data: 'Donde deben terminar router, datos, camaras o recorridos de baja tension?',
-      ev: 'El cargador VE se necesita ahora o solo reserva de tubo/cuadro para despues?',
-      solar: 'Conviene reservar recorridos desde cubierta/cuadro para futura solar o bateria?'
-    }
-  };
-  const currentLang = () => document.documentElement.dataset.langCurrent === 'es' ? 'es' : 'en';
-  const form = root.querySelector('[data-planner-form]');
-  let lastPlanText = '';
 
-  function text(key) {
-    const lang = currentLang();
-    return copy[lang][key] || copy.en[key] || key;
-  }
+  const labels = {
+    en: {
+      type: { residential: 'residential home', commercial: 'small commercial', renovation: 'home renovation', workshop: 'workshop / technical room' },
+      phase: { single: 'Single-phase', three: 'Three-phase' },
+      level: { basic: 'Basic residential', elevated: 'Elevated / high demand' },
+      board: { unknown: 'Board unknown', existing: 'Existing board', new: 'New board planned' }
+    },
+    es: {
+      type: { residential: 'vivienda', commercial: 'local pequeno', renovation: 'reforma de vivienda', workshop: 'taller / cuarto tecnico' },
+      phase: { single: 'Monofasico', three: 'Trifasico' },
+      level: { basic: 'Basica vivienda', elevated: 'Elevada / alta demanda' },
+      board: { unknown: 'Cuadro por revisar', existing: 'Cuadro existente', new: 'Cuadro nuevo previsto' }
+    }
+  };
+
+  const keywordRules = {
+    kitchen: /\b(kitchen|cocina|horno|vitro|placa|lavavajillas|dishwasher|termo|lavadora|washer|bath|bano|baño)/i,
+    hvac: /\b(hvac|clima|climatizacion|aire|air\s?conditioning|a\/c|split|heat pump|bomba de calor)/i,
+    heating: /\b(calefaccion|heating|radiator|radiador|floor heating|suelo radiante)/i,
+    automation: /\b(domotica|automation|automatizacion|security|seguridad|alarm|alarma|smart|sensor|cctv|camara|camera)/i,
+    exterior: /\b(exterior|terraza|jardin|garden|patio|balcon|balcony|pool|piscina|fachada|outdoor)/i,
+    data: /\b(data|ethernet|internet|router|wifi|network|red|telecom|ict|baja tension)/i,
+    ev: /\b(ev|electric car|vehiculo electrico|coche electrico|wallbox|cargador|charger)/i,
+    solar: /\b(solar|fotovoltaic|fotovoltaica|photovoltaic|battery|bateria|inverter|inversor)/i
+  };
+
+  const loadLabels = {
+    en: { kitchen: 'Kitchen/wet areas', hvac: 'C9 air conditioning', heating: 'C8 heating', automation: 'C11 automation', exterior: 'Exterior points', data: 'Data/telecom', ev: 'C13 EV', solar: 'Solar pathway' },
+    es: { kitchen: 'Cocina/zonas humedas', hvac: 'C9 aire', heating: 'C8 calefaccion', automation: 'C11 automatizacion', exterior: 'Exterior', data: 'Datos/telecom', ev: 'C13 VE', solar: 'Solar' }
+  };
+
+  const optionalCircuitMap = {
+    heating: { id: 'C8', es: 'Calefaccion electrica', en: 'Electric heating', detailEs: 'Prevision si existe calefaccion electrica', detailEn: 'Reserved when electric heating is expected' },
+    hvac: { id: 'C9', es: 'Aire acondicionado', en: 'Air conditioning', detailEs: 'Prevision para equipo de climatizacion', detailEn: 'Reserved for climate equipment' },
+    automation: { id: 'C11', es: 'Automatizacion y seguridad', en: 'Automation and security', detailEs: 'Domotica, seguridad o gestion tecnica', detailEn: 'Automation, safety or technical management' },
+    ev: { id: 'C13', es: 'Recarga vehiculo electrico', en: 'EV charging', detailEs: 'Requiere revision especifica ITC-BT-52', detailEn: 'Requires EV charging-specific review' }
+  };
+
+  const currentLang = () => document.documentElement.dataset.langCurrent === 'es' ? 'es' : 'en';
+  const text = (key) => (copy[currentLang()] && copy[currentLang()][key]) || copy.en[key] || key;
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  const unique = (items) => Array.from(new Set(items.filter(Boolean)));
 
   function applyPlannerCopy() {
     const lang = currentLang();
@@ -1975,166 +1898,236 @@ stop.bred{stop-color:#0b3d91!important}
     });
   }
 
-  function list(node, items) {
-    node.innerHTML = items.map((item) => '<li>' + escapeHtml(item) + '</li>').join('');
-  }
-
-  function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
-  }
-
-  function unique(items) {
-    return Array.from(new Set(items.filter(Boolean)));
-  }
-
   function analyzeBrief(brief) {
-    const textValue = String(brief || '');
-    return Object.keys(keywordRules).filter((key) => keywordRules[key].test(textValue));
+    const value = String(brief || '');
+    return Object.keys(keywordRules).filter((key) => keywordRules[key].test(value));
   }
 
   function getState() {
     const data = new FormData(form);
     const rooms = Math.max(1, Math.min(24, Number(data.get('rooms')) || 1));
     const area = Math.max(10, Math.min(1200, Number(data.get('area')) || 10));
-    const selectedLoads = Array.from(form.querySelectorAll('input[name="load"]:checked')).map((input) => input.value);
     const brief = String(data.get('brief') || '').trim();
+    const loads = Array.from(form.querySelectorAll('input[name="load"]:checked')).map((input) => input.value);
+    const level = data.get('level') || 'basic';
     return {
       type: data.get('projectType') || 'residential',
+      level: area > 160 ? 'elevated' : level,
+      board: data.get('board') || 'unknown',
       rooms,
       area,
       phase: data.get('phase') || 'single',
-      loads: selectedLoads,
-      brief,
-      inferredLoads: analyzeBrief(brief)
+      loads,
+      inferredLoads: analyzeBrief(brief),
+      brief
     };
+  }
+
+  function baseCircuits(state) {
+    const lang = currentLang();
+    const pointCount = Math.max(state.rooms, Math.ceil(state.area / 18));
+    const sockets = Math.max(2, Math.ceil(state.rooms / 2));
+    if (lang === 'es') {
+      return [
+        { id: 'C1', name: 'Iluminacion', detail: pointCount + ' puntos estimados por zonas', protection: 'PIA 10A / seccion a revisar' },
+        { id: 'C2', name: 'Tomas uso general y frigorifico', detail: sockets + ' grupos estimados', protection: 'PIA 16A / seccion a revisar' },
+        { id: 'C3', name: 'Cocina y horno', detail: 'Linea dedicada para cocina/horno', protection: 'PIA 25A / seccion a revisar' },
+        { id: 'C4', name: 'Lavadora, lavavajillas y termo', detail: 'Linea para aparatos de agua/calor', protection: 'PIA 20A / seccion a revisar' },
+        { id: 'C5', name: 'Banos y bases auxiliares cocina', detail: 'Tomas en zonas humedas y cocina', protection: 'PIA 16A / seccion a revisar' }
+      ];
+    }
+    return [
+      { id: 'C1', name: 'Lighting', detail: pointCount + ' estimated points by zone', protection: '10A MCB / section to review' },
+      { id: 'C2', name: 'General sockets and fridge', detail: sockets + ' estimated socket groups', protection: '16A MCB / section to review' },
+      { id: 'C3', name: 'Cooktop and oven', detail: 'Dedicated kitchen/oven line', protection: '25A MCB / section to review' },
+      { id: 'C4', name: 'Washer, dishwasher and water heater', detail: 'Line for water/heat appliances', protection: '20A MCB / section to review' },
+      { id: 'C5', name: 'Bathrooms and auxiliary kitchen sockets', detail: 'Wet-area and kitchen sockets', protection: '16A MCB / section to review' }
+    ];
+  }
+
+  function buildCircuits(state) {
+    const lang = currentLang();
+    const allLoads = unique(state.loads.concat(state.inferredLoads));
+    const circuits = baseCircuits(state);
+    if (state.level === 'elevated') {
+      circuits.push(lang === 'es'
+        ? { id: 'C6', name: 'Adicional iluminacion', detail: 'Reserva si hay muchos puntos de luz', protection: 'Segun reparto final' }
+        : { id: 'C6', name: 'Additional lighting', detail: 'Reserve if there are many light points', protection: 'Per final distribution' });
+      circuits.push(lang === 'es'
+        ? { id: 'C7', name: 'Adicional tomas generales', detail: 'Reserva si hay muchas tomas o vivienda grande', protection: 'Segun reparto final' }
+        : { id: 'C7', name: 'Additional general sockets', detail: 'Reserve for many sockets or larger homes', protection: 'Per final distribution' });
+    }
+    allLoads.forEach((load) => {
+      const optional = optionalCircuitMap[load];
+      if (optional && !circuits.some((item) => item.id === optional.id)) {
+        circuits.push({
+          id: optional.id,
+          name: lang === 'es' ? optional.es : optional.en,
+          detail: lang === 'es' ? optional.detailEs : optional.detailEn,
+          protection: lang === 'es' ? 'Dedicado / verificar normativa' : 'Dedicated / verify code'
+        });
+      }
+    });
+    if (allLoads.includes('data')) {
+      circuits.push(lang === 'es'
+        ? { id: 'ICT', name: 'Datos / telecomunicaciones', detail: 'Recorrido separado de potencia', protection: 'Canalizacion separada' }
+        : { id: 'ICT', name: 'Data / telecommunications', detail: 'Route separated from power', protection: 'Separated pathway' });
+    }
+    if (allLoads.includes('exterior')) {
+      circuits.push(lang === 'es'
+        ? { id: 'EXT', name: 'Exterior / terraza', detail: 'Puntos con exposicion a intemperie', protection: 'Grado IP y proteccion a revisar' }
+        : { id: 'EXT', name: 'Exterior / terrace', detail: 'Weather-exposed points', protection: 'IP rating and protection to review' });
+    }
+    if (allLoads.includes('solar')) {
+      circuits.push(lang === 'es'
+        ? { id: 'FV', name: 'Prevision solar / bateria', detail: 'Reserva de recorrido hasta cuadro/cubierta', protection: 'Proyecto especifico si se ejecuta' }
+        : { id: 'PV', name: 'Solar / battery provision', detail: 'Reserved route to board/roof', protection: 'Specific project if installed' });
+    }
+    return circuits.slice(0, 12);
   }
 
   function buildPlan(state) {
     const lang = currentLang();
-    const labels = typeLabels[lang];
-    const lightingPoints = Math.max(state.rooms, Math.ceil(state.area / 18));
-    const socketGroups = Math.max(2, Math.ceil(state.rooms / 2));
-    const materials = copy[lang].materialBase.slice();
-    const circuits = copy[lang].circuitBase.slice();
-    const prep = copy[lang].prepBase.slice();
-    const questions = copy[lang].questionBase.slice();
+    const l = labels[lang];
+    const circuits = buildCircuits(state);
     const allLoads = unique(state.loads.concat(state.inferredLoads));
-
-    materials.splice(1, 0, (lang === 'es' ? 'Puntos de luz estimados: ' : 'Estimated lighting points: ') + lightingPoints);
-    materials.splice(2, 0, (lang === 'es' ? 'Grupos de enchufes estimados: ' : 'Estimated socket groups: ') + socketGroups);
-
-    allLoads.forEach((load) => {
-      const extra = loadText[lang][load];
-      if (!extra) return;
-      materials.push(extra[0]);
-      circuits.push(extra[1]);
-      if (questionByLoad[lang][load]) questions.push(questionByLoad[lang][load]);
-    });
+    const idGroups = Math.max(1, Math.ceil(circuits.filter((item) => /^C/.test(item.id)).length / 5));
+    const summary = lang === 'es'
+      ? 'Para ' + l.type[state.type] + ' de ' + state.rooms + ' zonas y unos ' + state.area + ' m2, el dossier parte de electrificacion ' + (state.level === 'elevated' ? 'elevada' : 'basica') + ', con ' + circuits.length + ' circuitos/recorridos conceptuales y ' + idGroups + ' grupo(s) de diferencial como referencia preliminar.'
+      : 'For a ' + l.type[state.type] + ' with ' + state.rooms + ' zones and about ' + state.area + ' sq m, the dossier starts from ' + (state.level === 'elevated' ? 'elevated' : 'basic') + ' electrification, with ' + circuits.length + ' conceptual circuits/routes and ' + idGroups + ' RCD group(s) as a preliminary reference.';
+    const materials = lang === 'es'
+      ? [
+          'Cuadro con carril DIN, reserva de modulos y etiquetas por circuito',
+          'Proteccion general: ICP/IGA, protector de sobretensiones si procede, ID 30mA y PIA por circuito',
+          'Agrupar C1-C5 como base de vivienda antes de anadir reservas elevadas',
+          'Prever al menos un diferencial por cada cinco circuitos instalados como referencia de dossier',
+          'Registrar fotos del cuadro, contador, recorridos posibles y zonas humedas/exteriores'
+        ]
+      : [
+          'DIN-rail board with spare modules and labels per circuit',
+          'Main protection: ICP/IGA, surge protection when applicable, 30mA RCD and MCB per circuit',
+          'Group C1-C5 as the residential base before adding elevated reserves',
+          'Use one RCD per five installed circuits as a dossier reference',
+          'Capture photos of board, meter, possible routes and wet/exterior areas'
+        ];
+    const prep = lang === 'es'
+      ? [
+          'Confirmar potencia contratada, suministro mono/trifasico y espacio libre en cuadro',
+          'Marcar cocina, banos, lavadero, exteriores y recorridos dificiles en un plano sencillo',
+          'Separar lo que se ejecuta ahora de lo que solo queda preparado',
+          'Revisar canalizaciones, rozas permitidas, falso techo y horario de acceso',
+          'Convertir este dossier en medicion real despues de la visita'
+        ]
+      : [
+          'Confirm contracted power, single/three-phase supply and spare board space',
+          'Mark kitchen, bathrooms, laundry, exterior points and hard routes on a simple plan',
+          'Separate what is installed now from what is only prepared for later',
+          'Review conduit routes, wall chasing, ceiling access and visit times',
+          'Turn this dossier into a real measured quote after the visit'
+        ];
+    const questions = lang === 'es'
+      ? [
+          'El cuadro actual tiene espacio para nuevos PIA e ID?',
+          'Hay boletin/CIE reciente o se necesita revisar legalizacion?',
+          'Que paredes, techos o canalizaciones se pueden abrir?',
+          'Que electrodomesticos concretos van en cocina/lavadero?',
+          'Que puntos son obligatorios ahora y cuales son preinstalacion?'
+        ]
+      : [
+          'Does the existing board have space for new MCBs and RCDs?',
+          'Is there a recent certificate/CIE or does legalization need review?',
+          'Which walls, ceilings or conduits can be opened?',
+          'Which exact appliances will be in the kitchen/laundry?',
+          'Which points are required now and which are pre-installation only?'
+        ];
     if (state.phase === 'three') {
-      circuits.push(lang === 'es' ? 'Balancear cargas por fase durante la revision tecnica' : 'Balance loads across phases during technical review');
-      materials.push(lang === 'es' ? 'Etiquetas de fases para cuadro trifasico' : 'Phase labels for three-phase panel');
-      questions.push(lang === 'es' ? 'Que cargas deben quedar repartidas por fase durante la revision?' : 'Which loads should be balanced across phases during review?');
+      prep.push(lang === 'es' ? 'Repartir cargas relevantes por fase en la revision tecnica' : 'Balance relevant loads across phases during technical review');
+      questions.push(lang === 'es' ? 'Que cargas monofasicas/trifasicas deben quedar repartidas?' : 'Which single/three-phase loads need distribution?');
     }
+    allLoads.forEach((load) => {
+      const label = loadLabels[lang][load];
+      if (label) materials.push((lang === 'es' ? 'Reserva solicitada: ' : 'Requested reserve: ') + label);
+    });
     if (state.brief) {
-      prep.unshift((lang === 'es' ? 'Revisar nota del cliente: ' : 'Review client note: ') + state.brief);
+      prep.unshift((lang === 'es' ? 'Nota del cliente: ' : 'Client note: ') + state.brief);
       if (state.inferredLoads.length) {
-        const detected = state.inferredLoads.map((load) => loadLabels[lang][load]).join(', ');
-        prep.unshift(text('inferredPrefix') + ': ' + detected);
+        prep.unshift(text('inferredPrefix') + ': ' + state.inferredLoads.map((load) => loadLabels[lang][load]).join(', '));
       }
     }
-
-    const summary = text('summary')
-      .replace('{type}', labels[state.type])
-      .replace('{rooms}', state.rooms)
-      .replace('{area}', state.area);
-    return { labels, summary, materials: unique(materials), circuits: unique(circuits), prep: unique(prep), questions: unique(questions) };
+    return { labels: l, summary, circuits, materials: unique(materials), prep: unique(prep), questions: unique(questions), idGroups };
   }
 
   function activeDiagramMode() {
     return root.querySelector('[data-diagram-mode].active')?.dataset.diagramMode || 'unifilar';
   }
 
-  function diagramCircuits(state) {
-    const lang = currentLang();
-    const lightingPoints = Math.max(state.rooms, Math.ceil(state.area / 18));
-    const socketGroups = Math.max(2, Math.ceil(state.rooms / 2));
-    const allLoads = unique(state.loads.concat(state.inferredLoads));
-    const circuits = [
-      { id: 'C1', label: lang === 'es' ? 'Iluminacion' : 'Lighting', detail: lightingPoints + (lang === 'es' ? ' puntos' : ' points') },
-      { id: 'C2', label: lang === 'es' ? 'Enchufes generales' : 'General sockets', detail: socketGroups + (lang === 'es' ? ' grupos' : ' groups') }
-    ];
-    const loadMap = {
-      kitchen: { id: 'C3', en: 'Kitchen appliances', es: 'Cocina/aparatos' },
-      hvac: { id: 'C4', en: 'Climate equipment', es: 'Climatizacion' },
-      exterior: { id: 'C5', en: 'Exterior lighting', es: 'Iluminacion exterior' },
-      data: { id: 'C6', en: 'Data / low voltage', es: 'Datos / baja tension' },
-      ev: { id: 'C7', en: 'EV charger reserve', es: 'Reserva cargador VE' },
-      solar: { id: 'C8', en: 'Solar reserve', es: 'Reserva solar' }
-    };
-    allLoads.forEach((load) => {
-      const item = loadMap[load];
-      if (item) circuits.push({ id: item.id, label: item[lang], detail: lang === 'es' ? 'linea dedicada' : 'dedicated line' });
-    });
-    return circuits.slice(0, 7);
+  function box(x, y, w, title, detail, dark = false) {
+    const fill = dark ? '#061226' : '#fff';
+    const ink = dark ? '#fff' : '#061226';
+    const soft = dark ? 'rgba(255,255,255,.64)' : 'rgba(6,18,38,.58)';
+    return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="50" rx="9" fill="' + fill + '" stroke="rgba(11,61,145,.32)" stroke-width="1.5"/><text x="' + (x + 12) + '" y="' + (y + 20) + '" fill="' + ink + '" font-size="12" font-weight="900">' + escapeHtml(title) + '</text><text x="' + (x + 12) + '" y="' + (y + 37) + '" fill="' + soft + '" font-size="10" font-weight="700">' + escapeHtml(detail) + '</text>';
   }
 
-  function renderProtectionBox(x, y, title, detail) {
-    return '<rect x="' + x + '" y="' + y + '" width="86" height="48" rx="8" fill="#fff" stroke="rgba(11,61,145,.42)" stroke-width="1.5"/><text x="' + (x + 12) + '" y="' + (y + 20) + '" fill="#061226" font-size="12" font-weight="900">' + escapeHtml(title) + '</text><text x="' + (x + 12) + '" y="' + (y + 36) + '" fill="rgba(6,18,38,.58)" font-size="10" font-weight="700">' + escapeHtml(detail) + '</text>';
-  }
-
-  function renderUnifilar(state, plan, circuits) {
+  function renderUnifilar(state, plan) {
+    const circuits = plan.circuits.slice(0, 9);
     const lang = currentLang();
     const branches = circuits.map((circuit, index) => {
-      const y = 94 + index * 34;
-      const label = escapeHtml(circuit.label.length > 24 ? circuit.label.slice(0, 22) + '...' : circuit.label);
-      return '<path d="M355 ' + y + ' H384" stroke="#061226" stroke-width="2.2" stroke-linecap="round"/><rect x="384" y="' + (y - 16) + '" width="54" height="32" rx="7" fill="#eef4ff" stroke="#0b3d91" stroke-width="1.4"/><text x="400" y="' + (y + 4) + '" fill="#0b3d91" font-size="12" font-weight="900">' + escapeHtml(circuit.id) + '</text><path d="M438 ' + y + ' H486" stroke="#061226" stroke-width="2.2" stroke-linecap="round"/><rect x="486" y="' + (y - 17) + '" width="178" height="34" rx="9" fill="#fff" stroke="rgba(6,18,38,.15)"/><text x="500" y="' + (y - 2) + '" fill="#061226" font-size="11" font-weight="900">' + label + '</text><text x="500" y="' + (y + 12) + '" fill="rgba(6,18,38,.56)" font-size="9" font-weight="700">' + escapeHtml(circuit.detail) + '</text>';
+      const y = 132 + index * 29;
+      return '<path d="M340 ' + y + ' H370" stroke="#061226" stroke-width="2.2"/><rect x="370" y="' + (y - 13) + '" width="52" height="26" rx="6" fill="#eef4ff" stroke="#0b3d91"/><text x="396" y="' + (y + 4) + '" text-anchor="middle" fill="#0b3d91" font-size="11" font-weight="900">' + escapeHtml(circuit.id) + '</text><path d="M422 ' + y + ' H456" stroke="#061226" stroke-width="2.2"/><rect x="456" y="' + (y - 14) + '" width="220" height="28" rx="7" fill="#fff" stroke="rgba(6,18,38,.13)"/><text x="468" y="' + (y - 1) + '" fill="#061226" font-size="10.5" font-weight="900">' + escapeHtml(circuit.name) + '</text><text x="468" y="' + (y + 12) + '" fill="rgba(6,18,38,.55)" font-size="8.8" font-weight="700">' + escapeHtml(circuit.protection) + '</text>';
     }).join('');
-    const phases = state.phase === 'three' ? 'L1 L2 L3 N PE' : 'L N PE';
-    return '<svg viewBox="0 0 720 360" role="img" aria-label="Unifilar electrical schema"><text x="24" y="32" fill="#061226" font-size="16" font-weight="900">' + escapeHtml(text('modeUnifilar')) + ' - ' + escapeHtml(text('schemaNote')) + '</text><text x="24" y="52" fill="rgba(6,18,38,.58)" font-size="11" font-weight="700">' + escapeHtml(plan.labels[state.phase]) + ' / ' + escapeHtml(state.rooms + ' ' + text('zones')) + '</text><rect x="24" y="76" width="100" height="210" rx="14" fill="#061226"/><text x="43" y="106" fill="#fff" font-size="13" font-weight="900">' + escapeHtml(text('supplyLabel')) + '</text><text x="43" y="128" fill="rgba(255,255,255,.68)" font-size="11" font-weight="800">' + escapeHtml(phases) + '</text><path d="M74 150 V232" stroke="#fff" stroke-width="2"/><circle cx="74" cy="174" r="11" fill="none" stroke="#fff" stroke-width="2"/><path d="M65 197 H83 M74 188 V206" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M124 180 H158" stroke="#061226" stroke-width="2.6"/>' + renderProtectionBox(158, 156, text('meterLabel'), 'kWh') + '<path d="M244 180 H274" stroke="#061226" stroke-width="2.6"/>' + renderProtectionBox(274, 156, text('mainLabel'), 'Q0') + '<path d="M360 180 H390" stroke="#061226" stroke-width="2.6"/>' + renderProtectionBox(390, 156, text('rcdLabel'), '30mA') + '<path d="M476 180 H524" stroke="#061226" stroke-width="2.6"/><path d="M524 86 V' + (94 + (circuits.length - 1) * 34) + '" stroke="#061226" stroke-width="2.6"/><path d="M524 86 H355 V' + (94 + (circuits.length - 1) * 34) + '" fill="none" stroke="#0b3d91" stroke-width="1.8" stroke-dasharray="5 6"/><text x="384" y="82" fill="rgba(6,18,38,.62)" font-size="10" font-weight="900">' + escapeHtml(text('breakerLabel')) + '</text>' + branches + '<text x="24" y="326" fill="rgba(6,18,38,.58)" font-size="10" font-weight="700">* ' + escapeHtml(text('safety')) + '</text></svg>';
+    const supply = state.phase === 'three' ? 'L1 L2 L3 N PE' : 'L N PE';
+    return '<svg viewBox="0 0 720 420" role="img" aria-label="Concept unifilar schema"><text x="24" y="32" fill="#061226" font-size="16" font-weight="900">' + escapeHtml(text('modeUnifilar')) + ' - ' + escapeHtml(text('schemaNote')) + '</text><text x="24" y="52" fill="rgba(6,18,38,.58)" font-size="11" font-weight="700">' + escapeHtml(plan.labels.phase[state.phase]) + ' / ' + escapeHtml(plan.labels.level[state.level]) + ' / ' + escapeHtml(plan.labels.board[state.board]) + '</text><rect x="24" y="82" width="110" height="250" rx="14" fill="#061226"/><text x="44" y="113" fill="#fff" font-size="13" font-weight="900">' + escapeHtml(text('supplyLabel')) + '</text><text x="44" y="134" fill="rgba(255,255,255,.68)" font-size="11" font-weight="800">' + escapeHtml(supply) + '</text><path d="M80 160 V280" stroke="#fff" stroke-width="2"/><path d="M68 194 H92 M80 182 V206" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M134 208 H160" stroke="#061226" stroke-width="2.6"/>' + box(160, 183, 74, text('meterLabel'), 'kWh') + '<path d="M234 208 H256" stroke="#061226" stroke-width="2.6"/>' + box(256, 183, 70, text('mainLabel'), 'Q0') + '<path d="M326 208 H348" stroke="#061226" stroke-width="2.6"/>' + box(348, 183, 94, text('surgeLabel'), 'SPD') + '<path d="M442 208 H464" stroke="#061226" stroke-width="2.6"/>' + box(464, 183, 88, text('rcdLabel'), plan.idGroups + ' grp') + '<path d="M552 208 H586" stroke="#061226" stroke-width="2.6"/><path d="M340 116 V' + (132 + (circuits.length - 1) * 29) + '" stroke="#061226" stroke-width="2.4"/><text x="370" y="108" fill="rgba(6,18,38,.62)" font-size="10" font-weight="900">' + escapeHtml(text('breakerLabel')) + ' / ' + escapeHtml(text('boardLabel')) + '</text>' + branches + '<text x="24" y="380" fill="rgba(6,18,38,.58)" font-size="10" font-weight="700">' + (lang === 'es' ? 'Concepto basado en C1-C5 y reservas elevadas; no sustituye medicion ni calculo.' : 'Concept based on C1-C5 and elevated reserves; not a substitute for measurement or sizing.') + '</text></svg>';
   }
 
-  function renderMultifilar(state, plan, circuits) {
+  function renderMultifilar(state, plan) {
+    const circuits = plan.circuits.slice(0, 8);
     const lang = currentLang();
-    const conductorSet = state.phase === 'three'
+    const wires = state.phase === 'three'
       ? [{ n: 'L1', c: '#3b2f2f' }, { n: 'L2', c: '#6b7280' }, { n: 'L3', c: '#111827' }, { n: 'N', c: '#1d4ed8' }, { n: 'PE', c: '#16a34a' }]
       : [{ n: 'L', c: '#111827' }, { n: 'N', c: '#1d4ed8' }, { n: 'PE', c: '#16a34a' }];
-    const bus = conductorSet.map((wire, index) => {
-      const y = 84 + index * 18;
-      return '<text x="34" y="' + (y + 4) + '" fill="' + wire.c + '" font-size="10" font-weight="900">' + wire.n + '</text><path d="M58 ' + y + ' H672" stroke="' + wire.c + '" stroke-width="2" stroke-linecap="round"/>';
+    const rail = wires.map((wire, index) => {
+      const y = 86 + index * 20;
+      return '<text x="32" y="' + (y + 4) + '" fill="' + wire.c + '" font-size="10" font-weight="900">' + wire.n + '</text><path d="M58 ' + y + ' H680" stroke="' + wire.c + '" stroke-width="2.2" stroke-linecap="round"/>';
     }).join('');
-    const rows = circuits.slice(0, 5).map((circuit, index) => {
-      const y = 168 + index * 34;
-      const wireOffset = state.phase === 'three' ? index % 3 : 0;
-      const lineY = 84 + wireOffset * 18;
-      const neutralY = state.phase === 'three' ? 84 + 3 * 18 : 102;
-      const earthY = state.phase === 'three' ? 84 + 4 * 18 : 120;
-      const x = 126 + index * 86;
-      const label = escapeHtml(circuit.label.length > 18 ? circuit.label.slice(0, 16) + '...' : circuit.label);
-      return '<path d="M' + x + ' ' + lineY + ' V' + (y - 8) + '" stroke="' + conductorSet[wireOffset].c + '" stroke-width="1.8"/><path d="M' + (x + 12) + ' ' + neutralY + ' V' + (y + 2) + '" stroke="#1d4ed8" stroke-width="1.8"/><path d="M' + (x + 24) + ' ' + earthY + ' V' + (y + 12) + '" stroke="#16a34a" stroke-width="1.8"/><rect x="' + (x - 18) + '" y="' + (y - 20) + '" width="72" height="42" rx="8" fill="#fff" stroke="rgba(6,18,38,.16)"/><text x="' + (x + 5) + '" y="' + (y - 2) + '" fill="#0b3d91" font-size="12" font-weight="900">' + escapeHtml(circuit.id) + '</text><text x="' + (x - 6) + '" y="' + (y + 13) + '" fill="rgba(6,18,38,.58)" font-size="8" font-weight="700">' + label + '</text>';
+    const neutralY = state.phase === 'three' ? 146 : 106;
+    const earthY = state.phase === 'three' ? 166 : 126;
+    const rows = circuits.map((circuit, index) => {
+      const column = index % 4;
+      const row = Math.floor(index / 4);
+      const x = 90 + column * 154;
+      const y = 210 + row * 76;
+      const phaseY = state.phase === 'three' ? 86 + (index % 3) * 20 : 86;
+      return '<path d="M' + (x + 30) + ' ' + phaseY + ' V' + (y - 12) + '" stroke="#061226" stroke-width="1.7"/><path d="M' + (x + 44) + ' ' + neutralY + ' V' + (y - 2) + '" stroke="#1d4ed8" stroke-width="1.7"/><path d="M' + (x + 58) + ' ' + earthY + ' V' + (y + 8) + '" stroke="#16a34a" stroke-width="1.7"/><rect x="' + x + '" y="' + (y - 24) + '" width="124" height="58" rx="9" fill="#fff" stroke="rgba(6,18,38,.15)"/><text x="' + (x + 12) + '" y="' + (y - 5) + '" fill="#0b3d91" font-size="12" font-weight="900">' + escapeHtml(circuit.id) + '</text><text x="' + (x + 12) + '" y="' + (y + 10) + '" fill="#061226" font-size="9.5" font-weight="900">' + escapeHtml(circuit.name.slice(0, 26)) + '</text><text x="' + (x + 12) + '" y="' + (y + 24) + '" fill="rgba(6,18,38,.55)" font-size="8.2" font-weight="700">' + escapeHtml(circuit.detail.slice(0, 32)) + '</text>';
     }).join('');
-    return '<svg viewBox="0 0 720 360" role="img" aria-label="Multifilar electrical schema"><text x="24" y="32" fill="#061226" font-size="16" font-weight="900">' + escapeHtml(text('modeMultifilar')) + ' - ' + escapeHtml(text('schemaNote')) + '</text><text x="24" y="52" fill="rgba(6,18,38,.58)" font-size="11" font-weight="700">' + escapeHtml(text('boardLabel')) + ' / ' + escapeHtml(plan.labels[state.phase]) + '</text><rect x="24" y="66" width="672" height="76" rx="12" fill="#f4f8ff" stroke="rgba(11,61,145,.18)"/>' + bus + '<rect x="30" y="160" width="666" height="140" rx="12" fill="rgba(255,255,255,.78)" stroke="rgba(6,18,38,.12)"/>' + rows + '<text x="34" y="326" fill="rgba(6,18,38,.58)" font-size="10" font-weight="700">L / N / PE ' + (lang === 'es' ? 'representados para revisar recorridos; no sustituye calculo tecnico.' : 'shown for route review; not a substitute for technical sizing.') + '</text></svg>';
+    return '<svg viewBox="0 0 720 420" role="img" aria-label="Concept multifilar schema"><text x="24" y="32" fill="#061226" font-size="16" font-weight="900">' + escapeHtml(text('modeMultifilar')) + ' - ' + escapeHtml(text('schemaNote')) + '</text><text x="24" y="52" fill="rgba(6,18,38,.58)" font-size="11" font-weight="700">' + escapeHtml(text('boardLabel')) + ' / ' + escapeHtml(plan.labels.phase[state.phase]) + '</text><rect x="24" y="66" width="672" height="120" rx="12" fill="#f4f8ff" stroke="rgba(11,61,145,.18)"/>' + rail + '<rect x="24" y="198" width="672" height="166" rx="12" fill="rgba(255,255,255,.78)" stroke="rgba(6,18,38,.12)"/>' + rows + '<text x="34" y="392" fill="rgba(6,18,38,.58)" font-size="10" font-weight="700">' + (lang === 'es' ? 'L/N/PE representados para conversar recorridos; falta calculo y comprobacion real.' : 'L/N/PE represented to discuss routes; real sizing and checking still required.') + '</text></svg>';
   }
 
   function renderDiagram(state, plan) {
-    const circuits = diagramCircuits(state);
-    const html = activeDiagramMode() === 'multifilar' ? renderMultifilar(state, plan, circuits) : renderUnifilar(state, plan, circuits);
-    root.querySelector('[data-planner-diagram]').innerHTML = html;
+    const diagram = activeDiagramMode() === 'multifilar' ? renderMultifilar(state, plan) : renderUnifilar(state, plan);
+    root.querySelector('[data-planner-diagram]').innerHTML = diagram;
+  }
+
+  function list(node, items) {
+    if (node) node.innerHTML = items.map((item) => '<li>' + escapeHtml(item) + '</li>').join('');
   }
 
   function renderPlan() {
     applyPlannerCopy();
     const state = getState();
     const plan = buildPlan(state);
+    const lang = currentLang();
     root.querySelector('[data-planner-summary]').innerHTML = '<strong>' + escapeHtml(text('outputKicker')) + ':</strong> ' + escapeHtml(plan.summary);
-    root.querySelector('[data-planner-chip="type"]').textContent = plan.labels[state.type].replace(/^./, (c) => c.toUpperCase());
+    root.querySelector('[data-planner-chip="type"]').textContent = plan.labels.type[state.type].replace(/^./, (c) => c.toUpperCase());
     root.querySelector('[data-planner-chip="rooms"]').textContent = state.rooms + ' ' + text('zones');
-    root.querySelector('[data-planner-chip="phase"]').textContent = plan.labels[state.phase];
+    root.querySelector('[data-planner-chip="phase"]').textContent = plan.labels.phase[state.phase];
     const analysisChip = root.querySelector('[data-planner-chip="analysis"]');
     if (analysisChip) {
-      analysisChip.textContent = state.inferredLoads.length ? text('analysisFound') + ': ' + state.inferredLoads.map((load) => loadLabels[currentLang()][load]).join(', ') : text('analysisIdle');
+      analysisChip.textContent = state.inferredLoads.length
+        ? text('analysisFound') + ': ' + state.inferredLoads.map((load) => loadLabels[lang][load]).join(', ')
+        : plan.labels.level[state.level];
     }
     list(root.querySelector('[data-planner-materials]'), plan.materials);
-    list(root.querySelector('[data-planner-circuits]'), plan.circuits);
+    list(root.querySelector('[data-planner-circuits]'), plan.circuits.map((item) => item.id + ' - ' + item.name + ': ' + item.detail + ' (' + item.protection + ')'));
     list(root.querySelector('[data-planner-prep]'), plan.prep);
     list(root.querySelector('[data-planner-questions]'), plan.questions);
     renderDiagram(state, plan);
@@ -2143,17 +2136,19 @@ stop.bred{stop-color:#0b3d91!important}
       plan.summary,
       text('diagramLabel') + ': ' + (activeDiagramMode() === 'multifilar' ? text('modeMultifilar') : text('modeUnifilar')),
       '',
+      text('circuitsTitle') + ':',
+      ...plan.circuits.map((item) => '- ' + item.id + ' ' + item.name + ': ' + item.detail + ' / ' + item.protection),
+      '',
       text('materialsTitle') + ':',
       ...plan.materials.map((item) => '- ' + item),
-      '',
-      text('circuitsTitle') + ':',
-      ...plan.circuits.map((item) => '- ' + item),
       '',
       text('prepTitle') + ':',
       ...plan.prep.map((item) => '- ' + item),
       '',
       text('questionsTitle') + ':',
-      ...plan.questions.map((item) => '- ' + item)
+      ...plan.questions.map((item) => '- ' + item),
+      '',
+      text('safety')
     ].join('\n');
   }
 
@@ -2185,7 +2180,7 @@ stop.bred{stop-color:#0b3d91!important}
       message.setAttribute('aria-label', text('sent'));
     }
   });
-  form?.addEventListener('input', () => renderPlan());
+  form?.addEventListener('input', renderPlan);
   document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => {
     button.addEventListener('click', () => setTimeout(renderPlan, 0));
   });
