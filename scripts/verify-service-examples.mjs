@@ -40,12 +40,17 @@ const requiredSpanish = [
 for (const text of requiredSpanish) check(source.includes(text), `missing Spanish copy: ${text}`);
 
 const disclaimer = 'Planning and estimating support only. Final electrical work, permits, code compliance, and installation must be verified by a licensed professional.';
-check(source.includes(disclaimer), 'missing exact electrical disclaimer');
 const electricalSection = $('#service-4');
 const electricalDisclaimers = electricalSection.find('[data-electrical-disclaimer]');
 check(electricalDisclaimers.length === 1, 'electrical requires exactly one [data-electrical-disclaimer]');
+if (electricalDisclaimers.length === 1) {
+  check(
+    electricalDisclaimers.text().trim() === disclaimer,
+    'electrical disclaimer must contain the exact approved English text',
+  );
+}
 const electricalControls = electricalSection
-  .find('[data-planner-print], [data-planner-send], [data-tool-export], [data-tool-send]')
+  .find('[data-planner-print], [data-planner-send], [data-tool-export], [data-tool-send], [data-project-example-button], [data-project-contact]')
   .toArray();
 if (electricalDisclaimers.length === 1) {
   const electricalNodes = electricalSection.find('*').toArray();
