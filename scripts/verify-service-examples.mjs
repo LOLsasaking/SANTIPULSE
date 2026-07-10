@@ -41,6 +41,22 @@ for (const text of requiredSpanish) check(source.includes(text), `missing Spanis
 
 const disclaimer = 'Planning and estimating support only. Final electrical work, permits, code compliance, and installation must be verified by a licensed professional.';
 check(source.includes(disclaimer), 'missing exact electrical disclaimer');
+const electricalSection = $('#service-4');
+const electricalDisclaimers = electricalSection.find('[data-electrical-disclaimer]');
+check(electricalDisclaimers.length === 1, 'electrical requires exactly one [data-electrical-disclaimer]');
+const electricalControls = electricalSection
+  .find('[data-planner-print], [data-planner-send], [data-tool-export], [data-tool-send]')
+  .toArray();
+if (electricalDisclaimers.length === 1) {
+  const electricalNodes = electricalSection.find('*').toArray();
+  const disclaimerPosition = electricalNodes.indexOf(electricalDisclaimers[0]);
+  for (const control of electricalControls) {
+    check(
+      disclaimerPosition < electricalNodes.indexOf(control),
+      'electrical disclaimer must appear before every electrical export/contact control',
+    );
+  }
+}
 check($('#contactform').length === 1, 'existing contact form was removed');
 check($('#service-1').length === 1, 'existing web-design service was removed');
 
