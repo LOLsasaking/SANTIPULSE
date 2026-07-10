@@ -754,7 +754,7 @@ stop.bred{stop-color:#0b3d91!important}
 </form>
 <div class="repo-output"><div data-tool-preview><aside class="ai-lead-summary" data-ai-lead-summary></aside></div><pre data-tool-spec></pre></div>
 </div>
-<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast></span></div>
+<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast role="status" aria-live="polite"></span></div>
 </div>
 <div class="service-tag"><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.ai.tag1">AI Assistants</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.ai.tag2">Business Tools</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.ai.tag3">Smart Workflows</a></div>
 <p class="service-desc text-black-56" data-i18n="#service-2.desc">Try a practical AI assistant demo for business questions, lead qualification, and client intake.</p></div>
@@ -786,7 +786,7 @@ stop.bred{stop-color:#0b3d91!important}
 </form>
 <div class="repo-output"><div data-tool-preview><div class="auto-pipeline" data-automation-pipeline></div></div><pre data-tool-spec></pre></div>
 </div>
-<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast></span></div>
+<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast role="status" aria-live="polite"></span></div>
 </div>
 <div class="service-tag"><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.auto.tag1">Lead Flow</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.auto.tag2">Task Systems</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.auto.tag3">Process Design</a></div>
 <p class="service-desc text-black-56" data-i18n="#service-3.desc">Try a workflow demo for forms, client requests, dashboards, and repetitive tasks.</p></div>
@@ -910,7 +910,7 @@ stop.bred{stop-color:#0b3d91!important}
 </form>
 <div class="repo-output"><div data-tool-preview><div class="brand-system-board" data-brand-board></div></div><pre data-tool-spec></pre></div>
 </div>
-<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast></span></div>
+<div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast role="status" aria-live="polite"></span></div>
 </div>
 <div class="service-tag"><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.brand.tag1">Logo Design</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.brand.tag2">Brand Guidelines</a><a href="#contact" class="tag-item text-body-3 fw-medium text-black-72 link" data-i18n="services.brand.tag3">Visual Systems</a></div>
 <p class="service-desc text-black-56" data-i18n="#service-5.desc">Try a brand direction demo for logo ideas, palettes, and simple usage rules.</p></div>
@@ -1319,9 +1319,25 @@ stop.bred{stop-color:#0b3d91!important}
     window.setTimeout(() => firstControl?.focus({ preventScroll: true }), 450);
   }
 
+  function projectContactHandoff(section) {
+    const message = document.getElementById('message');
+    if (!message) return;
+    const language = projectLang();
+    const project = PROJECT_CATALOG[language][section.dataset.project];
+    if (!project) return;
+    const example = section.querySelector('[data-project-example]');
+    const brief = example?.dataset.toolPublicBrief || project.value;
+    const block = '--- ' + project.title + ' ---\n' + brief;
+    message.value = message.value.trim() ? message.value + '\n\n' + block : block;
+    message.dispatchEvent(new Event('input', { bubbles: true }));
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => message.focus({ preventScroll: true }), 450);
+  }
+
   document.querySelectorAll('[data-project]').forEach((section) => {
     renderProjectNarrative(section);
     section.querySelector('[data-project-example-button]')?.addEventListener('click', () => focusProjectExample(section));
+    section.querySelector('[data-project-contact]')?.addEventListener('click', () => projectContactHandoff(section));
   });
   document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => button.addEventListener('click', () => {
     window.setTimeout(() => document.querySelectorAll('[data-project]').forEach(renderProjectNarrative), 0);
@@ -1428,7 +1444,8 @@ stop.bred{stop-color:#0b3d91!important}
       suggested: 'Suggested questions',
       reply: 'Assistant reply',
       noStorage: 'Save unavailable',
-      noDownload: 'Download unavailable'
+      noDownload: 'Download unavailable',
+      noContact: 'Contact form unavailable'
     },
     es: {
       'ai.toolKicker': 'Herramienta real para clientes',
@@ -1514,7 +1531,8 @@ stop.bred{stop-color:#0b3d91!important}
       suggested: 'Preguntas sugeridas',
       reply: 'Respuesta del asistente',
       noStorage: 'Guardado no disponible',
-      noDownload: 'Descarga no disponible'
+      noDownload: 'Descarga no disponible',
+      noContact: 'Formulario de contacto no disponible'
     }
   };
 
@@ -1833,12 +1851,15 @@ stop.bred{stop-color:#0b3d91!important}
   function sendToContact(root) {
     build(root);
     const message = document.getElementById('message');
-    if (message) {
-      const header = '\n\n--- ' + (root.dataset.toolTitle || 'Service tool') + ' ---\n';
-      message.value = (message.value ? message.value + header : header.trimStart()) + (root.dataset.toolPublicBrief || '');
-      message.dispatchEvent(new Event('input', { bubbles: true }));
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!message) {
+      toast(root, t('noContact'));
+      return;
     }
+    const header = '\n\n--- ' + (root.dataset.toolTitle || 'Service tool') + ' ---\n';
+    message.value = (message.value ? message.value + header : header.trimStart()) + (root.dataset.toolPublicBrief || '');
+    message.dispatchEvent(new Event('input', { bubbles: true }));
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => message.focus({ preventScroll: true }), 450);
     toast(root, t('sent'));
   }
 
