@@ -316,11 +316,14 @@ stop.bred{stop-color:#0b3d91!important}
 .service-web-tile{height:76px;border:1px solid rgba(255,255,255,.12);border-radius:7px;background:#071426;overflow:hidden;box-shadow:0 16px 34px rgba(0,0,0,.22)}
 .service-web-tile:nth-child(2){height:92px}.service-web-tile:nth-child(3){height:64px}
 .service-web-tile img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.86) brightness(.82)}
-.service-ai-preview{grid-template-columns:106px minmax(0,1fr);align-items:stretch}
-.service-score-card{border-radius:7px;background:#071426;border:1px solid rgba(185,216,255,.16);padding:10px;color:#fff}
-.service-score-card strong{display:block;font-size:26px;line-height:1;margin-bottom:7px}
-.service-score-bar{height:7px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}.service-score-bar span{display:block;width:84%;height:100%;background:#5b8dd7}
-.service-chat-mini{display:grid;gap:7px;align-content:center}.service-chat-mini span{display:block;border-radius:8px;background:#e9f1ff;color:#061226;padding:7px 8px;font-size:11px;font-weight:850;line-height:1.2}.service-chat-mini span:nth-child(2){background:#071426;color:#dbeafe;margin-left:18px}
+.service-ai-preview{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:stretch}
+.service-ai-conversation,.service-ai-handoff{display:grid;gap:6px;align-content:center}
+.service-ai-label{color:#b9d8ff;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.1em}
+.service-ai-bubble{display:block;border-radius:7px;background:#e9f1ff;color:#061226;padding:7px 8px;font-size:11px;font-weight:850;line-height:1.2}
+.service-ai-bubble.assistant{background:#071426;color:#dbeafe;margin-left:14px}
+.service-ai-handoff{border-left:1px solid rgba(185,216,255,.2);padding-left:10px;color:#fff}
+.service-ai-handoff strong{font-size:13px;line-height:1.15}
+.service-ai-handoff small{color:rgba(255,255,255,.62);font-size:10px;line-height:1.25}
 .service-flow-preview{grid-template-columns:repeat(4,minmax(0,1fr));align-items:center}
 .service-flow-step{min-height:72px;border-radius:7px;background:#071426;border:1px solid rgba(185,216,255,.14);padding:9px;color:#dbeafe;font-size:10px;font-weight:900;line-height:1.2;display:grid;align-content:space-between}.service-flow-step b{color:#5b8dd7;font-size:11px}
 .service-electric-preview svg{position:relative;z-index:1;width:100%;height:92px;display:block;background:#f8fbff;border-radius:7px}
@@ -750,7 +753,7 @@ stop.bred{stop-color:#0b3d91!important}
 <label class="repo-field"><span data-tool-copy="field.tone">Tone</span><select name="tone"><option value="professional" data-tool-copy="tone.professional">Professional</option><option value="friendly" data-tool-copy="tone.friendly">Friendly</option><option value="premium" data-tool-copy="tone.premium">Premium</option></select></label>
 <label class="repo-field"><span data-tool-copy="field.handoff">Handoff</span><select name="handoff"><option value="email" data-tool-copy="handoff.email">Email summary</option><option value="crm" data-tool-copy="handoff.crm">CRM lead</option><option value="sheet" data-tool-copy="handoff.sheet">Spreadsheet row</option></select></label>
 <label class="repo-field repo-field-full"><span data-tool-copy="field.question">Knowledge and answers</span><textarea name="question">Insurance cards, tag renewals, tax help, appointments, business hours, required documents, and contact details.</textarea></label>
-<label class="repo-field repo-field-full"><span data-tool-copy="field.fallback">Safe fallback response</span><textarea name="fallback">I do not have enough verified information to answer that. I can collect your details so the team can follow up.</textarea></label>
+<label class="repo-field repo-field-full"><span data-tool-copy="field.fallback">Safe fallback response</span><textarea name="fallback" data-tool-default-en="I do not have enough verified information to answer that. I can collect your details so the team can follow up." data-tool-default-es="No tengo informacion verificada suficiente para responder. Puedo recoger tus datos para que el equipo haga seguimiento.">I do not have enough verified information to answer that. I can collect your details so the team can follow up.</textarea></label>
 </form>
 <div class="repo-output"><div data-tool-preview><aside class="ai-lead-summary" data-ai-lead-summary></aside></div><pre data-tool-spec></pre></div>
 </div>
@@ -1131,8 +1134,11 @@ stop.bred{stop-color:#0b3d91!important}
     {
       id: 'service-2',
       index: '02',
-      meta: { en: ['Assistant', 'Lead score', 'Follow-up'], es: ['Asistente', 'Lead score', 'Seguimiento'] },
-      preview: '<div class="service-preview-inner service-ai-preview"><div class="service-score-card"><strong>84%</strong><div class="service-score-bar"><span></span></div></div><div class="service-chat-mini"><span>Quote request detected</span><span>Name, email, service, timeline</span></div></div>'
+      meta: { en: ['Assistant', 'Captured request', 'Handoff'], es: ['Asistente', 'Solicitud capturada', 'Entrega'] },
+      preview: {
+        en: '<div class="service-preview-inner service-ai-preview"><div class="service-ai-conversation"><span class="service-ai-label">Conversation</span><span class="service-ai-bubble visitor">I need a quote and document list.</span><span class="service-ai-bubble assistant">I can collect the details for review.</span></div><div class="service-ai-handoff"><span class="service-ai-label">Captured request</span><strong>Ready for review</strong><small>Handoff: Email summary</small></div></div>',
+        es: '<div class="service-preview-inner service-ai-preview"><div class="service-ai-conversation"><span class="service-ai-label">Conversacion</span><span class="service-ai-bubble visitor">Necesito presupuesto y documentos.</span><span class="service-ai-bubble assistant">Puedo recoger los datos para revision.</span></div><div class="service-ai-handoff"><span class="service-ai-label">Solicitud capturada</span><strong>Lista para revision</strong><small>Entrega: Resumen por email</small></div></div>'
+      }
     },
     {
       id: 'service-3',
@@ -1176,7 +1182,7 @@ stop.bred{stop-color:#0b3d91!important}
       index.textContent = row.index;
       const preview = document.createElement('div');
       preview.className = 'service-row-preview';
-      preview.innerHTML = row.preview;
+      preview.innerHTML = typeof row.preview === 'string' ? row.preview : (row.preview[lang()] || row.preview.en);
       action.prepend(index);
       action.insertBefore(titleWrap, icon || null);
       if (icon) action.insertBefore(preview, icon);
@@ -1192,6 +1198,9 @@ stop.bred{stop-color:#0b3d91!important}
       const meta = document.querySelector('[data-service-row-meta="' + row.id + '"]');
       if (!meta) return;
       meta.innerHTML = (row.meta[lang()] || row.meta.en).map((item) => '<span>' + item + '</span>').join('');
+      const action = meta.closest('a[aria-controls]');
+      const preview = action ? action.querySelector('.service-row-preview') : null;
+      if (preview && typeof row.preview !== 'string') preview.innerHTML = row.preview[lang()] || row.preview.en;
     });
   }
 
@@ -1565,6 +1574,7 @@ stop.bred{stop-color:#0b3d91!important}
       if (!field) return;
       field.value = data[key];
     });
+    if (Object.keys(data).length) root.dataset.toolDataRestored = 'true';
   }
 
   function labelFor(root, name) {
@@ -1639,7 +1649,7 @@ stop.bred{stop-color:#0b3d91!important}
       + (isEs ? 'Tono: ' : 'Tone: ') + tone + '\n'
       + (isEs ? 'Entrega del lead: ' : 'Lead handoff: ') + handoff + '\n'
       + (isEs ? 'Respuesta segura: ' : 'Safe fallback: ') + fallback + '\n'
-      + (isEs ? 'Incluye resumen de conversacion y respuestas editables por el negocio.' : 'Includes a conversation summary and business-editable responses.') + '\n\n'
+      + (isEs ? 'Resumen de conversacion: incluido\nRespuestas editables por el negocio: si' : 'Conversation summary: included\nBusiness-editable responses: yes') + '\n\n'
       + (isEs ? 'Resumen del negocio\n' : 'Business summary\n') + knowledge + '\n\n'
       + (isEs ? 'Siguiente paso: envia este brief para convertirlo en un asistente real para tu web.' : 'Next step: send this brief to turn it into a real assistant for your website.');
     const config = {
@@ -1810,6 +1820,17 @@ stop.bred{stop-color:#0b3d91!important}
         const value = t(node.dataset.toolCopy);
         if (value) node.textContent = value;
       });
+      root.querySelectorAll('[data-tool-default-en][data-tool-default-es]').forEach((node) => {
+        const next = lang() === 'es' ? node.dataset.toolDefaultEs : node.dataset.toolDefaultEn;
+        const previous = node.dataset.toolDefaultCurrent;
+        const isInitial = root.dataset.toolCopyApplied !== 'true';
+        const mayReplace = isInitial
+          ? root.dataset.toolDataRestored !== 'true' && node.value === node.defaultValue
+          : node.value === previous;
+        if (mayReplace) node.value = next;
+        node.dataset.toolDefaultCurrent = next;
+      });
+      root.dataset.toolCopyApplied = 'true';
       build(root);
     });
   }
