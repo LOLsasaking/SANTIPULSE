@@ -9,6 +9,7 @@
 node_modules/
 dist/
 .worktrees/
+.superpowers/
 
 # os / editor
 .DS_Store
