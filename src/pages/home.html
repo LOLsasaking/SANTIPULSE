@@ -1327,8 +1327,9 @@ stop.bred{stop-color:#0b3d91!important}
     if (!project) return;
     const example = section.querySelector('[data-project-example]');
     const brief = example?.dataset.toolPublicBrief || project.value;
-    const block = '--- ' + project.title + ' ---\n' + brief;
-    message.value = message.value.trim() ? message.value + '\n\n' + block : block;
+    let block = '--- ' + project.title + ' ---\n' + brief;
+    if (message.tagName !== 'TEXTAREA') block = block.replace(/\n+/g, ' | ');
+    message.value = message.value.trim() ? message.value + (message.tagName !== 'TEXTAREA' ? ' | ' : '\n\n') + block : block;
     message.dispatchEvent(new Event('input', { bubbles: true }));
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     window.setTimeout(() => message.focus({ preventScroll: true }), 450);
@@ -1855,8 +1856,11 @@ stop.bred{stop-color:#0b3d91!important}
       toast(root, t('noContact'));
       return;
     }
-    const header = '\n\n--- ' + (root.dataset.toolTitle || 'Service tool') + ' ---\n';
-    message.value = (message.value ? message.value + header : header.trimStart()) + (root.dataset.toolPublicBrief || '');
+    const multiline = message.tagName === 'TEXTAREA';
+    const header = (multiline ? '\n\n' : ' | ') + '--- ' + (root.dataset.toolTitle || 'Service tool') + ' ---' + (multiline ? '\n' : ' | ');
+    let brief = root.dataset.toolPublicBrief || '';
+    if (!multiline) brief = brief.replace(/\n+/g, ' | ');
+    message.value = (message.value ? message.value + header : header.replace(/^( \| |\s+)/, '')) + brief;
     message.dispatchEvent(new Event('input', { bubbles: true }));
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     window.setTimeout(() => message.focus({ preventScroll: true }), 450);
@@ -2479,8 +2483,9 @@ stop.bred{stop-color:#0b3d91!important}
     renderPlan();
     const message = document.getElementById('message');
     if (!message) { showToast(text('noContact')); return; }
-    const block = '--- ' + (root.dataset.toolTitle || 'Electrical estimate') + ' ---\n' + lastPlanText;
-    message.value = message.value.trim() ? message.value + '\n\n' + block : block;
+    let block = '--- ' + (root.dataset.toolTitle || 'Electrical estimate') + ' ---\n' + lastPlanText;
+    if (message.tagName !== 'TEXTAREA') block = block.replace(/\n+/g, ' | ');
+    message.value = message.value.trim() ? message.value + (message.tagName !== 'TEXTAREA' ? ' | ' : '\n\n') + block : block;
     message.dispatchEvent(new Event('input', { bubbles: true }));
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     window.setTimeout(() => message.focus({ preventScroll: true }), 450);

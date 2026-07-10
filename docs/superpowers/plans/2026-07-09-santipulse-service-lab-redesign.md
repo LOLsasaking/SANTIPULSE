@@ -38,7 +38,7 @@
 - Consumes: `src/pages/home.html` and, when present, `dist/index.html`.
 - Produces: `npm run verify:services`, exiting `0` only when all required project structures and copy are present.
 
-- [ ] **Step 1: Capture a plugin-assisted baseline**
+- [x] **Step 1: Capture a plugin-assisted baseline**
 
 Run the current localhost site and inspect `#service` with the Product Design audit skill. Search Canva for `workflow process board`, `brand guidelines board`, and `electrical estimate worksheet`; inspect Figma references only if accessible. Record these implementation decisions in the task update:
 
@@ -50,7 +50,7 @@ Brand: lockups + named palette + typography + concrete applications
 Shared: restrained blue accent, square/low-radius controls, no glow or gradient
 ```
 
-- [ ] **Step 2: Add the failing structural verifier**
+- [x] **Step 2: Add the failing structural verifier**
 
 Create `scripts/verify-service-examples.mjs` with this complete implementation:
 
@@ -118,7 +118,7 @@ if (failures.length) {
 console.log('Service examples verified.');
 ```
 
-- [ ] **Step 3: Add the package command**
+- [x] **Step 3: Add the package command**
 
 Add this script to `package.json`:
 
@@ -126,13 +126,13 @@ Add this script to `package.json`:
 "verify:services": "node scripts/verify-service-examples.mjs"
 ```
 
-- [ ] **Step 4: Run the verifier and confirm the expected failure**
+- [x] **Step 4: Run the verifier and confirm the expected failure**
 
 Run: `npm run verify:services`
 
 Expected: exit `1` with missing `data-project`, narrative, CTA, and distinct-preview messages.
 
-- [ ] **Step 5: Commit the verification harness**
+- [x] **Step 5: Commit the verification harness**
 
 ```bash
 git add package.json scripts/verify-service-examples.mjs
@@ -152,7 +152,7 @@ git commit -m "test: define service example requirements"
 - Consumes: existing `#accordion-service`, `.service-accordion_item`, language state at `document.documentElement.dataset.langCurrent`, and `#contactform`.
 - Produces: `PROJECT_CATALOG`, `renderProjectNarrative(section)`, `[data-project-example-button]`, and `[data-project-contact]` hooks consumed by later tasks.
 
-- [ ] **Step 1: Add the shared static project structure**
+- [x] **Step 1: Add the shared static project structure**
 
 For `#service-2` through `#service-5`, add `data-project="ai|automation|electrical|brand"`. Replace each two-card generic overview with this semantic skeleton while retaining its existing tool below it:
 
@@ -177,7 +177,7 @@ For `#service-2` through `#service-5`, add `data-project="ai|automation|electric
 
 Set the four accordion headings to the approved English titles and add a wrapping subtitle below each heading. Keep the existing Bootstrap collapse attributes and expand/collapse icon.
 
-- [ ] **Step 2: Add the complete bilingual catalog**
+- [x] **Step 2: Add the complete bilingual catalog**
 
 Replace the old `service-detail-script` copy with a `PROJECT_CATALOG` object using these exact values:
 
@@ -272,7 +272,7 @@ const PROJECT_CATALOG = {
 };
 ```
 
-- [ ] **Step 3: Render the catalog safely and wire CTAs**
+- [x] **Step 3: Render the catalog safely and wire CTAs**
 
 Add these functions inside the same IIFE:
 
@@ -317,17 +317,17 @@ document.querySelectorAll('.language-toggle [data-lang]').forEach((button) => bu
 }));
 ```
 
-- [ ] **Step 4: Add the shared visual system**
+- [x] **Step 4: Add the shared visual system**
 
 Extend `#santiago-service-lab-v2` with scoped rules for `.project-narrative`, `.project-intro`, `.project-facts`, `.project-feature-grid`, `.project-workflow`, `.project-deliverables`, and `.project-actions`. Use `border-radius: 6px`, `gap` values from the existing 8px rhythm, blue `#0b3d91` only for emphasis, and stable `minmax(0, 1fr)` tracks. At `max-width: 767px`, stack every grid and make both actions full-width.
 
-- [ ] **Step 5: Run structural checks**
+- [x] **Step 5: Run structural checks**
 
 Run: `npm run verify:services`
 
 Expected: AI/automation/electrical/brand distinct-preview checks still fail; narrative, title, feature, workflow, deliverable, and CTA checks pass.
 
-- [ ] **Step 6: Commit the shared narrative**
+- [x] **Step 6: Commit the shared narrative**
 
 ```bash
 git add src/pages/home.html
@@ -346,7 +346,7 @@ git commit -m "feat: add client-ready service narratives"
 - Consumes: `[data-repo-tool="ai"]`, `[data-repo-tool="automation"]`, `formData(root)`, `labelFor(root, name)`, `bundleFile()`, and `sendToContact(root)`.
 - Produces: `buildAi(root, data)` with `[data-ai-lead-summary]` and `buildAutomation(root, data)` with `[data-automation-pipeline]`.
 
-- [ ] **Step 1: Extend the AI form with real handoff controls**
+- [x] **Step 1: Extend the AI form with real handoff controls**
 
 Add these fields to the AI form:
 
@@ -357,7 +357,7 @@ Add these fields to the AI form:
 
 Add equivalent Spanish and English `data-tool-copy` entries.
 
-- [ ] **Step 2: Replace fake AI scoring with captured lead state**
+- [x] **Step 2: Replace fake AI scoring with captured lead state**
 
 Remove `confidence`, percentage bars, and invented completion figures from `buildAi()`. Return a preview with this exact semantic structure:
 
@@ -375,7 +375,7 @@ const preview = '<div class="repo-preview ai-intake-preview">'
 
 Include `handoff`, `fallback`, `conversationSummary`, and `adminEditableResponses: true` in the exported config and public brief.
 
-- [ ] **Step 3: Turn automation into an operations pipeline**
+- [x] **Step 3: Turn automation into an operations pipeline**
 
 Add a `followUp` select with `15 minutes`, `1 hour`, and `next business day`. Build five stages: Intake, Classify, Route, Notify, Follow-up. Render the preview inside an element marked `data-automation-pipeline`, with one sample request card and explicit `Queued`, `Assigned`, and scheduled follow-up states. The exported JSON must include `trigger`, `classification`, `destination`, `followUp`, `rules`, and `steps`.
 
@@ -391,7 +391,7 @@ const stages = [
 ];
 ```
 
-- [ ] **Step 4: Verify both tools**
+- [x] **Step 4: Verify both tools**
 
 Run: `npm run verify:services`
 
@@ -399,7 +399,7 @@ Expected: AI and automation preview checks pass; electrical and brand preview ch
 
 Manually verify that changing each form updates only its own preview and that downloaded briefs contain no internal phrases such as `production upgrades`.
 
-- [ ] **Step 5: Commit both examples**
+- [x] **Step 5: Commit both examples**
 
 ```bash
 git add src/pages/home.html
@@ -419,7 +419,7 @@ git commit -m "feat: build practical AI and automation examples"
 - Consumes: `[data-electric-planner]`, the existing language toggle, and the existing contact `#message` field.
 - Produces: `readElectricalRooms()`, `estimateElectricalMaterials()`, `buildElectricalPlan()`, `renderElectricalPlan()`, print-to-PDF summary, local version history, and `[data-electrical-materials]`.
 
-- [ ] **Step 1: Replace dossier-first inputs with a room schedule**
+- [x] **Step 1: Replace dossier-first inputs with a room schedule**
 
 Keep project type, supply, board status, and notes. Replace the single room count with an editable room table containing room name/type, lights, outlets, switches, and average route length. Start with Kitchen, Living room, and Bedroom rows. Add `Add room`, `Save version`, `Print / Save PDF`, `Copy summary`, and `Send to contact form` actions.
 
@@ -437,7 +437,7 @@ Each row must use this markup:
 </div>
 ```
 
-- [ ] **Step 2: Implement entered-quantity estimation**
+- [x] **Step 2: Implement entered-quantity estimation**
 
 Replace the current `getState()` and material logic with these contracts:
 
@@ -505,11 +505,11 @@ function buildElectricalPlan() {
 
 Label route, conduit, and conductor values as preliminary allowances based on user-entered average route lengths. Do not automatically claim conductor section, breaker size, permit compliance, or final circuit capacity.
 
-- [ ] **Step 3: Keep circuits and diagrams as secondary professional context**
+- [x] **Step 3: Keep circuits and diagrams as secondary professional context**
 
 Retain C1-C5 and optional C8/C9/C11/C13 classification from the current script, driven by room types, selected loads, and notes. Place material quantities and room schedule first; place the unifilar/multifilar tabs below them. Add `data-electrical-materials` to the material table and `data-planner-checklist` to the five-item approval checklist returned by `buildElectricalPlan()`. Keep the diagram caption explicit that it is conceptual.
 
-- [ ] **Step 4: Implement version history and PDF handoff**
+- [x] **Step 4: Implement version history and PDF handoff**
 
 On `Save version`, write at most five summaries to `localStorage` under `santiago-electrical-estimator-versions`. Render timestamp, room count, point count, and project name. On `Print / Save PDF`, open a print-only summary document containing project details, room table, material table, notes, checklist, and the exact disclaimer, then call `print()` from that user gesture.
 
@@ -525,7 +525,7 @@ Use this Spanish equivalent when Spanish is active:
 Solo sirve como apoyo para planificacion y estimacion. El trabajo electrico final, permisos, cumplimiento normativo e instalacion deben ser verificados por un profesional autorizado.
 ```
 
-- [ ] **Step 5: Verify the estimator**
+- [x] **Step 5: Verify the estimator**
 
 Run: `npm run verify:services`
 
@@ -533,7 +533,7 @@ Expected: electrical distinct-preview and disclaimer checks pass; only brand pre
 
 Manual calculation check: for one room with 2 lights, 6 outlets, 2 switches, and 6m average route, expect 60 entered route metres, 66 conduit metres including 10% allowance, 198 conductor metres as a planning allowance, and 8 device boxes.
 
-- [ ] **Step 6: Commit the electrical example**
+- [x] **Step 6: Commit the electrical example**
 
 ```bash
 git add src/pages/home.html
@@ -553,11 +553,11 @@ git commit -m "feat: add electrical room and material estimator"
 - Consumes: `[data-repo-tool="brand"]`, `initials()`, `mix()`, `bundleFile()`, and shared export/contact helpers.
 - Produces: `buildBrand(root, data)` with a `[data-brand-board]` preview and an export bundle describing all client deliverables.
 
-- [ ] **Step 1: Add practical identity inputs**
+- [x] **Step 1: Add practical identity inputs**
 
 Keep brand name, sector, style, primary color, and promise. Add typography pairing (`Modern sans`, `Editorial serif`, `Technical grotesk`), voice (`Direct`, `Warm`, `Premium`, `Technical`), and primary application (`Website`, `Social`, `Print`, `All`). Remove the template names that imply a premade final design.
 
-- [ ] **Step 2: Render one coherent identity system**
+- [x] **Step 2: Render one coherent identity system**
 
 Replace the current three-row brand board with a preview marked `data-brand-board` containing:
 
@@ -573,17 +573,17 @@ Replace the current three-row brand board with a preview marked `data-brand-boar
 
 Populate each palette swatch with its hex value, show the chosen display/body type roles, render an initials-based mark as a direction rather than a finished AI logo, and include one explicit misuse warning such as `Do not stretch the mark or place it on low-contrast colors.`
 
-- [ ] **Step 3: Complete the downloadable brand-kit brief**
+- [x] **Step 3: Complete the downloadable brand-kit brief**
 
 The exported bundle JSON must contain named files for `logo-directions.svg`, `palette.json`, `typography.md`, `brand-voice.md`, `social-template-notes.md`, `website-hero-direction.md`, `business-card-spec.md`, `favicon.svg`, and `usage-guidelines.md`. Public copy must explain that final editable Canva/Figma assets are a client deliverable, not generated by this browser demo.
 
-- [ ] **Step 4: Run the complete structural verifier**
+- [x] **Step 4: Run the complete structural verifier**
 
 Run: `npm run verify:services`
 
 Expected: `Service examples verified.` and exit `0`.
 
-- [ ] **Step 5: Commit the identity system**
+- [x] **Step 5: Commit the identity system**
 
 ```bash
 git add src/pages/home.html
@@ -603,19 +603,19 @@ git commit -m "feat: expand brand identity system example"
 - Consumes: `PROJECT_CATALOG`, `sendToContact(root)`, `focusProjectExample(section)`, the language toggle, and `#message`.
 - Produces: complete bilingual rerendering, keyboard focus behavior, descriptive status messages, and project-aware contact handoff.
 
-- [ ] **Step 1: Wire narrative contact buttons**
+- [x] **Step 1: Wire narrative contact buttons**
 
 On `[data-project-contact]`, populate `#message` with the selected translated project title plus its current public brief when available, scroll to `#contact`, and focus `#message` after scrolling. Never overwrite existing visitor text without inserting a visible separator.
 
-- [ ] **Step 2: Make tool errors visible and accessible**
+- [x] **Step 2: Make tool errors visible and accessible**
 
 Set every `.repo-tool-toast` and `.planner-toast` to `role="status" aria-live="polite"`. Update `sendToContact()` to focus the message field. Use clear translated messages for save unavailable, download unavailable, copied, print blocked, empty room schedule, and contact form unavailable.
 
-- [ ] **Step 3: Verify language switching**
+- [x] **Step 3: Verify language switching**
 
 Switch EN -> ES -> EN while AI and electrical sections are open. Confirm project titles, narratives, feature lists, workflows, buttons, form labels, generated previews, export text, disclaimer, and contact handoff all follow the active language. Confirm user-entered values are preserved while labels change.
 
-- [ ] **Step 4: Verify keyboard behavior**
+- [x] **Step 4: Verify keyboard behavior**
 
 Using only Tab, Shift+Tab, Enter, and Space:
 
@@ -629,7 +629,7 @@ Confirm focus reaches the contact message field
 Return to the service section without a keyboard trap
 ```
 
-- [ ] **Step 5: Run source and build checks**
+- [x] **Step 5: Run source and build checks**
 
 Run:
 
@@ -642,7 +642,7 @@ git diff --check
 
 Expected: all commands exit `0`; the second verifier also validates `dist/index.html`.
 
-- [ ] **Step 6: Commit interaction hardening**
+- [x] **Step 6: Commit interaction hardening**
 
 ```bash
 git add src/pages/home.html
@@ -661,13 +661,13 @@ git commit -m "fix: harden service accessibility and contact handoff"
 - Consumes: built `dist/`, localhost preview, Product Design audit, Browser/Chrome controls, and Vercel browser verification.
 - Produces: a visually reviewed localhost build with no known overlap, clipping, console errors, or broken interactions.
 
-- [ ] **Step 1: Start the production-like preview**
+- [x] **Step 1: Start the production-like preview**
 
 Run: `npm run preview`
 
 Expected: localhost server reports the chosen port and serves `/` with HTTP `200`.
 
-- [ ] **Step 2: Run browser verification at representative viewports**
+- [x] **Step 2: Run browser verification at representative viewports**
 
 Use Browser/Chrome and Vercel browser verification at:
 
@@ -680,15 +680,15 @@ Use Browser/Chrome and Vercel browser verification at:
 
 For each viewport, open every project, capture the header plus preview, and check `document.documentElement.scrollWidth === document.documentElement.clientWidth`.
 
-- [ ] **Step 3: Perform a Product Design self-critique**
+- [x] **Step 3: Perform a Product Design self-critique**
 
 Rate the section against the approved spec and list anything that still looks generic or repeated. Fix findings involving weak hierarchy, excessive card framing, duplicate layouts, arbitrary decoration, unclear CTA order, or text that describes implementation instead of client value.
 
-- [ ] **Step 4: Inspect console and interaction state**
+- [x] **Step 4: Inspect console and interaction state**
 
 Confirm no uncaught errors, missing assets, failed local requests, or broken Bootstrap collapse state. Exercise save, download, copy, print, language, contact, add/remove room, version history, and diagram mode actions.
 
-- [ ] **Step 5: Run final verification**
+- [x] **Step 5: Run final verification**
 
 Run:
 
@@ -700,13 +700,57 @@ git diff --check
 
 Expected: all commands exit `0`.
 
-- [ ] **Step 6: Mark this plan complete and commit final fixes**
+- [x] **Step 6: Mark this plan complete and commit final fixes**
 
 ```bash
 git add src/pages/home.html docs/superpowers/plans/2026-07-09-santipulse-service-lab-redesign.md
 git commit -m "polish: finish client-ready service examples"
 ```
 
-- [ ] **Step 7: Hand off localhost only**
+- [x] **Step 7: Hand off localhost only**
 
 Report the localhost URL, files changed, sections updated, verification commands, and any remaining limitations. Do not push or deploy.
+
+---
+
+### Task 8: Obsidian AI Project Sync
+
+**Files:**
+- Modify: `scripts/sync-obsidian.mjs`
+- Read: `docs/superpowers/specs/2026-07-09-santipulse-service-lab-redesign.md`
+- Read: `docs/superpowers/plans/2026-07-09-santipulse-service-lab-redesign.md`
+- Write through the sync script: `/Users/santimac/Obsidian AI/Ai Projects/Santiago Portfolio System/`
+
+**Interfaces:**
+- Consumes: final project names, implementation result, localhost URL, verification commands, specification, and implementation plan.
+- Produces: current Obsidian project notes, design/implementation records, and verification status without copying secrets.
+
+- [ ] **Step 1: Replace stale service notes**
+
+Update the portfolio, design-language, verification, and next-actions notes generated by `scripts/sync-obsidian.mjs`. Remove stale public descriptions such as fake lead scoring, backend logs, add-later notes, and generic product-demo language. Use the four approved project names and client-facing descriptions.
+
+- [ ] **Step 2: Add durable project documentation**
+
+Generate `Planning/Client-Ready Service Examples.md` with links to the specification and implementation plan, the four project purposes, their deliverables, the plugin resources used, local run instructions, and final verification results. Copy the approved spec and plan into `Planning/Source Documents/` so future Codex tasks can recover the exact decisions.
+
+- [ ] **Step 3: Validate and run the sync**
+
+Run:
+
+```bash
+node --check scripts/sync-obsidian.mjs
+node scripts/sync-obsidian.mjs
+```
+
+Expected: syntax exits `0`; sync writes the organized notes under `/Users/santimac/Obsidian AI/Ai Projects/Santiago Portfolio System/` without touching unrelated vault folders.
+
+- [ ] **Step 4: Verify the vault output**
+
+Confirm the dashboard links resolve, both source documents exist, the four approved project names appear, the localhost URL is current, and no `.env`, API key, token, private customer data, or build artifact was copied.
+
+- [ ] **Step 5: Commit the sync source**
+
+```bash
+git add scripts/sync-obsidian.mjs docs/superpowers/plans/2026-07-09-santipulse-service-lab-redesign.md
+git commit -m "docs: sync service redesign with Obsidian"
+```

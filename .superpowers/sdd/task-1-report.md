@@ -76,3 +76,108 @@ Task 1 changed only:
 - `.superpowers/sdd/task-1-report.md`
 
 The pre-existing uncommitted changes in `src/pages/home.html` were preserved and were not edited or staged by this task.
+
+## Review Findings Follow-up
+
+### Baseline Audit Evidence
+
+The live localhost DOM showed these accessible service-row texts:
+
+- AI: `02 AI Solutions Assistant Lead score Follow-up 84% Quote request detected Name, email, service, timeline`.
+- Automation: `03 Automation Triggers Tasks Status board 01 Intake 02 Classify 03 Route 04 Notify`.
+- Electrical: `04 Electrical Planning Unifilar Multifilar Materials Electrical schema preview`.
+- Brand: `05 Brand Identity Logo system Brand kit Usage preview SP`.
+
+Screenshot evidence: `.superpowers/audits/service-baseline/01-current-service.png`.
+
+Read-only Canva searches for `workflow process board`, `brand guidelines board`, and `electrical estimate worksheet` returned sparse or mostly unrelated account designs, so nothing was copied. Retained reference ideas: clear stage progression, labeled brand-system groups, and worksheet quantity hierarchy.
+
+Figma access is view-only; no file was created or edited.
+
+### Electrical Disclaimer Structure
+
+The verifier now requires exactly one `[data-electrical-disclaimer]` inside `#service-4`. When any of `[data-planner-print]`, `[data-planner-send]`, `[data-tool-export]`, or `[data-tool-send]` exists inside that section, the verifier checks that the disclaimer precedes every such control in DOM order. The current verifier remains RED until later UI tasks add the future hooks and service markup.
+
+### Review Verification
+
+```text
+node --check scripts/verify-service-examples.mjs
+exit 0
+
+npm run verify:services
+exit 1
+- electrical requires exactly one [data-electrical-disclaimer]
+```
+
+The remaining verifier failures are the expected missing future service markup, titles, Spanish copy, and built-page titles; no failure is caused by a syntax error or by the new structural check beyond the absent future disclaimer hook.
+
+## Remaining Verifier Finding Fix
+
+### TDD Evidence
+
+RED before the fix:
+
+```text
+node scripts/verify-service-examples.mjs
+exit 1
+- missing exact electrical disclaimer
+- electrical requires exactly one [data-electrical-disclaimer]
+```
+
+GREEN after the verifier change:
+
+```text
+node --check scripts/verify-service-examples.mjs
+exit 0
+```
+
+### Fix Evidence
+
+- Replaced the global disclaimer search with an exact trimmed-text assertion on the single `#service-4 [data-electrical-disclaimer]` element.
+- Added `[data-project-example-button]` and `[data-project-contact]` to the electrical controls required to follow the disclaimer in DOM order.
+- Preserved the expected RED state because the future electrical disclaimer hook and service-example markup are not yet present.
+
+Final RED verification:
+
+```text
+npm run verify:services
+exit 1
+- electrical requires exactly one [data-electrical-disclaimer]
+```
+
+The uncommitted `src/pages/home.html` changes remain untouched and unstaged.
+
+## Baseline Audit Commit
+
+Committed tracked audit evidence as `df8286f` (`docs: record service examples baseline audit`).
+
+Checks before commit:
+
+```text
+test -s docs/superpowers/research/assets/service-examples-baseline.png
+test -s docs/superpowers/research/assets/service-examples-baseline-lower.png
+git diff --check
+git diff --cached --check
+```
+
+All checks passed. The commit contains only the audit document and the two current localhost screenshots.
+
+## Electrical Plan Copy Disclaimer Order Follow-up
+
+Updated `scripts/verify-service-examples.mjs` to include `[data-planner-copy-plan]` in the electrical controls required to appear after `#service-4 [data-electrical-disclaimer]`.
+
+Checks:
+
+```text
+node --check scripts/verify-service-examples.mjs
+exit 0
+
+npm run verify:services
+exit 1
+expected future-task markup, title, Spanish-copy, disclaimer-hook, and built-page failures; no verifier crash
+
+git diff --check
+exit 0
+```
+
+Commit: `d82156f` (`test: cover electrical plan copy disclaimer order`)
