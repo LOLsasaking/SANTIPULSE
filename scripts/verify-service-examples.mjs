@@ -50,7 +50,7 @@ if (electricalDisclaimers.length === 1) {
   );
 }
 const electricalControls = electricalSection
-  .find('[data-planner-print], [data-planner-send], [data-tool-export], [data-tool-send], [data-project-example-button], [data-project-contact]')
+  .find('[data-planner-print], [data-planner-send], [data-planner-copy-plan], [data-tool-export], [data-tool-send], [data-project-example-button], [data-project-contact]')
   .toArray();
 if (electricalDisclaimers.length === 1) {
   const electricalNodes = electricalSection.find('*').toArray();
