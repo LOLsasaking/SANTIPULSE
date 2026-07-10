@@ -44,7 +44,7 @@ function mdLink(label, filePath) {
 
 const today = new Date().toISOString().slice(0, 10);
 const repo = '/Users/santimac/Documents/Santi Project/santipulse';
-const localPreview = 'http://127.0.0.1:4620/';
+const localPreview = 'http://127.0.0.1:4599/';
 
 const logoAssets = [
   ['clone-assets/logos/santipulse.png', 'logos/santipulse.png'],
@@ -217,6 +217,7 @@ This is the organized Obsidian hub for the portfolio website, client websites, G
 - Plugin and launch status: [[Planning/Plugin and Launch Status]]
 - Verification log: [[Planning/Verification Log]]
 - Next actions: [[Planning/Next Actions]]
+- Client-ready service examples: [[Planning/Client-Ready Service Examples]]
 
 ## Core App Projects
 
@@ -279,10 +280,10 @@ Turn the old SantiPulse service website into a professional portfolio where Sant
 ## Current Services
 
 - Web Design
-- AI Solutions
-- Automation
-- Electrical Planning
-- Brand Identity
+- AI Business Assistant System
+- Business Workflow Automation
+- Electrical Planning & Material Estimator
+- Brand Identity System
 
 ## Notes
 
@@ -546,10 +547,10 @@ Use blue as the single action color. Anything currently green should become deep
 Each service row must expand into a different product-style interface:
 
 - Web Design: website gallery, case study, live links, responsive preview.
-- AI Solutions: chat, lead scoring, knowledge base, intent labels, backend logs.
-- Automation: workflow builder, run history, triggers, actions, status board.
-- Electrical Planning: unifilar and multifilar diagrams, load table, materials list, safety checklist.
-- Brand Identity: logo upload, AI/no-key concept generation, palette, exportable brand kit.
+- AI Business Assistant System: bilingual narrative, intake conversation preview, captured lead summary with handoff and safe fallback.
+- Business Workflow Automation: five-stage operations pipeline (Intake, Classify, Route, Notify, Follow-up) with explicit request states.
+- Electrical Planning & Material Estimator: room schedule, entered-quantity material estimate, version history, print summary, unifilar/multifilar concept.
+- Brand Identity System: lockups, named palette with hex values, typography roles, application tiles, and one usage rule.
 
 ## Repo Design Standards
 
@@ -647,24 +648,18 @@ updated: ${today}
 
 ## Latest Design Upgrade
 
-- Service accordion rows now show visible product previews before expanding:
-  - Web Design: client/site preview stack.
-  - AI Solutions: lead score and chat handoff preview.
-  - Automation: trigger-to-notification workflow preview.
-  - Electrical Planning: unifilar/multifilar-style line preview.
-  - Brand Identity: mark, palette, and brand kit preview.
-- The old thin circle/text row treatment was upgraded so the service list itself feels like a product surface.
-- The expanded app demos remain connected to their frontend/backend demo controls.
+- The four service examples are now client-ready project modules with shared bilingual narratives (problem, audience, capabilities, workflow, deliverables) and distinct functional previews:
+  - AI Business Assistant System: conversation preview plus a captured lead summary with handoff and safe fallback (no invented scores).
+  - Business Workflow Automation: five-stage pipeline with explicit Queued, Assigned, and Scheduled states.
+  - Electrical Planning & Material Estimator: editable room schedule, preliminary material table, approval checklist, version history, print/PDF summary, concept diagrams.
+  - Brand Identity System: lockups, palette with hex values, typography roles, application tiles, and a usage rule.
+- The electrical module shows the licensed-professional disclaimer before every export and contact action.
 
 ## Last Known Result
 
-- Portfolio static build passed.
-- All four standalone project server files passed \`node --check\`.
-- Smoke test passed for:
-  - AI Assistant Platform - \`POST /api/message\`
-  - Automation Ops Platform - \`POST /api/run\`
-  - Brand Identity AI Studio - \`POST /api/generate-brand\`
-  - Electrical Planning Platform - \`POST /api/plan\`
+- \`npm run verify:services\` passed against source and built output.
+- \`npm run build\` passed.
+- Inline scripts parse cleanly; DOM QA at 1440px and 375px showed no service-section overflow and no console errors.
 
 ## Notes
 
@@ -744,10 +739,10 @@ ${projects.map((project) => `- [ ] Prepare GitHub repo for [[Projects/${project.
 
 ## Services
 
-- [ ] AI Solutions: add real screenshots when a client AI tool is finished.
-- [ ] Automation: add real examples when a business workflow is finished.
-- [ ] Electrical Planning: improve unifilar and multifilar export.
-- [ ] Brand Identity: add real logo redesign case studies.
+- [ ] AI Business Assistant System: add real screenshots when a client assistant is finished.
+- [ ] Business Workflow Automation: add real examples when a business workflow is finished.
+- [ ] Electrical Planning & Material Estimator: collect feedback from a licensed electrician on the printed summary.
+- [ ] Brand Identity System: add real logo redesign case studies.
 
 ## Content To Collect
 
@@ -756,6 +751,56 @@ ${projects.map((project) => `- [ ] Prepare GitHub repo for [[Projects/${project.
 - [ ] LinkedIn certificate exports.
 - [ ] Screenshots of each client website on desktop and mobile.
 - [ ] A short personal bio in Spanish and English.
+`);
+
+const serviceLabDocs = [
+  ['docs/superpowers/specs/2026-07-09-santipulse-service-lab-redesign.md', 'Planning/Source Documents/Spec - Client-Ready Service Examples.md'],
+  ['docs/superpowers/plans/2026-07-09-santipulse-service-lab-redesign.md', 'Planning/Source Documents/Plan - Client-Ready Service Examples.md'],
+];
+for (const [docSource, docTarget] of serviceLabDocs) {
+  const absolute = path.join(repoRoot, docSource);
+  if (fs.existsSync(absolute)) writeNote(docTarget, fs.readFileSync(absolute, 'utf8'));
+}
+
+writeNote('Planning/Client-Ready Service Examples.md', `---
+tags:
+  - planning
+  - services
+  - portfolio
+updated: ${today}
+---
+
+# Client-Ready Service Examples
+
+The four portfolio service examples were rebuilt as practical, bilingual, client-ready project modules inside the existing accordion.
+
+## Source Documents
+
+- Specification: [[Planning/Source Documents/Spec - Client-Ready Service Examples]]
+- Implementation plan: [[Planning/Source Documents/Plan - Client-Ready Service Examples]]
+
+## The Four Projects
+
+- **AI Business Assistant System** - business assistants that answer questions, qualify leads, collect quote requests, and organize customer information. Deliverables: branded website assistant, business knowledge setup, intake fields, fallback and handoff rules, lead-summary format.
+- **Business Workflow Automation** - automation that connects forms, emails, spreadsheets, CRMs, calendars, and notifications. Deliverables: workflow map, trigger and routing rules, required data fields, status and notification model, integration and exception plan.
+- **Electrical Planning & Material Estimator** - a planning aid for rooms, electrical points, circuit concepts, and preliminary material quantities. Deliverables: room schedule, point and quantity summary, preliminary material estimate, project notes, diagram concept and client checklist. Always shows the licensed-professional disclaimer before export and contact actions.
+- **Brand Identity System** - complete brand kits with logo direction, colors, typography, social assets, and usage guidance. Deliverables: logo directions, color and typography specifications, usage examples, web direction and icon files, organized brand-kit package.
+
+## Run Locally
+
+\`\`\`bash
+cd "${repo}"
+npm run preview   # builds and serves at ${localPreview}
+npm run verify:services
+\`\`\`
+
+## Verification Status
+
+- \`npm run verify:services\` passes against source and built output.
+- \`npm run build\` passes; inline scripts parse cleanly.
+- DOM QA at 1440px and 375px: all four previews render, add/remove room, version history, print, copy, contact handoff, and EN/ES switching work with user values preserved; no service-section overflow; no console errors.
+- Work is local on branch \`feat/client-ready-services\`; not pushed or deployed until Santiago approves the localhost result.
+
 `);
 
 writeNote('../Santiago Portfolio System.md', `# Santiago Portfolio System
