@@ -508,6 +508,31 @@ stop.bred{stop-color:#0b3d91!important}
 .electro-planner .planner-diagram{min-height:390px;background:linear-gradient(90deg,rgba(11,61,145,.075) 1px,transparent 1px),linear-gradient(0deg,rgba(11,61,145,.075) 1px,transparent 1px),#fbfdff;background-size:22px 22px}
 .electro-planner .planner-summary{background:#071426}
 .product-app{display:none!important}
+#service .brand-system-board{display:grid;gap:12px;margin-top:14px;border:1px solid rgba(6,18,38,.12);border-radius:8px;background:#f8fbff;color:#061226;padding:14px}
+#service .brand-system-board:empty{display:none}
+#service .brand-lockups{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;align-items:center}
+#service .brand-primary-mark{aspect-ratio:1;border-radius:16px;display:grid;place-items:center;background:var(--brand-color,#0b3d91);color:#fff;font-size:34px;font-weight:900}
+#service .brand-horizontal-lockup{display:flex;align-items:center;gap:10px}
+#service .brand-mini-mark{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;background:var(--brand-color,#0b3d91);color:#fff;font-weight:900;font-size:14px;flex:none}
+#service .brand-horizontal-lockup strong{display:block;font-size:22px;line-height:1.05}
+#service .brand-horizontal-lockup small{display:block;margin-top:4px;color:rgba(6,18,38,.55);font-size:12px;line-height:1.35}
+#service .brand-color-spec{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#service .brand-color-spec span{display:block;height:34px;border-radius:7px;border:1px solid rgba(6,18,38,.12)}
+#service .brand-color-spec code{display:block;margin-top:4px;font-size:10.5px;color:rgba(6,18,38,.62)}
+#service .brand-type-spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#service .brand-type-spec div,#service .brand-applications>div{border:1px solid rgba(6,18,38,.12);border-radius:8px;background:#fff;padding:10px}
+#service .brand-type-spec span{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(6,18,38,.5)}
+#service .brand-type-spec strong{display:block;margin-top:5px;font-size:12.5px;line-height:1.3}
+#service .brand-applications{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#service .brand-applications small{display:block;margin-top:7px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(6,18,38,.5)}
+#service .brand-favicon{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:var(--brand-color,#0b3d91);color:#fff;font-weight:900;font-size:12px}
+#service .brand-social-tile{display:grid;place-items:center;height:52px;border-radius:7px;background:linear-gradient(135deg,var(--brand-color,#0b3d91),var(--brand-ink,#061226));color:#fff;font-weight:800;font-size:12.5px;text-align:center;padding:0 6px}
+#service .brand-card-tile{display:grid;gap:2px;border:1px solid rgba(6,18,38,.14);border-radius:7px;background:#fff;padding:8px;font-size:10.5px;color:rgba(6,18,38,.62)}
+#service .brand-card-tile strong{font-size:12px;color:#061226}
+#service .brand-rule{border:1px solid rgba(11,61,145,.25);border-left:3px solid #0b3d91;border-radius:7px;background:rgba(11,61,145,.06);padding:10px 12px}
+#service .brand-rule strong{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:#0b3d91}
+#service .brand-rule p{margin:4px 0 0;font-size:12.5px;line-height:1.45;color:#061226}
+@media (max-width:575px){#service .brand-lockups,#service .brand-type-spec,#service .brand-applications{grid-template-columns:1fr}#service .brand-color-spec{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .planner-disclaimer{border:1px solid rgba(185,216,255,.3);border-left:3px solid #0b3d91;border-radius:6px;background:rgba(11,61,145,.14);color:#d9eaff;padding:10px 12px;font-size:12.5px;line-height:1.5;margin:0 0 14px}
 .electro-planner .electrical-rooms{grid-column:1/-1;display:grid;gap:8px;margin:4px 0}
 .electro-planner .electrical-rooms-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -877,11 +902,13 @@ stop.bred{stop-color:#0b3d91!important}
 <label class="repo-field"><span data-tool-copy="field.brandName">Brand name</span><input name="brandName" value="Santi Pulse"></label>
 <label class="repo-field"><span data-tool-copy="field.sector">Sector</span><input name="sector" value="websites, AI and electrical work"></label>
 <label class="repo-field"><span data-tool-copy="field.style">Style</span><select name="style"><option value="clean" data-tool-copy="style.clean">Clean and modern</option><option value="premium" data-tool-copy="style.premium">Premium</option><option value="bold" data-tool-copy="style.bold">Bold</option><option value="technical" data-tool-copy="style.technical">Technical</option></select></label>
-<label class="repo-field"><span data-tool-copy="field.template">Design template</span><select name="template"><option value="executive-saas" data-tool-copy="template.saas">Executive SaaS</option><option value="local-service" data-tool-copy="template.local">Local service</option><option value="luxury-collection" data-tool-copy="template.luxury">Luxury collection</option><option value="mobility-imports" data-tool-copy="template.mobility">Mobility imports</option></select></label>
+<label class="repo-field"><span data-tool-copy="field.typography">Typography pairing</span><select name="typography"><option value="modern-sans" data-tool-copy="type.sans">Modern sans</option><option value="editorial-serif" data-tool-copy="type.serif">Editorial serif</option><option value="technical-grotesk" data-tool-copy="type.grotesk">Technical grotesk</option></select></label>
+<label class="repo-field"><span data-tool-copy="field.voice">Voice</span><select name="voice"><option value="direct" data-tool-copy="voice.direct">Direct</option><option value="warm" data-tool-copy="voice.warm">Warm</option><option value="premium" data-tool-copy="voice.premium">Premium</option><option value="technical" data-tool-copy="voice.technical">Technical</option></select></label>
+<label class="repo-field"><span data-tool-copy="field.application">Primary application</span><select name="application"><option value="website" data-tool-copy="app.website">Website</option><option value="social" data-tool-copy="app.social">Social</option><option value="print" data-tool-copy="app.print">Print</option><option value="all" data-tool-copy="app.all">All</option></select></label>
 <label class="repo-field"><span data-tool-copy="field.color">Main color</span><input type="color" name="color" value="#0b3d91"></label>
 <label class="repo-field repo-field-full"><span data-tool-copy="field.tagline">Tagline or promise</span><textarea name="tagline">Websites, AI tools, and professional electrical solutions that businesses can actually use.</textarea></label>
 </form>
-<div class="repo-output"><div data-tool-preview></div><pre data-tool-spec></pre></div>
+<div class="repo-output"><div data-tool-preview><div class="brand-system-board" data-brand-board></div></div><pre data-tool-spec></pre></div>
 </div>
 <div class="repo-tool-actions"><button type="button" class="repo-tool-button" data-tool-generate data-tool-copy="button.generate">Update demo</button><button type="button" class="repo-tool-button secondary" data-tool-save data-tool-copy="button.save">Save in browser</button><button type="button" class="repo-tool-button ghost" data-tool-export data-tool-copy="button.export">Download brief</button><button type="button" class="repo-tool-button ghost" data-tool-send data-tool-copy="button.send">Send to contact form</button><span class="repo-tool-toast" data-tool-toast></span></div>
 </div>
@@ -1340,7 +1367,9 @@ stop.bred{stop-color:#0b3d91!important}
       'field.brandName': 'Brand name',
       'field.sector': 'Sector',
       'field.style': 'Style',
-      'field.template': 'Design template',
+      'field.typography': 'Typography pairing',
+      'field.voice': 'Voice',
+      'field.application': 'Primary application',
       'field.color': 'Main color',
       'field.tagline': 'Tagline or promise',
       'field.handoff': 'Handoff',
@@ -1374,10 +1403,17 @@ stop.bred{stop-color:#0b3d91!important}
       'style.premium': 'Premium',
       'style.bold': 'Bold',
       'style.technical': 'Technical',
-      'template.saas': 'Executive SaaS',
-      'template.local': 'Local service',
-      'template.luxury': 'Luxury collection',
-      'template.mobility': 'Mobility imports',
+      'type.sans': 'Modern sans',
+      'type.serif': 'Editorial serif',
+      'type.grotesk': 'Technical grotesk',
+      'voice.direct': 'Direct',
+      'voice.warm': 'Warm',
+      'voice.premium': 'Premium',
+      'voice.technical': 'Technical',
+      'app.website': 'Website',
+      'app.social': 'Social',
+      'app.print': 'Print',
+      'app.all': 'All',
       'button.generate': 'Update demo',
       'button.save': 'Save in browser',
       'button.export': 'Download brief',
@@ -1417,7 +1453,9 @@ stop.bred{stop-color:#0b3d91!important}
       'field.brandName': 'Nombre de marca',
       'field.sector': 'Sector',
       'field.style': 'Estilo',
-      'field.template': 'Plantilla visual',
+      'field.typography': 'Tipografia',
+      'field.voice': 'Voz de marca',
+      'field.application': 'Aplicacion principal',
       'field.color': 'Color principal',
       'field.tagline': 'Frase o promesa',
       'field.handoff': 'Entrega',
@@ -1451,10 +1489,17 @@ stop.bred{stop-color:#0b3d91!important}
       'style.premium': 'Premium',
       'style.bold': 'Fuerte',
       'style.technical': 'Tecnico',
-      'template.saas': 'SaaS ejecutivo',
-      'template.local': 'Servicio local',
-      'template.luxury': 'Coleccion premium',
-      'template.mobility': 'Importacion / movilidad',
+      'type.sans': 'Sans moderna',
+      'type.serif': 'Serif editorial',
+      'type.grotesk': 'Grotesk tecnica',
+      'voice.direct': 'Directa',
+      'voice.warm': 'Cercana',
+      'voice.premium': 'Premium',
+      'voice.technical': 'Tecnica',
+      'app.website': 'Web',
+      'app.social': 'Redes',
+      'app.print': 'Impresion',
+      'app.all': 'Todas',
       'button.generate': 'Actualizar demo',
       'button.save': 'Guardar en navegador',
       'button.export': 'Descargar brief',
@@ -1665,38 +1710,59 @@ stop.bred{stop-color:#0b3d91!important}
     const brand = data.brandName || 'Santi Pulse';
     const sector = data.sector || '';
     const style = labelFor(root, 'style') || data.style || 'Clean';
+    const typography = labelFor(root, 'typography') || data.typography || 'Modern sans';
+    const voice = labelFor(root, 'voice') || data.voice || 'Direct';
+    const application = labelFor(root, 'application') || data.application || 'Website';
     const color = data.color || '#0b3d91';
     const palette = [color, mix(color, -0.52), mix(color, 0.42), '#f8fbff'];
     const tagline = data.tagline || '';
     const mark = initials(brand);
+    const typePair = data.typography === 'editorial-serif'
+      ? { display: 'Playfair Display / Georgia', body: 'Source Serif / Georgia' }
+      : data.typography === 'technical-grotesk'
+        ? { display: 'Space Grotesk / Arial', body: 'IBM Plex Sans / Arial' }
+        : { display: 'Inter / Helvetica', body: 'Inter / Arial' };
+    const misuse = isEs ? 'No estirar el logotipo ni colocarlo sobre colores con poco contraste.' : 'Do not stretch the mark or place it on low-contrast colors.';
     const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640"><rect width="640" height="640" rx="128" fill="' + color + '"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Inter,Arial,sans-serif" font-size="188" font-weight="900" fill="#ffffff">' + escapeHtml(mark) + '</text></svg>';
-    const css = ':root{--brand-primary:' + palette[0] + ';--brand-ink:' + palette[1] + ';--brand-soft:' + palette[2] + ';--brand-paper:' + palette[3] + ';}\n.brand-button{background:var(--brand-primary);color:#fff;border-radius:999px;padding:12px 18px;font-weight:800;}\n';
-    const kit = { brand, sector, style, tagline, mark, palette, files: ['logo.svg', 'brand-style.css', 'README.md'] };
+    const favicon = '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="' + color + '"/><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="900" fill="#ffffff">' + escapeHtml(mark) + '</text></svg>';
     const readme = '# ' + brand + ' Brand Kit\n\n'
       + '## Direction\n' + style + ' identity for ' + (sector || (isEs ? 'el negocio' : 'the business')) + '.\n\n'
       + '## Promise\n' + tagline + '\n\n'
       + '## Palette\n' + palette.map((item) => '- ' + item).join('\n') + '\n\n'
-      + '## Usage\n- Use the main mark on dark or clean backgrounds\n- Keep enough spacing around the logo\n- Use the primary color for buttons and important actions\n- Keep typography simple and readable\n';
+      + '## Typography\n- Display: ' + typePair.display + '\n- Body: ' + typePair.body + '\n\n'
+      + '## Voice\n' + voice + '\n\n'
+      + '## Primary application\n' + application + '\n\n'
+      + '## Usage\n- ' + misuse + '\n- Keep enough clear space around the mark\n- Use the primary color for key actions only\n- Keep typography simple and readable\n';
     const publicBrief = '# ' + brand + ' Brand Kit\n\n'
       + (isEs ? 'Direccion visual\n' : 'Visual direction\n') + style + ' - ' + (sector || (isEs ? 'negocio' : 'business')) + '\n\n'
       + (isEs ? 'Promesa\n' : 'Promise\n') + (tagline || (isEs ? 'Marca clara, coherente y facil de usar.' : 'A clear, consistent brand that is easy to use.')) + '\n\n'
       + (isEs ? 'Paleta\n' : 'Palette\n') + palette.map((item) => '- ' + item).join('\n') + '\n\n'
+      + (isEs ? 'Tipografia\n' : 'Typography\n') + '- ' + typePair.display + '\n- ' + typePair.body + '\n\n'
+      + (isEs ? 'Voz: ' : 'Voice: ') + voice + '\n'
+      + (isEs ? 'Aplicacion principal: ' : 'Primary application: ') + application + '\n\n'
+      + (isEs ? 'Los assets finales editables para Canva o Figma se entregan como parte del proyecto; esta demo del navegador no los genera.' : 'Final editable Canva or Figma assets are a client deliverable; this browser demo does not generate them.') + '\n\n'
       + (isEs ? 'Siguiente paso: envia este brief para preparar logo, colores y usos de marca.' : 'Next step: send this brief to prepare the logo, colors and brand usage.');
     const bundle = bundleFile('brand-kit-generator', brand + ' Brand Kit', [
-      { path: 'README.md', content: readme },
-      { path: 'brand-kit.json', content: JSON.stringify(kit, null, 2) },
-      { path: 'brand-style.css', content: css },
-      { path: slug(brand) + '-logo.svg', content: svg }
+      { path: 'logo-directions.svg', content: svg },
+      { path: 'palette.json', content: JSON.stringify({ primary: palette[0], ink: palette[1], soft: palette[2], paper: palette[3] }, null, 2) },
+      { path: 'typography.md', content: '# Typography\n\n- Pairing: ' + typography + '\n- Display: ' + typePair.display + '\n- Body: ' + typePair.body + '\n' },
+      { path: 'brand-voice.md', content: '# Brand voice\n\n- Voice: ' + voice + '\n- Promise: ' + tagline + '\n' },
+      { path: 'social-template-notes.md', content: '# Social template notes\n\n- Primary application: ' + application + '\n- Use the primary color for covers and calls to action.\n- Keep the mark clear of dense text areas.\n' },
+      { path: 'website-hero-direction.md', content: '# Website hero direction\n\n- Headline in display type over ' + palette[3] + ' or ' + palette[1] + '\n- One primary call to action in ' + palette[0] + '\n' },
+      { path: 'business-card-spec.md', content: '# Business card spec\n\n- Front: mark and name in display type\n- Back: contact details in body type\n- Colors: ' + palette[0] + ' on ' + palette[3] + '\n' },
+      { path: 'favicon.svg', content: favicon },
+      { path: 'usage-guidelines.md', content: '# Usage guidelines\n\n- ' + misuse + '\n- Keep clear space around the mark\n- Use the primary color for key actions only\n' }
     ]);
     const preview = '<div class="repo-preview">'
       + '<div class="repo-preview-title">' + escapeHtml(t('brandPreview')) + '</div>'
-      + '<div class="repo-preview-main">' + escapeHtml(isEs ? 'Sistema visual' : 'Visual system') + '</div>'
-      + '<div class="lab-brand-board" style="--brand-color:' + escapeHtml(color) + '">'
-      + '<div class="lab-brand-mark">' + escapeHtml(mark) + '</div>'
-      + '<div><div class="lab-brand-lockup">' + escapeHtml(brand) + '<small>' + escapeHtml(tagline || sector || (isEs ? 'Marca clara para web, redes y material comercial.' : 'A clear brand for web, social and business material.')) + '</small></div>'
-      + '<div class="lab-palette">' + palette.map((item) => '<span style="background:' + escapeHtml(item) + '" title="' + escapeHtml(item) + '"></span>').join('') + '</div>'
-      + '<div class="lab-usage"><div><strong>01</strong>' + escapeHtml(isEs ? 'Logo principal y versiones limpias' : 'Primary mark and clean versions') + '</div><div><strong>02</strong>' + escapeHtml(style) + '</div><div><strong>03</strong>' + escapeHtml(isEs ? 'Botones, web y redes' : 'Buttons, web and social') + '</div></div>'
-      + '</div></div></div>';
+      + '<div class="brand-system-board" data-brand-board style="--brand-color:' + escapeHtml(color) + ';--brand-ink:' + escapeHtml(palette[1]) + '">'
+      + '<section class="brand-lockups"><div class="brand-primary-mark" data-brand-primary-mark>' + escapeHtml(mark) + '</div>'
+      + '<div class="brand-horizontal-lockup" data-brand-horizontal-lockup><span class="brand-mini-mark">' + escapeHtml(mark) + '</span><span><strong>' + escapeHtml(brand) + '</strong><small>' + escapeHtml(tagline || sector || (isEs ? 'Direccion de marca clara y usable.' : 'A clear, usable brand direction.')) + '</small></span></div></section>'
+      + '<section class="brand-color-spec" data-brand-palette>' + palette.map((item) => '<div><span style="background:' + escapeHtml(item) + '"></span><code>' + escapeHtml(item) + '</code></div>').join('') + '</section>'
+      + '<section class="brand-type-spec" data-brand-typography><div><span>' + (isEs ? 'Titulares' : 'Display') + '</span><strong>' + escapeHtml(typePair.display) + '</strong></div><div><span>' + (isEs ? 'Texto' : 'Body') + '</span><strong>' + escapeHtml(typePair.body) + '</strong></div><div><span>' + (isEs ? 'Voz' : 'Voice') + '</span><strong>' + escapeHtml(voice) + '</strong></div></section>'
+      + '<section class="brand-applications"><div data-brand-favicon><span class="brand-favicon">' + escapeHtml(mark) + '</span><small>Favicon</small></div><div data-brand-social><span class="brand-social-tile">' + escapeHtml(brand) + '</span><small>' + (isEs ? 'Plantilla social' : 'Social template') + '</small></div><div data-brand-card><span class="brand-card-tile"><strong>' + escapeHtml(brand) + '</strong>' + escapeHtml(sector || application) + '</span><small>' + (isEs ? 'Tarjeta de visita' : 'Business card') + '</small></div></section>'
+      + '<aside class="brand-rule"><strong>' + (isEs ? 'Regla de uso' : 'Usage rule') + '</strong><p data-brand-rule>' + escapeHtml(misuse) + '</p></aside>'
+      + '</div></div>';
     return { title: brand + ' Brand Kit', readme, publicBrief, bundle, preview, filename: slug(brand) + '-brand-kit-project-brief.txt' };
   }
 
