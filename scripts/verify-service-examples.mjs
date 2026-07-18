@@ -110,6 +110,7 @@ const labsProducts = [
   ['AI Business Knowledge Assistant', 'https://labs.santipulse.com/knowledge'],
 ];
 check($('#ai-automation-labs').length === 1, 'missing focused AI Automation Labs section');
+check($('#projects a[target="_blank"]').length === 0, 'project links must navigate without blocked popups');
 check(source.includes('AI Automation Labs'), 'missing AI Automation Labs English heading');
 check(source.includes('Laboratorio de Automatizacion con IA'), 'missing AI Automation Labs Spanish heading');
 for (const [title, href] of labsProducts) {
