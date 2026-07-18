@@ -98,6 +98,24 @@ if (electricalDisclaimers.length === 1) {
 }
 check($('#contactform').length === 1, 'existing contact form was removed');
 check($('#service-1').length === 1, 'existing web-design service was removed');
+check(source.includes('service-project-hidden'), 'hidden service project styling was removed');
+check(
+  $('[data-portfolio-hidden="pending-direction"]').length === 4,
+  'projects 2-5 must remain hidden pending direction',
+);
+
+const labsProducts = [
+  ['AI Receptionist & Appointment Assistant', 'https://labs.santipulse.com/receptionist'],
+  ['AI Lead Qualification CRM', 'https://labs.santipulse.com/lead-crm'],
+  ['AI Business Knowledge Assistant', 'https://labs.santipulse.com/knowledge'],
+];
+check($('#ai-automation-labs').length === 1, 'missing focused AI Automation Labs section');
+check(source.includes('AI Automation Labs'), 'missing AI Automation Labs English heading');
+check(source.includes('Laboratorio de Automatizacion con IA'), 'missing AI Automation Labs Spanish heading');
+for (const [title, href] of labsProducts) {
+  check(source.includes(title), `missing Labs product title: ${title}`);
+  check(source.includes(href), `missing Labs product link: ${href}`);
+}
 
 const publicServiceText = $('#service').text().toLowerCase();
 for (const term of ['next-generation ai innovation', 'add later', 'production upgrades']) {
@@ -107,6 +125,11 @@ for (const term of ['next-generation ai innovation', 'add later', 'production up
 if (existsSync(resolve(root, 'dist/index.html'))) {
   const built = readFileSync(resolve(root, 'dist/index.html'), 'utf8');
   for (const project of projects) check(built.includes(project.title), `built page missing ${project.title}`);
+  check(built.includes('AI Automation Labs'), 'built page missing AI Automation Labs');
+  for (const [title, href] of labsProducts) {
+    check(built.includes(title), `built page missing Labs product: ${title}`);
+    check(built.includes(href), `built page missing Labs link: ${href}`);
+  }
 }
 
 if (failures.length) {
