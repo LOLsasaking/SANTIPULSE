@@ -104,19 +104,9 @@ check(
   'projects 2-5 must remain hidden pending direction',
 );
 
-const labsProducts = [
-  ['AI Receptionist & Appointment Assistant', 'https://labs.santipulse.com/receptionist'],
-  ['AI Lead Qualification CRM', 'https://labs.santipulse.com/lead-crm'],
-  ['AI Business Knowledge Assistant', 'https://labs.santipulse.com/knowledge'],
-];
-check($('#ai-automation-labs').length === 1, 'missing focused AI Automation Labs section');
-check($('#projects a[target="_blank"]').length === 0, 'project links must navigate without blocked popups');
-check(source.includes('AI Automation Labs'), 'missing AI Automation Labs English heading');
-check(source.includes('Laboratorio de Automatizacion con IA'), 'missing AI Automation Labs Spanish heading');
-for (const [title, href] of labsProducts) {
-  check(source.includes(title), `missing Labs product title: ${title}`);
-  check(source.includes(href), `missing Labs product link: ${href}`);
-}
+// The Interactive Projects / AI Automation Labs section was removed from the homepage.
+check($('#projects').length === 0, 'Interactive Projects section should be removed');
+check($('#ai-automation-labs').length === 0, 'AI Automation Labs section should be removed');
 
 const publicServiceText = $('#service').text().toLowerCase();
 for (const term of ['next-generation ai innovation', 'add later', 'production upgrades']) {
@@ -126,11 +116,7 @@ for (const term of ['next-generation ai innovation', 'add later', 'production up
 if (existsSync(resolve(root, 'dist/index.html'))) {
   const built = readFileSync(resolve(root, 'dist/index.html'), 'utf8');
   for (const project of projects) check(built.includes(project.title), `built page missing ${project.title}`);
-  check(built.includes('AI Automation Labs'), 'built page missing AI Automation Labs');
-  for (const [title, href] of labsProducts) {
-    check(built.includes(title), `built page missing Labs product: ${title}`);
-    check(built.includes(href), `built page missing Labs link: ${href}`);
-  }
+  check(!built.includes('id="ai-automation-labs"'), 'built page still has the AI Automation Labs section');
 }
 
 if (failures.length) {
